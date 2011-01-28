@@ -1,0 +1,13 @@
+<f:if condition="{users}">
+	<table>
+		<f:for each="{users}" as="user">
+			<tr>
+				<td>
+					<f:link.action action="show" controller="User" arguments="{user : user}" pageUid="{settings.profilePage}">
+						{user.name}
+					</f:link.action>
+				</td>
+			</tr>
+		</f:for> 
+	</table>
+</f:if>

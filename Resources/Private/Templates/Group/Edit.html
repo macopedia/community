@@ -1,0 +1,18 @@
+<f:layout name="default"/>
+
+<f:section name="main">
+	<f:form action="update" controller="Group" name="group" object="{group}">
+		<h3><f:translate key="group.edit.title" arguments="{name : group.name}"/></h3>
+		<dl>
+			<dt><f:translate key="group.edit.name"/></dt>
+			<dd><f:form.textbox property="name"/></dd>
+			
+			<dt><f:translate key="group.edit.description"/></dt>
+			<dd><f:form.textarea property="description" rows="3" cols="30"/></dd>
+
+			<dt><f:translate key="group.edit.image"/></dt>
+			<dd><f:form.upload property="image"/></dd>
+		</dl>
+		<f:form.submit value="{f:translate(key:'group.edit.submit')}"/>
+	</f:form>
+</f:section>

@@ -1,0 +1,22 @@
+<f:layout name="default" />
+
+<f:section name="main">
+	<div class="tx-community-message-read">
+		<h3><f:translate key="message.read.title"/></h3>
+		<div class="tx-community-message-read-date">
+			<f:format.date>{message.sentDate}</f:format.date>
+		</div>
+		<div class="tx-community-message-read-from">
+			<span><f:translate key="message.read.from"/>{message.sender.name}</span>
+		</div>
+		<div class="tx-community-message-read-to">
+			<span><f:translate key="message.read.to"/>{message.recipient.name}</span>
+		</div>
+		<div class="tx-community-message-read-subject">
+			<span><f:translate key="message.read.subject"/>{message.subject}</span>
+		</div>
+		<div class="tx-community-message-read-message">
+			<span><f:translate key="message.read.message"/>{message.message}</span>
+		</div>
+	</div>
+</f:section>

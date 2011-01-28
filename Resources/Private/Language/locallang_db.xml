@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'community'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_community_domain_model_group">Group</label>
+			<label index="tx_community_domain_model_group.name">Name</label>
+			<label index="tx_community_domain_model_group.grouptype">Grouptype</label>
+			<label index="tx_community_domain_model_group.description">Description</label>
+			<label index="tx_community_domain_model_group.image">Image</label>
+			<label index="tx_community_domain_model_group.creator">Creator</label>
+			<label index="tx_community_domain_model_group.admins">Admins</label>
+			<label index="tx_community_domain_model_group.members">Members</label>
+			<label index="tx_community_domain_model_group.pending_members">Pending Members</label>
+			<label index="tx_community_domain_model_user">User</label>
+			<label index="tx_community_domain_model_user."></label>
+			<label index="tx_community_domain_model_aclrole">Acl Role</label>
+			<label index="tx_community_domain_model_aclrole.name">Name</label>
+			<label index="tx_community_domain_model_aclrole.is_public">Is Public</label>
+			<label index="tx_community_domain_model_aclrole.is_friend">Is Friend</label>
+			<label index="tx_community_domain_model_aclrule">Acl Rule</label>
+			<label index="tx_community_domain_model_aclrule.name">Name</label>
+			<label index="tx_community_domain_model_aclrule.resource">Resource</label>
+			<label index="tx_community_domain_model_aclrule.access_mode">Access Mode</label>
+			<label index="tx_community_domain_model_aclrule.role">Role</label>
+		</languageKey>
+	</data>
+</T3locallang>

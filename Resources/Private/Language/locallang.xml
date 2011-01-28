@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for the Community extension in the FRONTEND</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_community_domain_model_group">A group</label>
+			<label index="tx_community_domain_model_group.name">name</label>
+			<label index="tx_community_domain_model_group.grouptype">The grouptype</label>
+			<label index="tx_community_domain_model_group.description">description</label>
+			<label index="tx_community_domain_model_group.image">the image of the group</label>
+			<label index="tx_community_domain_model_group.creator">creator</label>
+			<label index="tx_community_domain_model_group.admins">admins</label>
+			<label index="tx_community_domain_model_group.members">members</label>
+			<label index="tx_community_domain_model_group.pending_members">pendingMembers</label>
+			<label index="tx_community_domain_model_user">A user of the website</label>
+			<label index="tx_community_domain_model_user."></label>
+			<label index="tx_community_domain_model_aclrole">AclRole</label>
+			<label index="tx_community_domain_model_aclrole.name">name</label>
+			<label index="tx_community_domain_model_aclrole.is_public">isPublic</label>
+			<label index="tx_community_domain_model_aclrole.is_friend">isFriend</label>
+			<label index="tx_community_domain_model_aclrule">AclRule</label>
+			<label index="tx_community_domain_model_aclrule.name">name</label>
+			<label index="tx_community_domain_model_aclrule.resource">resource</label>
+			<label index="tx_community_domain_model_aclrule.access_mode">accessMode</label>
+			<label index="tx_community_domain_model_aclrule.role">role</label>
+
+                        <label index="access.denied">You don't have permission to access this resource.</label>
+
+
+			<label index="flexform.action.title">Content</label>
+			<label index="flexform.action.action">What to display</label>
+			<label index="flexform.action.user.action">Actions</label>
+			<label index="flexform.action.user.image">Profile Image</label>
+			<label index="flexform.action.user.details">Details</label>
+			<label index="flexform.action.user.edit">Edit details</label>
+			<label index="flexform.action.user.interaction">User menu</label>
+			<label index="flexform.action.relation.listSome">List Friends (short)</label>
+			<label index="flexform.action.relation.unconfirmed">Unconfirmed friends</label>
+			<label index="flexform.actionPage">Page where actions get performed</label>
+			<label index="flexform.profilePage">Page where the profile of users is displayed</label>
+			
+			<label index="profile.details.title">Details</label>
+                        <label index="profile.details.name">Name</label>
+                        <label index="profile.details.username">Username</label>
+			<label index="profile.details.firtsname">Firstname</label>
+			<label index="profile.details.lastname">Lastname</label>
+			<label index="profile.details.gender."></label>
+			<label index="profile.details.dateOfBirth">Birthday</label>
+			<label index="profile.details.politicalView">Political view</label>
+			<label index="profile.details.religiousView">Religious view</label>
+			<label index="profile.details.activities">Activities</label>
+			<label index="profile.details.interests">Interests</label>
+			<label index="profile.details.music">Music</label>
+			<label index="profile.details.movies">Movies</label>
+			<label index="profile.details.books">Books</label>
+			<label index="profile.details.quotes">Quotes</label>
+			<label index="profile.details.aboutMe">About me</label>
+			<label index="profile.details.address">Address</label>
+			<label index="profile.details.city">City</label>
+			<label index="profile.details.zip">Zip code</label>
+			<label index="profile.details.country">Country</label>
+			<label index="profile.details.www">Website</label>
+			<label index="profile.details.cellphone">Cellphone</label>
+			<label index="profile.details.phone">Phone</label>
+			<label index="profile.details.email">Email</label>
+			<label index="profile.details.gender">Gender</label>
+			<label index="profile.details.gender.female">female</label>
+			<label index="profile.details.gender.male">male</label>
+			<label index="profile.details.edit.submit">Submit</label>
+			<label index="profile.details.editImage">Set a new profile image</label>
+			
+			<label index="profile.editImage.title">Upload a new profile image</label>
+			<label index="profile.editImage.image">Image</label>
+			<label index="profile.editImage.submit">Upload</label>
+			
+			<label index="profile.interaction.user.title">User</label>
+			<label index="profile.interaction.requestRelation">Add as friend</label>
+			<label index="profile.interaction.cancelRelation">Delete as a friend</label>
+			<label index="profile.interaction.search">Search users</label>
+			<label index="profile.interaction.user.edit">Edit profile</label>
+			<label index="profile.interaction.aclRole.list">List access roles</label>
+			<label index="profile.interaction.aclRole.assign">Assign a role</label>
+			<label index="profile.interaction.group.title">Groups</label>
+			<label index="profile.interaction.group.new">Found a group</label>
+			<label index="profile.interaction.group.list">List groups</label>
+			<label index="profile.interaction.writeMessage">Send a message</label>
+			<label index="profile.interaction.message.title">Messages</label>
+			<label index="profile.interaction.message.inbox">Inbox</label>
+			<label index="profile.interaction.message.outbox">Outbox</label>
+			<label index="profile.interaction.message.unread">Unread</label>
+			
+                        <label index="profile.listSome.unconfirmed">Unconfirmed friends</label>
+
+                        <label index="relation.listSome.title">Friends</label>
+			<label index="relation.request.pending">Your friendship request is pending for approval.</label>
+                        <label index="relation.cancel.warning">Are you really want to cancel this relation?</label>
+                        <label index="relation.cancel.confirm">Yes</label>
+                        <label index="relation.cancel.success">Relation has been canceled.</label>
+                        <label index="relation.confirmed.cancel">cancel</label>
+                        <label index="relation.cancel.backToProfile">Back to profile page</label>
+
+                        <label index="relation.reject.warning">Are you really want to reject this relation?</label>
+                        <label index="relation.reject.confirm">Yes</label>
+                        <label index="relation.reject.success">Relation has been rejected.</label>
+                        <label index="relation.reject.backToProfile">Back to profile page</label>
+
+                        <label index="relation.unconfirmed.confirm">confirm</label>
+                        <label index="relation.unconfirmed.reject">reject</label>
+                        <label index="relation.confirm.success">You've just confirmed new friendship</label>
+
+			
+			<label index="role.new.title">New role</label>
+			<label index="role.new.name">Name</label>
+			<label index="role.new.submit">Submit</label>
+			
+			<label index="role.edit.title">Edit role</label>
+			<label index="role.edit.name">Name</label>
+			<label index="role.edit.submit">Update</label>
+			
+			<label index="role.list.title">Access roles</label>
+			<label index="role.list.new">Create a new role</label>
+			
+			<label index="role.access.title">Access options</label>
+			<label index="role.access.profile">Profile in general</label>
+			<label index="role.access.profile.image">Profile image</label>
+			<label index="role.access.profile.details">Details</label>
+			
+			<label index="role.assign.title">Assign a role</label>
+			<label index="role.assign.role">Role</label>
+			<label index="role.assign.submit">Assign</label>
+			
+			<label index="group.new.title">Found a group</label>
+			<label index="group.new.name">Groupname</label>
+			<label index="group.new.description">Description</label>
+			<label index="group.new.image">Image</label>
+			<label index="group.new.type">Type</label>
+			<label index="group.new.submit">Create</label>
+			
+			<label index="group.edit.title">Edit the group "%1$s"</label>
+			<label index="group.edit.name">Groupname</label>
+			<label index="group.edit.description">Description</label>
+			<label index="group.edit.image">Image</label>
+			<label index="group.edit.type">Type</label>
+			<label index="group.edit.submit">Update</label>
+			
+			<label index="group.list.title">Groups</label>
+			<label index="group.list.name">Groupname</label>
+			<label index="group.list.members">Members</label>
+			
+			<label index="group.show.title">Group: %1s</label>
+			<label index="group.show.name">Name</label>
+			<label index="group.show.description">Description</label>
+			<label index="group.show.members">Members</label>
+			<label index="group.show.edit">Edit</label>
+
+			<label index="group.show.creator">Founder</label>
+			<label index="group.show.request">Join</label>
+
+			<label index="group.create.imageError">There was a problem when uploading your image.</label>
+			
+			<label index="group.type.1">Public group</label>
+			<label index="group.type.2">Private group</label>
+			
+			<label index="search.submit">Search</label>
+			
+			<label index="message.write.title">Send a message to %1$s</label>
+			<label index="message.write.subject">Subject</label>
+			<label index="message.write.message">Message</label>
+			<label index="message.write.submit">Send</label>
+			
+			<label index="message.inbox.title">Incoming messages</label>
+			<label index="message.inbox.nomessages">You have no messages received.</label>
+
+                        <label index="message.outbox.title">Outgoing messages</label>
+			<label index="message.unread.title">Your unread messages</label>
+
+                        <label index="message.list.sender">Sender</label>
+			<label index="message.list.recipient">Recipient</label>
+			<label index="message.list.subject">Subject</label>
+			<label index="message.list.date">Date</label>
+
+                        <label index="message.read.title">Read a message</label>
+			<label index="message.read.date">Date:</label>
+			<label index="message.read.from">From:</label>
+			<label index="message.read.to">To:</label>
+			<label index="message.read.subject">Subject:</label>
+			<label index="message.read.message">Message:</label>
+
+                        <label index="message.send.success">Your message has been sent.</label>
+                        
+                        <label index="message.delete.success">Selected message has been deleted.</label>
+
+                </languageKey>
+	</data>
+</T3locallang>

@@ -1,0 +1,15 @@
+<f:layout name="default"/>
+
+<f:section name="main">
+	<div class="tx_community_profile_edit_image">
+		<f:form action="updateImage" controller="User" object="{user}" name="user" enctype="multipart/form-data">
+	
+		<h3><f:translate key="profile.editImage.title"/></h3>
+			<dl>
+				<dt><f:translate key="profile.editImage.image"/></dt>
+				<dd><f:form.upload property="image"/></dd>
+			</dl>
+			<f:form.submit value="{f:translate(key:'profile.editImage.submit')}"/>
+		</f:form>
+	</div>
+</f:section>

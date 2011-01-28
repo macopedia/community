@@ -1,0 +1,15 @@
+<f:if condition="{unconfirmedRelations}">
+    <ul>
+        <f:for each="{unconfirmedRelations}" as="relation">
+            <li>
+		{relation.initiatingUser.name}
+            <f:link.action action="confirm" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}">
+		(<f:translate key="relation.unconfirmed.confirm"/>)
+            </f:link.action>
+            <f:link.action action="reject" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}">
+		(<f:translate key="relation.unconfirmed.reject"/>)
+            </f:link.action>
+            </li>
+        </f:for>
+    </ul>
+</f:if>

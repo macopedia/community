@@ -1,0 +1,6 @@
+<f:form action="search" controller="User">
+	<f:form.textbox name="searchWord"/>
+	<f:form.submit name="submitSearch" value="{f:translate(key:'search.submit')}"/>
+</f:form>
+
+<f:render partial="User/ListUser" arguments="{users : users, settings : settings}"/>

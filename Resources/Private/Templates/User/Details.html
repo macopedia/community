@@ -1,0 +1,58 @@
+{namespace com=Tx_Community_ViewHelper}
+
+<div class="tx_community_wall">
+    <f:if condition="{displayWallList} >0">
+	<f:cObject typoscriptObjectPath="plugin.tx_community.wall.list"></f:cObject>
+    </f:if>
+    <f:if condition="{displayWallForm} >0">
+	<f:cObject typoscriptObjectPath="plugin.tx_community.wall.form"></f:cObject>
+    </f:if>
+</div>
+<div class="tx_community_profile_details">
+    <f:renderFlashMessages class="tx-extbase-flash-message" />
+    <h2>{user.name}</h2>
+	<h3><f:translate key="profile.details.title"/></h3>
+	<dl>
+			<dt><f:translate key="profile.details.username"/></dt>
+			<dd>{user.username}</dd>
+			<dt><f:translate key="profile.details.gender"/></dt>
+			<dd><f:translate key="profile.details.gender.{user.gender}"/></dd>
+			<dt><f:translate key="profile.details.dateOfBirth"/></dt>
+			<dd>{user.dateOfBirth->f:format.date(format:'d.m.Y')}</dd>
+			<dt><f:translate key="profile.details.politicalView"/></dt>
+			<dd>{user.politicalView}</dd>
+			<dt><f:translate key="profile.details.religiousView"/></dt>
+			<dd>{user.religiousView}</dd>
+			<dt><f:translate key="profile.details.activities"/></dt>
+			<dd>{user.activities}</dd>
+			<dt><f:translate key="profile.details.interests"/></dt>
+			<dd>{user.interests}</dd>
+			<dt><f:translate key="profile.details.music"/></dt>
+			<dd>{user.music}</dd>
+			<dt><f:translate key="profile.details.movies"/></dt>
+			<dd>{user.movies}</dd>
+			<dt><f:translate key="profile.details.books"/></dt>
+			<dd>{user.books}</dd>
+			<dt><f:translate key="profile.details.quotes"/></dt>
+			<dd>{user.quotes}</dd>
+			<dt><f:translate key="profile.details.aboutMe"/></dt>
+			<dd>{user.aboutMe}</dd>
+			<dt><f:translate key="profile.details.address"/></dt>
+			<dd>{user.address}</dd>
+			<dt><f:translate key="profile.details.city"/></dt>
+			<dd>{user.city}</dd>
+			<dt><f:translate key="profile.details.zip"/></dt>
+			<dd>{user.zip}</dd>
+			<dt><f:translate key="profile.details.country"/></dt>
+			<dd>{user.country}</dd>
+			<dt><f:translate key="profile.details.www"/></dt>
+			<dd>{user.www}</dd>
+			<dt><f:translate key="profile.details.cellphone"/></dt>
+			<dd>{user.cellphone}</dd>
+			<dt><f:translate key="profile.details.phone"/></dt>
+			<dd>{user.phone}</dd>
+			<dt><f:translate key="profile.details.email"/></dt>
+			<dd>{user.email}</dd>
+	</dl>
+	<br style="clear:both"/>
+</div>

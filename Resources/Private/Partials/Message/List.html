@@ -1,0 +1,32 @@
+<table class="tx-community-message-list">
+	<thead>
+		<tr>
+			<td><f:translate key="message.list.sender"/></td>
+			<td><f:translate key="message.list.recipient"/></td>
+			<td><f:translate key="message.list.subject"/></td>
+			<td><f:translate key="message.list.date"/></td>
+		</tr>
+	</thead>
+	<tbody>
+		<f:for each="{messages}" as="message">
+			<f:cycle values="{0: 'odd', 1: 'even'}" as="oddEven">
+				<f:if condition="{message.read}">
+					<f:then>
+						<tr class="tx-community-message-list-{oddEven} tx-community-message-list-read">
+					</f:then>
+					<f:else>
+						<tr class="tx-community-message-list-{oddEven} tx-community-message-list-unread">
+					</f:else>
+				</f:if>
+					<td>{message.sender.name}</td>
+					<td>{message.recipient.name}</td>
+					<td><f:link.action action="read" controller="Message" arguments="{message : message}">
+							<f:format.crop maxCharacters="50">{message.subject}</f:format.crop>
+						</f:link.action>
+					</td>
+					<td><f:format.date>{message.sentDate}</f:format.date></td>
+				</tr>
+			</f:cycle>
+		</f:for>
+	</tbody>
+</table>

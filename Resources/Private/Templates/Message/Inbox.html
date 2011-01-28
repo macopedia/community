@@ -1,0 +1,15 @@
+<f:layout name="default"/>
+
+<f:section name="main">
+	<div class="tx-community-messages">
+		<h3><f:translate key="message.inbox.title"/></h3>
+		<f:if condition="{messages}">
+			<f:then>
+				<f:render partial="Message/List" arguments="{messages : messages}"/>
+			</f:then>
+			<f:else>
+				<f:translate key="message.inbox.nomessages"/>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>
