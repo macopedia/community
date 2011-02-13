@@ -73,19 +73,19 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	//'inbox' => 'message.inbox',
 	//'outbox' => 'message.outbox',
 	//'unread' => 'message.unread',
-			'write' => 'message.write',
+	'write' => 'message.write',
 	//  'send' => 'message.send',
 	// 'read' => 'message.read',
 	//   'delete' => 'message.delete',
 			),
              'User'=>array(
                  'image' => 'profile.image',
-	//   'edit' => 'profile.edit',
+		 'edit' => 'profile.edit',
                  'search' => 'user.search',
-	//    'update' => 'profile.edit',
+		 'update' => 'profile.edit',
                  'details' => 'profile.details',
                  'interaction' => 'profile.menu',
-	//    'editImage' => 'profile.edit.image',
+		 'editImage' => 'profile.edit.image',
 		),
              'Relation' => array (
                  'listSome' => 'profile.relation.listSome',
@@ -93,7 +93,7 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
                  'request' => 'profile.relation.request',
                  'confirm' => 'profile.relation.confirm',
                  'reject' => 'profile.relation.reject',
-				'unconfirmed' => 'profile.relation.unconfirmed',
+		 'unconfirmed' => 'profile.relation.unconfirmed',
                  'cancel' => 'profile.relation.cancel',
 
 

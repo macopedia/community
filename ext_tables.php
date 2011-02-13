@@ -46,7 +46,9 @@ t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_relation');
 $TCA['tx_community_domain_model_relation'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation',
-		'label' 			=> 'name',
+		'label' 			=> 'initiating_user',
+		'label_alt'	    => 'requested_user, status',
+		'label_alt_force'   => 1,
 		'tstamp' 			=> 'tstamp',
 		'crdate' 			=> 'crdate',
 		'versioningWS' 		=> 2,
@@ -208,7 +210,7 @@ t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_message');
 $TCA['tx_community_domain_model_message'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message',
-		'label' 			=> 'name',
+		'label' 			=> 'subject',
 		'tstamp' 			=> 'tstamp',
 		'crdate' 			=> 'crdate',
 		'versioningWS' 		=> 2,
@@ -222,7 +224,7 @@ $TCA['tx_community_domain_model_message'] = array (
 			'disabled' => 'hidden'
 			),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Tca.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_relation.gif'
+		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_message.gif'
 	)
 );
 

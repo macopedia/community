@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
 <h4>Comment listing subpart</h4>
 <hr size="1" />
 <!-- ###COMMENT_LIST### begin
@@ -32,14 +33,12 @@
 				COMMENT_CONTENT	- content of the comment (nl2br + htmlspecialchars)
 		-->
 		<div class="tx-comments-comment###ALTERNATE###">
-			<span class="tx-comments-comment-name"><a href="###EMAIL###">###FIRSTNAME###</a></span>, <span class="tx-comments-comment-date">###COMMENT_DATE###</span>:
+			<span class="tx-comments-comment-name"><a href="###HOMEPAGE###">###FIRSTNAME###</a></span>, <span class="tx-comments-comment-date">###COMMENT_DATE###</span>:
 			<hr size="1" />
 			<div class="tx-comments-comment-content">
 				###COMMENT_CONTENT###
 			</div>
-			<div class="tx-comments-rating">
-			###RATINGS###
-			</div>
+			
 			<!-- ###REPORT_SUB### -->
 			<!--
 			<div class="tx-comments-comment-report">
@@ -70,18 +69,20 @@
 	This subpart formats comment form
 -->
 <div class="tx-comments-comment-form">
-	###TOP_MESSAGE###
+	
 	<form action="###ACTION_URL###" method="post">
 		<fieldset>
 			<legend>###TEXT_ADD_COMMENT###</legend>
 			<input type="hidden" name="tx_comments_pi1[itemurl]" value="###CURRENT_URL###" />
 			<input type="hidden" name="tx_comments_pi1[itemurlchk]" value="###CURRENT_URL_CHK###" />
 			<label for="tx_comments_pi1_content">###TEXT_CONTENT###</label>
-			<textarea cols="32" rows="7" name="tx_comments_pi1[content]" id="tx_comments_pi1_content">###CONTENT###</textarea> ###REQUIRED_CONTENT### ###ERROR_CONTENT###<br />
+			<textarea cols="32" rows="7" name="tx_comments_pi1[content]" id="tx_comments_pi1_content">###CONTENT###</textarea>###ERROR_CONTENT###<br />
 			<label for="tx_comments_pi1_submit">&nbsp;</label>
-			<input type="submit" name="tx_comments_pi1[submit]" id="tx_comments_pi1_submit" value="###TEXT_SUBMIT###" />
-			<input type="reset" value="###TEXT_RESET###" />
-			###JS_USER_DATA###
+			<div class="tx_community_wall_buttons">
+			    <input type="submit" name="tx_comments_pi1[submit]" id="tx_comments_pi1_submit" value="###TEXT_SUBMIT###" />
+			    <input type="reset" value="###TEXT_RESET###" />
+			</div>
+			
 		</fieldset>
 	</form>
 </div>

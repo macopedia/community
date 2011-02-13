@@ -11,10 +11,10 @@
                 </li>
             </f:for>
         </ul>
-        <f:link.action action="list" controller="Relation" arguments="{user : user}"><f:translate key="profile.listSome.list"/></f:link.action>
+        <f:link.action action="list" controller="Relation" pageUid="{settings.actionPage}" ><f:translate key="relation.listSome.goTolist"/></f:link.action>
     </f:if>
     <f:if condition="{unconfirmedRelations}">
-        <h4><f:translate key="profile.listSome.unconfirmed"/></h4>
+        <h4><f:translate key="relation.listSome.unconfirmed"/></h4>
         <ul>
             <f:for each="{unconfirmedRelations}" as="relation">
                 <li>

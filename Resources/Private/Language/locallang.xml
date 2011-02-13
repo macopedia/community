@@ -92,9 +92,10 @@
 			<label index="profile.interaction.message.outbox">Outbox</label>
 			<label index="profile.interaction.message.unread">Unread</label>
 			
-                        <label index="profile.listSome.unconfirmed">Unconfirmed friends</label>
+                        <label index="relation.listSome.unconfirmed">Unconfirmed friends</label>
 
                         <label index="relation.listSome.title">Friends</label>
+			<label index="relation.listSome.goTolist">All friends</label>
 			<label index="relation.request.pending">Your friendship request is pending for approval.</label>
                         <label index="relation.cancel.warning">Are you really want to cancel this relation?</label>
                         <label index="relation.cancel.confirm">Yes</label>

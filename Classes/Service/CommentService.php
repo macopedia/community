@@ -6,10 +6,13 @@
  *
  * 
  */
-class Tx_Community_Service_CommentService {
+class Tx_Community_Service_CommentService implements t3lib_Singleton{
 
+   
+   
     /**
      * customFunctionCode hook function for Comments extension
+     * used for displaying comment list (wall)
      * @param array $params contains one parameter $params['code']
      * @param tx_comments_pi1 $pObj Reference to calling class
      * @return Return html which have to be displayed
@@ -43,11 +46,23 @@ class Tx_Community_Service_CommentService {
 	    {
 		$rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('uid,username,name','fe_users',
 		    'uid = '.$userUid.$pObj->cObj->enableFields('fe_users') , '', '');
-	    }
-	    
-	    if($rows['username']) {
-		$newMarkerArray['###FIRSTNAME###'] = $rows['name'];
-	    }
+	   
+		if($rows['username']) {
+		    $newMarkerArray['###FIRSTNAME###'] = $rows['name'];
+
+		    $objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		    $uriBuilder =  $objectManager->get('Tx_Extbase_MVC_Web_Routing_UriBuilder');
+		    $uri = $uriBuilder
+			->reset()
+			->setTargetPageUid($this->settings['profilePage'])
+			->uriFor(NULL, array('user' => $userUid), "User" , "community","Pi1");
+
+		    $userProfileAddress = $uri;
+		    $newMarkerArray['###HOMEPAGE###'] = $userProfileAddress;
+		    
+		}
+
+	     }
 	}
   
         return $newMarkerArray;

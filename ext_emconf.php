@@ -18,7 +18,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'author_email' => 'mail@pascal-jungblut.com',
 	'author_company' => '',
 	'shy' => '',
-	'dependencies' => 'cms,extbase,fluid,enetcache',
+	'dependencies' => 'cms,extbase,fluid,enetcache,comments',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
@@ -35,6 +35,7 @@ $EM_CONF[$_EXTKEY] = array(
 			'cms' => '',
 			'extbase' => '',
 			'fluid' => '',
+			'comments' => '',
 		),
 		'conflicts' => array(
 		),

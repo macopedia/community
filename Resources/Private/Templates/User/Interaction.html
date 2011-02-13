@@ -45,10 +45,11 @@
 		</com:sameUser>
 	
 	</ul>
-	<h4><f:translate key="profile.interaction.message.title"/></h4>
-	<ul>
+	
 		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
 			<f:then>
+			    <h4><f:translate key="profile.interaction.message.title"/></h4>
+			    <ul>
 				<li>
 					<f:link.action action="inbox" controller="Message" pageUid="{settings.actionPage}">
 						<f:translate key="profile.interaction.message.inbox"/>
@@ -65,7 +66,8 @@
 						<f:translate key="profile.interaction.message.unread"/>
 					</f:link.action>
 				</li>
+				</ul>
 			</f:then>
 		</com:sameUser>
-	</ul>
+	
 </f:if>

@@ -49,7 +49,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	}
 
 	/**
-	 * @param Tx_Community_Domain_Model_User $user
+	 * Display some user's friends
+	 * 
 	 */
 	public function listSomeAction() {
 		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestingUser(), $this->settings['relations']['listSome']['limit']);
@@ -83,7 +84,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				$users[] = $relation->getRequestedUser();
 			}
 		}
-		$this->view->assign('relations', $users);
+		$this->view->assign('usersRelations', $users);
 	}
 
 	/**

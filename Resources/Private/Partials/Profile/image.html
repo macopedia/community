@@ -1,11 +1,11 @@
-<f:if condition="{user.image}">
-	<div class="tx_community_profile_image">
-		<f:image src="{settings.profile.image.prefix}{user.image}"
+<div class="tx_community_profile_image">
+    <f:image src="{f:if(condition: '{user.image}', 
+	     then: '{settings.profile.image.prefix}{user.image}',
+	     else: '{settings.profile.defaultImage}')}"
 			alt="{user.firstname}"
 			minWidth="{settings.profile.image.minWidth}"
 			minHeight="{settings.profile.image.minHeight}"
 			maxWidth="{settings.profile.image.maxWidth}"
 			maxHeight="{settings.profile.image.maxHeight}"
 		/>
-	</div>
-</f:if>
+ </div>

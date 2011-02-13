@@ -9,6 +9,7 @@ plugin.tx_community.settings {
 			maxHeight = 300
 			prefix = uploads/pics/
 			types = jpeg,jpg,png,gif
+			defaultImage = EXT:community/resources/public/Images/defaultProfileImage.png
 		}
 	}
 	
@@ -39,14 +40,15 @@ plugin.tx_community.settings {
                     user.search.access = 1
                     profile.menu.access = 1
                     profile.relation.listSome.access = 1
+		    profile.relation.list.access = 1
                     #unconfirmed friend is "other"
                     profile.relation.confirm.access = 1
                     profile.relation.reject.access = 1
                     profile.relation.request.access = 1
-					profile.relation.unconfirmed.access = 1
+		    profile.relation.unconfirmed.access = 1
 					
                     profile.details.access = 1
-					profile.wall.list.access = 1
+		    profile.wall.list.access = 1
                     
 
                 }
@@ -54,7 +56,7 @@ plugin.tx_community.settings {
                 friend < plugin.tx_community.settings.accessRules.other
                 friend {
                     access = 0
-                    message.write.access = 0
+                    message.write.access = 1
                     profile.relation.access = 1
 		    profile.wall.form.access = 1
                     
@@ -71,11 +73,16 @@ plugin.tx_community.wall.list {
     externalPrefix = tx_community
     prefixToTableMap.tx_community = fe_users
     showUidMap.tx_community = user
-    advanced.commentsPerPage = 10
+    advanced {
+	commentsPerPage = 10
+	#sort news by date descending
+	reverseSorting = 1
+    }
     requiredFields = content
     spamProtect.requireApproval = 0
     #flag for checking whether this plugin was called from community
     communityFlag = 1
+    
 }
 plugin.tx_community.wall.form < plugin.tx_community.wall.list
 plugin.tx_community.wall.form {
@@ -137,6 +144,12 @@ plugin.tx_community._CSS_DEFAULT_STYLE (
                 float: left;
                 margin-left: 2px;
         }
+
+	.tx_community_wall #tx_comments_pi1_content {
+	    width:100%;
+	    height:50px;
+	}
+	
 )
 
 config.tx_extbase.objects {

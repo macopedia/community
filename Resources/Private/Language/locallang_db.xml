@@ -16,7 +16,6 @@
 			<label index="tx_community_domain_model_group.members">Members</label>
 			<label index="tx_community_domain_model_group.pending_members">Pending Members</label>
 			<label index="tx_community_domain_model_user">User</label>
-			<label index="tx_community_domain_model_user."></label>
 			<label index="tx_community_domain_model_aclrole">Acl Role</label>
 			<label index="tx_community_domain_model_aclrole.name">Name</label>
 			<label index="tx_community_domain_model_aclrole.is_public">Is Public</label>
@@ -26,6 +25,35 @@
 			<label index="tx_community_domain_model_aclrule.resource">Resource</label>
 			<label index="tx_community_domain_model_aclrule.access_mode">Access Mode</label>
 			<label index="tx_community_domain_model_aclrule.role">Role</label>
+
+
+			<label index="tx_community_domain_model_relation">Relation</label>
+			<label index="tx_community_domain_model_relation.initiating_user">Initiating user</label>
+			<label index="tx_community_domain_model_relation.requested_user">Requested user</label>
+			<label index="tx_community_domain_model_relation.initiation_time">Initiation time</label>
+			<label index="tx_community_domain_model_relation.status">Relation status</label>
+			<label index="tx_community_domain_model_relation.status.1">New</label>
+			<label index="tx_community_domain_model_relation.status.2">Confirmed</label>
+			<label index="tx_community_domain_model_relation.status.4">Rejected</label>
+			<label index="tx_community_domain_model_relation.status.8">Cancelled</label>
+
+
+			<label index="tx_community_domain_model_message">Message</label>
+			<label index="tx_community_domain_model_message.sender">Sender</label>
+			<label index="tx_community_domain_model_message.recipient">Recipient</label>
+			<label index="tx_community_domain_model_message.sent_date">Sent date</label>
+			<label index="tx_community_domain_model_message.read_date">Read date</label>
+			<label index="tx_community_domain_model_message.sent">Sent</label>
+			<label index="tx_community_domain_model_message.read">Read</label>
+			<label index="tx_community_domain_model_message.subject">Subject</label>
+			<label index="tx_community_domain_model_message.message">Message</label>
+			<label index="tx_community_domain_model_message.sender_deleted">Deleted by sender</label>
+			<label index="tx_community_domain_model_message.recipient_deleted">Deleted by recipient</label>
+
+
+
+
+
 		</languageKey>
 	</data>
 </T3locallang>

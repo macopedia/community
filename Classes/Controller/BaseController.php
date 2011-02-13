@@ -84,7 +84,13 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
                  if ($this->hasAccess($resourceName) !='1') {
                           //access denied
                     $this->flashMessageContainer->add($this->_('access.denied'));
-                 //   $this->flashMessageContainer->add("You don't have permission to access ".$this->hasAccess($resourceName)." resource: ".$resourceName." ActionName: ".$actionName." LU: ".$this->getRequestingUser()->getUid()." RQD:".$this->getRequestedUser()->getUid());
+                 /*   $this->flashMessageContainer->add(
+			    "You don't have permission (".$this->hasAccess($resourceName).
+			    ") to access  resource: ".$resourceName.
+			    ", ActionName: ".$actionName.
+			    ", LU: ".$this->getRequestingUser()->getUid().
+			    " RQD:".$this->getRequestedUser()->getUid().
+		);*/
                     $this->redirectToUser($this->getRequestingUser());
 		}
       //        $this->flashMessageContainer->add("You have access ".$this->hasAccess($resourceName)." to resource: ".$resourceName." ActionName: ".$actionName." LU: ".$this->getRequestingUser()->getUid()." RQD:".$this->getRequestedUser()->getUid());

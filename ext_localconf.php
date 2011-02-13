@@ -61,12 +61,12 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Pi10',
 	array(
-		'Relation' => 'request,cancel,confirm,reject',
+		'Relation' => 'list,request,cancel,confirm,reject',
 		'User' => 'search,edit,update,editImage,updateImage',
 		'Message' => 'inbox,outbox,unread,write,send,read,delete',
 	),
 	array(
-		'Relation' => 'request,cancel,confirm,reject',
+		'Relation' => 'list,request,cancel,confirm,reject',
 		'Message' => 'inbox,outbox,unread,write,send,read,delete',
 		'User' => 'search,edit,update,editImage,updateImage',
 	)
