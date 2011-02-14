@@ -83,7 +83,7 @@ CREATE TABLE fe_users (
 	movies tinytext,
 	books tinytext,
 	quotes tinytext,
-	date_of_birth int(10) unsigned NOT NULL,
+	date_of_birth int(10) unsigned DEFAULT '' NOT NULL,
 	about_me tinytext,
 	cellphone varchar(255) DEFAULT '' NOT NULL,
 	gender varchar(32) DEFAULT '' NOT NULL,
