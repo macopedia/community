@@ -37,6 +37,7 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persist
 	 *
 	 * @return Tx_Community_Domain_Model_User
 	 * @todo Error Checking!
+	 * @todo if uid is not int then return null
 	 */
 	public function findCurrentUser() {
 		$uid = (integer) $GLOBALS["TSFE"]->fe_user->user['uid'];

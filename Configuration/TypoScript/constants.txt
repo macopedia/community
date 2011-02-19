@@ -1,0 +1,17 @@
+plugin.tx_community {
+	settings {
+	    # cat=plugin.tx_community//a; type=int+; label=Default login page PID, should be different from profile and action page
+        loginPage =
+
+        # cat=plugin.tx_community//a; type=int+; label=Default profile page PID
+        profilePage =
+
+        # cat=plugin.tx_community//a; type=int+; label=Default action page PID
+        actionPage =
+
+	}
+	persistence {
+		# cat=plugin.tx_community//a; type=int+; label=Default storage PID
+		storagePid = 
+	}
+}

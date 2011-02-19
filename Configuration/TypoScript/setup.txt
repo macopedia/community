@@ -2,91 +2,99 @@ tt_content.list.20.community_pi10 = USER_INT
 # set the namespace so any plugin can share arguments
 plugin.tx_community.view.pluginNamespace = tx_community
 
-plugin.tx_community.settings {
-	profile {
-		image {
-			maxWidth = 300
-			maxHeight = 300
-			prefix = uploads/pics/
-			types = jpeg,jpg,png,gif
-			defaultImage = EXT:community/resources/public/Images/defaultProfileImage.png
+plugin.tx_community {
+	persistence {
+		storagePid = {$plugin.tx_community.storagePid}
+	}
+
+	settings {
+		loginPage = {$plugin.tx_community.settings.loginPage}
+		profilePage = {$plugin.tx_community.settings.profilePage}
+		actionPage = {$plugin.tx_community.settings.actionPage}
+
+		profile {
+			image {
+				maxWidth = 300
+				maxHeight = 300
+				prefix = uploads/pics/
+				types = jpeg,jpg,png,gif
+				defaultImage = EXT:community/resources/public/Images/defaultProfileImage.png
+			}
 		}
-	}
-	
-	relation {
-		request {
-			allowMultiple = 1
+
+		relation {
+			request {
+				allowMultiple = 1
+			}
 		}
-	}
-	
-	caching {
-		Group = list,show
-		User = image,details
-		Relation = listSome,unconfirmed
-		AclRole = list,assign
-	}
-	
-	accessRules {
-                #guests (not logged in)
-                nobody { 
-                    profile.image.access = 1
-                    access = 0
-                }
 
-                #logged in, but not a friend
-		other < plugin.tx_community.settings.accessRules.nobody
-                other {
-                    access = 0
-                    user.search.access = 1
-                    profile.menu.access = 1
-                    profile.relation.listSome.access = 1
-		    profile.relation.list.access = 1
-                    #unconfirmed friend is "other"
-                    profile.relation.confirm.access = 1
-                    profile.relation.reject.access = 1
-                    profile.relation.request.access = 1
-		    profile.relation.unconfirmed.access = 1
-					
-                    profile.details.access = 1
-		    profile.wall.list.access = 1
-                    
+		caching {
+			Group = list,show
+			User = image,details
+			Relation = listSome,unconfirmed
+			AclRole = list,assign
+		}
 
-                }
+		accessRules {
+			#guests (not logged in)
+			nobody {
+				profile.image.access = 1
+				access = 0
+			}
 
-                friend < plugin.tx_community.settings.accessRules.other
-                friend {
-                    access = 0
-                    message.write.access = 1
-                    profile.relation.access = 1
-		    profile.wall.form.access = 1
-                    
-                }
-		
+			#logged in, but not a friend
+			other < plugin.tx_community.settings.accessRules.nobody
+			other {
+				access = 0
+				user.search.access = 1
+				profile.menu.access = 1
+				profile.relation.listSome.access = 1
+				profile.relation.list.access = 1
+
+				#unconfirmed friend is "other"
+				profile.relation.confirm.access = 1
+				profile.relation.reject.access = 1
+				profile.relation.request.access = 1
+				profile.relation.unconfirmed.access = 1
+
+				profile.details.access = 1
+				profile.wall.list.access = 1
+			}
+
+			friend < plugin.tx_community.settings.accessRules.other
+			friend {
+				access = 0
+				message.write.access = 1
+				profile.relation.access = 1
+				profile.wall.form.access = 1
+
+			}
+		}
 	}
 }
 
 plugin.tx_community.wall.list < plugin.tx_comments_pi1
 plugin.tx_community.wall.list {
-    code = COMMUNITY_WALL
-    templateFile = EXT:community/Resources/Private/Templates/Wall/tx_comments.html
-    storagePid = {$plugin.tx_comments_pi1.storagePid}
-    externalPrefix = tx_community
-    prefixToTableMap.tx_community = fe_users
-    showUidMap.tx_community = user
-    advanced {
-	commentsPerPage = 10
-	#sort news by date descending
-	reverseSorting = 1
-    }
-    requiredFields = content
-    spamProtect.requireApproval = 0
-    #flag for checking whether this plugin was called from community
-    communityFlag = 1
-    
+	code = COMMUNITY_WALL
+	templateFile = EXT:community/Resources/Private/Templates/Wall/tx_comments.html
+	storagePid = {$plugin.tx_comments_pi1.storagePid}
+	externalPrefix = tx_community
+	prefixToTableMap.tx_community = fe_users
+	showUidMap.tx_community = user
+	advanced {
+		commentsPerPage = 10
+		#sort news by date descending
+		reverseSorting = 1
+	}
+	requiredFields = content
+	spamProtect.requireApproval = 0
+	#flag for checking whether this plugin was called from community
+	communityFlag = 1
 }
+
 plugin.tx_community.wall.form < plugin.tx_community.wall.list
 plugin.tx_community.wall.form {
-    code = FORM
+	code = FORM
 }
 
 config.tx_extbase {
@@ -100,13 +108,13 @@ config.tx_extbase {
 				}
 			}
 		}
-                Tx_Community_Domain_Model_Message {
-                        mapping {
-                                columns {
-                                        tx_community_read.mapOnProperty = read
-                                }
-                        }
-                }
+		Tx_Community_Domain_Model_Message {
+			mapping {
+				columns {
+					tx_community_read.mapOnProperty = read
+				}
+			}
+		}
 	}
 }
 
@@ -130,36 +138,36 @@ plugin.tx_community._CSS_DEFAULT_STYLE (
 	.tx-community-pi1 table td {
 		vertical-align:top;
 	}
-        .tx-community-message-list-unread {
-                font-weight: bold;
-        }
-        .tx_community_profile_details dt {
-                 clear: left;
-                 display: block;
-                 float: left;
-                 margin-top: 5px;
-                 width: 50%;
-        }
-        .tx_community_profile_details dd {
-                float: left;
-                margin-left: 2px;
-        }
+	.tx-community-message-list-unread {
+		font-weight: bold;
+	}
+	.tx_community_profile_details dt {
+		clear: left;
+		display: block;
+		float: left;
+		margin-top: 5px;
+		width: 50%;
+	}
+	.tx_community_profile_details dd {
+		float: left;
+		margin-left: 2px;
+	}
 
 	.tx_community_wall #tx_comments_pi1_content {
-	    width:100%;
-	    height:50px;
+		width:100%;
+		height:50px;
 	}
 	
 )
 
 config.tx_extbase.objects {
-    Tx_Community_Service_Access_AccessServiceInterface {
-        className = Tx_Community_Service_Access_SimpleAccessService
-    }
-    Tx_Community_Service_Cache_CacheServiceInterface {
-    	# disable internal caching
-    	className = Tx_Community_Service_Cache_NoCacheService
-    }
+	Tx_Community_Service_Access_AccessServiceInterface {
+		className = Tx_Community_Service_Access_SimpleAccessService
+	}
+	Tx_Community_Service_Cache_CacheServiceInterface {
+		# disable internal caching
+		className = Tx_Community_Service_Cache_NoCacheService
+	}
 }
 
 

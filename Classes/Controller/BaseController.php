@@ -1,27 +1,27 @@
 <?php
 /***************************************************************
-*  Copyright notice
-*
-*  (c) 2010 Pascal Jungblut <mail@pascalj.de>
-*
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+ *  Copyright notice
+ *
+ *  (c) 2010 Pascal Jungblut <mail@pascalj.de>
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 
 /**
  * A base controller that implements basic functions that are needed
@@ -67,34 +67,42 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	protected $settingsService;
 
- 	/**
+	/**
 	 * Initialize before every action.
 	 */
 	protected function initializeAction() {
-                //redirect if user is not logged in
-                if (!$this->getRequestingUser()) {
-			$this->redirectToLogin();
-		}
-                $this->getRequestedUser();
-		$this->settingsService->set($this->settings);
-                $controllerName =  $this->request->getControllerName();
-                $actionName = $this->request->getControllerActionName();
-                $resourceName = $this->accessHelper->getResourceName($controllerName, $actionName);
-              
-                 if ($this->hasAccess($resourceName) !='1') {
-                          //access denied
-                    $this->flashMessageContainer->add($this->_('access.denied'));
-                 /*   $this->flashMessageContainer->add(
-			    "You don't have permission (".$this->hasAccess($resourceName).
-			    ") to access  resource: ".$resourceName.
-			    ", ActionName: ".$actionName.
-			    ", LU: ".$this->getRequestingUser()->getUid().
-			    " RQD:".$this->getRequestedUser()->getUid().
-		);*/
-                    $this->redirectToUser($this->getRequestingUser());
-		}
-      //        $this->flashMessageContainer->add("You have access ".$this->hasAccess($resourceName)." to resource: ".$resourceName." ActionName: ".$actionName." LU: ".$this->getRequestingUser()->getUid()." RQD:".$this->getRequestedUser()->getUid());
+		$controllerName = $this->request->getControllerName();
+		$actionName = $this->request->getControllerActionName();
+		$resourceName = $this->accessHelper->getResourceName($controllerName, $actionName);
 
+
+		//redirect if user is not logged in and resource isn't public
+		if (!$this->getRequestingUser()) {
+			if (!$this->accessHelper->hasAccess(NULL, NULL, $resourceName)) {
+				$this->redirectToLogin();
+			} else {
+				$this->getRequestedUser();
+				$this->settingsService->set($this->settings);
+			}
+		} else {
+			$this->getRequestedUser();
+			if ($this->hasAccess($resourceName) != '1') {
+				//access denied
+				$this->flashMessageContainer->add($this->_('access.denied'));
+				//debug flashmessage
+				/*
+				 $this->flashMessageContainer->add(
+										"You don't have permission (".$this->hasAccess($resourceName).
+										") to access  resource: ".$resourceName.
+										", ActionName: ".$actionName.
+										", LU: ".$this->getRequestingUser()->getUid().
+										" RQD:".$this->getRequestedUser()->getUid()
+				 );
+				 */
+				$this->redirectToUser($this->getRequestingUser());
+			}
+			$this->settingsService->set($this->settings);
+		}
 	}
 
 	/**
@@ -160,7 +168,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	protected function _($key, $arguments = array()) {
 		$translator = new Tx_Extbase_Utility_Localization();
-		return $translator->translate($key,'community', $arguments);
+		return $translator->translate($key, 'community', $arguments);
 	}
 
 	/**
@@ -216,17 +224,17 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	protected function handleUpload($property, $uploadDir, $types = 'jpg,gif,png', $maxSize = '1000000') {
 		$data = $_FILES['tx_' . strtolower($this->request->getControllerExtensionName())];
-		if(is_array($data) && count($data)>0) {
-			$propertyPath = t3lib_div::trimExplode('.',$property);
+		if (is_array($data) && count($data) > 0) {
+			$propertyPath = t3lib_div::trimExplode('.', $property);
 			$namePath = $data['name'];
 			$tmpPath = $data['tmp_name'];
 			$sizePath = $data['size'];
-			foreach($propertyPath as $segment) {
+			foreach ($propertyPath as $segment) {
 				$namePath = $namePath[$segment];
 				$tmpPath = $tmpPath[$segment];
 				$sizePath = $sizePath[$segment];
 			}
-			if($namePath !== NULL && $namePath !== '') {
+			if ($namePath !== NULL && $namePath !== '') {
 				$fileArray = array(
 					'name' => $namePath,
 					'tmp'  => $tmpPath,
@@ -239,22 +247,23 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 			return 0;
 		}
 
-		if($fileArray['size'] > $maxSize) {
+		if ($fileArray['size'] > $maxSize) {
 			return 2;
 		}
 		$fileInfo = pathinfo($fileArray['name']);
-		if(!t3lib_div::inList($types, strtolower($fileInfo['extension']))) {
+		if (!t3lib_div::inList($types, strtolower($fileInfo['extension']))) {
 			return 3;
 		}
 
-		if(file_exists(PATH_site . $uploadDir . $fileArray['name'])) {
+		if (file_exists(PATH_site . $uploadDir . $fileArray['name'])) {
 			$fileArray['name'] = $fileInfo['filename'] . '-' . time() . '.' . $fileInfo['extension'];
 		}
-		if(t3lib_div::upload_copy_move($fileArray['tmp'], PATH_site . $uploadDir . $fileArray['name'])) {
+		if (t3lib_div::upload_copy_move($fileArray['tmp'], PATH_site . $uploadDir . $fileArray['name'])) {
 			return $fileArray['name'];
 		} else {
 			return 4;
 		}
 	}
 }
+
 ?>
