@@ -99,7 +99,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		$message->setSentDate(time());
 		$message->setSender($this->getRequestingUser());
 		$this->repositoryService->get('message')->add($message);
-                $this->flashMessageContainer->add($this->_('message.send.success'));
+		$this->flashMessageContainer->add($this->_('message.send.success'));
 		$this->redirect('outbox', 'Message');
 	}
 
@@ -114,11 +114,11 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 			$this->getRequestingUser()->getUid() == $message->getSender()->getUid())) {
 			$this->repositoryService->get('message')->update($message);
 			$this->view->assign('message', $message);
-                       //do not flag message as read when reading your own message
-                        if( $this->getRequestingUser()->getUid() == $message->getRecipient()->getUid()){
-                            $message->setRead(true);
-                            $message->setReadDate(time());
-                       }
+			//do not flag message as read when reading your own message
+			if( $this->getRequestingUser()->getUid() == $message->getRecipient()->getUid()){
+				$message->setRead(true);
+				$message->setReadDate(time());
+			}
 		}
 	}
 
@@ -139,19 +139,19 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		}
 	}
 
-        /**
+	/**
 	 * Get the requested user
 	 * @see Classes/Controller/Tx_Community_Controller_BaseController#getRequestedUser()
 	 * @return Tx_Community_Domain_Model_User
 	 */
-        protected function getRequestedUser() {
-            parent::getRequestedUser();
+	protected function getRequestedUser() {
+		parent::getRequestedUser();
 
-            if ($this->request->hasArgument('recipient') && !is_array($this->request->getArgument('recipient'))) {
-				$this->requestedUser = $this->repositoryService->get('user')->findByUid((int) $this->request->getArgument('recipient'));
-			} 
+		if ($this->request->hasArgument('recipient') && !is_array($this->request->getArgument('recipient'))) {
+			$this->requestedUser = $this->repositoryService->get('user')->findByUid((int) $this->request->getArgument('recipient'));
+		} 
 
 		return $this->requestedUser;
-        }
+	}
 }
 ?>
