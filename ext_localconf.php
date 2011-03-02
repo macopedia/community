@@ -59,6 +59,30 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
+	'Wall',
+	array(
+		'WallPost' => 'list',
+	),
+	array(
+		'WallPost' => 'list',
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'WallForm',
+	array(
+		'WallPost' => 'new,delete,create',
+	),
+	array(
+		'WallPost' => 'new,delete,create',
+	)
+);
+
+
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
 	'Pi10',
 	array(
 		'Relation' => 'list,request,cancel,confirm,reject',
@@ -73,9 +97,5 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 );
 
 
-if (t3lib_extMgm::isLoaded('comments')) {
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['comments']['customFunctionCode'][$_EXTKEY] = 'EXT:community/Classes/Service/CommentService.php:&tx_Community_Service_CommentService->customFunctionCode';
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['comments']['comments_getComments'][$_EXTKEY] = 'EXT:community/Classes/Service/CommentService.php:&tx_Community_Service_CommentService->comments_getComments';
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['comments']['processSubmission'][$_EXTKEY] = 'EXT:community/Classes/Service/CommentService.php:&tx_Community_Service_CommentService->processSubmission';
-}
+
 ?>

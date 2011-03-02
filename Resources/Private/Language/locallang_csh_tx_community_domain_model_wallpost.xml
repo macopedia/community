@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Context Sensitive Help (CSH) for table tx_community_domain_model_wallpost</description>
+        <type>CSH</type>
+        <csh_table>tx_community_domain_model_wallpost</csh_table>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+			<label index="sender.description">Sender</label>
+			<label index="recipient.description">recipient</label>
+			<label index="subject.description">Subject</label>
+			<label index="message.description">message</label>
+		</languageKey>
+    </data>
+</T3locallang>

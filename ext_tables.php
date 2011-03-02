@@ -37,6 +37,18 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'Community: Actions'
 );
 
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'Wall',
+	'Community: User wall'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'WallForm',
+	'Community: User wall form'
+);
+
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Community');
 
 
@@ -205,6 +217,14 @@ $feUserColumns  = array(
 	),
 );
 
+
+t3lib_extMgm::addTCAcolumns('fe_users',$feUserColumns, 1);
+
+t3lib_extMgm::addToAllTCATypes('fe_users','gender','', 'after:name');
+t3lib_extMgm::addToAllTCATypes('fe_users','--div--;Community,political_view,religious_view,activities,interests,music,movies,books,quotes,about_me,cellphone,date_of_birth,profile_image;;;;1-1-1');
+
+
+
 t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_message','EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_message.xml');
 t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_message');
 $TCA['tx_community_domain_model_message'] = array (
@@ -228,9 +248,30 @@ $TCA['tx_community_domain_model_message'] = array (
 	)
 );
 
-t3lib_extMgm::addTCAcolumns('fe_users',$feUserColumns, 1);
 
-t3lib_extMgm::addToAllTCATypes('fe_users','gender','', 'after:name');
-t3lib_extMgm::addToAllTCATypes('fe_users','--div--;Community,political_view,religious_view,activities,interests,music,movies,books,quotes,about_me,cellphone,date_of_birth,profile_image;;;;1-1-1');
+
+
+t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_wallpost', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_wallpost.xml');
+t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_wallpost');
+$TCA['tx_community_domain_model_wallpost'] = array (
+	'ctrl' => array (
+		'title'             => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_wallpost',
+		'label' 			=> 'subject',
+		'tstamp' 			=> 'tstamp',
+		'crdate' 			=> 'crdate',
+		'versioningWS' 		=> 2,
+		'versioning_followPages'	=> TRUE,
+		'origUid' 			=> 't3_origuid',
+		'languageField' 	=> 'sys_language_uid',
+		'transOrigPointerField' 	=> 'l10n_parent',
+		'transOrigDiffSourceField' 	=> 'l10n_diffsource',
+		'delete' 			=> 'deleted',
+		'enablecolumns' 	=> array(
+			'disabled' => 'hidden'
+			),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/WallPost.php',
+		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_wallpost.gif'
+	)
+);
 
 ?>

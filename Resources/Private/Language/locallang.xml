@@ -175,24 +175,31 @@
 			<label index="message.inbox.title">Incoming messages</label>
 			<label index="message.inbox.nomessages">You have no messages received.</label>
 
-                        <label index="message.outbox.title">Outgoing messages</label>
+            <label index="message.outbox.title">Outgoing messages</label>
 			<label index="message.unread.title">Your unread messages</label>
 
-                        <label index="message.list.sender">Sender</label>
+            <label index="message.list.sender">Sender</label>
 			<label index="message.list.recipient">Recipient</label>
 			<label index="message.list.subject">Subject</label>
 			<label index="message.list.date">Date</label>
 
-                        <label index="message.read.title">Read a message</label>
+            <label index="message.read.title">Read a message</label>
 			<label index="message.read.date">Date:</label>
 			<label index="message.read.from">From:</label>
 			<label index="message.read.to">To:</label>
 			<label index="message.read.subject">Subject:</label>
 			<label index="message.read.message">Message:</label>
 
-                        <label index="message.send.success">Your message has been sent.</label>
+            <label index="message.send.success">Your message has been sent.</label>
                         
-                        <label index="message.delete.success">Selected message has been deleted.</label>
+            <label index="message.delete.success">Selected message has been deleted.</label>
+
+
+			<label index="tx_community_domain_model_wallpost">community wall post</label>
+			<label index="tx_community_domain_model_wallpost.sender">Sender</label>
+			<label index="tx_community_domain_model_wallpost.recipient">recipient</label>
+			<label index="tx_community_domain_model_wallpost.subject">Subject</label>
+			<label index="tx_community_domain_model_wallpost.message">message</label>
 
                 </languageKey>
 	</data>

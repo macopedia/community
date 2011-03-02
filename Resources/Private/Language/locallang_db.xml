@@ -50,7 +50,11 @@
 			<label index="tx_community_domain_model_message.sender_deleted">Deleted by sender</label>
 			<label index="tx_community_domain_model_message.recipient_deleted">Deleted by recipient</label>
 
-
+			<label index="tx_community_domain_model_wallpost">Wall Post</label>
+			<label index="tx_community_domain_model_wallpost.sender">Sender</label>
+			<label index="tx_community_domain_model_wallpost.recipient">Recipient</label>
+			<label index="tx_community_domain_model_wallpost.subject">Subject</label>
+			<label index="tx_community_domain_model_wallpost.message">Message</label>
 
 
 

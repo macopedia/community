@@ -1,13 +1,6 @@
 {namespace com=Tx_Community_ViewHelper}
 
-<div class="tx_community_wall">
-    <f:if condition="{displayWallList} >0">
-	<f:cObject typoscriptObjectPath="plugin.tx_community.wall.list"></f:cObject>
-    </f:if>
-    <f:if condition="{displayWallForm} >0">
-	<f:cObject typoscriptObjectPath="plugin.tx_community.wall.form"></f:cObject>
-    </f:if>
-</div>
+
 <div class="tx_community_profile_details">
     <f:renderFlashMessages class="tx-extbase-flash-message" />
     <h2>{user.name}</h2>

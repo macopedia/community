@@ -18,7 +18,7 @@ plugin.tx_community {
 				maxHeight = 300
 				prefix = uploads/pics/
 				types = jpeg,jpg,png,gif
-				defaultImage = EXT:community/resources/public/Images/defaultProfileImage.png
+				defaultImage = EXT:community/Resources/Public/Images/defaultProfileImage.png
 			}
 		}
 
@@ -58,7 +58,7 @@ plugin.tx_community {
 				profile.relation.unconfirmed.access = 1
 
 				profile.details.access = 1
-				profile.wall.list.access = 1
+
 			}
 
 			friend < plugin.tx_community.settings.accessRules.other
@@ -66,35 +66,38 @@ plugin.tx_community {
 				access = 0
 				message.write.access = 1
 				profile.relation.access = 1
-				profile.wall.form.access = 1
+				profile.wall.write.access = 1
+				profile.wall.list.access = 1
+			}
+		}
 
+		notification {
+			rules {
+				editProfile {
+					10 {
+						# handler = mail/wall/privateMessage
+						handler = Tx_Community_Service_Notification_PrivateMessageService
+						sender =
+						recipient =
+						template = EXT:community/Resources/Private/Partials/Notification/PlainMessage.html
+						message = Test message
+					}
+				#	20 {
+				#		type = mail
+				#		sender =
+				#		recipient =
+				#		template =
+				#	}
+				}
+
+			}
+			handlers {
+				10 {
+				 class = Tx_Community_Service_Notification_PrivateMessageService
+				}
 			}
 		}
 	}
-}
-
-plugin.tx_community.wall.list < plugin.tx_comments_pi1
-plugin.tx_community.wall.list {
-	code = COMMUNITY_WALL
-	templateFile = EXT:community/Resources/Private/Templates/Wall/tx_comments.html
-	storagePid = {$plugin.tx_comments_pi1.storagePid}
-	externalPrefix = tx_community
-	prefixToTableMap.tx_community = fe_users
-	showUidMap.tx_community = user
-	advanced {
-		commentsPerPage = 10
-		#sort news by date descending
-		reverseSorting = 1
-	}
-	requiredFields = content
-	spamProtect.requireApproval = 0
-	#flag for checking whether this plugin was called from community
-	communityFlag = 1
-}
-
-plugin.tx_community.wall.form < plugin.tx_community.wall.list
-plugin.tx_community.wall.form {
-	code = FORM
 }
 
 config.tx_extbase {
@@ -102,7 +105,7 @@ config.tx_extbase {
 		Tx_Community_Domain_Model_User {
 			mapping {
 				tableName = fe_users
-				userGroup.foreignClass = Tx_Extkbase_Domain_Model_FrontendUserGroup
+				userGroup.foreignClass = Tx_Extbase_Domain_Model_FrontendUserGroup
 				columns {
 					profile_image.mapOnProperty = image
 				}
@@ -167,6 +170,9 @@ config.tx_extbase.objects {
 	Tx_Community_Service_Cache_CacheServiceInterface {
 		# disable internal caching
 		className = Tx_Community_Service_Cache_NoCacheService
+	}
+	Tx_Community_Service_Notification_NotificationServiceInterface {
+		className = Tx_Community_Service_Notification_NotificationService
 	}
 }
 
