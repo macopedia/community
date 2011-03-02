@@ -31,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Service_Access_AccessServiceInterface,t3lib_Singleton {
+class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Service_Access_AccessServiceInterface, t3lib_Singleton {
 
 	/**
 	 * Logged out users
@@ -69,35 +69,39 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 * If
 	 */
 	protected $actionResourceMap = array(
-          'Message' => array(
-	//'inbox' => 'message.inbox',
-	//'outbox' => 'message.outbox',
-	//'unread' => 'message.unread',
-	'write' => 'message.write',
-	//  'send' => 'message.send',
-	// 'read' => 'message.read',
-	//   'delete' => 'message.delete',
-			),
-             'User'=>array(
-                 'image' => 'profile.image',
-		 'edit' => 'profile.edit',
-                 'search' => 'user.search',
-		 'update' => 'profile.edit',
-                 'details' => 'profile.details',
-                 'interaction' => 'profile.menu',
-		 'editImage' => 'profile.edit.image',
+		'Message' => array(
+			//'inbox' => 'message.inbox',
+			//'outbox' => 'message.outbox',
+			//'unread' => 'message.unread',
+			'write' => 'message.write',
+			//  'send' => 'message.send',
+			// 'read' => 'message.read',
+			//   'delete' => 'message.delete',
 		),
-             'Relation' => array (
-                 'listSome' => 'profile.relation.listSome',
-                 'list' => 'profile.relation.list',
-                 'request' => 'profile.relation.request',
-                 'confirm' => 'profile.relation.confirm',
-                 'reject' => 'profile.relation.reject',
-		 'unconfirmed' => 'profile.relation.unconfirmed',
-                 'cancel' => 'profile.relation.cancel',
-
-
+		'User' => array(
+			'image' => 'profile.image',
+			'edit' => 'profile.edit',
+			'search' => 'user.search',
+			'update' => 'profile.edit',
+			'details' => 'profile.details',
+			'interaction' => 'profile.menu',
+			'editImage' => 'profile.edit.image',
 		),
+		'Relation' => array(
+			'listSome' => 'profile.relation.listSome',
+			'list' => 'profile.relation.list',
+			'request' => 'profile.relation.request',
+			'confirm' => 'profile.relation.confirm',
+			'reject' => 'profile.relation.reject',
+			'unconfirmed' => 'profile.relation.unconfirmed',
+			'cancel' => 'profile.relation.cancel',
+		),
+		'WallPost' => array(
+			'list' => 'profile.wall.list',
+			'new' => 'profile.wall.write',
+			'create' => 'profile.wall.write',
+		),
+
 	);
 
 	/**

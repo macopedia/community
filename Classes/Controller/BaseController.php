@@ -68,13 +68,19 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	protected $settingsService;
 
 	/**
+	 * @var Tx_Community_Service_Notification_NotificationServiceInterface $notificationService
+	 */
+	protected $notificationService;
+
+	/**
 	 * Initialize before every action.
 	 */
 	protected function initializeAction() {
+		
 		$controllerName = $this->request->getControllerName();
 		$actionName = $this->request->getControllerActionName();
 		$resourceName = $this->accessHelper->getResourceName($controllerName, $actionName);
-
+		$this->settingsService->set($this->settings);
 
 		//redirect if user is not logged in and resource isn't public
 		if (!$this->getRequestingUser()) {
@@ -82,7 +88,6 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 				$this->redirectToLogin();
 			} else {
 				$this->getRequestedUser();
-				$this->settingsService->set($this->settings);
 			}
 		} else {
 			$this->getRequestedUser();
@@ -101,7 +106,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 				 */
 				$this->redirectToUser($this->getRequestingUser());
 			}
-			$this->settingsService->set($this->settings);
+
 		}
 	}
 
@@ -130,6 +135,15 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	public function injectSettingsService(Tx_Community_Service_SettingsService $settingsService) {
 		$this->settingsService = $settingsService;
+	}
+
+	/**
+	 * Inject notification service
+	 *
+	 * @param Tx_Community_Service_Notification_NotificationServiceInterface $notificationService
+	 */
+	public function injectNotificationService(Tx_Community_Service_Notification_NotificationServiceInterface $notificationService) {
+		$this->notificationService = $notificationService;
 	}
 
 	/**
