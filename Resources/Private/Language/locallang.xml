@@ -27,7 +27,7 @@
 			<label index="tx_community_domain_model_aclrule.access_mode">accessMode</label>
 			<label index="tx_community_domain_model_aclrule.role">role</label>
 
-                        <label index="access.denied">You don't have permission to access this resource.</label>
+			<label index="access.denied">You don't have permission to access this resource.</label>
 
 
 			<label index="flexform.action.title">Content</label>
@@ -43,8 +43,8 @@
 			<label index="flexform.profilePage">Page where the profile of users is displayed</label>
 			
 			<label index="profile.details.title">Details</label>
-                        <label index="profile.details.name">Name</label>
-                        <label index="profile.details.username">Username</label>
+			<label index="profile.details.name">Name</label>
+			<label index="profile.details.username">Username</label>
 			<label index="profile.details.firtsname">Firstname</label>
 			<label index="profile.details.lastname">Lastname</label>
 			<label index="profile.details.gender."></label>
@@ -92,25 +92,25 @@
 			<label index="profile.interaction.message.outbox">Outbox</label>
 			<label index="profile.interaction.message.unread">Unread</label>
 			
-                        <label index="relation.listSome.unconfirmed">Unconfirmed friends</label>
+			<label index="relation.listSome.unconfirmed">Unconfirmed friends</label>
 
-                        <label index="relation.listSome.title">Friends</label>
+			<label index="relation.listSome.title">Friends</label>
 			<label index="relation.listSome.goTolist">All friends</label>
 			<label index="relation.request.pending">Your friendship request is pending for approval.</label>
-                        <label index="relation.cancel.warning">Are you really want to cancel this relation?</label>
-                        <label index="relation.cancel.confirm">Yes</label>
-                        <label index="relation.cancel.success">Relation has been canceled.</label>
-                        <label index="relation.confirmed.cancel">cancel</label>
-                        <label index="relation.cancel.backToProfile">Back to profile page</label>
+			<label index="relation.cancel.warning">Are you really want to cancel this relation?</label>
+			<label index="relation.cancel.confirm">Yes</label>
+			<label index="relation.cancel.success">Relation has been canceled.</label>
+			<label index="relation.confirmed.cancel">cancel</label>
+			<label index="relation.cancel.backToProfile">Back to profile page</label>
 
-                        <label index="relation.reject.warning">Are you really want to reject this relation?</label>
-                        <label index="relation.reject.confirm">Yes</label>
-                        <label index="relation.reject.success">Relation has been rejected.</label>
-                        <label index="relation.reject.backToProfile">Back to profile page</label>
+			<label index="relation.reject.warning">Are you really want to reject this relation?</label>
+			<label index="relation.reject.confirm">Yes</label>
+			<label index="relation.reject.success">Relation has been rejected.</label>
+			<label index="relation.reject.backToProfile">Back to profile page</label>
 
-                        <label index="relation.unconfirmed.confirm">confirm</label>
-                        <label index="relation.unconfirmed.reject">reject</label>
-                        <label index="relation.confirm.success">You've just confirmed new friendship</label>
+			<label index="relation.unconfirmed.confirm">confirm</label>
+			<label index="relation.unconfirmed.reject">reject</label>
+			<label index="relation.confirm.success">You've just confirmed new friendship</label>
 
 			
 			<label index="role.new.title">New role</label>
@@ -175,24 +175,24 @@
 			<label index="message.inbox.title">Incoming messages</label>
 			<label index="message.inbox.nomessages">You have no messages received.</label>
 
-            <label index="message.outbox.title">Outgoing messages</label>
+			<label index="message.outbox.title">Outgoing messages</label>
 			<label index="message.unread.title">Your unread messages</label>
 
-            <label index="message.list.sender">Sender</label>
+			<label index="message.list.sender">Sender</label>
 			<label index="message.list.recipient">Recipient</label>
 			<label index="message.list.subject">Subject</label>
 			<label index="message.list.date">Date</label>
 
-            <label index="message.read.title">Read a message</label>
+			<label index="message.read.title">Read a message</label>
 			<label index="message.read.date">Date:</label>
 			<label index="message.read.from">From:</label>
 			<label index="message.read.to">To:</label>
 			<label index="message.read.subject">Subject:</label>
 			<label index="message.read.message">Message:</label>
 
-            <label index="message.send.success">Your message has been sent.</label>
-                        
-            <label index="message.delete.success">Selected message has been deleted.</label>
+			<label index="message.send.success">Your message has been sent.</label>
+			
+			<label index="message.delete.success">Selected message has been deleted.</label>
 
 
 			<label index="tx_community_domain_model_wallpost">community wall post</label>
@@ -200,7 +200,7 @@
 			<label index="tx_community_domain_model_wallpost.recipient">recipient</label>
 			<label index="tx_community_domain_model_wallpost.subject">Subject</label>
 			<label index="tx_community_domain_model_wallpost.message">message</label>
-
-                </languageKey>
+		</languageKey>
+	
 	</data>
 </T3locallang>
