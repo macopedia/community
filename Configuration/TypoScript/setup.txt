@@ -4,7 +4,7 @@ plugin.tx_community.view.pluginNamespace = tx_community
 
 plugin.tx_community {
 	persistence {
-		storagePid = {$plugin.tx_community.storagePid}
+		storagePid = {$plugin.tx_community.persistence.storagePid}
 	}
 
 	settings {
