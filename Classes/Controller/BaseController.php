@@ -71,6 +71,12 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @var Tx_Community_Service_Notification_NotificationServiceInterface $notificationService
 	 */
 	protected $notificationService;
+	
+	
+	/**
+	 * @var bool
+	 */
+	protected $noAccess;
 
 	/**
 	 * Initialize before every action.
@@ -81,6 +87,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$actionName = $this->request->getControllerActionName();
 		$resourceName = $this->accessHelper->getResourceName($controllerName, $actionName);
 		$this->settingsService->set($this->settings);
+		$this->noAccess = 0;
 
 		//redirect if user is not logged in and resource isn't public
 		if (!$this->getRequestingUser()) {
@@ -102,11 +109,22 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 										", ActionName: ".$actionName.
 										", LU: ".$this->getRequestingUser()->getUid().
 										" RQD:".$this->getRequestedUser()->getUid()
-				 );
-				 */
-				$this->redirectToUser($this->getRequestingUser());
+				 );*/
+				$this->noAccess = 1;
+				//$this->redirectToUser($this->getRequestingUser());
 			}
+		}
+	}
 
+	/**
+	 * Doesn't call action method if no access, otherwise acts normally
+	 */
+	protected function callActionMethod() {
+		if ($this->noAccess) {
+			$this->response->appendContent("");
+			return ;
+		} else {
+			return parent::callActionMethod();
 		}
 	}
 
