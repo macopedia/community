@@ -53,10 +53,11 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * 
 	 */
 	public function listSomeAction() {
-		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestingUser(), $this->settings['relations']['listSome']['limit']);
+		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestedUser(), $this->settings['relations']['listSome']['limit']);
+		$relationNumber = $this->repositoryService->get('relation')->countRelationsForUser($this->getRequestedUser());
 		$users = array();
 		foreach($relations as $relation) {
-			if ($relation->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
+			if ($relation->getRequestedUser()->getUid() == $this->getRequestedUser()->getUid()) {
 				$users[$relation->getUid()] = $relation->getInitiatingUser();
 			} else {
 				$users[$relation->getUid()] = $relation->getRequestedUser();
@@ -65,10 +66,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 
                 $usersRelations = $users;
 		$this->view->assign('usersRelations', $usersRelations);
-
-		$this->view->assign('unconfirmedRelations', $this->repositoryService->get('relation')->findUnconfirmedForUser(
-				$this->getRequestingUser())
-			);
+		$this->view->assign('countRelations',$relationNumber);
+		$this->view->assign('requestedUser',$this->getRequestedUser());
 	}
 
 	/**
@@ -84,6 +83,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				$users[] = $relation->getRequestedUser();
 			}
 		}
+		$this->view->assign('requestedUser',$this->getRequestedUser());
 		$this->view->assign('usersRelations', $users);
 	}
 
@@ -250,7 +250,6 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
                   } else {
                      $requestedUser = $relation->getInitiatingUser();
                   }
-                  //    $this->requestedUser = $this->repositoryService->get('user')->findByUid();
                   $this->requestedUser = $requestedUser;
             }
 		return $this->requestedUser;
