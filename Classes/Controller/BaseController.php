@@ -127,6 +127,28 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 			return parent::callActionMethod();
 		}
 	}
+	
+	/**
+	 * Injects the Configuration Manager and is initializing the framework settings
+	 * Function is used to override the merge of settings via TS & flexforms
+	 *
+	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface An instance of the Configuration Manager
+	 * @return void
+	 */
+	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+		$this->configurationManager = $configurationManager;
+		$this->settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+
+		$settingsToCheck = t3lib_div::trimExplode(',', $this->settings['overrideFlexformSettingsIfEmpty'], TRUE);
+		foreach ($settingsToCheck as $key) {
+			// if flexform setting is empty and value is available in TS
+			if ((!isset($this->settings[$key]) || empty($this->settings[$key]))
+					&& isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_community.']['settings.'][$key])) {
+				$this->settings[$key] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_community.']['settings.'][$key];
+			}
+
+		}
+	}
 
 	/**
 	 * Inject the access helper.
