@@ -83,8 +83,13 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * @dontvalidate $message
 	 */
 	public function writeAction(
-		Tx_Community_Domain_Model_User $recipient,
+		Tx_Community_Domain_Model_User $recipient = NULL,
 		Tx_Community_Domain_Model_Message $message =  NULL) {
+		if (!$recipient) {
+			$recipient = $this->getRequestedUser();
+		}
+		if ($recipient->getUid() == $this->getRequestingUser()->getUid())
+			return '';
 		$this->view->assign('recipient', $recipient);
 		$this->view->assign('message', $message);
 	}
@@ -100,7 +105,8 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		$message->setSender($this->getRequestingUser());
 		$this->repositoryService->get('message')->add($message);
 		$this->flashMessageContainer->add($this->_('message.send.success'));
-		$this->redirect('outbox', 'Message');
+		$this->request->setArgument('message', NULL);
+		$this->forward('write');
 	}
 
 	/**
