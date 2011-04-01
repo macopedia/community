@@ -1,0 +1,23 @@
+<f:if condition="{photos}">
+	<f:then>
+		<table>
+			<tr>
+				<th><f:translate key="tx_community_domain_model_photo.image" /></th>
+			</tr>
+
+			<f:for each="{photos}" as="photo">
+				<tr>
+					<td>
+
+						<f:link.action action="show" controller="Photo" arguments="{photo : photo}">
+							<f:image src="{settings.album.image.prefix}{photo.image}" height="100m" width="100m" alt="photo"/>
+						</f:link.action>
+					</td>
+				</tr>
+			</f:for>
+		</table>
+	</f:then>
+	<f:else>
+		No photos <br />
+	</f:else>
+</f:if>

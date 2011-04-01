@@ -1,0 +1,46 @@
+{namespace com=Tx_Community_ViewHelpers} 
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+  Resources:
+    Private: 
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+	<h1>Single View for Album</h1>
+
+	<f:flashMessages />
+	<f:render partial="Album/Properties" arguments="{album:album}" />
+
+	<f:if condition="{album.private}==0">
+		<f:render partial="Photo/List" arguments="{photos:album.photos, settings : settings}" />
+	</f:if>
+
+	<com:hasAccessToAlbum album="{album}" relation="{relation}" requestingUser="{requestingUser}">
+		<f:then>
+			<com:sameUser requestingUser="{requestingUser}" requestedUser="{album.user}">
+				<f:then>
+					<f:render partial="Photo/ListForOwner" arguments="{photos:album.photos, settings : settings}" />
+				</f:then>
+				<f:else>
+					<f:render partial="Photo/List" arguments="{photos:album.photos, settings : settings}" />
+				</f:else>
+			</com:sameUser>
+		</f:then>
+		<f:else>
+			<f:translate key="profile.album.accessDenied"/>
+		</f:else>
+	</com:hasAccessToAlbum>
+
+	<f:link.action action="list" arguments="{user : album.user}">Back to list</f:link.action><br />
+	<com:sameUser requestingUser="{requestingUser}" requestedUser="{album.user}">
+		<f:link.action action="new" controller="Photo" arguments="{album : album}">New Photo</f:link.action>
+		<f:link.action action="new">New Album</f:link.action>
+	</com:sameUser>
+</f:section>

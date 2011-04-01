@@ -12,6 +12,7 @@ plugin.tx_community {
 		profilePage = {$plugin.tx_community.settings.profilePage}
 		actionPage = {$plugin.tx_community.settings.actionPage}
 		messagePage = {$plugin.tx_community.settings.actionPage}
+		galleryPage = {$plugin.tx_community.settings.actionPage}
 
 		profile {
 			image {
@@ -20,6 +21,15 @@ plugin.tx_community {
 				prefix = uploads/pics/
 				types = jpeg,jpg,png,gif
 				defaultImage = EXT:community/Resources/Public/Images/defaultProfileImage.png
+			}
+		}
+
+		album {
+			image {
+				prefix = uploads/tx_community/photos/
+				types = jpeg,jpg,png
+				# in bytes
+				maxSize = 1000000
 			}
 		}
 
@@ -60,6 +70,7 @@ plugin.tx_community {
 
 				profile.details.access = 1
 
+				profile.gallery.access = 1
 			}
 
 			friend < plugin.tx_community.settings.accessRules.other

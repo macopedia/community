@@ -1,0 +1,9 @@
+<f:if condition="{privacy}==0">
+	<f:translate key="profile.album.public"/>
+</f:if>
+<f:if condition="{privacy}==1">
+	<f:translate key="profile.album.loggedInOnly"/>
+</f:if>
+<f:if condition="{privacy}==2">
+	<f:translate key="profile.album.friendsOnly"/>
+</f:if>

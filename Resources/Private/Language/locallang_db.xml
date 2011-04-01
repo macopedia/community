@@ -16,6 +16,8 @@
 			<label index="tx_community_domain_model_group.members">Members</label>
 			<label index="tx_community_domain_model_group.pending_members">Pending Members</label>
 			<label index="tx_community_domain_model_user">User</label>
+			<label index="tx_community_domain_model_user.albums">Albums</label>
+
 			<label index="tx_community_domain_model_aclrole">Acl Role</label>
 			<label index="tx_community_domain_model_aclrole.name">Name</label>
 			<label index="tx_community_domain_model_aclrole.is_public">Is Public</label>
@@ -56,7 +58,13 @@
 			<label index="tx_community_domain_model_wallpost.subject">Subject</label>
 			<label index="tx_community_domain_model_wallpost.message">Message</label>
 
-
+			<label index="tx_community_domain_model_album">Album</label>
+			<label index="tx_community_domain_model_album.name">Name</label>
+			<label index="tx_community_domain_model_album.private">Private</label>
+			<label index="tx_community_domain_model_album.photos">Photos</label>
+			<label index="tx_community_domain_model_photo">Photo</label>
+			<label index="tx_community_domain_model_photo.image">Image</label>
+			<label index="tx_community_domain_model_photo.album">Album</label>
 
 		</languageKey>
 	</data>

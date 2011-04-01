@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Context Sensitive Help (CSH) for table tx_community_domain_model_album</description>
+        <type>CSH</type>
+        <csh_table>tx_community_domain_model_album</csh_table>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+			<label index="name.description">Name of the album</label>
+			<label index="private.description">Only friends, only logged in or everyone</label>
+			<label index="photos.description">photos</label>
+		</languageKey>
+    </data>
+</T3locallang>

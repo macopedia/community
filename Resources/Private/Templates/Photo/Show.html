@@ -1,0 +1,35 @@
+{namespace com=Tx_Community_ViewHelpers}
+<f:layout name="Default" />
+
+This Template is responsible for displaying a single view for a domain object
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+  Resources:
+    Private: 
+      Templates:
+        Show.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Single View for Photo</h1>
+
+<f:flashMessages />
+<com:hasAccessToAlbum album="{photo.album}" relation="{relation}" requestingUser="{requestingUser}">
+	<f:then>
+		<f:image src="{settings.album.image.prefix}{photo.image}" maxHeight="1000" maxWidth="600" alt="photo"/>
+		<f:link.action action="show" controller="album" arguments="{album : photo.album}">Back to list</f:link.action>
+	</f:then>
+	<f:else>
+		<f:translate key="profile.album.accessDenied"/><br />
+		<f:link.action action="list" controller="album" arguments="{user : photo.album.user}">
+			Back to list of albums of {photo.album.user.name}
+		</f:link.action>
+	</f:else>
+</com:hasAccessToAlbum>
+<com:sameUser requestingUser="{requestingUser}" requestedUser="{photo.album.user}">
+	<f:link.action action="new" controller="Photo" arguments="{album : photo.album}">New Photo</f:link.action>
+	<f:link.action action="delete" controller="Photo" arguments="{photo : photo}">Delete</f:link.action>
+</com:sameUser>
+</f:section>

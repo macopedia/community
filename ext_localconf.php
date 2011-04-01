@@ -145,6 +145,18 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'Gallery',
+	array(
+		'Album' => 'list,show,new,create,edit,update,delete',
+		'Photo' => 'show,new,create,delete',
+	),
+	array(
+		'Album' => 'list,show,new,create,edit,update,delete',
+		'Photo' => 'show,new,create,delete',
+	)
+);
 
 
 ?>

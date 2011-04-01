@@ -1,0 +1,56 @@
+{namespace com=Tx_Community_ViewHelpers}
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+
+If you modify this template, do not forget to change the overwrite settings 
+in /Configuration/Kickstarter/settings.yaml:
+  Resources:
+    Private: 
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
+
+<f:section name="main">
+<h1>Listing for album of user {requestedUser.name}</h1>
+
+<f:flashMessages />
+
+<table  class="tx_community" >
+	<tr>
+		<th><f:translate key="tx_community_domain_model_album.name" /></th>
+		<th><f:translate key="tx_community_domain_model_album.private" /></th>
+		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
+			<th> </th>
+			<th> </th>
+		</com:sameUser>
+	</tr>
+
+	<f:for each="{albums}" as="album">
+		<tr>
+			<td>
+				<com:hasAccessToAlbum album="{album}" relation="{relation}" requestingUser="{requestingUser}">
+					<f:then>
+						<f:link.action action="show" arguments="{album : album}"> {album.name}</f:link.action></td>
+					</f:then>
+					<f:else>
+						{album.name}
+					</f:else>
+				</com:hasAccessToAlbum>
+			<td>
+				<f:render partial="Album/PrivacyToString" arguments="{privacy : album.private}" />
+			</td>
+			<com:sameUser requestingUser="{requestingUser}" requestedUser="{album.user}">
+				<td><f:link.action action="edit" arguments="{album : album}">Edit</f:link.action></td>
+				<td><f:link.action action="delete" arguments="{album : album}">Delete</f:link.action></td>
+			</com:sameUser>
+		</tr>
+	</f:for>
+</table>
+
+<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
+	<f:link.action action="new">New Album</f:link.action>
+</com:sameUser>
+</f:section>
