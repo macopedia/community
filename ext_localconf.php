@@ -4,7 +4,7 @@ if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Pi1',
+	'UserImage',
 	array(
 		'User' => 'image',
 	),
@@ -15,7 +15,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Pi2',
+	'UserDetails',
 	array(
 		'User' => 'details',
 	),
@@ -26,7 +26,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Pi3',
+	'InteracionMenu',
 	array(
 		'User' => 'interaction',
 	),
@@ -37,7 +37,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Pi4',
+	'ListRelations',
 	array(
 		'Relation' => 'listSome',
 	),
@@ -48,7 +48,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Pi5',
+	'UnconfirmedRelations',
 	array(
 		'Relation' => 'unconfirmed',
 	),
@@ -79,20 +79,69 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'MessageBox',
+	array(
+		'Message' => 'inbox,outbox,unread,read,delete',
+	),
+	array(
+		'Message' => 'inbox,outbox,unread,read,delete',
+	)
+);
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
-	'Pi10',
+	'MessageWriteBox',
+	array(
+		'Message' => 'write,send',
+	),
+	array(
+		'Message' => 'write,send',
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'SearchBox',
+	array(
+		'User' => 'searchBox',
+	),
+	array(
+		'User' => 'searchBox',
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'SearchResults',
+	array(
+		'User' => 'search',
+	),
+	array(
+		'User' => 'search',
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'EditProfile',
+	array(
+		'User' => 'edit,update,editImage,updateImage',
+	),
+	array(
+		'User' => 'edit,update,editImage,updateImage',
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'RelationManagement',
 	array(
 		'Relation' => 'list,request,cancel,confirm,reject',
-		'User' => 'search,edit,update,editImage,updateImage',
-		'Message' => 'inbox,outbox,unread,write,send,read,delete',
 	),
 	array(
 		'Relation' => 'list,request,cancel,confirm,reject',
-		'Message' => 'inbox,outbox,unread,write,send,read,delete',
-		'User' => 'search,edit,update,editImage,updateImage',
 	)
 );
 

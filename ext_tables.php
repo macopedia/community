@@ -3,38 +3,38 @@ if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
-	'Pi1',
+	'UserImage',
 	'Community: User image'
 );
 
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
-	'Pi2',
+	'UserDetails',
 	'Community: User details'
 );
 
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
-	'Pi3',
+	'InteracionMenu',
 	'Community: User menu'
 );
 
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
-	'Pi4',
+	'ListRelations',
 	'Community: List relations'
 );
 
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
-	'Pi5',
+	'UnconfirmedRelations',
 	'Community: Unconfirmed relations'
 );
 
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
-	'Pi10',
-	'Community: Actions'
+	'RelationManagement',
+	'Community: Relation Management'
 );
 
 Tx_Extbase_Utility_Extension::registerPlugin(
@@ -49,6 +49,35 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'Community: User wall form'
 );
 
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'MessageBox',
+	'Community: Messages'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'MessageWriteBox',
+	'Community: Write Message'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'SearchResults',
+	'Community: Search Results'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'SearchBox',
+	'Community: SearchBox'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'EditProfile',
+	'Community: Edit Profile'
+);
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Community');
 
 
@@ -80,7 +109,7 @@ $TCA['tx_community_domain_model_relation'] = array (
 
 // flexform to select the action
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
-$plugins = array('_pi3','_pi10');
+$plugins = array('_interacionmenu','_relationmanagement');
 
 foreach ($plugins as $plugin) {
 	$pluginSignature = strtolower($extensionName) . $plugin;

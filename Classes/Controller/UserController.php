@@ -155,6 +155,12 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
                 ///TODO: add message when no user was found
         }
 
+	/**
+	 * Give search box
+	 *
+	 */
+	public function searchBoxAction() {
+	}
 
 	/**
 	 * Get the identifier for this request (used for caching)
