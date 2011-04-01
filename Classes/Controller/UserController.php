@@ -73,16 +73,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	public function interactionAction() {
 		$this->view->assign('requestedUser', $this->getRequestedUser());
 		$this->view->assign('requestingUser', $this->getRequestingUser());
-		if ($this->getRequestingUser()) {
-			$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers(
-				$this->getRequestedUser(),
-				$this->getRequestingUser(),
-				Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED
-			);
-		} else {
-			$relation = NULL;
-		}
-		$this->view->assign('relation', $relation);
+		$this->view->assign('relation', $this->getRelation());
 	}
 
 	/**

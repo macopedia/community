@@ -215,6 +215,24 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	}
 
 	/**
+	 * Get relation between requesting and requested user
+	 *
+	 * @return Tx_Community_Domain_Model_Relation
+	 */
+	public function getRelation() {
+		if ($this->getRequestingUser()) {
+			$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers(
+				$this->getRequestedUser(),
+				$this->getRequestingUser(),
+				Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED
+			);
+		} else {
+			$relation = NULL;
+		}
+		return $relation;
+	}
+
+	/**
 	 * Translate $key
 	 *
 	 * @param string $key
