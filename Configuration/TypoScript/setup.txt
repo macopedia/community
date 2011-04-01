@@ -11,6 +11,7 @@ plugin.tx_community {
 		loginPage = {$plugin.tx_community.settings.loginPage}
 		profilePage = {$plugin.tx_community.settings.profilePage}
 		actionPage = {$plugin.tx_community.settings.actionPage}
+		messagePage = {$plugin.tx_community.settings.actionPage}
 
 		profile {
 			image {
