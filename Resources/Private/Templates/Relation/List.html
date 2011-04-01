@@ -1,18 +1,15 @@
 <div class="tx_community_relation_list">
     <f:if condition="{usersRelations}">
-        <h4><f:translate key="profile.listSome.friends"/></h4>
+        <h4><f:translate key="relation.list.title"/> <f:link.page additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.profilePage}">{requestedUser.name}</f:link.page></h4>
         <ul>
             <f:for each="{usersRelations}" as="user" key="relationUid">
                 <li>
-                    <f:link.page additionalParams="{tx_community : {user : user}}">{user.name}</f:link.page>
+                    <f:link.page additionalParams="{tx_community : {user : user}}" pageUid="{settings.profilePage}">{user.name}</f:link.page>
                     <f:link.action action="cancel" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relationUid}">
-					(<f:translate key="relation.confirmed.cancel"/>)
+						<f:translate key="relation.confirmed.cancel"/>
                     </f:link.action>
                 </li>
             </f:for>
         </ul>
-
     </f:if>
-   
-
 </div>

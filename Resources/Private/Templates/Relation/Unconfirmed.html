@@ -1,15 +1,24 @@
 <f:if condition="{unconfirmedRelations}">
-    <ul>
-        <f:for each="{unconfirmedRelations}" as="relation">
-            <li>
-		{relation.initiatingUser.name}
-            <f:link.action action="confirm" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}">
-		(<f:translate key="relation.unconfirmed.confirm"/>)
-            </f:link.action>
-            <f:link.action action="reject" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}">
-		(<f:translate key="relation.unconfirmed.reject"/>)
-            </f:link.action>
-            </li>
-        </f:for>
-    </ul>
+	<div class="friend-requests">
+		<h2><f:translate key="relation.unconfirmed.title"/></h2>
+		<f:for each="{unconfirmedRelations}" as="relation">
+			<div class="friend-request">
+				<f:link.page additionalParams="{tx_community : {user : relation.initiatingUser}}" pageUid="{settings.profilePage}">
+						<f:image
+								src="<f:render partial='Profile/ImageUrl' arguments='{user : relation.initiatingUser, settings : settings}' />"
+								class="user-photo-thumbnail" width="48c" height="47c" alt="{relation.initiatingUser.name}"
+						/>
+				</f:link.page>
+				<f:link.page additionalParams="{tx_community : {user : relation.initiatingUser}}" pageUid="{settings.profilePage}">
+					{relation.initiatingUser.name}
+				</f:link.page>
+				<f:link.action action="confirm" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}" class="confirm">
+					<f:translate key="relation.unconfirmed.confirm"/>
+				</f:link.action>
+				<f:link.action action="reject" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}" class="reject">
+					<f:translate key="relation.unconfirmed.reject"/>
+				</f:link.action>
+			</div>
+		</f:for>
+	</div>
 </f:if>

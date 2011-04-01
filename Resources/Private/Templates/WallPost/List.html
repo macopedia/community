@@ -1,41 +1,32 @@
 <f:layout name="Default" />
 
-This Template is responsible for creating a table of domain objects.
-
-
-If you modify this template, do not forget to change the overwrite settings 
-in /Configuration/Kickstarter/settings.yaml:
-  Resources:
-    Private: 
-      Templates:
-        List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
-
 <f:section name="main">
-<h1>Listing for WallPost</h1>
 
-<f:flashMessages />
+	<f:flashMessages />
+	
+	<f:if condition="{wallPosts -> f:count()} == 0">
+		<f:translate key="wallPost.list.noMessages"/>
+	</f:if>
 
-<table  class="tx_community" >
-	<tr>
-		<th><f:translate key="tx_community_domain_model_wallpost.sender" /></th>
-		<th><f:translate key="tx_community_domain_model_wallpost.recipient" /></th>
-		<th><f:translate key="tx_community_domain_model_wallpost.subject" /></th>
-		<th><f:translate key="tx_community_domain_model_wallpost.message" /></th>
-		<th> </th>
-	</tr>
+	<f:widget.paginate objects="{wallPosts}" as="paginatedWallPosts" configuration="{itemsPerPage: 5, insertAbove : 0, insertBelow: 1}">
+		<f:for each="{paginatedWallPosts}" as="wallPost">
+			<div class="news">
+				<div class="news-info">
+					<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}">
+						<f:image
+								src="<f:render partial='Profile/ImageUrl' arguments='{user : wallPost.sender, settings : settings}' />"
+								class="user-photo-thumbnail" width="48c" height="47c" alt="{wallPost.sender.name}"
+						/>
+					</f:link.page>
+					<div class="text-info">
+						<p class="news-title">{wallPost.subject}</p>
 
-	<f:for each="{wallPosts}" as="wallPost">
-		<tr>
-			<td><f:link.page additionalParams="{tx_community : {user : wallPost.sender}}">{wallPost.sender.name}</f:link.page></td>
-			<td>{wallPost.recipient.name}</td>
-			<td>{wallPost.subject}</td>
-			<td>{wallPost.message}></td>
-			<td><f:link.action action="delete" arguments="{wallPost : wallPost}">Delete</f:link.action></td>
-		</tr>
-	</f:for>
-</table>
-
+					</div>
+				</div>
+				<p>{wallPost.message}</p>
+				<div class="clearer"></div>
+			</div>
+		</f:for>
+	</f:widget.paginate>
 
 </f:section>

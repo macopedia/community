@@ -1,20 +1,22 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-	<div class="tx-community-message-write">
-		<h3><f:translate key="message.write.title" arguments="{name : recipient.name}"/></h3>
-		<f:form object="{message}" name="message" action="send" controller="Message">
-			<dl>
-				<dt><f:translate key="message.write.subject"/></dt>
-				<dd><f:form.textbox property="subject"/></dd>
+	<div id="message-box">
+		<h1><f:translate key="message.write.title" arguments="{name : recipient.name}"/></h1> 
+		<f:flashMessages/>
+		<f:render partial="FormErrors"/>
+		<f:form object="{message}" name="message" action="send" controller="Message" arguments="{user : recipient}">
+			<fieldset>
+				<p><f:translate key="message.write.subject"/></p>
+				<f:form.textbox property="subject"/>
 				
-				<dt><f:translate key="message.write.message"/></dt>
-				<dd><f:form.textarea property="message" rows="5" cols="30"/></dd>
+				<p><f:translate key="message.write.message"/></p>
+				<f:form.textarea property="message" rows="5" cols="30"/>
 				
-			</dl>
-			
-			<f:form.hidden property="recipient" value="{recipient}"/>
-			<f:form.submit value="{f:translate(key:'message.write.submit')}"/>
+				<f:form.hidden property="recipient" value="{recipient}"/>
+				
+				<f:form.submit value="{f:translate(key:'message.write.submit')}"/>
+			</fieldset>
 		</f:form>
 	</div>
 </f:section>

@@ -72,6 +72,13 @@
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
 			
+			<label index="profile.album.title">Albums</label>
+			<label index="profile.album.public">Public</label>
+			<label index="profile.album.loggedInOnly">Only for logged in</label>
+			<label index="profile.album.friendsOnly">Only for friends</label>
+			<label index="profile.album.uploadError">There was a problem when uploading your image.</label>
+			<label index="profile.album.accessDenied">You don't have access to view photos in this album.</label>
+			
 			<label index="profile.editImage.title">Upload a new profile image</label>
 			<label index="profile.editImage.image">Image</label>
 			<label index="profile.editImage.submit">Upload</label>
@@ -94,20 +101,23 @@
 			
 			<label index="relation.listSome.unconfirmed">Unconfirmed friends</label>
 
+			<label index="relation.list.title">Friends a user</label>
 			<label index="relation.listSome.title">Friends</label>
 			<label index="relation.listSome.goTolist">All friends</label>
 			<label index="relation.request.pending">Your friendship request is pending for approval.</label>
 			<label index="relation.cancel.warning">Are you really want to cancel this relation?</label>
 			<label index="relation.cancel.confirm">Yes</label>
 			<label index="relation.cancel.success">Relation has been canceled.</label>
-			<label index="relation.confirmed.cancel">cancel</label>
 			<label index="relation.cancel.backToProfile">Back to profile page</label>
+			
+			<label index="relation.confirmed.cancel">(cancel)</label>
 
 			<label index="relation.reject.warning">Are you really want to reject this relation?</label>
 			<label index="relation.reject.confirm">Yes</label>
 			<label index="relation.reject.success">Relation has been rejected.</label>
 			<label index="relation.reject.backToProfile">Back to profile page</label>
 
+			<label index="relation.unconfirmed.title">Confirm friendship:</label>
 			<label index="relation.unconfirmed.confirm">confirm</label>
 			<label index="relation.unconfirmed.reject">reject</label>
 			<label index="relation.confirm.success">You've just confirmed new friendship</label>
@@ -165,7 +175,9 @@
 			<label index="group.type.1">Public group</label>
 			<label index="group.type.2">Private group</label>
 			
-			<label index="search.submit">Search</label>
+			<label index="search.form.submit">Search</label>
+			<label index="search.results.title">Search results</label>
+			<label index="search.results.nothingFound">Nothing was found.</label>
 			
 			<label index="message.write.title">Send a message to %1$s</label>
 			<label index="message.write.subject">Subject</label>
@@ -200,6 +212,19 @@
 			<label index="tx_community_domain_model_wallpost.recipient">recipient</label>
 			<label index="tx_community_domain_model_wallpost.subject">Subject</label>
 			<label index="tx_community_domain_model_wallpost.message">message</label>
+			
+			<label index="wallPost.list.noMessages">There are no messages.</label>
+			<label index="wallPost.form.title">Write new message!</label>
+			<label index="wallPost.form.submit">Submit</label>
+			
+			<label index="tx_community_domain_model_user">User</label>
+			<label index="tx_community_domain_model_user.albums">albums</label>
+			<label index="tx_community_domain_model_album">Album that may contain images</label>
+			<label index="tx_community_domain_model_album.name">Name of the album</label>
+			<label index="tx_community_domain_model_album.private">Privacy</label>
+			<label index="tx_community_domain_model_album.photos">photos</label>
+			<label index="tx_community_domain_model_photo">Image that is in user's gallery</label>
+			<label index="tx_community_domain_model_photo.image">image</label>
 		</languageKey>
 	
 	</data>

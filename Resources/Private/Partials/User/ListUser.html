@@ -3,6 +3,14 @@
 		<f:for each="{users}" as="user">
 			<tr>
 				<td>
+					<f:link.page additionalParams="{tx_community : {user : user}}" pageUid="{settings.profilePage}">
+						<f:image
+							src="<f:render partial='Profile/ImageUrl' arguments='{user : user, settings : settings}' />"
+							class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}"
+						/>
+					</f:link.page>
+				</td>
+				<td>
 					<f:link.action action="show" controller="User" arguments="{user : user}" pageUid="{settings.profilePage}">
 						{user.name}
 					</f:link.action>

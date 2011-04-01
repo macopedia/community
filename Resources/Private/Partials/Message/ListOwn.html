@@ -1,25 +1,34 @@
-<table class="tx-community-message-list">
-	<thead>
-		<tr>
-			<td><f:translate key="message.list.sender"/></td>
-			<td><f:translate key="message.list.recipient"/></td>
-			<td><f:translate key="message.list.subject"/></td>
-			<td><f:translate key="message.list.date"/></td>
-		</tr>
-	</thead>
-	<tbody>
-		<f:for each="{messages}" as="message">
-			<f:cycle values="{0: 'odd', 1: 'even'}" as="oddEven">
-					<tr class="tx-community-message-list-{oddEven}">
-					<td>{message.sender.name}</td>
-					<td>{message.recipient.name}</td>
-					<td><f:link.action action="read" controller="Message" arguments="{message : message}">
-							<f:format.crop maxCharacters="50">{message.subject}</f:format.crop>
-						</f:link.action>
-					</td>
-					<td><f:format.date>{message.sentDate}</f:format.date></td>
-				</tr>
-			</f:cycle>
-		</f:for>
-	</tbody>
-</table>
+<div class="messages">
+	<f:for each="{messages}" as="message">
+		<div class="message sent">
+			<div class="message-icon"></div>
+			<div class="message-content">
+				<div class="message-info">
+					<f:link.page additionalParams="{tx_community : {user : message.recipient}}" pageUid="{settings.profilePage}">
+							<f:image
+									src="<f:render partial='Profile/ImageUrl' arguments='{user : message.recipient, settings : settings}' />"
+									class="user-photo-thumbnail" width="48c" height="47c" alt="{message.recipient}"
+							/>
+					</f:link.page>
+					<div class="text-info">
+						<span>
+							<f:translate key="message.read.to"/>
+							<f:link.page additionalParams="{tx_community : {user : message.recipient}}" pageUid="{settings.profilePage}">{message.recipient.name}</f:link.page>
+							&nbsp;/&nbsp;
+							<f:format.date>{message.sentDate}</f:format.date>
+						</span>
+						<p class="message-title">
+							<f:link.action action="read" controller="Message" arguments="{message : message}">
+								<f:format.crop maxCharacters="50">{message.subject}</f:format.crop>
+							</f:link.action>
+						</p>
+					</div>
+					<p><f:format.crop maxCharacters="50">{message.message}</f:format.crop></p>
+					<f:link.action action="read" controller="Message" arguments="{message : message}" class="show">
+						<f:translate key="message.list.readMore"/>
+					</f:link.action>
+				</div>
+			</div>
+		</div>
+	</f:for>
+</div>

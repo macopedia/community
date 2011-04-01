@@ -1,15 +1,32 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-	<div class="tx-community-messages">
-		<h3><f:translate key="message.unread.title"/></h3>
-		<f:if condition="{messages}">
-			<f:then>
-				<f:render partial="Message/List" arguments="{messages : messages}"/>
-			</f:then>
-			<f:else>
-				<f:translate key="message.unread.nomessages"/>
-			</f:else>
-		</f:if>
+	<h2><f:translate key="message.unread.title"/></h2>
+	<div class="filters">
+		<ul>
+			<li class="active">
+				<f:link.action action="unread" controller="Message" pageUid="{settings.messagePage}">
+					<f:translate key="message.navigation.unreaded"/>
+				</f:link.action>
+			</li>
+			<li>
+				<f:link.action action="inbox" controller="Message" pageUid="{settings.messagePage}">
+					<f:translate key="message.navigation.inbox"/>
+				</f:link.action>
+			</li>
+			<li>
+				<f:link.action action="outbox" controller="Message" pageUid="{settings.messagePage}">
+					<f:translate key="message.navigation.sentMail"/>
+				</f:link.action>
+			</li>
+		</ul>
 	</div>
+	<f:if condition="{messages}">
+		<f:then>
+			<f:render partial="Message/List" arguments="{messages : messages, settings : settings}"/>
+		</f:then>
+		<f:else>
+			<f:translate key="message.unread.nomessages"/>
+		</f:else>
+	</f:if>
 </f:section>

@@ -1,15 +1,18 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-	<div class="tx_community_profile_edit_image">
+	<h2><f:translate key="profile.editImage.title"/></h2>
+	<div id="data-edition-form">
 		<f:form action="updateImage" controller="User" object="{user}" name="user" enctype="multipart/form-data">
-	
-		<h3><f:translate key="profile.editImage.title"/></h3>
-			<dl>
-				<dt><f:translate key="profile.editImage.image"/></dt>
-				<dd><f:form.upload property="image"/></dd>
-			</dl>
-			<f:form.submit value="{f:translate(key:'profile.editImage.submit')}"/>
+			<fieldset>
+				<div><f:translate key="profile.editImage.image"/></div>
+				<f:image
+						src="<f:render partial='Profile/ImageUrl' arguments='{user : user, settings : settings}' />"
+						class="user-photo photo-edit" width="180c" height="180c" alt="{user.name}"
+				/>
+				<f:form.upload property="image"/>
+				<f:form.submit value="{f:translate(key:'profile.editImage.submit')}" class="photo-edit-button"/>
+			</fieldset>
 		</f:form>
 	</div>
 </f:section>
