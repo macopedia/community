@@ -39,7 +39,7 @@
 	 * @return string The rendered list view
 	 */
 	public function listAction() {
-		$wallPosts = $this->repositoryService->get('wallPost')->findByRecipient($this->getRequestedUser());
+		$wallPosts = $this->repositoryService->get('wallPost')->findRecentByRecipient($this->getRequestedUser());
 		$this->view->assign('wallPosts', $wallPosts);
 	}
 
@@ -59,7 +59,6 @@
 	 * Creates a new WallPost and forwards to the list action.
 	 *
 	 * @param Tx_Community_Domain_Model_WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
-	 * @dontvalidate $newWallPost
 	 * @return void
 	 *
 	 */

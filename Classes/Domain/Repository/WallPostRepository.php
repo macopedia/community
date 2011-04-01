@@ -25,6 +25,19 @@
 
 class Tx_Community_Domain_Repository_WallPostRepository extends Tx_Extbase_Persistence_Repository {
 
-
+	/**
+	 * Finds most recent posts by the specified blog
+	 *
+	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
+	 * @param integer $limit The number of posts to return at max
+	 * @return array The posts
+	 */
+	public function findRecentByRecipient(Tx_Community_Domain_Model_User $user) {
+		$query = $this->createQuery();
+		return $query->matching($query->equals('recipient', $user))
+			->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
+			->execute();
+	}
+	
 }
 ?>
