@@ -36,21 +36,21 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	/**
 	 * Logged out users
 	 *
-	 * @var int
+	 * @var string
 	 */
 	const ACCESS_NOBODY = 'nobody';
 
 	/**
 	 * Logged in users - no friends
 	 *
-	 * @var int
+	 * @var string
 	 */
 	const ACCESS_OTHER = 'other';
 
 	/**
 	 * Friends
 	 *
-	 * @var int
+	 * @var string
 	 */
 	const ACCESS_FRIEND = 'friend';
 
@@ -163,7 +163,7 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 *
 	 * @param Tx_Community_Domain_Model_User $requestingUser
 	 * @param Tx_Community_Domain_Model_User $requestedUser
-	 * @return int
+	 * @return string
 	 */
 	protected function getAccessType(
 	Tx_Community_Domain_Model_User $requestingUser = NULL,
