@@ -7,16 +7,20 @@
 	<dl>
 		<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'username', value : user.username}"/>
 
-		<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:'gender')}">
-			<dt><f:translate key="profile.details.gender"/></dt>
-			<dd><f:translate key="profile.details.gender.{user.gender}"/></dd>
+		<f:if condition="{user.gender}">
+			<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:'gender')}">
+				<dt><f:translate key="profile.details.gender"/></dt>
+				<dd><f:translate key="profile.details.gender.{user.gender}"/></dd>
+			</f:if>
 		</f:if>
-		
-		<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:'dateOfBirth')}">
-			<dt><f:translate key="profile.details.dateOfBirth"/></dt>
-			<dd>{user.dateOfBirth->f:format.date(format:'d.m.Y')}</dd>
+
+		<f:if condition="{user.dateOfBirth}">
+			<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:'dateOfBirth')}">
+				<dt><f:translate key="profile.details.dateOfBirth"/></dt>
+				<dd>{user.dateOfBirth->f:format.date(format:'d.m.Y')}</dd>
+			</f:if>
 		</f:if>
-			
+
 		<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'politicalView', value : user.politicalView}"/>
 		<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'religiousView', value : user.religiousView}"/>
 		<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'activities', value : user.activities}"/>

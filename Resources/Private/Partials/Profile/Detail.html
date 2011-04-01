@@ -1,5 +1,7 @@
 {namespace com=Tx_Community_ViewHelpers}
+	<f:if condition="{value}">
 		<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:label)}">
 			<dt><f:translate key="profile.details.{label}"/></dt>
 			<dd>{value}</dd>
 		</f:if>
+	</f:if>
