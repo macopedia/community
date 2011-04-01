@@ -78,9 +78,9 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		$users = array();
 		foreach($relations as $relation) {
 			if ($relation->getRequestedUser()->getUid() == $this->getRequestedUser()->getUid()) {
-				$users[] = $relation->getInitiatingUser();
+				$users[$relation->getUid()] = $relation->getInitiatingUser();
 			} else {
-				$users[] = $relation->getRequestedUser();
+				$users[$relation->getUid()] = $relation->getRequestedUser();
 			}
 		}
 		$this->view->assign('requestedUser',$this->getRequestedUser());
