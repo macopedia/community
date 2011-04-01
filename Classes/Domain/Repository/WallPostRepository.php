@@ -35,7 +35,7 @@ class Tx_Community_Domain_Repository_WallPostRepository extends Tx_Extbase_Persi
 	public function findRecentByRecipient(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('recipient', $user))
-			->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
+			->setOrderings(array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
 			->execute();
 	}
 	
