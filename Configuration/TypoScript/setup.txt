@@ -26,6 +26,9 @@ plugin.tx_community {
 				defaultImage = EXT:community/Resources/Public/Images/defaultProfileImage.png
 			}
 			reasonForReportRequired = 1
+			details {
+				showDetails = username,gender,dateOfBirth,politicalView,religiousView,activities,interests,music,movies,books,quotes,aboutMe,address,city,zip,country,www,cellphone,phone,email
+			}
 		}
 
 		album {
