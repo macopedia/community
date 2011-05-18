@@ -115,6 +115,20 @@ $TCA['tx_community_domain_model_album'] = array(
 				'eval' => 'required'
 			),
 		),
+		'album_type' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_album.type',
+			'config' => array(
+				'type' => 'none'
+			),
+		),
+		'main_photo' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_album.main_photo',
+			'config' => array(
+				'type' => 'none'
+			),
+		),
 		'photos' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_album.photos',

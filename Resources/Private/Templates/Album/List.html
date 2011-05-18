@@ -16,8 +16,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
 <f:section name="main">
 <h1>Listing for album of user {requestedUser.name}</h1>
 
-<f:flashMessages />
-
 <table  class="tx_community" >
 	<tr>
 		<th><f:translate key="tx_community_domain_model_album.name" /></th>
@@ -33,12 +31,26 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td>
 				<com:hasAccessToAlbum album="{album}" relation="{relation}" requestingUser="{requestingUser}">
 					<f:then>
-						<f:link.action action="show" arguments="{album : album}"> {album.name}</f:link.action></td>
+						<f:link.action action="show" arguments="{album : album}">
+							<f:if condition="{album.mainPhoto}">
+								<f:then>
+									<f:image src="{settings.album.image.prefix}{album.mainPhoto.image}" height="100m" width="100m" alt="photo"/>
+								</f:then>
+								<f:else>
+									<f:image src="{settings.album.dafaultAlbumMainPhoto}" height="100m" width="100m" alt="photo"/>
+								</f:else>
+							</f:if>
+							<br />
+							{album.name}
+						</f:link.action>
 					</f:then>
 					<f:else>
+						<f:image src="{settings.album.unknownAlbumMainPhoto}" height="100m" width="100m" alt="photo"/>
+						<br />
 						{album.name}
 					</f:else>
 				</com:hasAccessToAlbum>
+			</td>
 			<td>
 				<f:render partial="Album/PrivacyToString" arguments="{privacy : album.private}" />
 			</td>

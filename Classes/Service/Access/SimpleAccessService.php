@@ -102,6 +102,18 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 			'new' => 'profile.wall.write',
 			'create' => 'profile.wall.write',
 		),
+		'Album' => array(
+			'list' => 'profile.gallery',
+			'show' => 'profile.gallery',
+		),
+		'Photo' => array(
+			'avatar' => 'profile.gallery.avatar',
+				//allows seting other user's photo as avatar
+				//but still need to be able to see the photo
+		),
+		'Utils' => array(
+			'flashMessagesDisplay' => 'utils'
+		)
 
 	);
 

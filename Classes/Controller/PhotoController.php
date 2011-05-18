@@ -29,19 +29,6 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 
 
 	/**
-	 * Displays a single Photo
-	 *
-	 * @param Tx_Community_Domain_Model_Photo $photo the Photo to display
-	 * @return string The rendered view
-	 */
-	public function showAction(Tx_Community_Domain_Model_Photo $photo) {
-		$this->view->assign('photo', $photo);
-		$this->view->assign('relation', $this->getRelation());
-		$this->view->assign('requestingUser', $this->getRequestingUser());
-	}
-
-
-	/**
 	 * Displays a form for creating a new  Photo
 	 *
 	 * @param Tx_Community_Domain_Model_Album $album album we create photo in
@@ -73,7 +60,11 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 			$newPhoto = new Tx_Community_Domain_Model_Photo;
 			$newPhoto->setImage($fileName);
 			$album->addPhoto($newPhoto);
+			if (!$album->getMainPhoto()) {
+				$album->setMainPhoto($newPhoto);
+			}
 			$this->repositoryService->get('photo')->add($newPhoto);
+			$this->flashMessageContainer->add($this->_('photo.album.uploadSuccess'));
 			$this->redirect('show','album', NULL, array('album' => $album->getUid()));
 		} else {
 			$this->flashMessageContainer->add($this->_('profile.album.uploadError'));
@@ -91,10 +82,79 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 	public function deleteAction(Tx_Community_Domain_Model_Photo $photo) {
 		$album = $photo->getAlbum();
 		$album->removePhoto($photo);
+		if (! $album->getPhotos()->contains($album->getMainPhoto())) {
+			//we have to change the main photo, as it was deleted
+			if ($album->getPhotos()->count()) {
+				$album->getPhotos()->rewind();
+				$album->setMainPhoto($album->getPhotos()->current());
+			} else {
+				$album->setMainPhoto();
+			}
+		}
 		$this->repositoryService->get('photo')->remove($photo);
-		$this->flashMessageContainer->add('Your Photo was removed.');
+		$this->flashMessageContainer->add($this->_('profile.album.photoRemoved'));
 		$this->redirect('show','Album',NULL,array('album'=>$album));
 	}
 
+
+	/**
+	 * Sets an existing photo as user's avatar
+	 * It's posible to set other user's photo as own avatar
+	 *
+	 * @param Tx_Community_Domain_Model_Photo $photo the Photo to be set as avatar
+	 * @return void
+	 */
+	public function avatarAction(Tx_Community_Domain_Model_Photo $photo) {
+		$album = $photo->getAlbum();
+		if ($this->hasAccessToAlbum($album)) {
+			$imagePath = $photo->getImage();
+			$this->requestingUser->setImage($imagePath);
+			if ($album->getAlbumType() == Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR
+					&& $album->getUser() == $this->requestingUser) {
+				//don't have to copy photo to apecial album
+			} else {
+				$newPhoto = new Tx_Community_Domain_Model_Photo;
+				$newPhoto->setImage($imagePath);
+
+				$this->photoToSpecialAlbum($newPhoto, Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR);
+			}
+			$this->flashMessageContainer->add($this->_('profile.album.photoSetAsAvatar'));
+		} else {
+			$this->flashMessageContainer->add($this->_('profile.album.accessDenied'));
+		}
+		$this->redirect('show','Album',NULL,array('album'=>$album));
+	}
+
+	/**
+	 * Sets an existing photo as main photo of it's album
+	 *
+	 * @param Tx_Community_Domain_Model_Photo $photo the Photo to be set as main
+	 * @return void
+	 */
+	public function mainPhotoAction(Tx_Community_Domain_Model_Photo $photo) {
+		$photo->getAlbum()->setMainPhoto($photo);
+		$this->flashMessageContainer->add($this->_('profile.album.photoSetAsMainPhoto'));
+		$this->redirect('show','Album',NULL,array('album'=>$photo->getAlbum()));
+	}
+
+	/**
+	 * Checks if requesting user can see given album
+	 *
+	 * @param Tx_Community_Domain_Model_Album $album
+	 * @return bool
+	 */
+	public function hasAccessToAlbum($album) {
+		$requestingUser = $this->requestingUser;
+		$relation = $this->getRelation();
+
+		if (($requestingUser && ($album->getUser()->getUid() == $requestingUser->getUid())) ||
+				$relation ||
+				($album->getPrivate()<=1 && $requestingUser) ||
+				$album->getPrivate()==0  ) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
 }
 ?>

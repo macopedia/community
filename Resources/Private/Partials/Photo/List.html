@@ -8,10 +8,9 @@
 			<f:for each="{photos}" as="photo">
 				<tr>
 					<td>
-
-						<f:link.action action="show" controller="Photo" arguments="{photo : photo}">
+						<a rel="lightbox[community-album]" href="{settings.album.image.prefix}{photo.image}">
 							<f:image src="{settings.album.image.prefix}{photo.image}" height="100m" width="100m" alt="photo"/>
-						</f:link.action>
+						</a>
 					</td>
 				</tr>
 			</f:for>

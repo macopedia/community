@@ -27,6 +27,30 @@
  * Repository for Tx_Community_Domain_Model_Album
  */
 class Tx_Community_Domain_Repository_AlbumRepository extends Tx_Extbase_Persistence_Repository {
+	public function __construct() {
+		parent::__construct();
 
+		$this->setDefaultOrderings(array('crdate'=>Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+			//requied in AlbumController->showMostRecentAction
+	}
+
+	/**
+	 * Finds albums by user and special
+	 *
+	 * @param Tx_Community_Domain_Model_User $user The owner of album
+	 * @param integer $albumType The type of special album
+	 * @return array The posts
+	 */
+	public function findOneByUserAndType(Tx_Community_Domain_Model_User $user, $albumType) {
+		$query = $this->createQuery();
+		return $query->matching(
+					$query->logicalAnd(
+							$query->equals('user', $user),
+							$query->equals('albumType', $albumType)
+							)
+					)
+			->execute()
+			->getFirst();
+	}
 }
 ?>

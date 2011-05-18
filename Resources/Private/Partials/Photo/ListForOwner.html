@@ -4,16 +4,24 @@
 			<tr>
 				<th><f:translate key="tx_community_domain_model_photo.image" /></th>
 				<th> </th>
+				<th> </th>
+				<th> </th>
 			</tr>
 
 			<f:for each="{photos}" as="photo">
 				<tr>
 					<td>
-
-						<f:link.action action="show" controller="Photo" arguments="{photo : photo}">
+						<a rel="lightbox[community-album]" href="{settings.album.image.prefix}{photo.image}"
+						   title='
+								<f:link.action action="mainPhoto" controller="Photo" arguments="{photo : photo}"><f:translate key="profile.album.setMainAlbumPhoto" /></f:link.action><br />
+								<f:link.action action="avatar" controller="Photo" arguments="{photo : photo}"><f:translate key="profile.album.setPhotoAsAvatar" /></f:link.action><br />
+								<f:link.action action="delete" controller="Photo" arguments="{photo : photo}">Delete</f:link.action>
+						   '>
 							<f:image src="{settings.album.image.prefix}{photo.image}" height="100m" width="100m" alt="photo"/>
-						</f:link.action>
+						</a>
 					</td>
+					<td><f:link.action action="mainPhoto" controller="Photo" arguments="{photo : photo}"><f:translate key="profile.album.setMainAlbumPhoto" /></f:link.action></td>
+					<td><f:link.action action="avatar" controller="Photo" arguments="{photo : photo}"><f:translate key="profile.album.setPhotoAsAvatar" /></f:link.action></td>
 					<td><f:link.action action="delete" controller="Photo" arguments="{photo : photo}">Delete</f:link.action></td>
 				</tr>
 			</f:for>

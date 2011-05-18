@@ -47,12 +47,25 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	 * @var integer
 	 */
 	const PRIVACY_AVAILABLE_FOR_FRIENDS = 2;
+	
+	/**
+	 * album is a normal album
+	 *
+	 * @var integer
+	 */
+	const ALBUM_TYPE_NORMAL = 0;
+	
+	/**
+	 * album contains current and old avatars
+	 *
+	 * @var integer
+	 */
+	const ALBUM_TYPE_AVATAR = 1;
 
 	/**
 	 * Owner of the album
 	 *
 	 * @var Tx_Community_Domain_Model_User
-	 * @validate NotEmpty
 	 */
 	protected $user;
 
@@ -73,16 +86,31 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	protected $private;
 
 	/**
+	 * Normal album, album with user images(avatars),
+	 * wallposts images, etc.
+	 *
+	 * @var integer
+	 */
+	protected $albumType;
+
+	/**
 	 * photos
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_Photo>
 	 * @lazy
+	 * @cascade remove
 	 */
 	protected $photos;
 
+	/**
+	 * mainPhoto - the proto that represents the album on list
+	 *
+	 * @var Tx_Community_Domain_Model_Photo
+	 * @lazy
+	 */
+	protected $mainPhoto;
 
 	public function __construct() {
-		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();
 	}
 
@@ -126,11 +154,43 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
+	 * @param int $type
+	 * @return void
+	 */
+	public function setAlbumType($type) {
+		$this->albumType = $type;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getAlbumType() {
+		return $this->albumType;
+	}
+
+	/**
+	 * Set main photo of album
+	 * @param Tx_Community_Domain_Model_Photo $photo
+	 * @return void
+	 */
+	public function setMainPhoto(Tx_Community_Domain_Model_Photo $photo = NULL) {
+		$this->mainPhoto = $photo;
+	}
+
+	/**
+	 * Get main photo of album
+	 * @return Tx_Community_Domain_Model_Photo
+	 */
+	public function getMainPhoto() {
+		return $this->mainPhoto;
+	}
+
+	/**
 	 * Set owner of album
 	 * @param Tx_Community_Domain_Model_User $user
 	 * @return void
 	 */
-	public function setUser($user) {
+	public function setUser(Tx_Community_Domain_Model_User $user) {
 		$this->user = $user;
 	}
 

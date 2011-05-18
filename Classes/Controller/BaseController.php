@@ -188,12 +188,28 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * Get the requested user
+	 * 
+	 * Some objects (like photos or albums) have users assigned to them. 
+	 * To avoid security mistakes we check arguments (tx_community['foo']=88) in a
+	 * specific order and the first one that is set is the only one taken into account later on.
+	 * TODO: hook in this function
 	 *
 	 * @return Tx_Community_Domain_Model_User
 	 */
 	protected function getRequestedUser() {
 		if (!$this->requestedUser) {
-			if ($this->request->hasArgument('user') && !is_array($this->request->getArgument('user'))) {
+			//If we request album or photo then the owner of album is requested user and we ignore/override user argument
+			
+			if ($this->request->hasArgument('photo') && !is_array($this->request->getArgument('photo'))) {
+				$photo = $this->repositoryService->get('photo')->findByUid((int) $this->request->getArgument('photo'));
+				$this->request->setArgument('album', NULL);
+				$this->request->setArgument('user', NULL);
+				$this->requestedUser = $photo->getAlbum()->getUser();
+			} else if ($this->request->hasArgument('album') && !is_array($this->request->getArgument('album'))) {
+				$album = $this->repositoryService->get('album')->findByUid((int) $this->request->getArgument('album'));
+				$this->request->setArgument('user', NULL);
+				$this->requestedUser = $album->getUser();
+			} else if ($this->request->hasArgument('user') && !is_array($this->request->getArgument('user'))) {
 				$this->requestedUser = $this->repositoryService->get('user')->findByUid((int) $this->request->getArgument('user'));
 			} else {
 				$this->requestedUser = $this->getRequestingUser();
@@ -335,6 +351,28 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		} else {
 			return 4;
 		}
+	}
+
+	/**
+	 * Puts image into special album of given type owned by requesting user
+	 * Adds/updates album and adds photo to repo, you dont need to care about it
+	 *
+	 * @param Tx_Community_Domain_Model_Photo $photo
+	 * @param integer $albumType like Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR
+	 */
+	protected function photoToSpecialAlbum(Tx_Community_Domain_Model_Photo $newPhoto, $albumType) {
+		$user = $this->requestingUser;
+		$album = $this->repositoryService->get('album')->findOneByUserAndType($user,$albumType);
+		if (!$album) {
+			$album = new Tx_Community_Domain_Model_Album;
+			$album->setAlbumType($albumType);
+			$album->setName($this->_('profile.album.albumTypeName.'.$albumType));
+			$album->setUser($user);
+			$album->setMainPhoto($newPhoto);
+			$this->repositoryService->get('album')->add($album);
+		}
+		$album->addPhoto($newPhoto);
+		$this->repositoryService->get('photo')->add($newPhoto);
 	}
 }
 

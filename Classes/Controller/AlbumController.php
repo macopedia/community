@@ -28,7 +28,7 @@
 class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_BaseController {
 
 	/**
-	 * Displays all Albums
+	 * Displays all Albums of requested user
 	 *
 	 * @return void
 	 */
@@ -42,7 +42,7 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 
 
 	/**
-	 * Displays a single Album
+	 * Displays a single Album with it's photos
 	 *
 	 * @param Tx_Community_Domain_Model_Album $album the Album to display
 	 * @return string The rendered view
@@ -53,9 +53,18 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 		$this->view->assign('requestingUser', $this->getRequestingUser());
 	}
 
+	/**
+	 * Redirects to show freshest album of requestedUser
+	 *
+	 * @return void
+	 */
+	public function showMostRecentAction() {
+		$album = $this->repositoryService->get('album')->findOneByUser($this->requestedUser);
+		$this->redirect('show', NULL, NULL, array('album'=>$album));
+	}
 
 	/**
-	 * Displays a form for creating a new  Album
+	 * Displays a form for creating a new Album
 	 *
 	 * @param Tx_Community_Domain_Model_Album $newAlbum a fresh Album object which has not yet been added to the repository
 	 * @return void
@@ -71,13 +80,12 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	 *
 	 * @param Tx_Community_Domain_Model_Album $newAlbum a fresh Album object which has not yet been added to the repository
 	 * @return void
-	 * @dontvalidate $newAlbum
 	 */
 	public function createAction(Tx_Community_Domain_Model_Album $newAlbum) {
 		$newAlbum->setUser($this->requestingUser);
 		$this->repositoryService->get('album')->add($newAlbum);
-		$this->flashMessageContainer->add('Your new Album was created.');
-		$this->redirect('list');
+		$this->flashMessageContainer->add($this->_('profile.album.createdAlbum'));
+		$this->redirect('showMostRecent');
 	}
 
 
@@ -101,7 +109,7 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	 */
 	public function updateAction(Tx_Community_Domain_Model_Album $album) {
 		$this->repositoryService->get('album')->update($album);
-		$this->flashMessageContainer->add('Your Album was updated.');
+		$this->flashMessageContainer->add($this->_('profile.album.updatedAlbum'));
 		$this->redirect('list');
 	}
 
@@ -112,11 +120,8 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	 * @return void
 	 */
 	public function deleteAction(Tx_Community_Domain_Model_Album $album) {
-		foreach ($album->getPhotos()->toArray() as $photo) {
-			$this->repositoryService->get('photo')->remove($photo);
-		}
 		$this->repositoryService->get('album')->remove($album);
-		$this->flashMessageContainer->add('Your Album was removed.');
+		$this->flashMessageContainer->add($this->_('profile.album.removedAlbum'));
 		$this->redirect('list');
 	}
 

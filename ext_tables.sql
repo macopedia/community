@@ -133,7 +133,9 @@ CREATE TABLE tx_community_domain_model_album (
 	
 	name varchar(255) DEFAULT '' NOT NULL,
 	private tinyint(4) DEFAULT '0' NOT NULL,
+	album_type tinyint(4) DEFAULT '0' NOT NULL,
 	photos int(11) unsigned DEFAULT '0' NOT NULL,
+	main_photo int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
