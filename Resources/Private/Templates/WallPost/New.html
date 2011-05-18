@@ -12,19 +12,19 @@ New.html: keep
 Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
 
 <f:section name="main">
-	
-	<div class="new-news">
-		<p><f:translate key="wallPost.form.title"/></p>
+	<h1>New WallPost</h1>
 
-		<f:flashMessages/>
+	<f:flashMessages/>
 
-		<f:render partial="FormErrors"/>
-		<f:form method="post" action="create" controller="WallPost" arguments="{user : recipient}" name="newWallPost" object="{newWallPost}">
+	<f:render partial="FormErrors"/>
 
-			<fieldset>
-				<f:form.textarea property="message" cols="40" rows="4"/>
-				<f:form.submit value="{f:translate(key:'wallPost.form.submit')}"/>
-			</fieldset>
-		</f:form>
-	</div>
+	<f:form method="post" action="create" controller="WallPost" arguments="{user : recipient}" name="newWallPost" object="{newWallPost}">
+
+		<label for="message">
+			<f:translate key="tx_community_domain_model_wallpost.message"/>
+		</label><br/>
+		<f:form.textarea property="message" cols="40" rows="4"/>
+
+		<f:form.submit value="Create new"/>
+	</f:form>
 </f:section>
