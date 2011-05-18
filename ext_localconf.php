@@ -149,14 +149,25 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Gallery',
 	array(
-		'Album' => 'list,show,new,create,edit,update,delete',
-		'Photo' => 'show,new,create,delete',
+		'Album' => 'list,show,new,create,edit,update,delete,showMostRecent',
+		'Photo' => 'new,create,delete,avatar,mainPhoto',
 	),
 	array(
-		'Album' => 'list,show,new,create,edit,update,delete',
-		'Photo' => 'show,new,create,delete',
+		'Album' => 'list,show,new,create,edit,update,delete,showMostRecent',
+		'Photo' => 'new,create,delete,avatar,mainPhoto',
 	)
 );
 
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'FlashMessagesDisplayer',
+	array(
+		'Utils' => 'flashMessagesDisplay',
+	),
+	array(
+		'Utils' => 'flashMessagesDisplay',
+	)
+);
 
 ?>

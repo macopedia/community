@@ -78,6 +78,19 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'EditProfile',
 	'Community: Edit Profile'
 );
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'Gallery',
+	'Community: Gallery'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'FlashMessagesDisplayer',
+	'Community: FlashMessagesDisplayer'
+);
+
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Community');
 
 

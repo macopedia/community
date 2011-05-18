@@ -16,8 +16,6 @@ Otherwise your changes will be overwritten the next time you save the extension 
 	<div class="new-news">
 		<p><f:translate key="wallPost.form.title"/></p>
 
-		<f:flashMessages/>
-
 		<f:render partial="FormErrors"/>
 		<f:form method="post" action="create" controller="WallPost" arguments="{user : recipient}" name="newWallPost" object="{newWallPost}">
 
