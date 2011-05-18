@@ -28,8 +28,7 @@ class Tx_Community_Domain_Repository_WallPostRepository extends Tx_Extbase_Persi
 	/**
 	 * Finds most recent posts by the specified blog
 	 *
-	 * @param Tx_BlogExample_Domain_Model_Blog $blog The blog the post must refer to
-	 * @param integer $limit The number of posts to return at max
+	 * @param Tx_Community_Domain_Model_User $user The owner of wall
 	 * @return array The posts
 	 */
 	public function findRecentByRecipient(Tx_Community_Domain_Model_User $user) {

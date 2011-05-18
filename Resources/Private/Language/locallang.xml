@@ -76,12 +76,24 @@
 			<label index="profile.album.public">Public</label>
 			<label index="profile.album.loggedInOnly">Only for logged in</label>
 			<label index="profile.album.friendsOnly">Only for friends</label>
+			<label index="profile.album.uploadSuccess">The photo was uploaded</label>
 			<label index="profile.album.uploadError">There was a problem when uploading your image.</label>
 			<label index="profile.album.accessDenied">You don't have access to view photos in this album.</label>
+			<label index="profile.album.albumTypeName.1">Profile pictures</label><!-- Album for avatars -->
+			<label index="profile.album.setPhotoAsAvatar">Set as profile image</label>
+			<label index="profile.album.setMainAlbumPhoto">Set as cover of album</label>
+			<label index="profile.album.photoRemoved">The photo was removed</label>
+			<label index="profile.album.photoSetAsAvatar">The photo was was set as your profile image</label>
+			<label index="profile.album.photoSetAsMainPhoto">New album cover was set</label>
+			<label index="profile.album.createdAlbum">New album was created</label>
+			<label index="profile.album.updatedAlbum">You changed album settings</label>
+			<label index="profile.album.removedAlbum">You deleted your album</label>
 			
 			<label index="profile.editImage.title">Upload a new profile image</label>
 			<label index="profile.editImage.image">Image</label>
 			<label index="profile.editImage.submit">Upload</label>
+			<label index="profile.updateImage.error">There was a problem when uploading your profile image.</label>
+			<label index="profile.updateImage.success">You changed your profile image.</label>
 			
 			<label index="profile.interaction.user.title">User</label>
 			<label index="profile.interaction.requestRelation">Add as friend</label>
@@ -224,6 +236,8 @@
 			<label index="wallPost.list.noMessages">There are no messages.</label>
 			<label index="wallPost.form.title">Write new message!</label>
 			<label index="wallPost.form.submit">Submit</label>
+			<label index="wallPost.form.created">You added post</label>
+			<label index="wallPost.form.deleted">You deleted post</label>
 			
 			<label index="tx_community_domain_model_user">User</label>
 			<label index="tx_community_domain_model_user.albums">albums</label>
