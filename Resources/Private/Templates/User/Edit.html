@@ -1,56 +1,56 @@
 <f:layout name="Default"/>
 <f:section name="main">
-<div class="tx_community_profile_edit">
+<div  id="data-edition-form" class="tx_community_profile_edit">
 <f:form action="update" controller="User" object="{user}" name="updatedUser">
 
 	<h2>{user.name}</h2>
 	<h3><f:translate key="profile.details.title"/></h3>
-	<dl>
-			<dt><f:translate key="profile.details.username"/></dt>
-			<dd><f:form.textbox disabled="disabled" property="username"/></dd>
-            <dt><f:translate key="profile.details.name"/></dt>
-			<dd><f:form.textbox property="name"/></dd>
-			<dt><f:translate key="profile.details.gender"/></dt>
-			<dd><f:form.select property="gender" options="{male : '{f:translate(key:\'profile.details.gender.male\')}', female : '{f:translate(key:\'profile.details.gender.female\')}'}"/></dd>
-			<dt><f:translate key="profile.details.dateOfBirth"/></dt>
-			<dd><f:form.textbox property="dateOfBirth" value="{user.dateOfBirth->f:format.date(format:'d.m.Y')}"/></dd>
-			<dt><f:translate key="profile.details.politicalView"/></dt>
-			<dd><f:form.textarea property="politicalView" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.religiousView"/></dt>
-			<dd><f:form.textarea property="religiousView" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.activities"/></dt>
-			<dd><f:form.textarea property="activities" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.interests"/></dt>
-			<dd><f:form.textarea property="interests" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.music"/></dt>
-			<dd><f:form.textarea property="music" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.movies"/></dt>
-			<dd><f:form.textarea property="movies" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.books"/></dt>
-			<dd><f:form.textarea property="books" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.quotes"/></dt>
-			<dd><f:form.textarea property="quotes" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.aboutMe"/></dt>
-			<dd><f:form.textarea property="aboutMe" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.address"/></dt>
-			<dd><f:form.textarea property="address" rows="3" cols="50"/></dd>
-			<dt><f:translate key="profile.details.city"/></dt>
-			<dd><f:form.textbox property="city"/></dd>
-			<dt><f:translate key="profile.details.zip"/></dt>
-			<dd><f:form.textbox property="zip"/></dd>
-			<dt><f:translate key="profile.details.country"/></dt>
-			<dd><f:form.textbox property="country"/></dd>
-			<dt><f:translate key="profile.details.www"/></dt>
-			<dd><f:form.textbox property="www"/></dd>
-			<dt><f:translate key="profile.details.cellphone"/></dt>
-			<dd><f:form.textbox property="cellphone"/></dd>
-			<dt><f:translate key="profile.details.phone"/></dt>
-			<dd><f:form.textbox property="telephone"/></dd>
-			<dt><f:translate key="profile.details.email"/></dt>
-			<dd><f:form.textbox property="email"/></dd>
-	</dl>
+	
+			<label><f:translate key="profile.details.username"/></label>
+			<f:form.textbox disabled="disabled" property="username"/>
+            <label><f:translate key="profile.details.name"/></label>
+			<f:form.textbox property="name"/>
+			<label><f:translate key="profile.details.gender"/></label>
+			<f:form.select property="gender" options="{male : '{f:translate(key:\'profile.details.gender.male\')}', female : '{f:translate(key:\'profile.details.gender.female\')}'}"/>
+			<label><f:translate key="profile.details.dateOfBirth"/></label>
+			<f:form.textbox property="dateOfBirth" value="{user.dateOfBirth->f:format.date(format:'d.m.Y')}"/>
+			<label><f:translate key="profile.details.politicalView"/></label>
+			<f:form.textarea property="politicalView" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.religiousView"/></label>
+			<f:form.textarea property="religiousView" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.activities"/></label>
+			<f:form.textarea property="activities" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.interests"/></label>
+			<f:form.textarea property="interests" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.music"/></label>
+			<f:form.textarea property="music" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.movies"/></label>
+			<f:form.textarea property="movies" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.books"/></label>
+			<f:form.textarea property="books" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.quotes"/></label>
+			<f:form.textarea property="quotes" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.aboutMe"/></label>
+			<f:form.textarea property="aboutMe" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.address"/></label>
+			<f:form.textarea property="address" rows="3" cols="50"/>
+			<label><f:translate key="profile.details.city"/></label>
+			<f:form.textbox property="city"/>
+			<label><f:translate key="profile.details.zip"/></label>
+			<f:form.textbox property="zip"/>
+			<label><f:translate key="profile.details.country"/></label>
+			<f:form.textbox property="country"/>
+			<label><f:translate key="profile.details.www"/></label>
+			<f:form.textbox property="www"/>
+			<label><f:translate key="profile.details.cellphone"/></label>
+			<f:form.textbox property="cellphone"/>
+			<label><f:translate key="profile.details.phone"/></label>
+			<f:form.textbox property="telephone"/>
+			<label><f:translate key="profile.details.email"/></label>
+			<f:form.textbox property="email"/>
+	
 	<f:form.submit value="{f:translate(key:'profile.details.edit.submit')}"/>
 </f:form>
-<f:link.action action="editImage" controller="User"><f:translate key="profile.details.editImage"/></f:link.action>
+<f:link.action action="editImage" class="button-link" controller="User"><f:translate key="profile.details.editImage"/></f:link.action>
 </div>
 </f:section>

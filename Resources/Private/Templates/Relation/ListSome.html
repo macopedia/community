@@ -13,21 +13,4 @@
         </ul>
         <f:link.action action="list" controller="Relation" pageUid="{settings.actionPage}" ><f:translate key="relation.listSome.goTolist"/></f:link.action>
     </f:if>
-    <f:if condition="{unconfirmedRelations}">
-        <h4><f:translate key="relation.listSome.unconfirmed"/></h4>
-        <ul>
-            <f:for each="{unconfirmedRelations}" as="relation">
-                <li>
-                <f:link.page additionalParams="{tx_community : {user : relation.initiatingUser}}">{relation.initiatingUser.name}</f:link.page>
-                <f:link.action action="confirm" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}">
-					(<f:translate key="relation.unconfirmed.confirm"/>)
-                </f:link.action>
-                <f:link.action action="reject" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}">
-					(<f:translate key="relation.unconfirmed.reject"/>)
-                </f:link.action>
-                </li>
-            </f:for>
-        </ul>
-    </f:if>
-
 </div>

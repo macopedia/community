@@ -1,73 +1,74 @@
 {namespace com=Tx_Community_ViewHelpers} 
 <f:if condition="{requestingUser}">
-
-	<h4><f:translate key="profile.interaction.user.title"/></h4>
-	<ul>
-
+<h4><f:translate key="profile.interaction.user.title"/></h4>
+	<span class="status">
+		<f:link.page additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.profilePage}">
+			{requestedUser.name}
+		</f:link.page>
+	</span>
+	<f:link.page additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.profilePage}">
+		<f:image
+				src="<f:render partial='Profile/ImageUrl' arguments='{user : requestedUser, settings : settings}' />"
+				class="user-photo" width="180c" height="180c" alt="{requestedUser.name}"
+		/>
+	</f:link.page>
+	<div class="user-panel">
+		<ul class="action-menu">	
 		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
 			<f:then>
 				<li>
-					<f:link.action action="search" controller="User" pageUid="{settings.actionPage}">
-						<f:translate key="profile.interaction.search"/>
-					</f:link.action>
-				</li>
-				<li>
-					<f:link.action action="edit" controller="User" pageUid="{settings.actionPage}" arguments="{user : requestedUser}">
+					<f:link.action action="edit" controller="User" pageUid="{settings.editProfilePage}" arguments="{user : requestedUser}">
 						<f:translate key="profile.interaction.user.edit"/>
 					</f:link.action>
 				</li>
-				
-			</f:then>
-			<f:else>
-				<f:if condition="{relation}">
-					<f:then>
-						<li>
-							<f:link.action action="write" controller="Message" arguments="{recipient : requestedUser}" pageUid="{settings.actionPage}">
-								<f:translate key="profile.interaction.writeMessage"/>
-							</f:link.action>
-						</li>
-						<li>
-							<f:link.action action="cancel" controller="Relation" arguments="{relation : relation}" pageUid="{settings.actionPage}">
-								<f:translate key="profile.interaction.cancelRelation"/>
-							</f:link.action>
-						</li>
-					</f:then>
-					<f:else>
-						<li>
-							<f:link.action action="request" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.actionPage}">
-								<f:translate key="profile.interaction.requestRelation"/>
-							</f:link.action>
-						</li>
-					</f:else>
-				</f:if>
-			
-			</f:else>
-		</com:sameUser>
-	
-	</ul>
-	
-		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
-			<f:then>
-			    <h4><f:translate key="profile.interaction.message.title"/></h4>
-			    <ul>
 				<li>
-					<f:link.action action="inbox" controller="Message" pageUid="{settings.actionPage}">
+					<f:link.action action="inbox" controller="Message" pageUid="{settings.messagePage}">
 						<f:translate key="profile.interaction.message.inbox"/>
 					</f:link.action>
 				</li>
 				
 				<li>
-					<f:link.action action="outbox" controller="Message" pageUid="{settings.actionPage}">
+					<f:link.action action="outbox" controller="Message" pageUid="{settings.messagePage}">
 						<f:translate key="profile.interaction.message.outbox"/>
 					</f:link.action>
 				</li>
 				<li>
-					<f:link.action action="unread" controller="Message" pageUid="{settings.actionPage}">
+					<f:link.action action="unread" controller="Message" pageUid="{settings.messagePage}">
 						<f:translate key="profile.interaction.message.unread"/>
 					</f:link.action>
 				</li>
-				</ul>
 			</f:then>
+			<f:else>
+				<f:if condition="{relation}">
+					<f:then>
+						<li>
+							<f:link.action action="write" controller="Message" arguments="{recipient : requestedUser}" pageUid="{settings.messagePage}">
+								<f:translate key="profile.interaction.writeMessage"/>
+							</f:link.action>
+						</li>
+					</f:then>
+				</f:if>			
+			</f:else>
 		</com:sameUser>
 	
+		</ul>
+		
+		<hr />
+		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
+			<f:else>
+				<f:if condition="{relation}">
+					<f:then>
+							<f:link.action action="cancel" class="remove-from-friends" controller="Relation" arguments="{relation : relation}" pageUid="{settings.actionPage}">
+								<f:translate key="profile.interaction.cancelRelation"/>
+							</f:link.action>
+					</f:then>
+					<f:else>
+							<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.actionPage}">
+								<f:translate key="profile.interaction.requestRelation"/>
+							</f:link.action>
+					</f:else>
+				</f:if>
+			</f:else>
+		</com:sameUser>
+	</div>
 </f:if>
