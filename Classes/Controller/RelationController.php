@@ -215,26 +215,5 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		// TODO send mails on rejection
 	}
 
-         /**
-	 * Get the requested user
-	 * @see Classes/Controller/Tx_Community_Controller_BaseController#getRequestedUser()
-	 * @return Tx_Community_Domain_Model_User
-	 */
-        protected function getRequestedUser() {
-            parent::getRequestedUser();
-
-            if ($this->request->hasArgument('relation') && !is_array($this->request->getArgument('relation'))) {
-                  $relation = $this->repositoryService->get('relation')->findByUid((int) $this->request->getArgument('relation'));
-                  $requestedUser = null;
-                  if ($relation->getInitiatingUser()->getUid() == $this->getRequestingUser()->getUid()) {
-                     $requestedUser = $relation->getRequestedUser();
-                  } else {
-                     $requestedUser = $relation->getInitiatingUser();
-                  }
-                  $this->requestedUser = $requestedUser;
-            }
-		return $this->requestedUser;
-        }
-
 }
 ?>
