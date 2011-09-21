@@ -110,7 +110,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 			$this->flashMessageContainer->add($this->_('profile.updateImage.success'));
 			$this->redirect('edit', 'User', NULL, array('user' => $user));
 		} else {
-			$this->flashMessageContainer->add($this->_('profile.updateImage.error'));
+			$this->flashMessageContainer->add($this->_('profile.updateImage.error'),'',t3lib_FlashMessage::ERROR);
 			$this->redirect('editImage', 'User', NULL, array('user' => $user));
 		}
 	}
@@ -129,11 +129,11 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	/**
 	 * Update the edited user.
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Tx_Community_Domain_Model_User $updatedUser
 	 */
 	public function updateAction(Tx_Community_Domain_Model_User $updatedUser) {
 		$this->repositoryService->get('user')->update($updatedUser);
-		$this->redirectToUser($updatedUser);
+		$this->redirect('edit');
 	}
 
 	/**

@@ -16,7 +16,6 @@
 			<label index="tx_community_domain_model_group.members">members</label>
 			<label index="tx_community_domain_model_group.pending_members">pendingMembers</label>
 			<label index="tx_community_domain_model_user">A user of the website</label>
-			<label index="tx_community_domain_model_user."></label>
 			<label index="tx_community_domain_model_aclrole">AclRole</label>
 			<label index="tx_community_domain_model_aclrole.name">name</label>
 			<label index="tx_community_domain_model_aclrole.is_public">isPublic</label>
@@ -47,7 +46,6 @@
 			<label index="profile.details.username">Username</label>
 			<label index="profile.details.firtsname">Firstname</label>
 			<label index="profile.details.lastname">Lastname</label>
-			<label index="profile.details.gender."></label>
 			<label index="profile.details.dateOfBirth">Birthday</label>
 			<label index="profile.details.politicalView">Political view</label>
 			<label index="profile.details.religiousView">Religious view</label>

@@ -144,13 +144,6 @@ plugin.tx_community {
 				}
 			}
 		}
-		repositories {
-			#by default is like:
-			#user = Tx_Community_Domain_Repository_UserRepository
-
-			#I used some extensions and made
-			#user = Tx_CommunityForm_Domain_Repository_UserRepository
-		}
 
 		debug = 0
 

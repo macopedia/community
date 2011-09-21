@@ -156,7 +156,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 
 	/**
 	 *
-	 * @return
+	 * @return string
 	 */
 	public function getInterests()
 	{
@@ -312,6 +312,22 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	public function setDateOfBirth(DateTime $dateOfBirth)
 	{
 	    $this->dateOfBirth = $dateOfBirth;
+	}
+	
+	/**
+	 * Counts age from date of birth
+	 * @return integer
+	 */
+	public function getAge()
+	{
+		$age = date('Y')-$this->dateOfBirth->format('Y');
+		// Check if birthday month/day has been reached
+		if (date('m')<$this->dateOfBirth->format('m')) {
+			$age--;
+		} elseif (date('m') == $this->dateOfBirth->format('m') && date('d')<$this->dateOfBirth->format('d')) {
+			$age--;
+		}
+		return $age;
 	}
 
 	public function initializeObject() {

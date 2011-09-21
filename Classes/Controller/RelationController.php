@@ -59,16 +59,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 */
 	public function listAction() {
 		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestedUser());
-		$users = array();
-		foreach($relations as $relation) {
-			if ($relation->getRequestedUser()->getUid() == $this->getRequestedUser()->getUid()) {
-				$users[$relation->getUid()] = $relation->getInitiatingUser();
-			} else {
-				$users[$relation->getUid()] = $relation->getRequestedUser();
-			}
-		}
-		$this->view->assign('requestedUser',$this->getRequestedUser());
-		$this->view->assign('usersRelations', $users);
+		$this->view->assign('relations', $relations);
 	}
 
 	/**
