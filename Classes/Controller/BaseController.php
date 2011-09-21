@@ -89,36 +89,27 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	protected function initializeAction() {
 		
+		$this->settingsService->set($this->settings);
 		$controllerName = $this->request->getControllerName();
 		$actionName = $this->request->getControllerActionName();
 		$resourceName = $this->accessHelper->getResourceName($controllerName, $actionName);
-		$this->settingsService->set($this->settings);
 		$this->noAccess = 0;
 
-		//redirect if user is not logged in and resource isn't public
-		if (!$this->getRequestingUser()) {
-			if (!$this->accessHelper->hasAccess(NULL, NULL, $resourceName)) {
-				$this->redirectToLogin();
-			} else {
-				$this->getRequestedUser();
+		if ($this->hasAccess($resourceName) != '1') {
+			//access denied
+			if ($this->settings['debug']) {
+				$this->flashMessageContainer->add(
+					"You do not have permission (".$this->hasAccess($resourceName).
+					") to access  resource: ".$resourceName.
+					", ActionName: ".$actionName.
+					($this->getRequestingUser()?", RequestingUser: ".$this->getRequestingUser()->getUid():"").
+					($this->getRequestedUser()?", RequestedUser:".$this->getRequestedUser()->getUid():"").
+					", AccesType: ".$this->accessHelper->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
+					"Debug",
+					t3lib_FlashMessage::WARNING
+				);
 			}
-		} else {
-			$this->getRequestedUser();
-			if ($this->hasAccess($resourceName) != '1') {
-				//access denied
-				$this->flashMessageContainer->add($this->_('access.denied'));
-				//debug flashmessage
-				/*
-				 $this->flashMessageContainer->add(
-										"You don't have permission (".$this->hasAccess($resourceName).
-										") to access  resource: ".$resourceName.
-										", ActionName: ".$actionName.
-										", LU: ".$this->getRequestingUser()->getUid().
-										" RQD:".$this->getRequestedUser()->getUid()
-				 );*/
-				$this->noAccess = 1;
-				//$this->redirectToUser($this->getRequestingUser());
-			}
+			$this->noAccess = 1;
 		}
 	}
 	
@@ -292,7 +283,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @param string $resource
 	 */
 	public function hasAccess($resource) {
-		return $this->accessHelper->hasAccess($this->requestingUser, $this->requestedUser, $resource);
+		return $this->accessHelper->hasAccess($this->getRequestingUser(), $this->getRequestedUser(), $resource);
 	}
 
 	/**
@@ -397,6 +388,19 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	protected function redirect($actionName, $controllerName = NULL, $extensionName = NULL, array $arguments = NULL, $pageUid = NULL, $delay = 0, $statusCode = 303) {
 		Tx_Community_Controller_BaseController::$redirected = TRUE;
 		parent::redirect($actionName, $controllerName, $extensionName, $arguments, $pageUid, $delay, $statusCode);
+	}
+	
+	/**
+	 * If there were validation errors, we don't want to write details like
+	 * "An error occurred while trying to call Tx_Community_Controller_UserController->updateAction()"
+	 *
+	 * @return string|boolean The flash message or FALSE if no flash message should be set
+	 */
+	protected function getErrorFlashMessage() {
+		if ($this->settings['debug']) {
+			return parent::getErrorFlashMessage();
+		}
+		return FALSE;
 	}
 }
 

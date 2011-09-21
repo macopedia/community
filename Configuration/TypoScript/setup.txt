@@ -53,6 +53,11 @@ plugin.tx_community {
 			AclRole = list,assign
 		}
 
+		//Allows to add resource-action mapping used in SimpleAccessService
+		accessActionResourceMappers {
+			10 = Tx_Community_Service_Access_SimpleActionResourceMapper
+		}
+
 		accessRules {
 			#guests (not logged in)
 			nobody {
@@ -125,6 +130,9 @@ plugin.tx_community {
 			#I used some extensions and made
 			#user = Tx_CommunityForm_Domain_Repository_UserRepository
 		}
+
+		debug = 0
+
 		#css-like path to the element, on it's beginning flashMessages would be displayed
 		#it would be used by jQuery
 		#eg.

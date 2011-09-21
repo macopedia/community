@@ -66,56 +66,13 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 
 	/**
 	 * An array containing a mapping between action and resource names
-	 * If
 	 */
-	protected $actionResourceMap = array(
-		'Message' => array(
-			//'inbox' => 'message.inbox',
-			//'outbox' => 'message.outbox',
-			//'unread' => 'message.unread',
-			// 'read' => 'message.read',
-			//   'delete' => 'message.delete',
-			'write' => 'message.write',
-			'send' => 'message.write',
-		),
-		'User' => array(
-			'image' => 'profile.image',
-			'edit' => 'profile.edit',
-			'search' => 'user.search',
-			'searchBox' => 'user.searchBox',
-			'update' => 'profile.edit',
-			'details' => 'profile.details',
-			'interaction' => 'profile.menu',
-			'editImage' => 'profile.edit.image',
-		),
-		'Relation' => array(
-			'listSome' => 'profile.relation.listSome',
-			'list' => 'profile.relation.list',
-			'request' => 'profile.relation.request',
-			'confirm' => 'profile.relation.confirm',
-			'reject' => 'profile.relation.reject',
-			'unconfirmed' => 'profile.relation.unconfirmed',
-			'cancel' => 'profile.relation.cancel',
-		),
-		'WallPost' => array(
-			'list' => 'profile.wall.list',
-			'new' => 'profile.wall.write',
-			'create' => 'profile.wall.write',
-		),
-		'Album' => array(
-			'list' => 'profile.gallery',
-			'show' => 'profile.gallery',
-		),
-		'Photo' => array(
-			'avatar' => 'profile.gallery.avatar',
-				//allows seting other user's photo as avatar
-				//but still need to be able to see the photo
-		),
-		'Utils' => array(
-			'flashMessagesDisplay' => 'utils'
-		)
-
-	);
+	protected $actionResourceMap = array();
+	
+	/**
+	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 */
+	protected $objectManager;
 
 	/**
 	 * Return resource name for given action and controller name
@@ -124,6 +81,13 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 * @return
 	 */
 	public function getResourceName($controllerName, $actionName) {
+		if (!count($this->actionResourceMap)) {
+			$settings = $this->settingsService->get();
+			foreach ($settings['accessActionResourceMappers'] as $mapperName) {
+				$mapper = $this->objectManager->get($mapperName);
+				$this->actionResourceMap = $mapper->doMapping($this->actionResourceMap);
+			}
+		}
 		return $this->actionResourceMap[$controllerName][$actionName];
 	}
 
@@ -151,10 +115,17 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 *
 	 * @param Tx_Community_Service_RepositoryServiceInterface $repositoryService
 	 */
-	public function injectRepositoryService(
-	Tx_Community_Service_RepositoryServiceInterface $repositoryService
-	) {
+	public function injectRepositoryService(Tx_Community_Service_RepositoryServiceInterface $repositoryService) {
 		$this->repositoryService = $repositoryService;
+	}
+
+	/**
+	 * Inject the object manager so we can create objects on our own.
+	 *
+	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+	 */
+	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
+		$this->objectManager = $objectManager;
 	}
 
 	/**
@@ -177,7 +148,7 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 * @param Tx_Community_Domain_Model_User $requestedUser
 	 * @return string
 	 */
-	protected function getAccessType(
+	public function getAccessType(
 	Tx_Community_Domain_Model_User $requestingUser = NULL,
 	Tx_Community_Domain_Model_User $requestedUser = NULL
 	) {
