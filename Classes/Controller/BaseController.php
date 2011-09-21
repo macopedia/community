@@ -71,6 +71,12 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @var Tx_Community_Service_Notification_NotificationServiceInterface $notificationService
 	 */
 	protected $notificationService;
+
+	/**
+	 * If we have already benn redirected, don't show the flashmessages
+	 * @var bool
+	 */
+	static protected $redirected = FALSE;
 	
 	
 	/**
@@ -373,6 +379,14 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		}
 		$album->addPhoto($newPhoto);
 		$this->repositoryService->get('photo')->add($newPhoto);
+	}
+	
+	/**
+	 * We want to know if we were already redirected
+	 */
+	protected function redirect($actionName, $controllerName = NULL, $extensionName = NULL, array $arguments = NULL, $pageUid = NULL, $delay = 0, $statusCode = 303) {
+		Tx_Community_Controller_BaseController::$redirected = TRUE;
+		parent::redirect($actionName, $controllerName, $extensionName, $arguments, $pageUid, $delay, $statusCode);
 	}
 }
 

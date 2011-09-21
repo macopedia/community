@@ -29,10 +29,12 @@ class Tx_Community_Controller_UtilsController extends Tx_Community_Controller_Ba
 
 	/**
 	 * Manages printing messages from 
-	 * @return void
+	 * @return mixed
 	 */
 	public function flashMessagesDisplayAction() {
+		if (Tx_Community_Controller_BaseController::$redirected) {
+			return ''; //Dont show messages
+		}
 	}
-
 }
 ?>
