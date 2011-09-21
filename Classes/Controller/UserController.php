@@ -34,16 +34,6 @@
  */
 class Tx_Community_Controller_UserController extends Tx_Community_Controller_BaseController implements Tx_Community_Controller_Cacheable_ControllerInterface {
 
-
-        /**
-	 * Initializes the current action - called before any other action
-	 * @see Classes/Controller/Tx_Community_Controller_BaseController#initializeAction()
-	 * @return void
-	 */
-	protected function initializeAction() {
-		parent::initializeAction();
-	}
-
 	/**
 	 * Get a profile image. We simply assign the user to the view and
 	 * let a viewhelper do the work.
@@ -57,10 +47,6 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * Show the details like name, contact, homepage and so on.
 	 */
 	public function detailsAction() {
-		if(!$this->request->hasArgument('tx_community[user]')) {
-		    //this is a little hack to get comments working on profile page
-		    t3lib_div::_GETset($this->getRequestedUser()->getUid(),'tx_community|user');
-		}
 		$this->view->assign('displayWallList', $this->hasAccess('profile.wall.list'));
 		$this->view->assign('displayWallForm', $this->hasAccess('profile.wall.form'));
 
@@ -149,9 +135,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 			$users = $this->repositoryService->get('user')->searchByName($word);
 		}
 		$this->view->assign('users', $users);
-	
-                ///TODO: add message when no user was found
-        }
+	}
 
 	/**
 	 * Give search box

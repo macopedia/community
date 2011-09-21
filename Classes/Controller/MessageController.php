@@ -33,23 +33,11 @@
  */
 class Tx_Community_Controller_MessageController extends Tx_Community_Controller_BaseController {
 
-	/**
-	 * Initializes the current action - called before any other action
-	 * @see Classes/Controller/Tx_Community_Controller_BaseController#initializeAction()
-	 * @return void
-	 */
-	protected function initializeAction() {
-		parent::initializeAction();
-	}
-
-        /**
+    /**
 	 * Show the inbox of a user
 	 */
 	public function inboxAction() {
-		$messages = array();
-		if ($this->getRequestingUser()) {
-			$messages = $this->repositoryService->get('message')->findIncomingForUser($this->getRequestingUser());
-		}
+		$messages = $this->repositoryService->get('message')->findIncomingForUser($this->getRequestingUser());
 		$this->view->assign('messages', $messages);
 	}
 
@@ -57,10 +45,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * Show the outgoing messages of a user
 	 */
 	public function outboxAction() {
-		$messages = array();
-		if ($this->getRequestingUser()) {
-			$messages = $this->repositoryService->get('message')->findOutgoingForUser($this->getRequestingUser());
-		}
+		$messages = $this->repositoryService->get('message')->findOutgoingForUser($this->getRequestingUser());
 		$this->view->assign('messages', $messages);
 	}
 
@@ -68,10 +53,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * Show the unread messages for a user
 	 */
 	public function unreadAction() {
-		$messages = array();
-		if ($this->getRequestingUser()) {
-			$messages = $this->repositoryService->get('message')->findUnreadForUser($this->getRequestingUser());
-		}
+		$messages = $this->repositoryService->get('message')->findUnreadForUser($this->getRequestingUser());
 		$this->view->assign('messages', $messages);
 	}
 

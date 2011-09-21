@@ -35,20 +35,6 @@
 class Tx_Community_Controller_RelationController extends Tx_Community_Controller_BaseController {
 
 	/**
-	 * @var Tx_Commnity_Domain_Repository_UserRepository
-	 */
-	protected $userRepository;
-
-	/**
-	 * Initializes the current action - called before any other action
-	 * @see Classes/Controller/Tx_Community_Controller_BaseController#initializeAction()
-	 * @return void
-	 */
-	protected function initializeAction() {
-		parent::initializeAction();
-	}
-
-	/**
 	 * Display some user's friends
 	 * 
 	 */
@@ -228,10 +214,6 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED);
 		$this->repositoryService->get('relation')->remove($relation);
 		// TODO send mails on rejection
-	}
-
-	protected function setDefaultRole() {
-
 	}
 
          /**
