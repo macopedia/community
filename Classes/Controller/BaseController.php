@@ -121,6 +121,16 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 			}
 		}
 	}
+	
+	/**
+	 * Prepare view - assign requestedUser and requestingUser
+	 * @param Tx_Extbase_MVC_View_ViewInterface $view 
+	 */
+	protected function initializeView(Tx_Extbase_MVC_View_ViewInterface $view) {
+		parent::initializeView($view);
+		$this->view->assign('requestedUser',$this->getRequestedUser());
+		$this->view->assign('requestingUser',$this->getRequestingUser());
+	}
 
 	/**
 	 * Doesn't call action method if no access, otherwise acts normally

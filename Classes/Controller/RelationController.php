@@ -53,7 +53,6 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
                 $usersRelations = $users;
 		$this->view->assign('usersRelations', $usersRelations);
 		$this->view->assign('countRelations',$relationNumber);
-		$this->view->assign('requestedUser',$this->getRequestedUser());
 	}
 
 	/**
