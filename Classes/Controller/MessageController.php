@@ -60,19 +60,16 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Write a message
 	 *
-	 * @param Tx_Community_Domain_Model_User $recipient
+	 * @param Tx_Community_Domain_Model_User $user recipient
 	 * @param Tx_Community_Domain_Model_Message $message
 	 * @dontvalidate $message
 	 */
 	public function writeAction(
-		Tx_Community_Domain_Model_User $recipient = NULL,
+		Tx_Community_Domain_Model_User $user = NULL,
 		Tx_Community_Domain_Model_Message $message =  NULL) {
-		if (!$recipient) {
-			$recipient = $this->getRequestedUser();
-		}
-		if ($recipient->getUid() == $this->getRequestingUser()->getUid())
+		if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid())
 			return '';
-		$this->view->assign('recipient', $recipient);
+		$this->view->assign('recipient', $this->getRequestedUser());
 		$this->view->assign('message', $message);
 	}
 
@@ -125,21 +122,6 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 			}
 			 $this->flashMessageContainer->add($this->_('message.delete.success'));
 		}
-	}
-
-	/**
-	 * Get the requested user
-	 * @see Classes/Controller/Tx_Community_Controller_BaseController#getRequestedUser()
-	 * @return Tx_Community_Domain_Model_User
-	 */
-	protected function getRequestedUser() {
-		parent::getRequestedUser();
-
-		if ($this->request->hasArgument('recipient') && !is_array($this->request->getArgument('recipient'))) {
-			$this->requestedUser = $this->repositoryService->get('user')->findByUid((int) $this->request->getArgument('recipient'));
-		} 
-
-		return $this->requestedUser;
 	}
 }
 ?>
