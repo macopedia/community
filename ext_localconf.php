@@ -127,10 +127,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'EditProfile',
 	array(
-		'User' => 'edit,update,editImage,updateImage',
+		'User' => 'edit,update,editImage,updateImage,deleteImage',
 	),
 	array(
-		'User' => 'edit,update,editImage,updateImage',
+		'User' => 'edit,update,editImage,updateImage,deleteImage',
 	)
 );
 

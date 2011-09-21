@@ -114,6 +114,17 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 			$this->redirect('editImage', 'User', NULL, array('user' => $user));
 		}
 	}
+	
+	/**
+	 * Delete the image
+	 *
+	 * @param Tx_Community_Domain_Model_User $user
+	 */
+	public function deleteImageAction() {
+		$this->requestingUser->setImage('');
+		$this->repositoryService->get('user')->update($this->requestingUser);
+		$this->redirect('edit', 'User');
+	}
 
 	/**
 	 * Update the edited user.
