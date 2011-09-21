@@ -83,8 +83,10 @@ abstract class Tx_Community_Domain_Model_Observer_AbstractObservableEntity
 	 * Notify all observers that something has changed
 	 */
 	public function notify() {
-		foreach($this->observers as $observer) {
-			$observer->update($this);
+		if ($this->observers) {
+			foreach($this->observers as $observer) {
+				$observer->update($this);
+			}
 		}
 	}
 	
