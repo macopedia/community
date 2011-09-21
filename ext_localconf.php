@@ -17,10 +17,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'UserDetails',
 	array(
-		'User' => 'details',
+		'User' => 'details,report',
 	),
 	array(
-		'User' => 'details',
+		'User' => 'details,report',
 	)
 );
 

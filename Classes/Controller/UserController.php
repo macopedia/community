@@ -155,6 +155,23 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	public function searchBoxAction() {
 	}
 
+	/*
+	 * Reports a profile with gore and nudity
+	 * @param Tx_Community_Domain_Model_User $user
+	 */
+	public function reportAction (Tx_Community_Domain_Model_User $user) {
+		$this->flashMessageContainer->add($this->_('profile.details.reported'));
+		
+		$notifyArguments = array(
+			'requestingUser' => $this->requestingUser,
+			'replyTo' => $this->requestingUser,
+			'user' => $user
+		);
+		$this->notificationService->notify($notifyArguments, 'report');
+		
+		$this->forward('details');
+	}
+
 	/**
 	 * Get the identifier for this request (used for caching)
 	 *
