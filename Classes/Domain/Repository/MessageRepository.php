@@ -38,7 +38,7 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 				$query->equals('senderDeleted', false)
 			)
 		)->setOrderings(array('sentDate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
-                )->execute();
+		)->execute();
 	}
 
 	/**
@@ -54,8 +54,8 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 				$query->equals('recipientDeleted', false)
 			)
 		)->setOrderings(array('sentDate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
-                )->execute();
-        }
+		)->execute();
+	}
 
 	/**
 	 * Find unread messages for a user
