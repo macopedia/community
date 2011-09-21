@@ -14,4 +14,10 @@ plugin.tx_community {
 		# cat=plugin.tx_community//a; type=int+; label=Default storage PID
 		storagePid = 
 	}
+
+	# cat=plugin.tx_community//a; type=type=text; label=Address to send reports to
+	adminEmail = 
+
+	# cat=plugin.tx_community//a; type=type=text; label=Server email to send mails from
+	serverEmail =  no-reply@example.com
 }

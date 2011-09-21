@@ -32,15 +32,27 @@
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
 class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Service_Notification_HandlerInterface, t3lib_Singleton {
-
-
+	
+	/**
+	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 */
+	protected $objectManager;
+	
+	/**
+	 * Inject the object manager so we can create objects on our own.
+	 *
+	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+	 */
+	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
+		$this->objectManager = $objectManager;
+	}
+	
 	/**
 	 * Repository service. Get all your repositories with it.
 	 *
 	 * @var Tx_Community_Service_RepositoryServiceInterface
 	 */
 	protected $repositoryService;
-
 
 	/**
 	 * Inject the repository service.
@@ -52,20 +64,48 @@ class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Serv
 	}
 
 	/**
-	 *
-	 *
-	 *
+	 * @var Tx_Community_Service_SettingsService
 	 */
-	public function send(Tx_Community_Domain_Model_User $sender, $recipients, $configuration) {
-
-	}
-
+	protected $settingsService;
 
 	/**
+	 * Inject the settings service
+	 *
+	 * @param Tx_Community_Service_SettingsService $settingsService
+	 */
+	public function injectSettingsService(Tx_Community_Service_SettingsService $settingsService) {
+		$this->settingsService = $settingsService;
+	}
+
+	/**
+	 * Override it to implement your notification handler
+	 * You want to use render() inside
+	 * 
+	 * @abstract
+	 * @param array $arguments Objects passed to fluid view (not only)
+	 *		Notable arguments:
+	 *			$arguments['sender'] Tx_Community_Domain_Model_User 
+	 *			$arguments['recipient'] Tx_Community_Domain_Model_User
+	 *			$arguments['recipients'] array of Tx_Community_Domain_Model_User
+	 *			$arguments['subject'] string - some handlers set message subject
+	 * @param array $mathodConfiguration from plugin.tx_community.settings.notification.ruses.XXX.YYY
+	 * @return void
+	 */
+	public function send(array $arguments, array $methodConfiguration) {
+	}
+	
+	/**
+	 * @param array $arguments Objects passed to fluid view
+	 * @param array $mathodConfiguration
 	 * @return string
 	 */
-	public function getIdentifier(){
-		return get_class($this);
+	protected function render(array $arguments, array $methodConfiguration) {
+		$view = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+		/* @var $view Tx_Fluid_View_StandaloneView */
+		$arguments['settings'] = $this->settingsService->get();
+		$view->setTemplatePathAndFilename(t3lib_div::getFileAbsFileName($arguments['settings']['notification']['templateRootPath'].'/Notification/'.$methodConfiguration['template'].'.html'));
+		$view->assignMultiple($arguments);
+		return $view->render();
 	}
 
 }

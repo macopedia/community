@@ -33,46 +33,26 @@
  */
 class Tx_Community_Service_Notification_PrivateMessageService extends Tx_Community_Service_Notification_BaseHandler {
 
-
-
-
-	protected $view;
-
 	/**
 	 * 
 	 *
 	 *
 	 */
-	public function send(Tx_Community_Domain_Model_User $sender, $recipients, $configuration) {
+	public function send(array $arguments, array $configuration) {
 
 		$message = t3lib_div::makeInstance('Tx_Community_Domain_Model_Message');
+		/* @var $message Tx_Community_Domain_Model_Message */
 		$message->setSent(true);
 		$message->setSentDate(time());
-		$message->setSender($sender);
-		$message->setRecipient($recipients[0]);
-
-		$view = t3lib_div::makeInstance('Tx_Fluid_View_StandaloneView');
-
-		if($configuration['template'] !== ""){
-			$templatePath = t3lib_div::getFileAbsFileName($configuration['template']);
-			$view->setTemplatePathAndFilename($templatePath);
-			$view->assign('sender', $sender);
-			$content = $configuration['message'];
-			$view->assign('message', $content);
-			$messageContent = $view->render();
-			$message->setMessage($messageContent);
-			$this->repositoryService->get('message')->add($message);
-
-		} else {
-		 //TODO:throw exception	
-		}
-
-
-
-
-
+		$message->setSender($arguments['sender']);
+		$message->setRecipient($arguments['recipient']);
+		if ($configuration['subject'])
+			$message->setSubject($configuration['subject']);
+		if ($arguments['subject'])
+			$message->setSubject($arguments['subject']);
+		$message->setMessage($this->render($arguments, $configuration));
+		$this->repositoryService->get('message')->add($message);
 	}
-
 
 }
 ?>

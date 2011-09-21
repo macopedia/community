@@ -47,6 +47,6 @@ interface Tx_Community_Service_Notification_NotificationServiceInterface {
 	 * @param string $resourceName
 	 *
 	 */
-	public function notify($sender, $recipients, $resourceName);
+	public function notify(array $arguments, $resourceName);
 }
 ?>

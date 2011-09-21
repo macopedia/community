@@ -98,28 +98,49 @@ plugin.tx_community {
 		}
 
 		notification {
+			// Layouts and partials not supported
+			templateRootPath = EXT:community/Resources/Private/Templates
 			rules {
-				editProfile {
+				requestRelation {
 					10 {
-						# handler = mail/wall/privateMessage
-						handler = Tx_Community_Service_Notification_PrivateMessageService
-						sender =
-						recipient =
-						template = EXT:community/Resources/Private/Partials/Notification/PlainMessage.html
-						message = Test message
+						handler = Tx_Community_Service_Notification_MailService
+						template = RequestRelation
+						subject = requestRelation
+						sender = {$plugin.tx_community.serverEmail}
 					}
-				#	20 {
-				#		type = mail
-				#		sender =
-				#		recipient =
-				#		template =
-				#	}
 				}
-
-			}
-			handlers {
-				10 {
-				 class = Tx_Community_Service_Notification_PrivateMessageService
+				confirmedRelation {
+					10 {
+						handler = Tx_Community_Service_Notification_MailService
+						template = ConfirmedRelation
+						subject = confirmedRelation
+						sender = {$plugin.tx_community.serverEmail}
+					}
+				}
+				rejectedRelation {
+					10 {
+						handler = Tx_Community_Service_Notification_MailService
+						template = RejectedRelation
+						subject = rejectedRelation
+						sender = {$plugin.tx_community.serverEmail}
+					}
+				}
+				canceledRelation {
+					10 {
+						handler = Tx_Community_Service_Notification_MailService
+						template = CanceledRelation
+						subject = canceledRelation
+						sender = {$plugin.tx_community.serverEmail}
+					}
+				}
+				report {
+					10 {
+						handler = Tx_Community_Service_Notification_MailService
+						template = Report
+						subject = Profile report
+						recipient = {$plugin.tx_community.adminEmail}
+						sender = {$plugin.tx_community.serverEmail}
+					}
 				}
 			}
 		}

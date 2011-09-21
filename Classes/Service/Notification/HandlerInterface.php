@@ -36,16 +36,11 @@ interface Tx_Community_Service_Notification_HandlerInterface {
 
 	/**
 	 * @abstract
-	 * @param Tx_Community_Domain_Model_User $sender
-	 * @param  array $recipients
+	 * @param  array $arguments
 	 * @param  array $configuration
 	 * @return void
 	 */
-	public function send(Tx_Community_Domain_Model_User $sender, $recipients, $configuration);
+	public function send(array $arguments, array $configuration);
 
-	/**
-	 * @return string
-	 */
-	public function getIdentifier();
 }
 ?>

@@ -38,18 +38,14 @@ class Tx_Community_Service_Notification_WallService extends Tx_Commmunity_Servic
 	 *
 	 *
 	 */
-	public function send(Tx_Community_Domain_Model_User $sender, $recipients, $configuration) {
+	public function send(array $arguments, array $configuration) {
 
 		$message = t3lib_div::makeInstance('Tx_Community_Domain_Model_WallPost');
-		$message->setSender($sender);
-		$message->setRecipient($recipients[0]);
-		$message->setSubject($sender->getName());
-		$content = $configuration['message'];
-		$message->setMessage($content);
+		$message->setSender($arguments['sender']);
+		$message->setRecipient($arguments['recipient']);
+		$message->setSubject($arguments['sender']->getName());
+		$message->setMessage($this->render($arguments, $configuration));
 		$this->repositoryService->get('wallPost')->add($message);
-
 	}
-
-	
 }
 ?>
