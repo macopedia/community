@@ -4,7 +4,7 @@ class Tx_Community_Service_Access_SimpleActionResourceMapper {
 
 	/**
 	 * @param array $oldMapping
-	 * @return array 
+	 * @return array
 	 */
 	public function doMapping($oldMapping) {
 		return array(

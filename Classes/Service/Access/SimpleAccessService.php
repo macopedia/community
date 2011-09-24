@@ -68,7 +68,7 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 * An array containing a mapping between action and resource names
 	 */
 	protected $actionResourceMap = array();
-	
+
 	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
 	 */

@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011 Konrad Baumgart
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -86,17 +86,15 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	}
 
 
-	
 	/**
 	 * Displays a form for editing an existing Album
 	 *
 	 * @param Tx_Community_Domain_Model_Album $album the Album to display
-	 * @return string A form to edit a Album 
+	 * @return string A form to edit a Album
 	 */
 	public function editAction(Tx_Community_Domain_Model_Album $album) {
 		$this->view->assign('album', $album);
 	}
-
 
 
 	/**

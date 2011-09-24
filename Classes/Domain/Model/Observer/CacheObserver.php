@@ -39,7 +39,7 @@ class Tx_Community_Domain_Model_Observer_CacheObserver implements Tx_Community_D
 		$this->cacheService->dropTagsForEntity($observable);
 		$observable->detach($this);
 	}
-	
+
 	/**
 	 * Inject the cache service
 	 */

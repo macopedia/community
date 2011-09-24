@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * 
+ * Interface for notification service
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -33,19 +33,11 @@
  */
 interface Tx_Community_Service_Notification_NotificationServiceInterface {
 
-
 	/**
-	 * 
-	 * @param string $resourceName
-	 *
-	 */
-//	public function notify($resourceName);
-
-	/**
+	 * @abstract
 	 * @param Tx_Community_Domain_Model_User $sender
 	 * @param array $recipients
 	 * @param string $resourceName
-	 *
 	 */
 	public function notify(array $arguments, $resourceName);
 }

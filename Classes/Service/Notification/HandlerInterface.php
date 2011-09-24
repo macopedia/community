@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * 
+ * Handlers for NotificationService, each implements one way of notification
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors

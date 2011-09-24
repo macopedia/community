@@ -40,7 +40,7 @@
 			<label index="flexform.action.relation.unconfirmed">Unconfirmed friends</label>
 			<label index="flexform.actionPage">Page where actions get performed</label>
 			<label index="flexform.profilePage">Page where the profile of users is displayed</label>
-			
+
 			<label index="profile.details.title">Details</label>
 			<label index="profile.details.name">Name</label>
 			<label index="profile.details.username">Username</label>
@@ -69,7 +69,7 @@
 			<label index="profile.details.gender.male">male</label>
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
-			
+
 			<label index="profile.album.title">Albums</label>
 			<label index="profile.album.public">Public</label>
 			<label index="profile.album.loggedInOnly">Only for logged in</label>
@@ -86,13 +86,13 @@
 			<label index="profile.album.createdAlbum">New album was created</label>
 			<label index="profile.album.updatedAlbum">You changed album settings</label>
 			<label index="profile.album.removedAlbum">You deleted your album</label>
-			
+
 			<label index="profile.editImage.title">Upload a new profile image</label>
 			<label index="profile.editImage.image">Image</label>
 			<label index="profile.editImage.submit">Upload</label>
 			<label index="profile.updateImage.error">There was a problem when uploading your profile image.</label>
 			<label index="profile.updateImage.success">You changed your profile image.</label>
-			
+
 			<label index="profile.interaction.user.title">User</label>
 			<label index="profile.interaction.requestRelation">Add as friend</label>
 			<label index="profile.interaction.cancelRelation">Delete as a friend</label>
@@ -108,7 +108,7 @@
 			<label index="profile.interaction.message.inbox">Inbox</label>
 			<label index="profile.interaction.message.outbox">Outbox</label>
 			<label index="profile.interaction.message.unread">Unread</label>
-			
+
 			<label index="relation.listSome.unconfirmed">Unconfirmed friends</label>
 
 			<label index="relation.list.title">Friends a user</label>
@@ -119,7 +119,7 @@
 			<label index="relation.cancel.confirm">Yes</label>
 			<label index="relation.cancel.success">Relation has been canceled.</label>
 			<label index="relation.cancel.backToProfile">Back to profile page</label>
-			
+
 			<label index="relation.confirmed.cancel">(cancel)</label>
 
 			<label index="relation.reject.warning">Are you really want to reject this relation?</label>
@@ -132,45 +132,44 @@
 			<label index="relation.unconfirmed.reject">reject</label>
 			<label index="relation.confirm.success">You've just confirmed new friendship</label>
 
-			
 			<label index="role.new.title">New role</label>
 			<label index="role.new.name">Name</label>
 			<label index="role.new.submit">Submit</label>
-			
+
 			<label index="role.edit.title">Edit role</label>
 			<label index="role.edit.name">Name</label>
 			<label index="role.edit.submit">Update</label>
-			
+
 			<label index="role.list.title">Access roles</label>
 			<label index="role.list.new">Create a new role</label>
-			
+
 			<label index="role.access.title">Access options</label>
 			<label index="role.access.profile">Profile in general</label>
 			<label index="role.access.profile.image">Profile image</label>
 			<label index="role.access.profile.details">Details</label>
-			
+
 			<label index="role.assign.title">Assign a role</label>
 			<label index="role.assign.role">Role</label>
 			<label index="role.assign.submit">Assign</label>
-			
+
 			<label index="group.new.title">Found a group</label>
 			<label index="group.new.name">Groupname</label>
 			<label index="group.new.description">Description</label>
 			<label index="group.new.image">Image</label>
 			<label index="group.new.type">Type</label>
 			<label index="group.new.submit">Create</label>
-			
+
 			<label index="group.edit.title">Edit the group "%1$s"</label>
 			<label index="group.edit.name">Groupname</label>
 			<label index="group.edit.description">Description</label>
 			<label index="group.edit.image">Image</label>
 			<label index="group.edit.type">Type</label>
 			<label index="group.edit.submit">Update</label>
-			
+
 			<label index="group.list.title">Groups</label>
 			<label index="group.list.name">Groupname</label>
 			<label index="group.list.members">Members</label>
-			
+
 			<label index="group.show.title">Group: %1s</label>
 			<label index="group.show.name">Name</label>
 			<label index="group.show.description">Description</label>
@@ -181,28 +180,28 @@
 			<label index="group.show.request">Join</label>
 
 			<label index="group.create.imageError">There was a problem when uploading your image.</label>
-			
+
 			<label index="group.type.1">Public group</label>
 			<label index="group.type.2">Private group</label>
-			
+
 			<label index="search.form.submit">Search</label>
 			<label index="search.results.title">Search results</label>
 			<label index="search.results.nothingFound">Nothing was found.</label>
-			
+
 			<label index="message.write.title">Send a message to %1$s</label>
 			<label index="message.write.subject">Subject</label>
 			<label index="message.write.message">Message</label>
 			<label index="message.write.submit">Send</label>
-			
+
 			<label index="message.inbox.title">Incoming messages</label>
 			<label index="message.inbox.nomessages">You have no messages received.</label>
 
 			<label index="message.outbox.title">Outgoing messages</label>
 			<label index="message.outbox.nomessages">You have no messages received.</label>
-			
+
 			<label index="message.unread.title">Your unread messages</label>
 			<label index="message.unread.nomessages">You have no messages received.</label>
-			
+
 			<label index="message.navigation.unreaded">Unreaded</label>
 			<label index="message.navigation.inbox">Inbox</label>
 			<label index="message.navigation.sentMail">Sent Mail</label>
@@ -221,7 +220,7 @@
 			<label index="message.read.message">Message:</label>
 
 			<label index="message.send.success">Your message has been sent.</label>
-			
+
 			<label index="message.delete.success">Selected message has been deleted.</label>
 
 
@@ -230,13 +229,13 @@
 			<label index="tx_community_domain_model_wallpost.recipient">recipient</label>
 			<label index="tx_community_domain_model_wallpost.subject">Subject</label>
 			<label index="tx_community_domain_model_wallpost.message">message</label>
-			
+
 			<label index="wallPost.list.noMessages">There are no messages.</label>
 			<label index="wallPost.form.title">Write new message!</label>
 			<label index="wallPost.form.submit">Submit</label>
 			<label index="wallPost.form.created">You added post</label>
 			<label index="wallPost.form.deleted">You deleted post</label>
-			
+
 			<label index="tx_community_domain_model_user">User</label>
 			<label index="tx_community_domain_model_user.albums">albums</label>
 			<label index="tx_community_domain_model_album">Album that may contain images</label>
@@ -246,6 +245,6 @@
 			<label index="tx_community_domain_model_photo">Image that is in user's gallery</label>
 			<label index="tx_community_domain_model_photo.image">image</label>
 		</languageKey>
-	
+
 	</data>
 </T3locallang>

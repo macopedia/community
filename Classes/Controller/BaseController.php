@@ -77,8 +77,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @var bool
 	 */
 	static protected $redirected = FALSE;
-	
-	
+
 	/**
 	 * @var bool
 	 */
@@ -88,7 +87,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * Initialize before every action.
 	 */
 	protected function initializeAction() {
-		
+
 		$this->settingsService->set($this->settings);
 		$controllerName = $this->request->getControllerName();
 		$actionName = $this->request->getControllerActionName();
@@ -112,10 +111,10 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 			$this->noAccess = 1;
 		}
 	}
-	
+
 	/**
 	 * Prepare view - assign requestedUser and requestingUser
-	 * @param Tx_Extbase_MVC_View_ViewInterface $view 
+	 * @param Tx_Extbase_MVC_View_ViewInterface $view
 	 */
 	protected function initializeView(Tx_Extbase_MVC_View_ViewInterface $view) {
 		parent::initializeView($view);
@@ -134,7 +133,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 			return parent::callActionMethod();
 		}
 	}
-	
+
 	/**
 	 * Injects the Configuration Manager and is initializing the framework settings
 	 * Function is used to override the merge of settings via TS & flexforms
@@ -195,8 +194,8 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * Get the requested user
-	 * 
-	 * Some objects (like photos or albums) have users assigned to them. 
+	 *
+	 * Some objects (like photos or albums) have users assigned to them.
 	 * To avoid security mistakes we check arguments (tx_community['foo']=88) in a
 	 * specific order and the first one that is set is the only one taken into account later on.
 	 * TODO: hook in this function
@@ -207,7 +206,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		if (!$this->requestedUser) {
 			//Arguments from highest to lowest priority
 			$argumentsPriority = array('photo','album','relation','user');
-			
+
 			$foundUser = 0;
 			foreach ($argumentsPriority as $argument) {
 				if ($foundUser) {
@@ -404,7 +403,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$album->addPhoto($newPhoto);
 		$this->repositoryService->get('photo')->add($newPhoto);
 	}
-	
+
 	/**
 	 * We want to know if we were already redirected
 	 */
@@ -412,7 +411,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		Tx_Community_Controller_BaseController::$redirected = TRUE;
 		parent::redirect($actionName, $controllerName, $extensionName, $arguments, $pageUid, $delay, $statusCode);
 	}
-	
+
 	/**
 	 * If there were validation errors, we don't want to write details like
 	 * "An error occurred while trying to call Tx_Community_Controller_UserController->updateAction()"

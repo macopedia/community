@@ -37,6 +37,6 @@ class Tx_Community_Domain_Repository_WallPostRepository extends Tx_Extbase_Persi
 			->setOrderings(array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
 			->execute();
 	}
-	
+
 }
 ?>

@@ -89,7 +89,7 @@ abstract class Tx_Community_Domain_Model_Observer_AbstractObservableEntity
 			}
 		}
 	}
-	
+
 	/**
 	 * inject the object manager
 	 *

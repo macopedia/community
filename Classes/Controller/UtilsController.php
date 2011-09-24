@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011 Konrad Baumgart
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,7 +28,7 @@
 class Tx_Community_Controller_UtilsController extends Tx_Community_Controller_BaseController {
 
 	/**
-	 * Manages printing messages from 
+	 * Manages printing messages from flashMessages queue
 	 * @return mixed
 	 */
 	public function flashMessagesDisplayAction() {

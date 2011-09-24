@@ -51,7 +51,7 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 			)
 		)->execute();
 	}
-	
+
 	/**
 	 * Counts relations for a certain user.
 	 *

@@ -114,7 +114,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 			$this->redirect('editImage', 'User', NULL, array('user' => $user));
 		}
 	}
-	
+
 	/**
 	 * Delete the image
 	 *
@@ -161,14 +161,14 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 */
 	public function reportAction (Tx_Community_Domain_Model_User $user) {
 		$this->flashMessageContainer->add($this->_('profile.details.reported'));
-		
+
 		$notifyArguments = array(
 			'requestingUser' => $this->requestingUser,
 			'replyTo' => $this->requestingUser,
 			'user' => $user
 		);
 		$this->notificationService->notify($notifyArguments, 'report');
-		
+
 		$this->forward('details');
 	}
 

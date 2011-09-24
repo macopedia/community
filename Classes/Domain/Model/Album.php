@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 
+*  (c) 2011 Konrad Baumgart
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -47,14 +47,14 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	 * @var integer
 	 */
 	const PRIVACY_AVAILABLE_FOR_FRIENDS = 2;
-	
+
 	/**
 	 * album is a normal album
 	 *
 	 * @var integer
 	 */
 	const ALBUM_TYPE_NORMAL = 0;
-	
+
 	/**
 	 * album contains current and old avatars
 	 *

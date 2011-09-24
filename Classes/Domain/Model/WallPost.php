@@ -45,7 +45,6 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	 * Subject
 	 *
 	 * @var string $subject
-	 * 
 	 */
 	protected $subject;
 
@@ -54,7 +53,6 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	 *
 	 * @var string $message
 	 * @validate NotEmpty
-	 * 
 	 */
 	protected $message;
 

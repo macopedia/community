@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * 
+ * Handler for single way of notifying user
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -32,12 +32,12 @@
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
 class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Service_Notification_HandlerInterface, t3lib_Singleton {
-	
+
 	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
 	 */
 	protected $objectManager;
-	
+
 	/**
 	 * Inject the object manager so we can create objects on our own.
 	 *
@@ -46,7 +46,7 @@ class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Serv
 	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
-	
+
 	/**
 	 * Repository service. Get all your repositories with it.
 	 *
@@ -80,11 +80,11 @@ class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Serv
 	/**
 	 * Override it to implement your notification handler
 	 * You want to use render() inside
-	 * 
+	 *
 	 * @abstract
 	 * @param array $arguments Objects passed to fluid view (not only)
 	 *		Notable arguments:
-	 *			$arguments['sender'] Tx_Community_Domain_Model_User 
+	 *			$arguments['sender'] Tx_Community_Domain_Model_User
 	 *			$arguments['recipient'] Tx_Community_Domain_Model_User
 	 *			$arguments['recipients'] array of Tx_Community_Domain_Model_User
 	 *			$arguments['subject'] string - some handlers set message subject
@@ -93,7 +93,7 @@ class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Serv
 	 */
 	public function send(array $arguments, array $methodConfiguration) {
 	}
-	
+
 	/**
 	 * @param array $arguments Objects passed to fluid view
 	 * @param array $mathodConfiguration

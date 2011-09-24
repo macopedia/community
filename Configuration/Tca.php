@@ -78,7 +78,6 @@ $TCA['tx_community_domain_model_relation'] = array(
 				'maxitems' => 1
 			)
 		),
-		
 		'initiation_time' => array(
 			'exclude' => 0,
 			'label'   => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.initiation_time',

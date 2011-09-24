@@ -1,11 +1,7 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- * Description of NotificationService
+ * Service used to send messages to users with multiple ways.
  *
  * @author Konrad Baumgart
  */
@@ -52,7 +48,7 @@ class Tx_Community_Service_Notification_NotificationService implements Tx_Commun
 		}
 		return $this->settings['notification']['rules'][$resourceName];
 	}
-	
+
 	/**
 	 * Inject the object manager so we can create objects on our own.
 	 *

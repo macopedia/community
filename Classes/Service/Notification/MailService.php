@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * 
+ * Email notifications
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -41,6 +41,10 @@ class Tx_Community_Service_Notification_MailService extends Tx_Community_Service
 	 *
 	 * Info about mails
 	 * @see http://buzz.typo3.org/article/your-first-blog/
+	 *
+	 * @param  array $arguments
+	 * @param  array $configuration
+	 * @return void
 	 */
 	public function send(array $arguments, array $configuration) {
 		/* @var $recipient Tx_Community_Domain_Model_User */
@@ -48,7 +52,7 @@ class Tx_Community_Service_Notification_MailService extends Tx_Community_Service
 
 		$mail = t3lib_div::makeInstance('t3lib_mail_Message');
 		/* @var $mail t3lib_mail_Message */
-		
+
 		if ($arguments['recipient']) {
 			if ($arguments['recipient'] instanceof Tx_Community_Domain_Model_User) {
 				$mail->addTo($arguments['recipient']->getEmail(), $arguments['recipient']->getUsername());
@@ -68,13 +72,13 @@ class Tx_Community_Service_Notification_MailService extends Tx_Community_Service
 				}
 			}
 		}
-		
+
 		if ($configuration['sender']) {
 			$mail->setFrom($configuration['sender']);
 		} else {
 			throw new Tx_Community_Exception_UnexpectedException('No sender while sending mail via MailService', 1316515689);
 		}
-		
+
 		if ($arguments['sender']) {
 			//We can't send from user's email
 			if ($arguments['sender'] instanceof Tx_Community_Domain_Model_User) {
@@ -83,7 +87,7 @@ class Tx_Community_Service_Notification_MailService extends Tx_Community_Service
 				$mail->addReplyTo($arguments['sender']);
 			}
 		}
-		
+
 		if ($arguments['replyTo']) {
 			if ($arguments['replyTo'] instanceof Tx_Community_Domain_Model_User) {
 				$mail->addReplyTo($arguments['replyTo']->getEmail(), $arguments['replyTo']->getUsername());
@@ -91,23 +95,19 @@ class Tx_Community_Service_Notification_MailService extends Tx_Community_Service
 				$mail->addReplyTo($arguments['replyTo']);
 			}
 		}
-		
+
 		if ($configuration['subject'])
 			$mail->setSubject($configuration['subject']);
 		if ($arguments['subject'])
 			$mail->setSubject($arguments['subject']);
-		
+
 		$content = $this->render($arguments, $configuration);
 		$mail->setBody($content, 'text/html')
 			->send();
-		
+
 		// TODO: Add plain version
 		// $mail->addPart($bodyText, 'text/plain');
 	}
 
-
-
-		
-	
 }
 ?>

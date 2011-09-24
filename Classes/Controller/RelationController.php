@@ -35,8 +35,7 @@
 class Tx_Community_Controller_RelationController extends Tx_Community_Controller_BaseController {
 
 	/**
-	 * Display some user's friends
-	 * 
+	 * Display some of user's friends
 	 */
 	public function listSomeAction() {
 		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestedUser(), $this->settings['relations']['listSome']['limit']);
@@ -81,18 +80,18 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			$relation->setRequestedUser($user);
 			$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 			$this->repositoryService->get('relation')->add($relation);
-			
+
 			$notifyArguments = array(
 				'sender' => $this->requestingUser,
 				'recipient' => $user,
 				//'relation' => $relation,
 			);
 			$this->notificationService->notify($notifyArguments, 'requestRelation');
-			
+
 		} elseif ($relation instanceof Tx_Community_Domain_Model_Relation) {
-			
+
 			switch ($relation->getStatus()) {
-				
+
 				case Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW:
 					if($relation->getRequestedUser() == $user) {
 						$this->flashMessageContainer->add($this->_('relation.request.alreadyPending'), '', t3lib_FlashMessage::NOTICE);
@@ -100,7 +99,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 						// if both sides request friendship, it's ok
 						$this->flashMessageContainer->add($this->_('relation.confirm.success'));
 						$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED);
-						
+
 						$notifyArguments = array(
 							'sender' => $this->requestingUser,
 							'recipient' => $user,
@@ -109,11 +108,11 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 						$this->notificationService->notify($notifyArguments, 'confirmedRelation');
 					}
 					break;
-				
+
 				case Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED:
 					$this->flashMessageContainer->add($this->_('relation.request.alreadyFriends'), '', t3lib_FlashMessage::INFO);
 					break;
-				
+
 				case Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED:
 					if($relation->getRequestedUser() == $user) {
 						 $this->flashMessageContainer->add($this->_('relation.request.alreadyRejected'), '', t3lib_FlashMessage::ERROR);
@@ -122,7 +121,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 						if ($this->settings['relation']['request']['allowMultiple'] == '1') {
 							$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 							$this->repositoryService->get('relation')->update($relation);
-							
+
 							$notifyArguments = array(
 								'sender' => $this->requestingUser,
 								'recipient' => $user,
@@ -130,7 +129,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 							);
 							$this->notificationService->notify($notifyArguments, 'requestRelation');
 						} else {
-							 return;
+							return;
 						}
 					} else {
 						// The user that already rejected request, changed his mind
@@ -148,11 +147,11 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 						$this->notificationService->notify($notifyArguments, 'requestRelation');
 					}
 					break;
-				
+
 				case Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED:
 					$this->flashMessageContainer->add($this->_('relation.request.alreadyCanceled'), '', t3lib_FlashMessage::NOTICE);
 					break;
-					
+
 				default:
 					throw new Tx_Community_Exception_UnexpectedException(
 							'Unknown relation status between user ' . $user->getUid() . ' and user ' . $this->getRequestingUser()->getUid()
@@ -206,7 +205,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				'relation' => $relation,
 			);
 			$this->notificationService->notify($notifyArguments, 'cancelRelation');
-			
+
 			$this->redirectToUser($this->getRequestingUser());
 		} else {
 			$this->view->assign('relation', $relation);
@@ -243,7 +242,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				'relation' => $relation,
 			);
 			$this->notificationService->notify($notifyArguments, 'canceledRelation');
-			
+
 			$this->redirectToUser($this->getRequestingUser());
 		}else {
 			$this->view->assign('relation', $relation);
@@ -258,7 +257,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	protected function confirmRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED);
 		$this->repositoryService->get('relation')->update($relation);
-		
+
 		$notifyArguments = array(
 			'sender' => $this->requestingUser,
 			'recipient' => $this->requestedUser,
@@ -275,7 +274,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	protected function rejectRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED);
 		$this->repositoryService->get('relation')->update($relation);
-		
+
 		$notifyArguments = array(
 			'sender' => $this->requestingUser,
 			'recipient' => $this->requestedUser,
@@ -293,7 +292,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	protected function cancelRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED);
 		$this->repositoryService->get('relation')->remove($relation);
-		
+
 		$notifyArguments = array(
 			'sender' => $this->requestingUser,
 			'recipient' => $this->requestedUser,

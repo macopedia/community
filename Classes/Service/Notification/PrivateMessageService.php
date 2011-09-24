@@ -24,7 +24,7 @@
 ***************************************************************/
 
 /**
- * 
+ * Notify user with private message
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -34,9 +34,9 @@
 class Tx_Community_Service_Notification_PrivateMessageService extends Tx_Community_Service_Notification_BaseHandler {
 
 	/**
-	 * 
-	 *
-	 *
+	 * @param  array $arguments
+	 * @param  array $configuration
+	 * @return void
 	 */
 	public function send(array $arguments, array $configuration) {
 

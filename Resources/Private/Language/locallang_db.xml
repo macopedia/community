@@ -15,7 +15,7 @@
 			<label index="tx_community_domain_model_group.admins">Admins</label>
 			<label index="tx_community_domain_model_group.members">Members</label>
 			<label index="tx_community_domain_model_group.pending_members">Pending Members</label>
-			
+
 			<label index="tx_community_domain_model_user">User</label>
 			<label index="tx_community_domain_model_user.albums">Albums</label>
 

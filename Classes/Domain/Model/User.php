@@ -313,7 +313,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	{
 	    $this->dateOfBirth = $dateOfBirth;
 	}
-	
+
 	/**
 	 * Counts age from date of birth
 	 * @return integer
