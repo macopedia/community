@@ -47,4 +47,10 @@
 			<dd>{user.email}</dd>
 	</dl>
 	<br style="clear:both"/>
+	<f:form id="report-form" action="report" controller="User" additionalParams="{tx_community : {user: user}}">
+		<f:translate key="profile.report.writeReason"/>
+		<f:form.textarea rows="3" cols="30" name="reason" />
+		<f:form.submit class="visible" value="{f:translate(key:'profile.report.submit')}"/>
+		<div style="clear:both"></div>
+	</f:form>
 </div>

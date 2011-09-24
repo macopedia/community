@@ -157,18 +157,23 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	/**
 	 * Reports a profile with gore and nudity
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @param string $reason
 	 */
-	public function reportAction (Tx_Community_Domain_Model_User $user) {
-		$this->flashMessageContainer->add($this->_('profile.details.reported'));
+	public function reportAction (Tx_Community_Domain_Model_User $user, $reason = '') {
+		if ($this->settings['profile']['reasonForReportRequired'] && strlen($reason)==0) {
+			$this->flashMessageContainer->add($this->_('profile.report.needReason'),'',t3lib_FlashMessage::ERROR);
+		} else {
+			$this->flashMessageContainer->add($this->_('profile.report.reported'));
 
-		$notifyArguments = array(
-			'requestingUser' => $this->requestingUser,
-			'replyTo' => $this->requestingUser,
-			'user' => $user
-		);
-		$this->notificationService->notify($notifyArguments, 'report');
-
-		$this->forward('details');
+			$notifyArguments = array(
+				'requestingUser' => $this->requestingUser,
+				'replyTo' => $this->requestingUser,
+				'user' => $user,
+				'reason' => $reason,
+			);
+			$this->notificationService->notify($notifyArguments, 'report');
+		}
+		$this->redirect('details', NULL, NULL, array('user'=>$user));
 	}
 
 	/**

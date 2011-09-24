@@ -1,2 +1,3 @@
 User <f:link.action absolute="1" arguments="{user : sender}" pageUid="{settings.profilePage}" controller="User" action="details"> {sender.username} </f:link.action>
 reports profile <f:link.action absolute="1" arguments="{user : user}" pageUid="{settings.profilePage}"  controller="User" action="details"> {user.username} </f:link.action>
+<f:if condition="{reason}">Reason: {reason}</f:if>

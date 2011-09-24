@@ -70,6 +70,11 @@
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
 
+			<label index="profile.report.writeReason">Write what's inappropriate on this profile.</label>
+			<label index="profile.report.submit">Report</label>
+			<label index="profile.report.needReason">You must enter reason for the profile report</label>
+			<label index="profile.report.reported">You have reported a profile</label>
+
 			<label index="profile.album.title">Albums</label>
 			<label index="profile.album.public">Public</label>
 			<label index="profile.album.loggedInOnly">Only for logged in</label>

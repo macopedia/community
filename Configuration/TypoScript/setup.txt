@@ -25,6 +25,7 @@ plugin.tx_community {
 				types = jpeg,jpg,png,gif
 				defaultImage = EXT:community/Resources/Public/Images/defaultProfileImage.png
 			}
+			reasonForReportRequired = 1
 		}
 
 		album {
