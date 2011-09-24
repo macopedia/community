@@ -88,7 +88,7 @@ class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Serv
 	 *			$arguments['recipient'] Tx_Community_Domain_Model_User
 	 *			$arguments['recipients'] array of Tx_Community_Domain_Model_User
 	 *			$arguments['subject'] string - some handlers set message subject
-	 * @param array $mathodConfiguration from plugin.tx_community.settings.notification.ruses.XXX.YYY
+	 * @param array $methodConfiguration from plugin.tx_community.settings.notification.rules.XXX.YYY
 	 * @return void
 	 */
 	public function send(array $arguments, array $methodConfiguration) {

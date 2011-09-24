@@ -115,6 +115,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	/**
 	 * Prepare view - assign requestedUser and requestingUser
 	 * @param Tx_Extbase_MVC_View_ViewInterface $view
+	 * @return void
 	 */
 	protected function initializeView(Tx_Extbase_MVC_View_ViewInterface $view) {
 		parent::initializeView($view);
@@ -216,13 +217,19 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 					switch ($argument) {
 						case 'photo':
 							//If we request album or photo then the owner of album is requested user and we ignore/override 'user' argument
-							$this->requestedUser = $this->repositoryService->get('photo')->findByUid((int) $this->request->getArgument('photo'))->getAlbum()->getUser();
+							$this->requestedUser = $this->repositoryService->get('photo')
+														->findByUid((int) $this->request->getArgument('photo'))
+														->getAlbum()
+														->getUser();
 							break;
 						case 'album':
-							$this->requestedUser = $this->repositoryService->get('album')->findByUid((int) $this->request->getArgument('album'))->getUser();
+							$this->requestedUser = $this->repositoryService->get('album')
+														->findByUid((int) $this->request->getArgument('album'))
+														->getUser();
 							break;
 						case 'relation':
-							$relation = $this->repositoryService->get('relation')->findByUid((int) $this->request->getArgument('relation'));
+							$relation = $this->repositoryService->get('relation')
+											 ->findByUid((int) $this->request->getArgument('relation'));
 							if ($relation->getInitiatingUser()->getUid() == $this->getRequestingUser()->getUid()) {
 								$requestedUser = $relation->getRequestedUser();
 							} elseif ($relation->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
@@ -234,9 +241,11 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 							}
 							break;
 						case 'user':
-							$this->requestedUser = $this->repositoryService->get('user')->findByUid((int) $this->request->getArgument('user'));
+							$this->requestedUser = $this->repositoryService->get('user')
+														->findByUid((int) $this->request->getArgument('user'));
 							break;
 						default :
+							//TODO: add hook
 					}
 				}
 			}
@@ -406,6 +415,18 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * We want to know if we were already redirected
+	 * @see Tx_Extbase_MVC_Controller_AbstractController::redirect()
+	 *
+	 * @param string $actionName Name of the action to forward to
+	 * @param string $controllerName Unqualified object name of the controller to forward to. If not specified, the current controller is used.
+	 * @param string $extensionName Name of the extension containing the controller to forward to. If not specified, the current extension is assumed.
+	 * @param Tx_Extbase_MVC_Controller_Arguments $arguments Arguments to pass to the target action
+	 * @param integer $pageUid Target page uid. If NULL, the current page uid is used
+	 * @param integer $delay (optional) The delay in seconds. Default is no delay.
+	 * @param integer $statusCode (optional) The HTTP status code for the redirect. Default is "303 See Other"
+	 * @return void
+	 * @throws Tx_Extbase_MVC_Exception_UnsupportedRequestType If the request is not a web request
+	 * @throws Tx_Extbase_MVC_Exception_StopAction
 	 */
 	protected function redirect($actionName, $controllerName = NULL, $extensionName = NULL, array $arguments = NULL, $pageUid = NULL, $delay = 0, $statusCode = 303) {
 		Tx_Community_Controller_BaseController::$redirected = TRUE;

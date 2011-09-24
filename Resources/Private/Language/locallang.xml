@@ -92,7 +92,8 @@
 			<label index="profile.editImage.submit">Upload</label>
 			<label index="profile.updateImage.error">There was a problem when uploading your profile image.</label>
 			<label index="profile.updateImage.success">You changed your profile image.</label>
-
+			<label index="profile.deleteImage.success">You deleted your profile image.</label>
+			
 			<label index="profile.interaction.user.title">User</label>
 			<label index="profile.interaction.requestRelation">Add as friend</label>
 			<label index="profile.interaction.cancelRelation">Delete as a friend</label>

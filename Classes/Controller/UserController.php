@@ -78,7 +78,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	}
 
 	/**
-	 * Upload an image
+	 * Show form to edit/upload profile image
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
 	 */
@@ -116,13 +116,12 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	}
 
 	/**
-	 * Delete the image
-	 *
-	 * @param Tx_Community_Domain_Model_User $user
+	 * Delete profile image
 	 */
 	public function deleteImageAction() {
 		$this->requestingUser->setImage('');
 		$this->repositoryService->get('user')->update($this->requestingUser);
+		$this->flashMessageContainer->add($this->_('profile.deleteImage.success'));
 		$this->redirect('edit', 'User');
 	}
 
@@ -155,7 +154,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	public function searchBoxAction() {
 	}
 
-	/*
+	/**
 	 * Reports a profile with gore and nudity
 	 * @param Tx_Community_Domain_Model_User $user
 	 */
