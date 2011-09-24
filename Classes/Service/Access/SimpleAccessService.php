@@ -65,11 +65,6 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	protected $settingsService;
 
 	/**
-	 * An array containing a mapping between action and resource names
-	 */
-	protected $actionResourceMap = array();
-
-	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
 	 */
 	protected $objectManager;
@@ -81,14 +76,8 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 * @return
 	 */
 	public function getResourceName($controllerName, $actionName) {
-		if (!count($this->actionResourceMap)) {
-			$settings = $this->settingsService->get();
-			foreach ($settings['accessActionResourceMappers'] as $mapperName) {
-				$mapper = $this->objectManager->get($mapperName);
-				$this->actionResourceMap = $mapper->doMapping($this->actionResourceMap);
-			}
-		}
-		return $this->actionResourceMap[$controllerName][$actionName];
+		$settings = $this->settingsService->get();
+		return $settings['accessActionResourceMap'][$controllerName][$actionName];
 	}
 
 	/**

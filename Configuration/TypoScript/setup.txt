@@ -54,9 +54,50 @@ plugin.tx_community {
 			AclRole = list,assign
 		}
 
-		//Allows to add resource-action mapping used in SimpleAccessService
-		accessActionResourceMappers {
-			10 = Tx_Community_Service_Access_SimpleActionResourceMapper
+		//Allows to set access to multiple actions with one 'variable'
+		//Actions that user can do only on himself don't need to be here
+		accessActionResourceMap {
+			Message {
+				write = message.write
+				send = message.write
+			}
+			User {
+				image = profile.image
+				edit = profile.edit
+				search = user.search
+				searchBox = user.searchBox
+				update = profile.edit
+				details = profile.details
+				interaction = profile.menu
+				editImage = profile.edit.image
+				report = profile.report
+			}
+			Relation {
+				listSome = profile.relation.listSome
+				list = profile.relation.list
+				request = profile.relation.request
+				confirm = profile.relation.confirm
+				reject = profile.relation.reject
+				unconfirmed = profile.relation.unconfirmed
+				cancel = profile.relation.cancel
+			}
+			WallPost {
+				list = profile.wall.list
+				new = profile.wall.write
+				create = profile.wall.write
+			}
+			Album {
+				list = profile.gallery
+				show = profile.gallery
+			}
+			Photo {
+				avatar = profile.gallery.avatar
+					//allows seting other users photo as avatar
+					//but still need to be able to see the photo
+			}
+			Utils {
+				flashMessagesDisplay = utils
+			}
 		}
 
 		accessRules {
