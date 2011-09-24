@@ -245,6 +245,11 @@
 			<label index="tx_community_domain_model_album.photos">photos</label>
 			<label index="tx_community_domain_model_photo">Image that is in user's gallery</label>
 			<label index="tx_community_domain_model_photo.image">image</label>
+
+			<label index="paginate_previous">Previous</label>
+			<label index="paginate_next">Next</label>
+			<label index="paginate_page">Page</label>
+
 		</languageKey>
 
 	</data>

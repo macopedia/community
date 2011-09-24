@@ -204,7 +204,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @return Tx_Community_Domain_Model_User
 	 */
 	protected function getRequestedUser() {
-		if (!$this->requestedUser) {
+		if (!$this->requestedUser) { //TODO:change condition
 			//Arguments from highest to lowest priority
 			$argumentsPriority = array('photo','album','relation','user');
 
@@ -231,9 +231,9 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 							$relation = $this->repositoryService->get('relation')
 											 ->findByUid((int) $this->request->getArgument('relation'));
 							if ($relation->getInitiatingUser()->getUid() == $this->getRequestingUser()->getUid()) {
-								$requestedUser = $relation->getRequestedUser();
+								$this->requestedUser = $relation->getRequestedUser();
 							} elseif ($relation->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
-								$requestedUser = $relation->getInitiatingUser();
+								$this->requestedUser = $relation->getInitiatingUser();
 							} else {
 								throw new Tx_Community_Exception_UnexpectedException(
 										'User ' . $this->getRequestingUser()->getUid() . ' is not in relation ' . $this->request->getArgument('relation')
@@ -262,7 +262,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @return Tx_Community_Domain_Model_User
 	 */
 	protected function getRequestingUser() {
-		if (!$this->requestingUser) {
+		if (!$this->requestingUser) { //TODO:change condition
 			$this->requestingUser = $this->repositoryService->get('user')->findCurrentUser();
 		}
 		return $this->requestingUser;
