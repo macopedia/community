@@ -85,7 +85,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 
 		} elseif ($relation instanceof Tx_Community_Domain_Model_Relation) {
 
-			$this->requestedExistingRelation($relation);
+			$this->requestedExistingRelation($relation, $user);
 
 		} else {
 			// more than one relation? something is wrong.
@@ -100,8 +100,9 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	/**
 	 * Used in requestAction() when requested relation exists
 	 * @param Tx_Community_Domain_Model_Relation $relation
+	 * @param Tx_Community_Domain_Model_User $user
 	 */
-	protected function requestedExistingRelation(Tx_Community_Domain_Model_Relation $relation) {
+	protected function requestedExistingRelation(Tx_Community_Domain_Model_Relation $relation, Tx_Community_Domain_Model_User $user) {
 		
 		switch ($relation->getStatus()) {
 
