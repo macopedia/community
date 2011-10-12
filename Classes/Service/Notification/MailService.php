@@ -79,8 +79,8 @@ class Tx_Community_Service_Notification_MailService extends Tx_Community_Service
 			throw new Tx_Community_Exception_UnexpectedException('No sender while sending mail via MailService', 1316515689);
 		}
 
-		if ($arguments['sender']) {
-			//We can't send from user's email
+		//We can't send from user's email, as other servers won't accept mails from foreign domains from us
+		if ($configuration['useSenderFromArgumentsAsReplyTo'] && $arguments['sender']) {
 			if ($arguments['sender'] instanceof Tx_Community_Domain_Model_User) {
 				$mail->addReplyTo($arguments['sender']->getEmail(), $arguments['sender']->getUsername());
 			} else {
