@@ -182,6 +182,7 @@ plugin.tx_community {
 						subject = Profile report
 						recipient = {$plugin.tx_community.adminEmail}
 						sender = {$plugin.tx_community.serverEmail}
+						useSenderFromArgumentsAsReplyTo = 1
 					}
 				}
 			}
