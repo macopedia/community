@@ -31,9 +31,11 @@ class Tx_Community_Service_Notification_NotificationService implements Tx_Commun
 	 */
 	public function notify(array $arguments, $resourceName) {
 		$methods = $this->getNotificationMethods($resourceName);
-		foreach ($methods as $k=>$method){
-			$handler = $this->objectManager->get($method['handler']);
-			$handler->send($arguments, $method);
+		if ($methods) {
+			foreach ($methods as $k=>$method){
+				$handler = $this->objectManager->get($method['handler']);
+				$handler->send($arguments, $method);
+			}
 		}
 
 	}
