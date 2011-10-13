@@ -88,6 +88,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	protected function initializeAction() {
 
+		$this->findRequestedAndRequestingUser();
 		$this->settingsService->set($this->settings);
 		$controllerName = $this->request->getControllerName();
 		$actionName = $this->request->getControllerActionName();
@@ -194,65 +195,85 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	}
 
 	/**
-	 * Get the requested user
+	 * Finds the requested user, if there is any request argument that specifies requested user.
 	 *
 	 * Some objects (like photos or albums) have users assigned to them.
-	 * To avoid security mistakes we check arguments (tx_community['foo']=88) in a
+	 * To avoid security mistakes we check arguments (like tx_community['foo']=88) in a
 	 * specific order and the first one that is set is the only one taken into account later on.
 	 * TODO: hook in this function
+	 *
+	 * @return void
+	 */
+	protected function fetchRequestedUserFromRequestArguments() {
+		$argumentsPriority = array('photo','album','relation','user');
+
+		$foundUser = false;
+		foreach ($argumentsPriority as $argument) {
+			if ($foundUser) {
+				$this->request->setArgument($argument, NULL);
+			} else if ($this->request->hasArgument($argument) && !is_array($this->request->getArgument($argument))) {
+				$foundUser = true;
+				switch ($argument) {
+					case 'photo':
+						//If we request album or photo then the owner of album is requested user and we ignore/override 'user' argument
+						$this->requestedUser = $this->repositoryService->get('photo')
+													->findByUid((int) $this->request->getArgument('photo'))
+													->getAlbum()
+													->getUser();
+						break;
+					case 'album':
+						$this->requestedUser = $this->repositoryService->get('album')
+													->findByUid((int) $this->request->getArgument('album'))
+													->getUser();
+						break;
+					case 'relation':
+						$relation = $this->repositoryService->get('relation')
+										 ->findByUid((int) $this->request->getArgument('relation'));
+						if ($relation->getInitiatingUser()->getUid() == $this->getRequestingUser()->getUid()) {
+							$this->requestedUser = $relation->getRequestedUser();
+						} elseif ($relation->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
+							$this->requestedUser = $relation->getInitiatingUser();
+						} else {
+							throw new Tx_Community_Exception_UnexpectedException(
+									'User ' . $this->getRequestingUser()->getUid() . ' is not in relation ' . $this->request->getArgument('relation')
+							);
+						}
+						break;
+					case 'user':
+						$this->requestedUser = $this->repositoryService->get('user')
+													->findByUid((int) $this->request->getArgument('user'));
+						break;
+					default :
+						//TODO: add hook
+				}
+			}
+		}
+	}
+
+	/**
+	 * Finds requesting and requested user
+	 *
+	 * After we run this function, we know that both
+	 * $this->requestingUser and $this->requestedUser are set,
+	 * unless there is no requesting and requested user.
+	 *
+	 * @return void
+	 */
+	protected function findRequestedAndRequestingUser() {
+		$this->requestingUser = $this->repositoryService->get('user')->findCurrentUser();
+
+		$this->fetchRequestedUserFromRequestArguments();
+		if ($this->requestedUser == NULL) {
+			$this->requestedUser = $this->getRequestingUser();
+		}
+	}
+
+	/**
+	 * Get the requested user
 	 *
 	 * @return Tx_Community_Domain_Model_User
 	 */
 	protected function getRequestedUser() {
-		if (!$this->requestedUser) { //TODO:change condition
-			//Arguments from highest to lowest priority
-			$argumentsPriority = array('photo','album','relation','user');
-
-			$foundUser = 0;
-			foreach ($argumentsPriority as $argument) {
-				if ($foundUser) {
-					$this->request->setArgument($argument, NULL);
-				} else if ($this->request->hasArgument($argument) && !is_array($this->request->getArgument($argument))) {
-					$foundUser = 1;
-					switch ($argument) {
-						case 'photo':
-							//If we request album or photo then the owner of album is requested user and we ignore/override 'user' argument
-							$this->requestedUser = $this->repositoryService->get('photo')
-														->findByUid((int) $this->request->getArgument('photo'))
-														->getAlbum()
-														->getUser();
-							break;
-						case 'album':
-							$this->requestedUser = $this->repositoryService->get('album')
-														->findByUid((int) $this->request->getArgument('album'))
-														->getUser();
-							break;
-						case 'relation':
-							$relation = $this->repositoryService->get('relation')
-											 ->findByUid((int) $this->request->getArgument('relation'));
-							if ($relation->getInitiatingUser()->getUid() == $this->getRequestingUser()->getUid()) {
-								$this->requestedUser = $relation->getRequestedUser();
-							} elseif ($relation->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
-								$this->requestedUser = $relation->getInitiatingUser();
-							} else {
-								throw new Tx_Community_Exception_UnexpectedException(
-										'User ' . $this->getRequestingUser()->getUid() . ' is not in relation ' . $this->request->getArgument('relation')
-								);
-							}
-							break;
-						case 'user':
-							$this->requestedUser = $this->repositoryService->get('user')
-														->findByUid((int) $this->request->getArgument('user'));
-							break;
-						default :
-							//TODO: add hook
-					}
-				}
-			}
-			if (!$foundUser) {
-				$this->requestedUser = $this->getRequestingUser();
-			}
-		}
 		return $this->requestedUser;
 	}
 
@@ -262,9 +283,6 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @return Tx_Community_Domain_Model_User
 	 */
 	protected function getRequestingUser() {
-		if (!$this->requestingUser) { //TODO:change condition
-			$this->requestingUser = $this->repositoryService->get('user')->findCurrentUser();
-		}
 		return $this->requestingUser;
 	}
 
