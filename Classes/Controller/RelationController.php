@@ -259,7 +259,12 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			'recipient' => $this->requestedUser,
 			'relation' => $relation,
 		);
-		$this->notificationService->notify($notifyArguments, $resourceName);
+		if(t3lib_div::validEmail($this->requestedUser->getEmail())){
+			$this->notificationService->notify($notifyArguments, $resourceName);		   
+		}
+		else {
+		    t3lib_div::sysLog('User with id:'.$this->requestedUser->getUid()." has wrong email address.", "Community");
+		}
 	}
 }
 ?>
