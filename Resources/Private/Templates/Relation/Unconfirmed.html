@@ -1,6 +1,7 @@
-<f:if condition="{unconfirmedRelations}">
-	<div class="friend-requests">
-		<h2><f:translate key="relation.unconfirmed.title"/></h2>
+<div class="friend-requests" >
+    <h3><f:translate key="relation.unconfirmed.title"/></h3>
+    <f:if condition="{unconfirmedRelations}">
+	<f:then>
 		<f:for each="{unconfirmedRelations}" as="relation">
 			<div class="friend-request">
 				<f:link.page additionalParams="{tx_community : {user : relation.initiatingUser}}" pageUid="{settings.profilePage}">
@@ -12,13 +13,17 @@
 				<f:link.page additionalParams="{tx_community : {user : relation.initiatingUser}}" pageUid="{settings.profilePage}">
 					{relation.initiatingUser.name}
 				</f:link.page>
-				<f:link.action action="confirm" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}" class="confirm">
+				<f:link.action action="confirm" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}" class="confirm">
 					<f:translate key="relation.unconfirmed.confirm"/>
 				</f:link.action>
-				<f:link.action action="reject" controller="Relation" pageUid="{settings.actionPage}" arguments="{relation : relation}" class="reject">
+				<f:link.action action="reject" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}" class="reject">
 					<f:translate key="relation.unconfirmed.reject"/>
 				</f:link.action>
 			</div>
 		</f:for>
-	</div>
-</f:if>
+	</f:then>
+	<f:else>
+	    
+	</f:else>
+    </f:if>
+</div>

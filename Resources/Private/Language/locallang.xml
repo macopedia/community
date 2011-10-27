@@ -70,6 +70,7 @@
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
 
+			<label index="profile.details.reportProfile">Report profile</label>
 			<label index="profile.report.writeReason">Write what's inappropriate on this profile.</label>
 			<label index="profile.report.submit">Report</label>
 			<label index="profile.report.needReason">You must enter reason for the profile report</label>
@@ -117,7 +118,8 @@
 
 			<label index="relation.listSome.unconfirmed">Unconfirmed friends</label>
 
-			<label index="relation.list.title">Friends a user</label>
+			<label index="relation.list.title">Friends</label>
+			<label index="relation.list.noRelations">You have no friends yet.</label>
 			<label index="relation.listSome.title">Friends</label>
 			<label index="relation.listSome.goTolist">All friends</label>
 			<label index="relation.request.pending">Your friendship request is pending for approval.</label>
@@ -128,6 +130,9 @@
 			<label index="relation.cancel.confirm">Yes</label>
 			<label index="relation.cancel.success">Relation has been canceled.</label>
 			<label index="relation.cancel.backToProfile">Back to profile page</label>
+			<label index="relation.menu.list">Friends</label>
+			<label index="relation.menu.unconfirmed">Unconfirmed</label>
+			
 
 			<label index="relation.confirmed.cancel">(cancel)</label>
 
@@ -203,7 +208,7 @@
 			<label index="message.write.submit">Send</label>
 
 			<label index="message.inbox.title">Incoming messages</label>
-			<label index="message.inbox.nomessages">You have no messages received.</label>
+			<label index="message.inbox.nomessages">You don't have any messages yet.</label>
 
 			<label index="message.outbox.title">Outgoing messages</label>
 			<label index="message.outbox.nomessages">You have no messages received.</label>

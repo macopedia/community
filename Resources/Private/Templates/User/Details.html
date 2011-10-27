@@ -39,11 +39,28 @@
 		<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'phone', value : user.phone}"/>
 		<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'email', value : user.email}"/>
 	</dl>
-	<br style="clear:both"/>
-	<f:form id="report-form" action="report" controller="User" additionalParams="{tx_community : {user: user}}">
-		<f:translate key="profile.report.writeReason"/>
-		<f:form.textarea rows="3" cols="30" name="reason" />
-		<f:form.submit class="visible" value="{f:translate(key:'profile.report.submit')}"/>
-		<div style="clear:both"></div>
-	</f:form>
+	<com:sameUser requestingUser="{requestingUser}" requestedUser="{user}">
+		<f:then></f:then>
+		<f:else>
+		    <div class="report-profile">   
+			<a href="#" class="report-link">
+				<f:translate key="profile.details.reportProfile"/>
+			</a>
+			<br style="clear:both"/>
+			<f:form id="report-form" style="display:none;" action="report" controller="User" additionalParams="{tx_community : {user: user}}">
+				<f:translate key="profile.report.writeReason"/>
+				<f:form.textarea rows="3" cols="30" name="reason" />
+				<f:form.submit value="{f:translate(key:'profile.report.submit')}"/>
+			</f:form>
+			<script>
+			$(function(){
+				$('.report-link').click(function(){
+					$('#report-form').toggle();
+					return false;
+				});
+			});
+			</script>
+		    </div>
+	</f:else>
+	</com:sameUser>
 </div>
