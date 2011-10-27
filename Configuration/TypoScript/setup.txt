@@ -1,3 +1,5 @@
+page.includeCSS.community = EXT:community/Resources/Public/CSS/default.css
+
 tt_content.list.20.community_pi10 = USER_INT
 # set the namespace so any plugin can share arguments
 plugin.tx_community.view.pluginNamespace = tx_community
@@ -224,44 +226,6 @@ config.tx_extbase {
 
 
 
-plugin.tx_community._CSS_DEFAULT_STYLE (
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-community-pi1 table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-community-pi1 table th {
-		font-weight:bold;
-	}
-
-	.tx-community-pi1 table td {
-		vertical-align:top;
-	}
-	.tx-community-message-list-unread {
-		font-weight: bold;
-	}
-	.tx_community_profile_details dt {
-		clear: left;
-		display: block;
-		float: left;
-		margin-top: 5px;
-		width: 50%;
-	}
-	.tx_community_profile_details dd {
-		float: left;
-		margin-left: 2px;
-	}
-
-	.tx_community_wall #tx_comments_pi1_content {
-		width:100%;
-		height:50px;
-	}
-)
 
 config.tx_extbase.objects {
 	Tx_Community_Service_Access_AccessServiceInterface {

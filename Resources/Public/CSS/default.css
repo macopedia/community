@@ -1,0 +1,40 @@
+.tx_community_profile_edit .row { clear:both; margin: 0 0 0.5em;}
+.tx_community_profile_edit .row label {float:left; margin:right:5%;width:30%; }
+.tx_community_profile_edit .row input, .row textarea, .row select, .row fieldset { width: 50%;}
+
+input.f3-form-error {
+	background-color:#FF9F9F;
+	border: 1px #FF0000 solid;
+}
+
+.tx-community-pi1 table {
+	border-collapse:separate;
+	border-spacing:10px;
+}
+
+.tx-community-pi1 table th {
+	font-weight:bold;
+}
+
+.tx-community-pi1 table td {
+	vertical-align:top;
+}
+.tx-community-message-list-unread {
+	font-weight: bold;
+}
+.tx_community_profile_details dt {
+	clear: left;
+	display: block;
+	float: left;
+	margin-top: 5px;
+	width: 50%;
+}
+.tx_community_profile_details dd {
+	float: left;
+	margin-left: 2px;
+}
+
+.tx_community_wall #tx_comments_pi1_content {
+	width:100%;
+	height:50px;
+}
