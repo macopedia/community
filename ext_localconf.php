@@ -83,10 +83,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'MessageBox',
 	array(
-		'Message' => 'inbox,outbox,unread,read,delete',
+		'Message' => 'inbox,outbox,unread,read,delete,send',
 	),
 	array(
-		'Message' => 'inbox,outbox,unread,read,delete',
+		'Message' => 'inbox,outbox,unread,read,delete,send',
 	)
 );
 
@@ -138,10 +138,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'RelationManagement',
 	array(
-		'Relation' => 'list,request,cancel,confirm,reject',
+		'Relation' => 'list,request,cancel,confirm,reject,unconfirmed',
 	),
 	array(
-		'Relation' => 'list,request,cancel,confirm,reject',
+		'Relation' => 'list,request,cancel,confirm,reject,unconfirmed',
 	)
 );
 

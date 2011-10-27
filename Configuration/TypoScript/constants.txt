@@ -1,13 +1,29 @@
 plugin.tx_community {
 	settings {
 	    # cat=plugin.tx_community//a; type=int+; label=Default login page PID, should be different from profile and action page
-        loginPage =
+	    loginPage =
 
-        # cat=plugin.tx_community//a; type=int+; label=Default profile page PID
-        profilePage =
+	    # cat=plugin.tx_community//a; type=int+; label=Default profile page PID
+	    profilePage =
+ 
+	    # cat=plugin.tx_community//a; type=int+; label=Page PID with edit profile plugin
+	    editProfilePage =
 
-        # cat=plugin.tx_community//a; type=int+; label=Default action page PID
-        actionPage =
+	    # cat=plugin.tx_community//a; type=int+; label=Default action page PID
+	    actionPage =
+
+	    # cat=plugin.tx_community//a; type=int+; label=Page PID with message plugin
+	    messagePage =
+
+	    # cat=plugin.tx_community//a; type=int+; label=Page PID with gallery plugin
+	    galleryPage =
+
+	    # cat=plugin.tx_community//a; type=int+; label=Page PID with search results plugin
+	    searchPage =
+	    
+	    # cat=plugin.tx_community//a; type=int+; label=Page PID with relations management plugin
+	    relationPage =
+
 
 	}
 	persistence {

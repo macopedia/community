@@ -13,11 +13,12 @@ plugin.tx_community {
 		overrideFlexformSettingsIfEmpty = actionPage,profilePage
 		loginPage = {$plugin.tx_community.settings.loginPage}
 		profilePage = {$plugin.tx_community.settings.profilePage}
-		editProfilePage = {$plugin.tx_community.settings.actionPage}
+		editProfilePage = {$plugin.tx_community.settings.editProfilePage}
 		actionPage = {$plugin.tx_community.settings.actionPage}
-		messagePage = {$plugin.tx_community.settings.actionPage}
-		galleryPage = {$plugin.tx_community.settings.actionPage}
-		searchPage = {$plugin.tx_community.settings.actionPage}
+		messagePage = {$plugin.tx_community.settings.messagePage}
+		galleryPage = {$plugin.tx_community.settings.galleryPage}
+		searchPage = {$plugin.tx_community.settings.searchPage}
+		relationPage = {$plugin.tx_community.settings.relationPage}
 
 		profile {
 			image {
