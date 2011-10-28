@@ -200,8 +200,14 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
 	 */
-	public function cancelAction(Tx_Community_Domain_Model_User $user) {
+	public function cancelAction(Tx_Community_Domain_Model_Relation $relation = null, Tx_Community_Domain_Model_User $user = null) {
+	  if($relation === null ){
+		if($user !== null){
 		$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
+		}else {
+		  throw new Tx_Community_Exception_UnexpectedException("One of the parameters must be set");
+		}
+	  }
 		if ($this->request->hasArgument('confirmCancel')) {
 			$this->cancelRelation($relation);
 			$this->flashMessageContainer->add($this->_('relation.cancel.success'));
