@@ -1,11 +1,10 @@
 <div class="tx_community_profile_image">
-    <f:image src="{f:if(condition: '{user.image}', 
-	     then: '{settings.profile.image.prefix}{user.image}',
-	     else: '{settings.profile.defaultImage}')}"
+    <f:image src="<f:render partial='Profile/ImageUrl' arguments='{user : user, settings : settings}' />"
 			alt="{user.firstname}"
 			minWidth="{settings.profile.image.minWidth}"
 			minHeight="{settings.profile.image.minHeight}"
 			maxWidth="{settings.profile.image.maxWidth}"
 			maxHeight="{settings.profile.image.maxHeight}"
 		/>
+	
  </div>

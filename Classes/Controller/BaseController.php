@@ -211,7 +211,9 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		foreach ($argumentsPriority as $argument) {
 			if ($foundUser) {
 				$this->request->setArgument($argument, NULL);
-			} else if ($this->request->hasArgument($argument) && !is_array($this->request->getArgument($argument))) {
+			} elseif ($this->request->hasArgument($argument) 
+						&& !is_array($this->request->getArgument($argument))
+						&& $this->request->getArgument($argument)!=null) {
 				$foundUser = true;
 				switch ($argument) {
 					case 'photo':
