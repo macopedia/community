@@ -83,10 +83,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'MessageBox',
 	array(
-		'Message' => 'inbox,outbox,unread,read,delete,send',
+		'Message' => 'inbox,outbox,unread,read,delete',
 	),
 	array(
-		'Message' => 'inbox,outbox,unread,read,delete,send',
+		'Message' => 'inbox,outbox,unread,read,delete',
 	)
 );
 
