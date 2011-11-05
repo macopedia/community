@@ -248,7 +248,7 @@
 			<label index="wallPost.form.title">Write new message!</label>
 			<label index="wallPost.form.submit">Submit</label>
 			<label index="wallPost.form.created">You added post</label>
-			<label index="wallPost.form.deleted">You deleted post</label>
+			<label index="wallPost.list.deleted">You deleted post</label>
 
 			<label index="tx_community_domain_model_user">User</label>
 			<label index="tx_community_domain_model_user.albums">albums</label>

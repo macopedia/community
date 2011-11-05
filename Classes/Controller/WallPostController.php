@@ -69,7 +69,7 @@
 		$newPost->setSender($this->getRequestingUser());
 		$newPost->setSubject($this->getRequestingUser()->getName());
 		$this->repositoryService->get('wallPost')->add($newPost);
-		$this->flashMessageContainer->add($this->_('wallPost.created'));
+		$this->flashMessageContainer->add($this->_('wallPost.form.created'));
 		$this->redirectToUser($this->getRequestedUser());
 		//$this->redirect('new');
 	}
@@ -82,7 +82,7 @@
 	 */
 	public function deleteAction(Tx_Community_Domain_Model_WallPost $wallPost) {
 		$this->repositoryService->get('wallPost')->remove($wallPost);
-		$this->flashMessageContainer->add($this->_('wallPost.deleted'));
+		$this->flashMessageContainer->add($this->_('wallPost.list.deleted'));
 		$this->redirect('list');
 	}
 

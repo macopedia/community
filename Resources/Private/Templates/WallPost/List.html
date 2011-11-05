@@ -1,30 +1,34 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	
+  <div class="community-wall">
 	<f:if condition="{wallPosts -> f:count()} == 0">
-		<f:translate key="wallPost.list.noMessages"/>
+	  <f:translate key="wallPost.list.noMessages"/>
 	</f:if>
 
 	<f:widget.paginate objects="{wallPosts}" as="paginatedWallPosts" configuration="{itemsPerPage: 5, insertAbove : 0, insertBelow: 1}">
-		<f:for each="{paginatedWallPosts}" as="wallPost">
-			<div class="news">
-				<div class="news-info">
-					<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}">
-						<f:image
-								src="<f:render partial='Profile/ImageUrl' arguments='{user : wallPost.sender, settings : settings}' />"
-								class="user-photo-thumbnail" width="48c" height="47c" alt="{wallPost.sender.name}"
-						/>
-					</f:link.page>
-					<div class="text-info">
-						<p class="news-title">{wallPost.subject}</p>
-
-					</div>
-				</div>
-				<p>{wallPost.message}</p>
-				<div class="clearer"></div>
+	  <f:for each="{paginatedWallPosts}" as="wallPost">
+		<div class="wall-item-wrap">
+		  <div class="wall-item">
+			<div class="item-image">
+			  <f:image src="<f:render partial='Profile/ImageUrl' arguments='{user : wallPost.sender, settings : settings}' />" class="user-photo-thumbnail" width="48c" height="47c" alt="{wallPost.sender.name}" />
 			</div>
-		</f:for>
-	</f:widget.paginate>
+			<div class="item-content-wrap">
+			  <div class="content-row">
+				<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}">
+				  {wallPost.subject}
+				</f:link.page>
+			  </div>
+			  <div class="content-row">
+				<div class="content-text">
+				 <p>{wallPost.message}</p>
+				</div>
+			  </div>
 
+			</div>
+		  </div>
+		</div>
+	  </f:for>
+	</f:widget.paginate>
+  </div>
 </f:section>

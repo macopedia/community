@@ -1,6 +1,7 @@
-.tx_community_profile_edit .row { clear:both; margin: 0 0 0.5em;}
-.tx_community_profile_edit .row label {float:left; margin:right:5%;width:30%; }
-.tx_community_profile_edit .row input, .row textarea, .row select, .row fieldset { width: 50%;}
+.tx_community_form .row { clear:both; margin: 0 0 0.5em;}
+.tx_community_form .row label {float:left; margin-right:5%;width:30%; }
+.tx_community_form .row input, .row textarea, .row select, .row fieldset { width: 50%;}
+
 
 input.f3-form-error {
 	background-color:#FF9F9F;
@@ -109,4 +110,34 @@ ul.form-errors {
 		}
 		.message-error a {
 			color:#AA0225;
+		}
+/*
+ * WALL
+ */
+.wall-item-wrap {border-top: 1px solid #cccccc; }
+.wall-item {padding: 10px 20px; overflow:hidden;}
+.wall-item .item-image {float:left; overflow: hidden;}
+.wall-item .item-content-wrap {float: left; overflow: hidden; margin-left: 10px;}
+
+/*
+ * PAGINATOR
+ */
+ul.f3-widget-paginator {
+	text-align: center;
+}
+	ul.f3-widget-paginator li {
+		display: inline;
+	}
+		ul.f3-widget-paginator li.current a{
+			color: black;
+			font-weight: bold;
+		}
+		ul.f3-widget-paginator li.previous {
+			float: left;
+		}
+		ul.f3-widget-paginator li.next {
+			float: right;
+		}
+		ul.f3-widget-paginator li.pagination-text {
+			padding-right: 7px;
 		}
