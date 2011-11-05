@@ -129,6 +129,7 @@ plugin.tx_community {
 				profile.relation.reject.access = 1
 				profile.relation.request.access = 1
 				profile.relation.unconfirmed.access = 1
+				profile.report.access = 1
 
 				profile.details.access = 1
 
