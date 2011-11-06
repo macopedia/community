@@ -70,8 +70,7 @@
 		$newPost->setSubject($this->getRequestingUser()->getName());
 		$this->repositoryService->get('wallPost')->add($newPost);
 		$this->flashMessageContainer->add($this->_('wallPost.form.created'));
-		$this->redirectToUser($this->getRequestedUser());
-		//$this->redirect('new');
+		$this->redirect('new');
 	}
 
 	/**
