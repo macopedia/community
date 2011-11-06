@@ -26,7 +26,6 @@
 /**
  * The controller for messages
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
@@ -74,7 +73,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	}
 
 	/**
-	 * Send a message
+	 * Send a private message
 	 *
 	 * @param Tx_Community_Domain_Model_Message $message
 	 */
@@ -85,7 +84,20 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		$this->repositoryService->get('message')->add($message);
 		$this->flashMessageContainer->add($this->_('message.send.success'));
 		$this->request->setArgument('message', NULL);
-		$this->forward('write');
+
+		$this->notificationService->notify(
+			array(
+				'sender' => $this->requestingUser,
+				'recipient' => $this->requestedUser,
+				'message' => $message,
+			),
+			'sendEmailToMessageRecipient'
+		);
+
+		if ($this->request->getPluginName() == 'MessageBox')
+			$this->redirect('read', NULL, NULL, array('user' => $message->getRecipient()));
+		else
+			$this->forward('write');
 	}
 
 	/**
