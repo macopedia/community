@@ -70,6 +70,15 @@
 		$newPost->setSubject($this->getRequestingUser()->getName());
 		$this->repositoryService->get('wallPost')->add($newPost);
 		$this->flashMessageContainer->add($this->_('wallPost.form.created'));
+		$this->notificationService->notify(
+			array(
+				'sender' => $this->requestingUser,
+				'recipient' => $this->requestedUser,
+				'message' => $newPost,
+			),
+			'wallPostCreate'
+		);
+
 		$this->redirect('new');
 	}
 
