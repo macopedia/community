@@ -1,13 +1,14 @@
 <f:layout name="Default"/>
 <f:section name="main">
 <h2>{user.name}</h2>
+<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
+		 class="user-photo photo-edit" width="180c" height="180c" alt="{user.name}" />
 <f:link.action action="editImage" class="button-link" controller="User"><f:translate key="profile.details.editImage"/></f:link.action>
 
-<div  id="data-edition-form" class="tx_community_profile_edit tx_community_form">
-<f:form action="update" controller="User" object="{user}" name="updatedUser">
-	
-	<h3><f:translate key="profile.details.title"/></h3>
-		<div class="row">		
+<div id="data-edition-form" class="tx_community_profile_edit tx_community_form">
+	<f:form action="update" controller="User" object="{user}" name="updatedUser">
+		<h3><f:translate key="profile.details.title"/></h3>
+		<div class="row">
 			<label><f:translate key="profile.details.username"/></label>
 			<f:form.textbox disabled="disabled" property="username"/>
 		</div>
@@ -91,9 +92,7 @@
 			<label><f:translate key="profile.details.email"/></label>
 			<f:form.textbox property="email"/>
 		</div>
-	
-	<f:form.submit value="{f:translate(key:'profile.details.edit.submit')}"/>
-</f:form>
-
+		<f:form.submit value="{f:translate(key:'profile.details.edit.submit')}"/>
+	</f:form>
 </div>
 </f:section>

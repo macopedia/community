@@ -120,6 +120,13 @@ ul.form-errors {
 .wall-item .item-content-wrap {float: left; overflow: hidden; margin-left: 10px;}
 
 /*
+ * LIST SOME RELATIONS
+ */
+.tx_community_relation_listsome .item-image {float:left; overflow: hidden; margin-right:5px;}
+.tx_community_relation_listsome .relation-item {overflow: hidden; margin-bottom: 10px;}
+.tx_community_relation_listsome .relation-item .content-wrap {}
+
+/*
  * PAGINATOR
  */
 ul.f3-widget-paginator {
