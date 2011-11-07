@@ -171,7 +171,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 				'user' => $user,
 				'reason' => $reason,
 			);
-			$this->notificationService->notify($notifyArguments, 'report');
+			$this->notificationService->notify($notifyArguments, 'userReport');
 		}
 		$this->redirect('details', NULL, NULL, array('user'=>$user));
 	}

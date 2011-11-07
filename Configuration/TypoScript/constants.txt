@@ -24,7 +24,8 @@ plugin.tx_community {
 	    # cat=plugin.tx_community//a; type=int+; label=Page PID with relations management plugin
 	    relationPage =
 
-
+		# cat=plugin.tx_community//a; type=int+; label=Page PID with wall 
+	    wallPage =
 	}
 	persistence {
 		# cat=plugin.tx_community//a; type=int+; label=Default storage PID

@@ -76,7 +76,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			$relation = new Tx_Community_Domain_Model_Relation();
 
 			// we must notify before new relation is created
-			$this->notify('requestRelation');
+			$this->notify('relationRequest');
 			// set the details for the relation
 			$relation->setInitiatingUser($this->getRequestingUser());
 			$relation->setRequestedUser($user);
@@ -134,7 +134,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 					$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 					$this->repositoryService->get('relation')->update($relation);
 
-					$this->notify('requestRelation');
+					$this->notify('relationRequest');
 				}
 				break;
 
@@ -174,7 +174,6 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			$this->rejectRelation($relation);
 			$this->flashMessageContainer->add($this->_('relation.reject.success'));
 
-			$this->notify('cancelRelation');
 
 			$this->redirectToUser($this->getRequestingUser());
 		} else {
@@ -226,7 +225,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	protected function confirmRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED);
 		$this->repositoryService->get('relation')->update($relation);
-		$this->notify('confirmedRelation');
+		$this->notify('relationConfirm');
 	}
 
 	/**
@@ -238,7 +237,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED);
 		$this->repositoryService->get('relation')->update($relation);
 
-		$this->notify('rejectedRelation');
+		$this->notify('relationReject');
 	}
 
 	/**
@@ -250,7 +249,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	protected function cancelRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED);
 
-		$this->notify('cancelledRelation');
+		$this->notify('relationCancel');
 	}
 
 	/**
@@ -265,6 +264,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			'recipient' => $this->requestedUser,
 			'relation' => $relation,
 		);
+		//TODO: this check should be moved to email notification,
+		// as this method is used also for non-mail notification types
 		if(t3lib_div::validEmail($this->requestedUser->getEmail())){
 			$this->notificationService->notify($notifyArguments, $resourceName);		   
 		}
