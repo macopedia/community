@@ -114,8 +114,8 @@ $TCA['tx_community_domain_model_relation'] = array (
 		'delete' 			=> 'deleted',
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
-			),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Tca.php',
+		),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Relation.php',
 		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_relation.gif'
 	)
 );
@@ -259,12 +259,9 @@ $feUserColumns  = array(
 	),
 );
 
-
 t3lib_extMgm::addTCAcolumns('fe_users',$feUserColumns, 1);
-
 t3lib_extMgm::addToAllTCATypes('fe_users','gender','', 'after:name');
 t3lib_extMgm::addToAllTCATypes('fe_users','--div--;Community,political_view,religious_view,activities,interests,music,movies,books,quotes,about_me,cellphone,date_of_birth,profile_image;;;;1-1-1');
-
 
 
 t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_message','EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_message.xml');
@@ -284,14 +281,11 @@ $TCA['tx_community_domain_model_message'] = array (
 		'delete' 			=> 'deleted',
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
-			),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/Tca.php',
+		),
+		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Message.php',
 		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_message.gif'
 	)
 );
-
-
-
 
 t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_wallpost', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_wallpost.xml');
 t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_wallpost');
@@ -310,7 +304,7 @@ $TCA['tx_community_domain_model_wallpost'] = array (
 		'delete' 			=> 'deleted',
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
-			),
+		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/WallPost.php',
 		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_wallpost.gif'
 	)
@@ -336,7 +330,7 @@ $TCA['tx_community_domain_model_album'] = array(
 			'disabled' => 'hidden',
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
-			),
+		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Album.php',
 		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_album.gif'
 	),
@@ -362,7 +356,7 @@ $TCA['tx_community_domain_model_photo'] = array(
 			'disabled' => 'hidden',
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
-			),
+		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Photo.php',
 		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_photo.gif'
 	),
