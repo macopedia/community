@@ -64,11 +64,11 @@
 			<label index="tx_community_domain_model_album.private">Private</label>
 			<label index="tx_community_domain_model_album.type">Type</label>
 			<label index="tx_community_domain_model_album.main_photo">Main Photo</label>
+			<label index="tx_community_domain_model_album.user">User</label>
 			<label index="tx_community_domain_model_album.photos">Photos</label>
 			<label index="tx_community_domain_model_photo">Photo</label>
 			<label index="tx_community_domain_model_photo.image">Image</label>
 			<label index="tx_community_domain_model_photo.album">Album</label>
-
 		</languageKey>
 	</data>
 </T3locallang>

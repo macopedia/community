@@ -88,7 +88,7 @@
 			<label index="profile.album.setPhotoAsAvatar">Set as profile image</label>
 			<label index="profile.album.setMainAlbumPhoto">Set as cover of album</label>
 			<label index="profile.album.photoRemoved">The photo was removed</label>
-			<label index="profile.album.photoSetAsAvatar">The photo was was set as your profile image</label>
+			<label index="profile.album.photoSetAsAvatar">The photo was set as your profile image</label>
 			<label index="profile.album.photoSetAsMainPhoto">New album cover was set</label>
 			<label index="profile.album.createdAlbum">New album was created</label>
 			<label index="profile.album.updatedAlbum">You changed album settings</label>
@@ -259,6 +259,8 @@
 			<label index="tx_community_domain_model_photo">Image that is in user's gallery</label>
 			<label index="tx_community_domain_model_photo.image">image</label>
 
+			<label index="photo.album.uploadSuccess">Photo successfully uploaded</label>
+			
 			<label index="paginate_previous">Previous</label>
 			<label index="paginate_next">Next</label>
 			<label index="paginate_page">Page</label>
