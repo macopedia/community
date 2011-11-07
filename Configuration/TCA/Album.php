@@ -148,6 +148,7 @@ $TCA['tx_community_domain_model_album'] = array(
 		),
 		'user' => array(
 			'exclude' => 0,
+			'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_album.user',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'fe_users',
