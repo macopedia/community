@@ -69,6 +69,7 @@
 			<label index="profile.details.gender.male">male</label>
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
+			<label index="profile.details.profileImage">Profile image</label>
 
 			<label index="profile.details.reportProfile">Report profile</label>
 			<label index="profile.report.writeReason">Write what's inappropriate on this profile.</label>
@@ -133,7 +134,6 @@
 			<label index="relation.menu.list">Friends</label>
 			<label index="relation.menu.unconfirmed">Unconfirmed</label>
 			
-
 			<label index="relation.confirmed.cancel">(cancel)</label>
 
 			<label index="relation.reject.warning">Are you really want to reject this relation?</label>
@@ -262,8 +262,6 @@
 			<label index="paginate_previous">Previous</label>
 			<label index="paginate_next">Next</label>
 			<label index="paginate_page">Page</label>
-
 		</languageKey>
-
 	</data>
 </T3locallang>
