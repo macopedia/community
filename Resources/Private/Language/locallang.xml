@@ -93,6 +93,7 @@
 			<label index="profile.album.createdAlbum">New album was created</label>
 			<label index="profile.album.updatedAlbum">You changed album settings</label>
 			<label index="profile.album.removedAlbum">You deleted your album</label>
+			<label index="profile.album.delete">Delete</label>
 
 			<label index="profile.editImage.title">Upload a new profile image</label>
 			<label index="profile.editImage.image">Image</label>

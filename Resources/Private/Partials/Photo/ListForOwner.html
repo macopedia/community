@@ -3,11 +3,10 @@
 		<table>
 			<tr>
 				<th><f:translate key="tx_community_domain_model_photo.image" /></th>
-				<th> </th>
-				<th> </th>
-				<th> </th>
+				<th></th>
+				<th></th>
+				<th></th>
 			</tr>
-
 			<f:for each="{photos}" as="photo">
 				<tr>
 					<td>
@@ -16,14 +15,14 @@
 							<f:image src="{settings.album.image.prefix}{photo.image}" height="100m" width="100m" alt="photo"/>
 						</a>
 					</td>
-					<td><f:link.action action="mainPhoto" controller="Photo" arguments="{photo : photo}"><f:translate key="profile.album.setMainAlbumPhoto" /></f:link.action></td>
-					<td><f:link.action action="avatar" controller="Photo" arguments="{photo : photo}"><f:translate key="profile.album.setPhotoAsAvatar" /></f:link.action></td>
-					<td><f:link.action action="delete" controller="Photo" arguments="{photo : photo}">Delete</f:link.action></td>
+					<td><f:link.action action="mainPhoto" controller="Photo" arguments="{photo: photo}"><f:translate key="profile.album.setMainAlbumPhoto" /></f:link.action></td>
+					<td><f:link.action action="avatar" controller="Photo" arguments="{photo: photo}"><f:translate key="profile.album.setPhotoAsAvatar" /></f:link.action></td>
+					<td><f:link.action action="delete" controller="Photo" arguments="{photo: photo}"><f:translate key="profile.album.delete" /></f:link.action></td>
 				</tr>
 			</f:for>
 		</table>
 	</f:then>
 	<f:else>
-		No photos <br />
+		No photos
 	</f:else>
 </f:if>
