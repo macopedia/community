@@ -1,3 +1,4 @@
+{namespace com=Tx_Community_ViewHelpers}
 <f:layout name="Default" />
 
 <f:section name="main">
@@ -5,7 +6,7 @@
 		<f:if condition="{wallPosts -> f:count()} == 0">
 			<f:translate key="wallPost.list.noMessages"/>
 		</f:if>
-		<f:widget.paginate objects="{wallPosts}" as="paginatedWallPosts" configuration="{itemsPerPage: 5, insertAbove : 0, insertBelow: 1}">
+		<f:widget.paginate objects="{wallPosts}" as="paginatedWallPosts" configuration="{itemsPerPage: 10, insertAbove : 0, insertBelow: 1}">
 			<f:for each="{paginatedWallPosts}" as="wallPost">
 				<div class="wall-item-wrap">
 					<div class="wall-item">
@@ -23,6 +24,13 @@
 									<p>{wallPost.message}</p>
 								</div>
 							</div>
+						</div>
+						<div class="item-delete">
+							<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
+								<f:link.action action="delete" additionalParams="{tx_community : {wallPost : wallPost}}">
+									X
+								</f:link.action>
+							</com:sameUser>
 						</div>
 					</div>
 				</div>
