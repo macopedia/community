@@ -1,18 +1,10 @@
 <table class="tx-community-pi1" >
 	<tr>
-		<td>
-			<f:translate key="tx_community_domain_model_album.name" />
-		</td>
-		<td>
-			{album.name}
-		</td>
+		<td><f:translate key="tx_community_domain_model_album.name" /></td>
+		<td>{album.name}</td>
 	</tr>
 	<tr>
-		<td>
-			<f:translate key="tx_community_domain_model_album.private" />
-		</td>
-		<td>
-			<f:render partial="Album/PrivacyToString" arguments="{privacy : album.private}" />
-		</td>
+		<td><f:translate key="tx_community_domain_model_album.private" /></td>
+		<td><f:render partial="Album/PrivacyToString" arguments="{privacy: album.private}" />		</td>
 	</tr>
 </table>

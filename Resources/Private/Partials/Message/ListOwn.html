@@ -4,16 +4,16 @@
 			<div class="message-icon"></div>
 			<div class="message-content">
 				<div class="message-info">
-					<f:link.page additionalParams="{tx_community : {user : message.recipient}}" pageUid="{settings.profilePage}">
-							<f:image
-									src="<f:render partial='Profile/ImageUrl' arguments='{user : message.recipient, settings : settings}' />"
-									class="user-photo-thumbnail" width="48c" height="47c" alt="{message.recipient}"
-							/>
+					<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}">
+						<f:image
+							src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.recipient, settings: settings}')}"
+							class="user-photo-thumbnail" width="48c" height="47c" alt="{message.recipient}"
+						/>
 					</f:link.page>
 					<div class="text-info">
 						<span>
 							<f:translate key="message.read.to"/>
-							<f:link.page additionalParams="{tx_community : {user : message.recipient}}" pageUid="{settings.profilePage}">{message.recipient.name}</f:link.page>
+							<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}">{message.recipient.name}</f:link.page>
 							&nbsp;/&nbsp;
 							<f:format.date>{message.sentDate}</f:format.date>
 						</span>

@@ -1,29 +1,26 @@
 {namespace com=Tx_Community_ViewHelpers}
-
 <div class="tx_community_relation_list">
-  
-<f:if condition="{relations}">
-    <f:then>
-	<f:widget.paginate objects="{relations}" as="paginatedRelations" configuration="{itemsPerPage: 10, insertAbove : 0, insertBelow: 1}">
-	    <f:for each="{paginatedRelations}" as="relation">
-		  <f:alias map="{user: '{com:sameUser(requestingUser: requestingUser, requestedUser: relation.initiatingUser, then: relation.requestedUser, else: relation.initiatingUser)}'}" >
-		    <div class="user-single">
-						<f:link.action action="details"  controller="User" arguments="{user : user}" pageUid="{settings.profilePage}">
-							<f:image src="<f:render partial='Profile/ImageUrl' arguments='{user : user, settings : settings}' />"
-				class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
-						</f:link.action>
-			  <f:link.action action="details"  controller="User" arguments="{user : user}" pageUid="{settings.profilePage}"><span>{user.name}</span></f:link.action>
-			
-			<f:link.action action="cancel" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}">
-						<f:translate key="relation.confirmed.cancel"/>
-                    </f:link.action>
-			</div>
-		  </f:alias>
-	    </f:for>
-	</f:widget.paginate>
-    </f:then>
-    <f:else>
-	<f:translate key="relation.list.noRelations"/>
-    </f:else>
-</f:if>
+	<f:if condition="{relations}">
+		<f:then>
+			<f:widget.paginate objects="{relations}" as="paginatedRelations" configuration="{itemsPerPage: 10, insertAbove : 0, insertBelow: 1}">
+				<f:for each="{paginatedRelations}" as="relation">
+					<f:alias map="{user: '{com:sameUser(requestingUser: requestingUser, requestedUser: relation.initiatingUser, then: relation.requestedUser, else: relation.initiatingUser)}'}" >
+						<div class="user-single">
+							<f:link.action action="details" controller="User" arguments="{user: user}" pageUid="{settings.profilePage}">
+								<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
+								         class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
+								</f:link.action>
+							<f:link.action action="details" controller="User" arguments="{user: user}" pageUid="{settings.profilePage}"><span>{user.name}</span></f:link.action>
+							<f:link.action action="cancel" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}">
+								<f:translate key="relation.confirmed.cancel"/>
+							</f:link.action>
+						</div>
+					</f:alias>
+				</f:for>
+			</f:widget.paginate>
+		</f:then>
+		<f:else>
+			<f:translate key="relation.list.noRelations"/>
+		</f:else>
+	</f:if>
 </div>

@@ -6,9 +6,8 @@
 		<f:form action="updateImage" controller="User" object="{user}" name="user" enctype="multipart/form-data">
 			<fieldset>
 				<div><f:translate key="profile.editImage.image"/></div>
-				<f:image
-						src="<f:render partial='Profile/ImageUrl' arguments='{user : user, settings : settings}' />"
-						class="user-photo photo-edit" width="180c" height="180c" alt="{user.name}"
+				<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : user, settings : settings}')}"
+				         class="user-photo photo-edit" width="180c" height="180c" alt="{user.name}"
 				/>
 				<f:form.upload property="image"/>
 				<f:form.submit value="{f:translate(key:'profile.editImage.submit')}" class="photo-edit-button"/>
