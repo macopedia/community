@@ -114,8 +114,8 @@ ul.form-errors {
 /*
  * WALL
  */
-.wall-item-wrap {border-top: 1px solid #cccccc; }
-.wall-item {padding: 10px 20px; overflow:hidden;}
+.wall-item-wrap {border-top: 1px solid #cccccc;}
+.wall-item {padding: 10px 0; overflow:hidden;}
 .wall-item .item-image {float:left; overflow: hidden;}
 .wall-item .item-content-wrap {float: left; overflow: hidden; margin-left: 10px;}
 
