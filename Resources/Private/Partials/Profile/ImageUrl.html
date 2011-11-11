@@ -1,3 +1,8 @@
-{f:if(condition: '{user.image}', 
-	     then: '{settings.profile.image.prefix}{user.image}',
-	     else: '{settings.profile.image.defaultImage}')}
+<f:if condition="{user.image}">
+	<f:then>
+		{settings.profile.image.prefix}{user.image}
+	</f:then>
+	<f:else>
+		{settings.profile.image.defaultImage}
+	</f:else>
+</f:if>
