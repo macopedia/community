@@ -28,19 +28,6 @@
 
 			<label index="access.denied">You don't have permission to access this resource.</label>
 
-
-			<label index="flexform.action.title">Content</label>
-			<label index="flexform.action.action">What to display</label>
-			<label index="flexform.action.user.action">Actions</label>
-			<label index="flexform.action.user.image">Profile Image</label>
-			<label index="flexform.action.user.details">Details</label>
-			<label index="flexform.action.user.edit">Edit details</label>
-			<label index="flexform.action.user.interaction">User menu</label>
-			<label index="flexform.action.relation.listSome">List Friends (short)</label>
-			<label index="flexform.action.relation.unconfirmed">Unconfirmed friends</label>
-			<label index="flexform.actionPage">Page where actions get performed</label>
-			<label index="flexform.profilePage">Page where the profile of users is displayed</label>
-
 			<label index="profile.details.title">Details</label>
 			<label index="profile.details.name">Name</label>
 			<label index="profile.details.username">Username</label>

@@ -120,16 +120,6 @@ $TCA['tx_community_domain_model_relation'] = array (
 	)
 );
 
-// flexform to select the action
-$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
-$plugins = array('_interacionmenu','_relationmanagement');
-
-foreach ($plugins as $plugin) {
-	$pluginSignature = strtolower($extensionName) . $plugin;
-	$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-	t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForm/Actions.xml');
-}
-
 // extend fe_users
 t3lib_div::loadTCA('fe_users');
 $feUserColumns  = array(

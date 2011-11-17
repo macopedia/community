@@ -9,9 +9,6 @@ plugin.tx_community {
 		# cat=plugin.tx_community//a; type=int+; label=Page PID with edit profile plugin
 		editProfilePage =
 
-		# cat=plugin.tx_community//a; type=int+; label=Default action page PID
-		actionPage =
-
 		# cat=plugin.tx_community//a; type=int+; label=Page PID with message plugin
 		messagePage =
 
