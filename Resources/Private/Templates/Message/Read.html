@@ -6,11 +6,11 @@
 		<tbody>
 			<tr>
 				<td><strong><f:translate key="message.read.from"/></strong></td>
-				<td><f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}">{message.sender.name}</f:link.page></td>
+				<td><f:render partial="Profile/LinkToProfile" arguments="{user: message.sender, settings: settings}"/></td>
 			</tr>
 			<tr>
 				<td><strong><f:translate key="message.read.to"/></strong></td>
-				<td><f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}">{message.recipient.name}</f:link.page></td>
+				<td><f:render partial="Profile/LinkToProfile" arguments="{user: message.recipient, settings: settings}"/></td>
 			</tr>
 			<tr>
 				<td><strong><f:translate key="message.read.date"/></strong></td>
@@ -26,21 +26,37 @@
 	<com:sameUser requestingUser="{requestingUser}" requestedUser="{message.sender}">
 		<f:then>
 			<!-- outbox -->
-			<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
-				<f:image
-					src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.recipient, settings: settings}')}"
-					class="user-photo-thumbnail" width="155" height="180m" alt="{message.recipient}"
-				/>
-			</f:link.page>
+			<f:if condition="{message.recipient}">
+				<f:then>
+					<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
+						<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.recipient, settings: settings}')}"
+							class="user-photo-thumbnail" width="155" height="180m" alt="{message.recipient.name}"
+						/>
+					</f:link.page>
+				</f:then>
+				<f:else>
+					<f:image src="{settings.profile.image.defaultImage}"
+						class="user-photo-thumbnail" width="155" height="180m" alt="{f:translate(key:'profile.deletedUserName')}"
+					/>
+				</f:else>
+			</f:if>
 		</f:then>
 		<f:else>
 			<!-- inbox -->
-			<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
-				<f:image
-					src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.sender, settings: settings}')}"
-					class="user-photo-thumbnail" width="155" height="180m" alt="{message.sender}"
-				/>
-			</f:link.page>
+			<f:if condition="{message.sender}">
+				<f:then>
+					<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
+						<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.sender, settings: settings}')}"
+							class="user-photo-thumbnail" width="155" height="180m" alt="{message.sender.name}"
+						/>
+					</f:link.page>
+				</f:then>
+				<f:else>
+					<f:image src="{settings.profile.image.defaultImage}"
+						class="user-photo-thumbnail" width="155" height="180m" alt="{f:translate(key:'profile.deletedUserName')}"
+					/>
+				</f:else>
+			</f:if>
 		</f:else>
 	</com:sameUser>
 

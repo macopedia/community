@@ -8,6 +8,7 @@
 		<languageKey index="default" type="array">
 			<label index="access.denied">You don't have permission to access this resource.</label>
 
+			<label index="profile.deletedUserName">Deleted user</label>
 			<label index="profile.details.title">Details</label>
 			<label index="profile.details.name">Name</label>
 			<label index="profile.details.username">Username</label>
@@ -43,6 +44,9 @@
 			<label index="profile.report.submit">Report</label>
 			<label index="profile.report.needReason">You must enter reason for the profile report</label>
 			<label index="profile.report.reported">You have reported a profile</label>
+
+			<label index="profile.delete.button">Delete profile</label>
+			<label index="profile.delete.sureQuestion">Are you sure? Deleting profile is irreversible!</label>
 
 			<label index="profile.album.title">Albums</label>
 			<label index="profile.album.public">Public</label>
@@ -190,7 +194,7 @@
 			<label index="message.unread.title">Your unread messages</label>
 			<label index="message.unread.nomessages">You have no messages received.</label>
 
-			<label index="message.navigation.unreaded">Unreaded</label>
+			<label index="message.navigation.unread">Unread</label>
 			<label index="message.navigation.inbox">Inbox</label>
 			<label index="message.navigation.sentMail">Sent Mail</label>
 

@@ -107,16 +107,28 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * @param Tx_Community_Domain_Model_Message $message
 	 */
 	public function readAction(Tx_Community_Domain_Model_Message $message) {
-		if ($this->getRequestingUser() &&
-			($this->getRequestingUser()->getUid() == $message->getRecipient()->getUid() ||
-			$this->getRequestingUser()->getUid() == $message->getSender()->getUid())) {
-			$this->repositoryService->get('message')->update($message);
-			$this->view->assign('message', $message);
+
+		//We can read only when we are sender or recipient of this message
+		$hasAccess = FALSE;
+
+		if ($message->getRecipient() && $this->getRequestingUser()->getUid() == $message->getRecipient()->getUid()) {
+
+			$hasAccess = TRUE;
+
 			//do not flag message as read when reading your own message
-			if( $this->getRequestingUser()->getUid() == $message->getRecipient()->getUid()){
-				$message->setRead(true);
-				$message->setReadDate(time());
-			}
+			$message->setRead(true);
+			$message->setReadDate(time());
+			$this->repositoryService->get('message')->update($message);
+		}
+
+		if ($message->getSender() && $this->getRequestingUser()->getUid() == $message->getSender()->getUid()) {
+			$hasAccess = TRUE;
+		}
+
+		if ($hasAccess) {
+			$this->view->assign('message', $message);
+		} else {
+			return '';
 		}
 	}
 
@@ -128,9 +140,9 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 */
 	public function deleteAction(Tx_Community_Domain_Model_Message $message, $redirectAction = NULL) {
 		if ($this->getRequestingUser()) {
-			if ($message->getSender()->getUid() == $this->getRequestingUser()->getUid()) {
+			if ($message->getSender() && $message->getSender()->getUid() == $this->getRequestingUser()->getUid()) {
 				$message->setSenderDeleted(true);
-			} elseif ($message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
+			} elseif ($message->getRecipient() && $message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
 				$message->setRecipientDeleted(true);
 			}
 			$this->flashMessageContainer->add($this->_('message.delete.success'));

@@ -36,6 +36,7 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	 * Find confirmed relations for a certain user.
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @return Tx_Extbase_Persistence_QueryResultInterface
 	 */
 	public function findRelationsForUser(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
@@ -55,8 +56,8 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	 *
 	 * @param Tx_Community_Domain_Model_User $requestedUser
 	 * @param Tx_Community_Domain_Model_User $requestingUser
-	 * @param integer || NULL $status
-	 * @return Tx_Community_Domain_Model_Relation
+	 * @param integer | NULL $status
+	 * @return Tx_Community_Domain_Model_Relation | NULL
 	 * @throws Tx_Community_Exception_UnexpectedException
 	 */
 	public function findRelationBetweenUsers(
@@ -101,6 +102,7 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	 * find relationships waiting for a given user approval
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @return Tx_Extbase_Persistence_QueryResultInterface
 	 */
 	public function findUnconfirmedForUser(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
@@ -110,6 +112,26 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 				$query->equals('status', Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW)
 			)
 		)->execute();
+	}
+
+	/**
+	 * Deletes all (confirmed,unconfirmed...) relations for given user - useful when we delete him
+	 *
+	 * @param Tx_Community_Domain_Model_User |int $user
+	 * @return void
+	 */
+	public function deleteAllForUser($user) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(false);
+		$relations = $query->matching(
+			$query->logicalOr(
+				$query->equals('initiatingUser', $user),
+				$query->equals('requestedUser', $user)
+			)
+		)->execute();
+		foreach ($relations as $relation) {
+			$this->remove($relation);
+		}
 	}
 }
 ?>

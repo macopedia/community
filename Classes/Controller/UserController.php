@@ -139,6 +139,21 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	}
 
 	/**
+	 * Delete user account and all his data
+	 */
+	public function deleteAccountAction() {
+		$user = $this->getRequestingUser();
+		$this->repositoryService->get('relation')->deleteAllForUser($user);
+		$this->repositoryService->get('message')->deleteAllForUser($user);
+		$this->repositoryService->get('wallPost')->deleteAllForUser($user);
+		$this->repositoryService->get('album')->deleteAllForUser($user); //we don't need to delete photos, because of @cascade remove
+		$this->repositoryService->get('user')->remove($user);
+		
+		$redirectPage = $this->settings['afterAccountDeletePage'];
+		$this->redirect(NULL, NULL, NULL, NULL, $redirectPage);
+	}
+
+	/**
 	 * Search users
 	 */
 	public function searchAction() {

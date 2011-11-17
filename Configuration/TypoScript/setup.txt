@@ -18,6 +18,7 @@ plugin.tx_community {
 		searchPage = {$plugin.tx_community.settings.searchPage}
 		relationPage = {$plugin.tx_community.settings.relationPage}
 		wallPage = {$plugin.tx_community.settings.wallPage}
+		afterAccountDeletePage = {$plugin.tx_community.settings.loginPage}
 
 		profile {
 			image {
@@ -256,7 +257,7 @@ config.tx_extbase.objects {
 
 plugin.tx_community.flashMessagesDisplayer = USER_INT
 plugin.tx_community.flashMessagesDisplayer {
-    userFunc = tx_extbase_core_bootstrap->run
-    extensionName = Community
-    pluginName = FlashMessagesDisplayer
+	userFunc = tx_extbase_core_bootstrap->run
+	extensionName = Community
+	pluginName = FlashMessagesDisplayer
 }
