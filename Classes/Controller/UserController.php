@@ -97,7 +97,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 			'user.image',
 			$this->settings['profile']['image']['prefix'],
 			$this->settings['profile']['image']['types']
-			);
+		);
 		if (!is_int($imagePath)) {
 			$user->setImage($imagePath);
 			$this->repositoryService->get('user')->update($user);
@@ -136,13 +136,13 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	}
 
 	/**
-	 * Search a user by name
+	 * Search users
 	 */
 	public function searchAction() {
 		$users = array();
 		if ($this->request->hasArgument('searchWord')) {
 			$word = $this->request->getArgument('searchWord');
-			$users = $this->repositoryService->get('user')->searchByName($word);
+			$users = $this->repositoryService->get('user')->searchByString($word);
 		}
 		$this->view->assign('users', $users);
 	}

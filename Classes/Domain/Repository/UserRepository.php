@@ -44,10 +44,20 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persist
 		return $this->findByUid($uid);
 	}
 
-	public function searchByName($word) {
+	/*
+	 * Find users by string
+	 *
+	 * @param string $word
+	 * @return array
+	 */
+	public function searchByString($word) {
 		$query = $this->createQuery();
 		return $query->matching(
-			$query->like('name', '%' . $word . '%')
+			$query->logicalOr(
+				$query->like('name', '%' . $word . '%'),
+				$query->like('username', '%' . $word . '%'),
+				$query->like('email', $word) //only full email address
+			)
 		)->execute();
 	}
 }
