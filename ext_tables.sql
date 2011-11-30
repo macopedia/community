@@ -88,7 +88,7 @@ CREATE TABLE fe_users (
 	date_of_birth int(10) unsigned DEFAULT '0' NOT NULL,
 	about_me tinytext,
 	cellphone varchar(255) DEFAULT '' NOT NULL,
-	gender varchar(32) DEFAULT '' NOT NULL,
+	gender int(11) unsigned DEFAULT '0' NOT NULL,
 	profile_image varchar(255) DEFAULT '' NOT NULL
 );
 

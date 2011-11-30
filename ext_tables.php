@@ -229,8 +229,8 @@ $feUserColumns  = array(
 			'type' => 'select',
 			'items' => array(
 				array('---', ''),
-				array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.female', 'female'),
-				array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.male', 'male'),
+				array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.female', 1),
+				array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.male', 0),
 			)
 		)
 	),

@@ -65,8 +65,8 @@
 			<label index="profile.details.phone">Phone</label>
 			<label index="profile.details.email">Email</label>
 			<label index="profile.details.gender">Gender</label>
-			<label index="profile.details.gender.female">female</label>
-			<label index="profile.details.gender.male">male</label>
+			<label index="profile.details.gender.1">female</label>
+			<label index="profile.details.gender.0">male</label>
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
 			<label index="profile.details.profileImage">Profile image</label>

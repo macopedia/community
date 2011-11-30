@@ -91,7 +91,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	protected $cellphone;
 
 	/**
-	 * @var string
+	 * @var int
 	 */
 	protected $gender;
 
@@ -282,7 +282,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 
 	/**
 	 *
-	 * @param string $gender
+	 * @param int $gender
 	 * @return void
 	 */
 	public function setGender($gender) {
@@ -290,7 +290,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	}
 
 	/**
-	 * @return string
+	 * @return int
 	 */
 	public function getGender() {
 		return $this->gender;
