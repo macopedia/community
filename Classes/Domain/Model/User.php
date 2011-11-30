@@ -286,7 +286,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	 * @return void
 	 */
 	public function setGender($gender) {
-		$this->gender = $gender;
+			$this->gender = $gender;
 	}
 
 	/**
