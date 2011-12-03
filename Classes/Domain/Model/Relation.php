@@ -95,36 +95,32 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 	 *
 	 * @return Tx_Community_Domain_Model_User
 	 */
-	public function getInitiatingUser()
-	{
-	    return $this->initiatingUser;
+	public function getInitiatingUser() {
+		return $this->initiatingUser;
 	}
 
 	/**
 	 *
 	 * @param Tx_Community_Domain_Model_User $initiatingUser
 	 */
-	public function setInitiatingUser(Tx_Community_Domain_Model_User $initiatingUser)
-	{
-	    $this->initiatingUser = $initiatingUser;
+	public function setInitiatingUser(Tx_Community_Domain_Model_User $initiatingUser) {
+		$this->initiatingUser = $initiatingUser;
 	}
 
 	/**
 	 *
 	 * @return Tx_Community_Domain_Model_User
 	 */
-	public function getRequestedUser()
-	{
-	    return $this->requestedUser;
+	public function getRequestedUser() {
+		return $this->requestedUser;
 	}
 
 	/**
 	 *
 	 * @param Tx_Community_Domain_Model_User $requestedUser
 	 */
-	public function setRequestedUser($requestedUser)
-	{
-	    $this->requestedUser = $requestedUser;
+	public function setRequestedUser($requestedUser) {
+		$this->requestedUser = $requestedUser;
 	}
 
 	/**

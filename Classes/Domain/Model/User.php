@@ -44,7 +44,6 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	 */
 	protected $politicalView;
 
-
 	/**
 	 * @var string
 	 */
@@ -102,182 +101,172 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 
 	/**
 	 *
-	 * @return
+	 * @return string
 	 */
-	public function getPoliticalView()
-	{
-	    return $this->politicalView;
+	public function getPoliticalView() {
+		return $this->politicalView;
 	}
 
 	/**
 	 *
 	 * @param $politicalView
+	 * @return void
 	 */
-	public function setPoliticalView($politicalView)
-	{
-	    $this->politicalView = $politicalView;
+	public function setPoliticalView($politicalView) {
+		$this->politicalView = $politicalView;
 	}
 
 	/**
 	 *
-	 * @return
+	 * @return string
 	 */
-	public function getReligiousView()
-	{
-	    return $this->religiousView;
+	public function getReligiousView() {
+		return $this->religiousView;
 	}
 
 	/**
 	 *
 	 * @param $religiousView
+	 * @return void
 	 */
-	public function setReligiousView($religiousView)
-	{
-	    $this->religiousView = $religiousView;
+	public function setReligiousView($religiousView) {
+		$this->religiousView = $religiousView;
 	}
 
 	/**
 	 *
-	 * @return
+	 * @return string
 	 */
-	public function getActivities()
-	{
-	    return $this->activities;
+	public function getActivities() {
+		return $this->activities;
 	}
 
 	/**
 	 *
 	 * @param $activities
+	 * @return void
 	 */
-	public function setActivities($activities)
-	{
-	    $this->activities = $activities;
+	public function setActivities($activities) {
+		$this->activities = $activities;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getInterests()
-	{
-	    return $this->interests;
+	public function getInterests() {
+		return $this->interests;
 	}
 
 	/**
 	 *
 	 * @param $interests
+	 * @return void
 	 */
-	public function setInterests($interests)
-	{
-	    $this->interests = $interests;
+	public function setInterests($interests) {
+		$this->interests = $interests;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getMusic()
-	{
-	    return $this->music;
+	public function getMusic() {
+		return $this->music;
 	}
 
 	/**
 	 *
 	 * @param $music
+	 * @return void
 	 */
-	public function setMusic($music)
-	{
-	    $this->music = $music;
+	public function setMusic($music) {
+		$this->music = $music;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getMovies()
-	{
-	    return $this->movies;
+	public function getMovies() {
+		return $this->movies;
 	}
 
 	/**
 	 *
 	 * @param $movies
+	 * @return void
 	 */
-	public function setMovies($movies)
-	{
-	    $this->movies = $movies;
+	public function setMovies($movies) {
+		$this->movies = $movies;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getBooks()
-	{
-	    return $this->books;
+	public function getBooks() {
+		return $this->books;
 	}
 
 	/**
 	 *
 	 * @param $books
+	 * @return void
 	 */
-	public function setBooks($books)
-	{
-	    $this->books = $books;
+	public function setBooks($books) {
+		$this->books = $books;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getQuotes()
-	{
-	    return $this->quotes;
+	public function getQuotes() {
+		return $this->quotes;
 	}
 
 	/**
 	 *
 	 * @param $quotes
+	 * @return void
 	 */
-	public function setQuotes($quotes)
-	{
-	    $this->quotes = $quotes;
+	public function setQuotes($quotes) {
+		$this->quotes = $quotes;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getAboutMe()
-	{
-	    return $this->aboutMe;
+	public function getAboutMe() {
+		return $this->aboutMe;
 	}
 
 	/**
 	 *
 	 * @param $aboutMe
+	 * @return void
 	 */
-	public function setAboutMe($aboutMe)
-	{
-	    $this->aboutMe = $aboutMe;
+	public function setAboutMe($aboutMe) {
+		$this->aboutMe = $aboutMe;
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	public function getCellphone()
-	{
-	    return $this->cellphone;
+	public function getCellphone() {
+		return $this->cellphone;
 	}
 
 	/**
 	 *
 	 * @param $cellphone
+	 * @return void
 	 */
-	public function setCellphone($cellphone)
-	{
-	    $this->cellphone = $cellphone;
+	public function setCellphone($cellphone) {
+		$this->cellphone = $cellphone;
 	}
 
 	/**
@@ -286,7 +275,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	 * @return void
 	 */
 	public function setGender($gender) {
-			$this->gender = $gender;
+		$this->gender = $gender;
 	}
 
 	/**
@@ -300,31 +289,28 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	 *
 	 * @return DateTime
 	 */
-	public function getDateOfBirth()
-	{
-	    return $this->dateOfBirth;
+	public function getDateOfBirth() {
+		return $this->dateOfBirth;
 	}
 
 	/**
 	 *
 	 * @param DateTime $dateOfBirth
 	 */
-	public function setDateOfBirth(DateTime $dateOfBirth)
-	{
-	    $this->dateOfBirth = $dateOfBirth;
+	public function setDateOfBirth(DateTime $dateOfBirth) {
+		$this->dateOfBirth = $dateOfBirth;
 	}
 
 	/**
 	 * Counts age from date of birth
 	 * @return integer
 	 */
-	public function getAge()
-	{
+	public function getAge() {
 		$age = date('Y')-$this->dateOfBirth->format('Y');
 		// Check if birthday month/day has been reached
-		if (date('m')<$this->dateOfBirth->format('m')) {
+		if (date('m') < $this->dateOfBirth->format('m')) {
 			$age--;
-		} elseif (date('m') == $this->dateOfBirth->format('m') && date('d')<$this->dateOfBirth->format('d')) {
+		} elseif (date('m') == $this->dateOfBirth->format('m') && date('d') < $this->dateOfBirth->format('d')) {
 			$age--;
 		}
 		return $age;
@@ -357,7 +343,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	}
 
 	/**
-     * Overrides the normal _isNew function and notifies the observers if this object is new (and will be persisted)
+	 * Overrides the normal _isNew function and notifies the observers if this object is new (and will be persisted)
 	 */
 	public function _isNew($notify = TRUE) {
 		$new = parent::_isNew();

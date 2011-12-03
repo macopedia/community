@@ -23,7 +23,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-
 interface Tx_Community_Domain_Model_Observer_ObserverInterface {
 	public function update(Tx_Community_Domain_Model_Observer_ObservableInterface $observable);
 	public function __toString();

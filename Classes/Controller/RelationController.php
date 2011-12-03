@@ -68,7 +68,6 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * @see Tx_Community_Domain_Model_Relation
 	 */
 	public function requestAction(Tx_Community_Domain_Model_User $user) {
-
 		$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
 		if ($relation === NULL) {
 			//Normal request
@@ -82,11 +81,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			$relation->setRequestedUser($user);
 			$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 			$this->repositoryService->get('relation')->add($relation);
-
 		} elseif ($relation instanceof Tx_Community_Domain_Model_Relation) {
-
 			$this->requestedExistingRelation($relation, $user);
-
 		} else {
 			// more than one relation? something is wrong.
 			throw new Tx_Community_Exception_UnexpectedException(
@@ -101,9 +97,10 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * Used in requestAction() when requested relation exists
 	 * @param Tx_Community_Domain_Model_Relation $relation
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @return void
 	 */
 	protected function requestedExistingRelation(Tx_Community_Domain_Model_Relation $relation, Tx_Community_Domain_Model_User $user) {
-		
+
 		switch ($relation->getStatus()) {
 
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW:
@@ -123,7 +120,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED:
 				if($relation->getRequestedUser() == $user && !$this->settings['relation']['request']['allowMultiple']) {
 					//It's too late for this friendship
-					 $this->flashMessageContainer->add($this->_('relation.request.alreadyRejected'), '', t3lib_FlashMessage::ERROR);
+					$this->flashMessageContainer->add($this->_('relation.request.alreadyRejected'), '', t3lib_FlashMessage::ERROR);
 				} else {
 					// The user that already rejected request, changed his mind
 					// or an already rejected relation can be requested again
@@ -153,7 +150,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	/**
 	 * Confirm a relation
 	 *
-	 * @param Tx_Community_Domain_Model_User $relation
+	 * @param Tx_Community_Domain_Model_Relation $relation
 	 */
 	public function confirmAction(Tx_Community_Domain_Model_Relation $relation) {
 		if ($relation->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
@@ -168,12 +165,12 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * Reject a relation which hasn't been accepted yet
 	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
+	 * @return void
 	 */
 	public function rejectAction(Tx_Community_Domain_Model_Relation $relation) {
 		if ($this->request->hasArgument('confirmReject')) {
 			$this->rejectRelation($relation);
 			$this->flashMessageContainer->add($this->_('relation.reject.success'));
-
 
 			$this->redirectToUser($this->getRequestingUser());
 		} else {
@@ -182,7 +179,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	}
 
 	/**
-	 * List all unconfirmed relations.
+	 * List all unconfirmed relations
+	 * @return void
 	 */
 	public function unconfirmedAction() {
 		if ($this->ownProfile()) {
@@ -197,22 +195,23 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	/**
 	 * Cancel a relation that is allready accepted.
 	 *
+	 * @param Tx_Community_Domain_Model_Relation $relation
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @return void
 	 */
 	public function cancelAction(Tx_Community_Domain_Model_Relation $relation = null, Tx_Community_Domain_Model_User $user = null) {
-	  if($relation === null ){
-		if($user !== null){
-		$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
-		}else {
-		  throw new Tx_Community_Exception_UnexpectedException("One of the parameters must be set");
+		if ($relation === null ){
+			if ($user !== null){
+				$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
+			} else {
+				throw new Tx_Community_Exception_UnexpectedException("One of the parameters must be set");
+			}
 		}
-	  }
 		if ($this->request->hasArgument('confirmCancel')) {
 			$this->cancelRelation($relation);
 			$this->flashMessageContainer->add($this->_('relation.cancel.success'));
-
 			$this->redirectToUser($this->getRequestingUser());
-		}else {
+		} else {
 			$this->view->assign('relation', $relation);
 		}
 	}
@@ -221,6 +220,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * Confirm a relation and notify the initiating user
 	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
+	 * @return void
 	 */
 	protected function confirmRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED);
@@ -232,11 +232,11 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * Reject a relation and notify the initiating user
 	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
+	 * @return void
 	 */
 	protected function rejectRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED);
 		$this->repositoryService->get('relation')->update($relation);
-
 		$this->notify('relationReject');
 	}
 
@@ -245,10 +245,10 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * an accepted relation gets cancelled by one of the users.
 	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
+	 * @return void
 	 */
 	protected function cancelRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED);
-
 		$this->notify('relationCancel');
 	}
 
@@ -267,10 +267,10 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		//TODO: this check should be moved to email notification,
 		// as this method is used also for non-mail notification types
 		if(t3lib_div::validEmail($this->requestedUser->getEmail())){
-			$this->notificationService->notify($notifyArguments, $resourceName);		   
+			$this->notificationService->notify($notifyArguments, $resourceName);
 		}
 		else {
-		    t3lib_div::sysLog('User with id:'.$this->requestedUser->getUid()." has wrong email address.", "Community");
+			t3lib_div::sysLog('User with id:'.$this->requestedUser->getUid()." has wrong email address.", "Community");
 		}
 	}
 }

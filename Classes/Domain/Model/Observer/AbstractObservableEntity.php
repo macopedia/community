@@ -51,7 +51,7 @@ abstract class Tx_Community_Domain_Model_Observer_AbstractObservableEntity
 	}
 
 	/**
-     * Overrides the normal _isNew function and notifies the observers if this object is new (and will be persisted)
+	 * Overrides the normal _isNew function and notifies the observers if this object is new (and will be persisted)
 	 */
 	public function _isNew($notify = TRUE) {
 		$new = parent::_isNew();

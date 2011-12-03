@@ -32,7 +32,7 @@
  */
 class Tx_Community_Controller_MessageController extends Tx_Community_Controller_BaseController {
 
-    /**
+	/**
 	 * Show the inbox of a user
 	 */
 	public function inboxAction() {

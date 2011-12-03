@@ -51,13 +51,13 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 
 		// handleUpload() returns numer in case of error
 		$fileName = $this->handleUpload(
-				'newPhoto.image',
-				$this->settings['album']['image']['prefix'],
-				$this->settings['album']['image']['types'],
-				$this->settings['album']['image']['maxSize']
-				);
+			'newPhoto.image',
+			$this->settings['album']['image']['prefix'],
+			$this->settings['album']['image']['types'],
+			$this->settings['album']['image']['maxSize']
+		);
 		if (!is_int($fileName)) {
-			$newPhoto = new Tx_Community_Domain_Model_Photo;
+			$newPhoto = new Tx_Community_Domain_Model_Photo();
 			$newPhoto->setImage($fileName);
 			$album->addPhoto($newPhoto);
 			if (!$album->getMainPhoto()) {
@@ -113,7 +113,7 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 					&& $album->getUser() == $this->requestingUser) {
 				//don't have to copy photo to apecial album
 			} else {
-				$newPhoto = new Tx_Community_Domain_Model_Photo;
+				$newPhoto = new Tx_Community_Domain_Model_Photo();
 				$newPhoto->setImage($imagePath);
 
 				$this->photoToSpecialAlbum($newPhoto, Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR);
@@ -149,8 +149,8 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 
 		if (($requestingUser && ($album->getUser()->getUid() == $requestingUser->getUid())) ||
 				$relation ||
-				($album->getPrivate()<=1 && $requestingUser) ||
-				$album->getPrivate()==0  ) {
+				($album->getPrivate() <= 1 && $requestingUser) ||
+				$album->getPrivate() == 0) {
 			return TRUE;
 		} else {
 			return FALSE;

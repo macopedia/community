@@ -44,11 +44,11 @@ class Tx_Community_Domain_Repository_AlbumRepository extends Tx_Extbase_Persiste
 	public function findOneByUserAndType(Tx_Community_Domain_Model_User $user, $albumType) {
 		$query = $this->createQuery();
 		return $query->matching(
-					$query->logicalAnd(
-							$query->equals('user', $user),
-							$query->equals('albumType', $albumType)
-							)
-					)
+			$query->logicalAnd(
+					$query->equals('user', $user),
+					$query->equals('albumType', $albumType)
+				)
+			)
 			->execute()
 			->getFirst();
 	}

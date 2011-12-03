@@ -67,7 +67,8 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 				),
 				$query->equals('status', Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED)
 			)
-		)->count();
+		)->execute()
+		->count();
 	}
 
 	/**
@@ -104,6 +105,7 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 				$statusQuery
 			)
 		)->execute();
+
 		if (count($relations) > 1) {
 			throw new Tx_Community_Exception_UnexpectedException(
 				'There are more than one relations from user ' . $requestedUser->getUid() .' to ' . $requestingUser->getUid()

@@ -43,7 +43,7 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	 * Displays a single Album with it's photos
 	 *
 	 * @param Tx_Community_Domain_Model_Album $album the Album to display
-	 * @return string The rendered view
+	 * @return void
 	 */
 	public function showAction(Tx_Community_Domain_Model_Album $album) {
 		$this->view->assign('album', $album);
@@ -101,6 +101,7 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	 * Updates an existing Album and forwards to the list action afterwards.
 	 *
 	 * @param Tx_Community_Domain_Model_Album $album the Album to display
+	 * @return void
 	 */
 	public function updateAction(Tx_Community_Domain_Model_Album $album) {
 		$this->repositoryService->get('album')->update($album);

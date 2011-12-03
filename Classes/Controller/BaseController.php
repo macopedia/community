@@ -154,7 +154,6 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 					&& isset($GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_community.']['settings.'][$key])) {
 				$this->settings[$key] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_community.']['settings.'][$key];
 			}
-
 		}
 	}
 
@@ -211,7 +210,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		foreach ($argumentsPriority as $argument) {
 			if ($foundUser) {
 				$this->request->setArgument($argument, NULL);
-			} elseif ($this->request->hasArgument($argument) 
+			} elseif ($this->request->hasArgument($argument)
 						&& !is_array($this->request->getArgument($argument))
 						&& $this->request->getArgument($argument)!=null) {
 				$foundUser = true;
@@ -265,7 +264,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$this->requestingUser = $this->repositoryService->get('user')->findCurrentUser();
 
 		$this->fetchRequestedUserFromRequestArguments();
-		if ($this->requestedUser == NULL) {
+		if ($this->requestedUser === NULL) {
 			$this->requestedUser = $this->getRequestingUser();
 		}
 	}
@@ -311,6 +310,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 *
 	 * @param string $key
 	 * @param array $arguments
+	 * @return string
 	 */
 	protected function _($key, $arguments = array()) {
 		$translator = new Tx_Extbase_Utility_Localization();
@@ -319,6 +319,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * Check if the user is on his own profile
+	 * @return boolean
 	 */
 	protected function ownProfile() {
 		if ($this->getRequestingUser()) {
@@ -356,7 +357,6 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	protected function redirectToUser(Tx_Community_Domain_Model_User $user) {
 		$this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['profilePage'] ? $this->settings['profilePage'] : $GLOBALS['TSFE']->id));
 	}
-
 
 
 	/**
@@ -422,7 +422,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$user = $this->requestingUser;
 		$album = $this->repositoryService->get('album')->findOneByUserAndType($user,$albumType);
 		if (!$album) {
-			$album = new Tx_Community_Domain_Model_Album;
+			$album = new Tx_Community_Domain_Model_Album();
 			$album->setAlbumType($albumType);
 			$album->setName($this->_('profile.album.albumTypeName.'.$albumType));
 			$album->setUser($user);

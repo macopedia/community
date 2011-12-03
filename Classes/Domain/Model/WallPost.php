@@ -29,7 +29,6 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	 * Sender
 	 *
 	 * @var Tx_Community_Domain_Model_User $sender
-	 *
 	 */
 	protected $sender;
 
@@ -37,7 +36,6 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	 * recipient
 	 *
 	 * @var Tx_Community_Domain_Model_User $recipient
-	 *
 	 */
 	protected $recipient;
 
@@ -138,9 +136,7 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	 * @return void
 	 */
 	public function __construct() {
-
 	}
-
 
 }
 
