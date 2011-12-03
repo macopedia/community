@@ -1,3 +1,4 @@
+{namespace com=Tx_Community_ViewHelpers}
 <f:layout name="Default" />
 
 <f:section name="main">
@@ -22,12 +23,26 @@
 		</tbody>
 	</table>
 
-	<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
-		<f:image
-			src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.sender, settings: settings}')}"
-			class="user-photo-thumbnail" width="155" height="180m" alt="{message.sender}"
-		/>
-	</f:link.page>
+	<com:sameUser requestingUser="{requestingUser}" requestedUser="{message.sender}">
+		<f:then>
+			<!-- outbox -->
+			<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
+				<f:image
+					src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.recipient, settings: settings}')}"
+					class="user-photo-thumbnail" width="155" height="180m" alt="{message.recipient}"
+				/>
+			</f:link.page>
+		</f:then>
+		<f:else>
+			<!-- inbox -->
+			<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
+				<f:image
+					src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.sender, settings: settings}')}"
+					class="user-photo-thumbnail" width="155" height="180m" alt="{message.sender}"
+				/>
+			</f:link.page>
+		</f:else>
+	</com:sameUser>
 
 	<div class="tx-community-message-body">
 		<f:format.nl2br>{message.message}</f:format.nl2br>
