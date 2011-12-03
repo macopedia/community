@@ -36,7 +36,6 @@ class Tx_Community_ViewHelpers_StrlenViewHelper extends Tx_Fluid_ViewHelpers_Bas
 	 * @param string $value The string
 	 */
 	public function render($value) {
-		echo strlen($value);
 		return strlen($value);
 	}
 }
