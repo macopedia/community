@@ -6,8 +6,8 @@
 				<div class="relation-item">
 					<div class="item-image">
 						<f:link.page additionalParams="{tx_community : {user : user}}" pageUid="{settings.profilePage}">
-							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: relation.initiatingUser, settings: settings}')}"
-							         class="user-photo-thumbnail" width="48c" height="47c" alt="{relation.initiatingUser.name}" />
+							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
+							         class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
 						</f:link.page>
 					</div>
 					<div class="item-content-wrap">
