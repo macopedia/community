@@ -8,30 +8,30 @@
 				<div class="message read">
 			</f:else>
 		</f:if>
-			<div class="message-icon"></div>
-			<div class="message-content">
-				<div class="message-info">
-					<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}">
-						<f:image
-							src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.sender, settings: settings}')}"
-							class="user-photo-thumbnail" width="48c" height="47c" alt="{message.sender}"
-						/>
-					</f:link.page>
-					<div class="text-info">
-						<span>
-							<f:translate key="message.read.from"/>
-							<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}">{message.sender.name}</f:link.page>
-							&nbsp;/&nbsp;
-							<f:format.date>{message.sentDate}</f:format.date>
-						</span>
-						<p class="message-title">
-							<f:link.action action="read" controller="Message" arguments="{message : message}">
-								<f:format.crop maxCharacters="50">{message.subject}</f:format.crop>
-							</f:link.action>
-						</p>
-					</div>
+			<div class="icon-wrap">
+				<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}">
+					<f:image
+						src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.sender, settings: settings}')}"
+						class="user-photo-thumbnail" width="60" height="80m" alt="{message.sender}"
+					/>
+				</f:link.page>
+			</div>
+			<div class="content-wrap">
+				<div class="message-header">
+					<span>
+						<f:translate key="message.read.from"/>
+						<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}">{message.sender.name}</f:link.page><br />
+						<small><f:format.date format="d.m.Y, H:i">{message.sentDate}</f:format.date></small>
+					</span>
+					<p class="message-title">
+						<f:link.action action="read" controller="Message" arguments="{message : message}">
+							<f:format.crop maxCharacters="50">{message.subject}</f:format.crop>
+						</f:link.action>
+					</p>
+				</div>
+				<div class="content">
 					<p><f:format.crop maxCharacters="50">{message.message}</f:format.crop></p>
-					<f:link.action action="read" controller="Message" arguments="{message: message}" class="show">
+					<f:link.action action="read" controller="Message" arguments="{message : message}" class="show">
 						<f:translate key="message.list.readMore"/>
 					</f:link.action>
 				</div>

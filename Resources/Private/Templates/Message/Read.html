@@ -1,22 +1,36 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<div class="tx-community-message-read">
-		<h3><f:translate key="message.read.title"/></h3>
-		<div class="tx-community-message-read-date">
-			<f:format.date>{message.sentDate}</f:format.date>
-		</div>
-		<div class="tx-community-message-read-from">
-			<span><f:translate key="message.read.from"/>{message.sender.name}</span>
-		</div>
-		<div class="tx-community-message-read-to">
-			<span><f:translate key="message.read.to"/>{message.recipient.name}</span>
-		</div>
-		<div class="tx-community-message-read-subject">
-			<span><f:translate key="message.read.subject"/>{message.subject}</span>
-		</div>
-		<div class="tx-community-message-read-message">
-			<span><f:translate key="message.read.message"/>{message.message}</span>
-		</div>
+	<table class="tx-community-message-header">
+		<tbody>
+			<tr>
+				<td><strong><f:translate key="message.read.from"/></strong></td>
+				<td><f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}">{message.sender.name}</f:link.page></td>
+			</tr>
+			<tr>
+				<td><strong><f:translate key="message.read.to"/></strong></td>
+				<td><f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}">{message.recipient.name}</f:link.page></td>
+			</tr>
+			<tr>
+				<td><strong><f:translate key="message.read.date"/></strong></td>
+				<td><f:format.date format="d.m.Y, H:i">{message.sentDate}</f:format.date></td>
+			</tr>
+			<tr>
+				<td><strong><f:translate key="message.read.subject"/></strong></td>
+				<td>{message.subject}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}" class="tx-community-message-image-link">
+		<f:image
+			src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.sender, settings: settings}')}"
+			class="user-photo-thumbnail" width="155" height="180m" alt="{message.sender}"
+		/>
+	</f:link.page>
+
+	<div class="tx-community-message-body">
+		<f:format.nl2br>{message.message}</f:format.nl2br>
 	</div>
+	<div class="back-link"><a href="javascript: history.go(-1)">&lt;- <f:translate key="message.read.back" /> </a></div>
 </f:section>

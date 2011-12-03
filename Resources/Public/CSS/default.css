@@ -23,6 +23,21 @@ input.f3-form-error {
 .tx-community-message-list-unread {
 	font-weight: bold;
 }
+
+.tx-community-message-header {
+	float: left;
+}
+
+.tx-community-message-image-link {
+	float: right;
+}
+.tx-community-message-body {
+	clear: both;
+	border-bottom: 1px solid #C9C9C9;
+	border-top: 1px solid #C9C9C9;
+	margin: 15px 0;
+	padding: 15px 0;
+}
 .tx_community_profile_details dt {
 	clear: left;
 	display: block;
@@ -35,7 +50,7 @@ input.f3-form-error {
 	margin-left: 2px;
 }
 .tx_community_profile_details dl {
-    overflow: hidden;    
+    overflow: hidden;
 }
 
 .tx_community_wall #tx_comments_pi1_content {
@@ -149,3 +164,17 @@ ul.f3-widget-paginator {
 		ul.f3-widget-paginator li.pagination-text {
 			padding-right: 7px;
 		}
+
+/*
+ * MESSAGES
+ */
+.message-nav .active {font-weight: bold;}
+.messages .message {border-top: 1px solid #cccccc;}
+.messages .icon-wrap {float: left;}
+.messages .content-wrap {
+	margin-left: 70px;
+}
+.messages .message {
+	overflow: hidden;
+	padding: 10px 0;
+}

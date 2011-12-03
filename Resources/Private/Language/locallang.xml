@@ -101,7 +101,7 @@
 			<label index="profile.updateImage.error">There was a problem when uploading your profile image.</label>
 			<label index="profile.updateImage.success">You changed your profile image.</label>
 			<label index="profile.deleteImage.success">You deleted your profile image.</label>
-			
+
 			<label index="profile.interaction.user.title">User</label>
 			<label index="profile.interaction.requestRelation">Add as friend</label>
 			<label index="profile.interaction.cancelRelation">Delete as a friend</label>
@@ -134,7 +134,7 @@
 			<label index="relation.cancel.backToProfile">Back to profile page</label>
 			<label index="relation.menu.list">Friends</label>
 			<label index="relation.menu.unconfirmed">Unconfirmed</label>
-			
+
 			<label index="relation.confirmed.cancel">(cancel)</label>
 
 			<label index="relation.reject.warning">Are you really want to reject this relation?</label>
@@ -225,7 +225,7 @@
 			<label index="message.list.recipient">Recipient</label>
 			<label index="message.list.subject">Subject</label>
 			<label index="message.list.date">Date</label>
-			<label index="message.list.readMore">read!</label>
+			<label index="message.list.readMore">read more...</label>
 
 			<label index="message.read.title">Read a message</label>
 			<label index="message.read.date">Date:</label>
@@ -233,6 +233,7 @@
 			<label index="message.read.to">To:</label>
 			<label index="message.read.subject">Subject:</label>
 			<label index="message.read.message">Message:</label>
+			<label index="message.read.back">Back to messages</label>
 
 			<label index="message.send.success">Your message has been sent.</label>
 
