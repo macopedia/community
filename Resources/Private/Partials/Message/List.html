@@ -32,7 +32,7 @@
 						</p>
 					</div>
 					<div class="content">
-						<p><f:format.nl2br><f:format.crop maxCharacters="50">{message.message}</f:format.crop></f:format.nl2br></p>
+						<p><f:format.crop maxCharacters="50"><f:format.nl2br>{message.message}</f:format.nl2br></f:format.crop></p>
 						<f:if condition="{com:strlen(value: message.message)} > 50">
 							<f:link.action action="read" controller="Message" arguments="{message : message}" class="show">
 								<f:translate key="message.list.readMore"/>

@@ -43,7 +43,8 @@ $TCA['tx_community_domain_model_message'] = array(
 		),
 		'l18n_diffsource' => array(
 			'config'=>array(
-				'type'=>'passthrough')
+				'type'=>'passthrough'
+			)
 		),
 		't3ver_label' => array(
 			'displayCond' => 'FIELD:t3ver_label:REQ:true',
@@ -91,7 +92,7 @@ $TCA['tx_community_domain_model_message'] = array(
 		'read_date' => array(
 			'exclude' => 0,
 			'label'   => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.read_date',
-		'config'  => array(
+			'config'  => array(
 				'type' => 'input',
 				'eval' => 'datetime'
 			)
@@ -123,7 +124,7 @@ $TCA['tx_community_domain_model_message'] = array(
 			'exclude' => 0,
 			'label'   => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.message',
 			'config'  => array(
-				'type' => 'input',
+				'type' => 'text',
 				'size' => 30,
 				'eval' => 'trim,required'
 			)
