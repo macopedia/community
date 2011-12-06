@@ -128,6 +128,7 @@ plugin.tx_community {
 				#unconfirmed friend is "other"
 				profile.relation.confirm.access = 1
 				profile.relation.reject.access = 1
+				profile.relation.cancel.access = 1
 				profile.relation.request.access = 1
 				profile.relation.unconfirmed.access = 1
 				profile.report.access = 1
