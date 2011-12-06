@@ -143,14 +143,14 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 	 * @param Tx_Community_Domain_Model_Album $album
 	 * @return bool
 	 */
-	public function hasAccessToAlbum($album) {
+	public function hasAccessToAlbum(Tx_Community_Domain_Model_Album $album) {
 		$requestingUser = $this->requestingUser;
 		$relation = $this->getRelation();
 
-		if (($requestingUser && ($album->getUser()->getUid() == $requestingUser->getUid())) ||
-				$relation ||
+		if (($requestingUser && ($album->getUser()->getUid() === $requestingUser->getUid())) ||
+				$relation->getStatus() === Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED ||
 				($album->getPrivate() <= 1 && $requestingUser) ||
-				$album->getPrivate() == 0) {
+				$album->getPrivate() === 0) {
 			return TRUE;
 		} else {
 			return FALSE;

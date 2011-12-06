@@ -193,15 +193,16 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	}
 
 	/**
-	 * Cancel a relation that is allready accepted.
+	 * Cancel a relation that is already accepted.
 	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
 	 * @param Tx_Community_Domain_Model_User $user
 	 * @return void
 	 */
-	public function cancelAction(Tx_Community_Domain_Model_Relation $relation = null, Tx_Community_Domain_Model_User $user = null) {
+	public function cancelAction(Tx_Community_Domain_Model_Relation $relation = NULL, Tx_Community_Domain_Model_User $user = NULL) {
 		if ($relation === null ){
-			if ($user !== null){
+			if($user !== null){
+
 				$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
 			} else {
 				throw new Tx_Community_Exception_UnexpectedException("One of the parameters must be set");

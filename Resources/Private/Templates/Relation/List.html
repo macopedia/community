@@ -4,16 +4,63 @@
 		<f:then>
 			<f:widget.paginate objects="{relations}" as="paginatedRelations" configuration="{itemsPerPage: 10, insertAbove : 0, insertBelow: 1}">
 				<f:for each="{paginatedRelations}" as="relation">
-					<f:alias map="{user: '{com:sameUser(requestingUser: requestingUser, requestedUser: relation.initiatingUser, then: relation.requestedUser, else: relation.initiatingUser)}'}" >
+					<f:alias map="{user: '{com:sameUser(requestingUser: requestedUser, requestedUser: relation.initiatingUser, then: relation.requestedUser, else: relation.initiatingUser)}'}" >
 						<div class="user-single">
 							<f:link.action action="details" controller="User" arguments="{user: user}" pageUid="{settings.profilePage}">
 								<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
 								         class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
 								</f:link.action>
 							<f:link.action action="details" controller="User" arguments="{user: user}" pageUid="{settings.profilePage}"><span>{user.name}</span></f:link.action>
-							<f:link.action action="cancel" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}">
-								<f:translate key="relation.confirmed.cancel"/>
-							</f:link.action>
+
+							<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
+								<f:then>
+									<!-- we view our own friends -->
+									<f:link.action action="cancel" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}">
+										<f:translate key="relation.confirmed.cancel"/>
+									</f:link.action>
+								</f:then>
+								<f:else>
+									<!-- we view someone else's friends -->
+									<f:alias map="{userRelation: '{com:relation(requestingUser: requestingUser, requestedUser: user)}'}">
+										<f:if condition="{userRelation}">
+											<f:then>
+												<f:if condition="{userRelation.status} == 1"><!--pending (new)-->
+													<f:link.action action="cancel" class="remove-from-friends" controller="Relation" arguments="{relation : userRelation}" pageUid="{settings.relationPage}">
+														<f:translate key="profile.interaction.cancelRequest"/>
+													</f:link.action>
+												</f:if>
+												<f:if condition="{userRelation.status} == 2"><!--confirmed-->
+													<f:link.action action="cancel" class="remove-from-friends" controller="Relation" arguments="{relation : userRelation}" pageUid="{settings.relationPage}">
+														<f:translate key="profile.interaction.cancelRelation"/>
+													</f:link.action>
+												</f:if>
+												<f:if condition="{userRelation.status} == 4"><!-- rejected -->
+													<f:if condition="{settings.relation.request.allowMultiple}"><!-- allow multiple? -->
+														<f:then>
+															<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : user}" pageUid="{settings.relationPage}">
+																<f:translate key="profile.interaction.requestRelation"/>
+															</f:link.action>
+														</f:then>
+														<f:else>
+															<f:translate key="profile.interaction.rejectedRelation"/>
+														</f:else>
+													</f:if>
+												</f:if>
+												<f:if condition="{userRelation.status} == 8"><!--cancelled-->
+													<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : user}" pageUid="{settings.relationPage}">
+														<f:translate key="profile.interaction.requestRelation"/>
+													</f:link.action>
+												</f:if>
+											</f:then>
+											<f:else>
+												<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : user}" pageUid="{settings.relationPage}">
+													<f:translate key="profile.interaction.requestRelation"/>
+												</f:link.action>
+											</f:else>
+										</f:if>
+									</f:alias>
+								</f:else>
+							</com:sameUser>
 						</div>
 					</f:alias>
 				</f:for>

@@ -95,6 +95,19 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$resourceName = $this->accessHelper->getResourceName($controllerName, $actionName);
 		$this->noAccess = 0;
 
+		if ($this->settings['debug']) {
+			$this->flashMessageContainer->add(
+				'Controller: '.$controllerName."<br />".
+				'ActionName: '.$actionName."<br />".
+				'resourceName: '.$resourceName."<br />".
+				($this->getRequestingUser() ? "RequestingUser: ".$this->getRequestingUser()->getName() : '')."<br />".
+				($this->getRequestedUser() ? "RequestedUser: ".$this->getRequestedUser()->getName() : '')."<br />".
+				'AccesType: '.$this->accessHelper->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
+				'Debug',
+				t3lib_FlashMessage::INFO
+			);
+		}
+
 		if ($this->hasAccess($resourceName) != '1') {
 			//access denied
 			if ($this->settings['debug']) {
@@ -296,8 +309,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		if ($this->getRequestingUser()) {
 			$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers(
 				$this->getRequestedUser(),
-				$this->getRequestingUser(),
-				Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED
+				$this->getRequestingUser()
 			);
 		} else {
 			$relation = NULL;

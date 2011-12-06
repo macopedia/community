@@ -12,13 +12,10 @@
 					</div>
 					<div class="item-content-wrap">
 						<f:link.page additionalParams="{tx_community : {user : user}}"  pageUid="{settings.profilePage}">{user.name}</f:link.page>
-						<f:link.action action="cancel" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relationUid}">
-							<f:translate key="relation.confirmed.cancel"/>
-						</f:link.action>
 					</div>
 				</div>
 			</f:for>
-			<f:link.action action="list" controller="Relation" pageUid="{settings.relationPage}" ><f:translate key="relation.listSome.goTolist"/></f:link.action>
+			<f:link.action action="list" controller="Relation" additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.relationPage}" ><f:translate key="relation.listSome.goTolist"/></f:link.action>
 		</f:then>
 		<f:else>
 			<f:translate key="relation.list.relation.list.noRelations"/>

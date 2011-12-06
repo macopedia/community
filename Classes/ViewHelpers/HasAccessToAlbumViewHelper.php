@@ -38,11 +38,11 @@ class Tx_Community_ViewHelpers_HasAccessToAlbumViewHelper extends Tx_Fluid_ViewH
 	 * @param Tx_Community_Domain_Model_Relation $relation
 	 * @param Tx_Community_Domain_Model_User $requestingUser
 	 */
-	public function render($album, $relation, $requestingUser) {
-		if (($requestingUser && ($album->getUser()->getUid() == $requestingUser->getUid())) ||
-				$relation ||
-				($album->getPrivate()<=1 && $requestingUser) ||
-				$album->getPrivate()==0  ) {
+	public function render(Tx_Community_Domain_Model_Album $album, Tx_Community_Domain_Model_Relation $relation, Tx_Community_Domain_Model_User $requestingUser) {
+		if (($requestingUser && ($album->getUser()->getUid() === $requestingUser->getUid())) ||
+				$relation->getStatus() === Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED ||
+				($album->getPrivate() <= 1 && $requestingUser) ||
+				$album->getPrivate() === 0) {
 			return $this->renderThenChild();
 		} else {
 			return $this->renderElseChild();
