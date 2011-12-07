@@ -142,10 +142,11 @@
 			<label index="relation.reject.success">Relation has been rejected.</label>
 			<label index="relation.reject.backToProfile">Back to profile page</label>
 
-			<label index="relation.unconfirmed.title">Confirm friendship:</label>
-			<label index="relation.unconfirmed.confirm">confirm</label>
-			<label index="relation.unconfirmed.reject">reject</label>
-			<label index="relation.confirm.success">You've just confirmed new friendship</label>
+			<label index="relation.unconfirmed.title">Friend requests</label>
+			<label index="relation.unconfirmed.confirm">Confirm</label>
+			<label index="relation.unconfirmed.reject">Reject</label>
+			<label index="relation.unconfirmed.noUnconfirmedRelations">No pending friend requests at the moment</label>
+			<label index="relation.confirm.success">Friendship confirmed</label>
 
 			<label index="role.new.title">New role</label>
 			<label index="role.new.name">Name</label>
