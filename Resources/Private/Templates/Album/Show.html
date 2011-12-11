@@ -2,8 +2,21 @@
 <f:layout name="Default" />
 
 <f:section name="main">
-	<h1>Single View for Album</h1>
-	<f:render partial="Album/Properties" arguments="{album:album}" />
+	<h1>{album.name}</h1>
+	<p>by <f:link.page additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.profilePage}">{requestedUser.name}</f:link.page><p>
+
+	<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
+		<table class="tx-community-pi1">
+			<tr>
+				<td><f:translate key="tx_community_domain_model_album.name" /></td>
+				<td>{album.name}</td>
+			</tr>
+			<tr>
+				<td><f:translate key="tx_community_domain_model_album.private" /></td>
+				<td><f:render partial="Album/PrivacyToString" arguments="{privacy: album.private}" /></td>
+			</tr>
+		</table>
+	</com:sameUser>
 
 	<com:hasAccessToAlbum album="{album}" relation="{relation}" requestingUser="{requestingUser}">
 		<f:then>

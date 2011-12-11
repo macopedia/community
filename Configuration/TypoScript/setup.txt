@@ -112,6 +112,7 @@ plugin.tx_community {
 		accessRules {
 			#guests (not logged in)
 			nobody {
+				profile.gallery.access = 1
 				profile.image.access = 1
 				utils.access = 1
 				access = 0

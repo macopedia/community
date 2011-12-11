@@ -4,21 +4,20 @@
 <f:section name="main">
 <h1>Listing for album of user {requestedUser.name}</h1>
 
-<table  class="tx_community" >
+<table class="tx_community">
 	<tr>
 		<th><f:translate key="tx_community_domain_model_album.name" /></th>
-		<th><f:translate key="tx_community_domain_model_album.private" /></th>
 		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
-			<th> </th>
-			<th> </th>
+			<th><f:translate key="tx_community_domain_model_album.private" /></th>
+			<th></th>
+			<th></th>
 		</com:sameUser>
 	</tr>
-
 	<f:for each="{albums}" as="album">
-		<tr>
-			<td>
-				<com:hasAccessToAlbum album="{album}" relation="{relation}" requestingUser="{requestingUser}">
-					<f:then>
+		<com:hasAccessToAlbum album="{album}" relation="{relation}" requestingUser="{requestingUser}">
+			<f:then>
+				<tr>
+					<td>
 						<f:link.action action="show" arguments="{album : album}">
 							<f:if condition="{album.mainPhoto}">
 								<f:then>
@@ -31,22 +30,15 @@
 							<br />
 							{album.name}
 						</f:link.action>
-					</f:then>
-					<f:else>
-						<f:image src="{settings.album.unknownAlbumMainPhoto}" height="100m" width="100m" alt="photo"/>
-						<br />
-						{album.name}
-					</f:else>
-				</com:hasAccessToAlbum>
-			</td>
-			<td>
-				<f:render partial="Album/PrivacyToString" arguments="{privacy : album.private}" />
-			</td>
-			<com:sameUser requestingUser="{requestingUser}" requestedUser="{album.user}">
-				<td><f:link.action action="edit" arguments="{album : album}">Edit</f:link.action></td>
-				<td><f:link.action action="delete" arguments="{album : album}">Delete</f:link.action></td>
-			</com:sameUser>
-		</tr>
+					</td>
+					<com:sameUser requestingUser="{requestingUser}" requestedUser="{album.user}">
+						<td><f:render partial="Album/PrivacyToString" arguments="{privacy : album.private}" /></td>
+						<td><f:link.action action="edit" arguments="{album : album}">Edit</f:link.action></td>
+						<td><f:link.action action="delete" arguments="{album : album}">Delete</f:link.action></td>
+					</com:sameUser>
+				</tr>
+			</f:then>
+		</com:hasAccessToAlbum>
 	</f:for>
 </table>
 
