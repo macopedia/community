@@ -129,11 +129,24 @@ ul.form-errors {
 /*
  * WALL
  */
-.wall-item-wrap {border-top: 1px solid #cccccc;}
-.wall-item {padding: 10px 20px; overflow:hidden; position: relative;}
-.wall-item .item-image {float:left; overflow: hidden;}
-.wall-item .item-content-wrap {float: left; overflow: hidden; margin-left: 10px;}
-.wall-item .item-delete {position: absolute; right: 0;}
+.wall-item-wrap {
+	border-top: 1px solid #cccccc;
+}
+.wall-item {
+	padding: 10px 20px;
+	overflow:hidden;
+	position: relative;
+}
+.wall-item .item-image {
+	float:left;
+	margin-right: 10px;
+}
+.wall-item .item-content-wrap {
+	overflow: hidden;
+}
+.wall-item .item-delete {
+	float: right;
+}
 
 /*
  * LIST SOME RELATIONS
