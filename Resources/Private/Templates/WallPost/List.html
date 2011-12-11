@@ -10,10 +10,17 @@
 			<f:for each="{paginatedWallPosts}" as="wallPost">
 				<div class="wall-item-wrap">
 					<div class="wall-item">
-						<div class="item-image">
+						<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}" class="item-image">
 							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : wallPost.sender, settings : settings}')}" class="user-photo-thumbnail" width="48c" height="47c" alt="{wallPost.sender.name}" />
-						</div>
+						</f:link.page>
 						<div class="item-content-wrap">
+							<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
+								<div class="item-delete">
+									<f:link.action action="delete" additionalParams="{tx_community : {wallPost : wallPost}}">
+										X
+									</f:link.action>
+								</div>
+							</com:sameUser>
 							<div class="content-row">
 								<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}">
 									{wallPost.subject}
@@ -21,16 +28,9 @@
 							</div>
 							<div class="content-row">
 								<div class="content-text">
-									<p>{wallPost.message}</p>
+									<p><f:format.nl2br><com:parseLinks string="{wallPost.message}" /></f:format.nl2br></p>
 								</div>
 							</div>
-						</div>
-						<div class="item-delete">
-							<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
-								<f:link.action action="delete" additionalParams="{tx_community : {wallPost : wallPost}}">
-									X
-								</f:link.action>
-							</com:sameUser>
 						</div>
 					</div>
 				</div>

@@ -45,7 +45,7 @@
 	</com:sameUser>
 
 	<div class="tx-community-message-body">
-		<f:format.nl2br>{message.message}</f:format.nl2br>
+		<f:format.nl2br><com:parseLinks string="{message.message}" /></f:format.nl2br>
 	</div>
 	<div class="back-link"><a href="javascript: history.go(-1)">&lt;- <f:translate key="message.read.back" /> </a></div>
 </f:section>
