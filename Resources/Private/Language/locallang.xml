@@ -117,6 +117,8 @@
 			<label index="profile.interaction.message.inbox">Inbox</label>
 			<label index="profile.interaction.message.outbox">Outbox</label>
 			<label index="profile.interaction.message.unread">Unread</label>
+			<label index="profile.interaction.wall">Wall</label>
+			<label index="profile.interaction.gallery">Gallery</label>
 
 			<label index="relation.listSome.unconfirmed">Unconfirmed friends</label>
 

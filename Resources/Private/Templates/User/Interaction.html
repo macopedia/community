@@ -1,4 +1,4 @@
-{namespace com=Tx_Community_ViewHelpers} 
+{namespace com=Tx_Community_ViewHelpers}
 <f:if condition="{requestingUser}">
 <h4><f:translate key="profile.interaction.user.title"/></h4>
 	<span class="status">
@@ -12,7 +12,7 @@
 		/>
 	</f:link.page>
 	<div class="user-panel">
-		<ul class="action-menu">	
+		<ul class="action-menu">
 			<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
 				<f:then>
 					<li>
@@ -45,9 +45,19 @@
 								</f:link.action>
 							</li>
 						</f:then>
-					</f:if>			
+					</f:if>
 				</f:else>
 			</com:sameUser>
+			<li>
+				<f:link.page pageUid="{settings.wallPage}" additionalParams="{tx_community : {user : requestedUser}}">
+					<f:translate key="profile.interaction.wall"/>
+				</f:link.page>
+			</li>
+			<li>
+				<f:link.page pageUid="{settings.galleryPage}" additionalParams="{tx_community : {user : requestedUser}}">
+					<f:translate key="profile.interaction.gallery"/>
+				</f:link.page>
+			</li>
 		</ul>
 
 		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
