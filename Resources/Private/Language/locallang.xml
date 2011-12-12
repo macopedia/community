@@ -6,26 +6,6 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tx_community_domain_model_group">A group</label>
-			<label index="tx_community_domain_model_group.name">name</label>
-			<label index="tx_community_domain_model_group.grouptype">The grouptype</label>
-			<label index="tx_community_domain_model_group.description">description</label>
-			<label index="tx_community_domain_model_group.image">the image of the group</label>
-			<label index="tx_community_domain_model_group.creator">creator</label>
-			<label index="tx_community_domain_model_group.admins">admins</label>
-			<label index="tx_community_domain_model_group.members">members</label>
-			<label index="tx_community_domain_model_group.pending_members">pendingMembers</label>
-			<label index="tx_community_domain_model_user">A user of the website</label>
-			<label index="tx_community_domain_model_aclrole">AclRole</label>
-			<label index="tx_community_domain_model_aclrole.name">name</label>
-			<label index="tx_community_domain_model_aclrole.is_public">isPublic</label>
-			<label index="tx_community_domain_model_aclrole.is_friend">isFriend</label>
-			<label index="tx_community_domain_model_aclrule">AclRule</label>
-			<label index="tx_community_domain_model_aclrule.name">name</label>
-			<label index="tx_community_domain_model_aclrule.resource">resource</label>
-			<label index="tx_community_domain_model_aclrule.access_mode">accessMode</label>
-			<label index="tx_community_domain_model_aclrule.role">role</label>
-
 			<label index="access.denied">You don't have permission to access this resource.</label>
 
 			<label index="profile.details.title">Details</label>
@@ -230,18 +210,9 @@
 			<label index="message.read.back">Back to messages</label>
 			<label index="message.read.delete">Delete message</label>
 
-
 			<label index="message.send.success">Your message has been sent.</label>
 			<label index="message.delete.success">Selected message has been deleted.</label>
 			<label index="message.delete.confirm">Do you really want to delete this message?</label>
-
-
-
-			<label index="tx_community_domain_model_wallpost">community wall post</label>
-			<label index="tx_community_domain_model_wallpost.sender">Sender</label>
-			<label index="tx_community_domain_model_wallpost.recipient">recipient</label>
-			<label index="tx_community_domain_model_wallpost.subject">Subject</label>
-			<label index="tx_community_domain_model_wallpost.message">message</label>
 
 			<label index="wallPost.list.noMessages">There are no messages.</label>
 			<label index="wallPost.form.title">Write new message!</label>
@@ -249,7 +220,6 @@
 			<label index="wallPost.form.created">You added post</label>
 			<label index="wallPost.list.deleted">You deleted post</label>
 
-			<label index="tx_community_domain_model_user">User</label>
 			<label index="tx_community_domain_model_user.albums">albums</label>
 			<label index="tx_community_domain_model_album">Album that may contain images</label>
 			<label index="tx_community_domain_model_album.name">Name of the album</label>
@@ -259,7 +229,7 @@
 			<label index="tx_community_domain_model_photo.image">image</label>
 
 			<label index="photo.album.uploadSuccess">Photo successfully uploaded</label>
-			
+
 			<label index="paginate_previous">Previous</label>
 			<label index="paginate_next">Next</label>
 			<label index="paginate_page">Page</label>
