@@ -96,13 +96,14 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 		$imagePath = $this->handleUpload(
 			'user.image',
 			$this->settings['profile']['image']['prefix'],
-			$this->settings['profile']['image']['types']
+			$this->settings['profile']['image']['types'],
+			intval($this->settings['profile']['image']['maxSize'])
 		);
 		if (!is_int($imagePath)) {
 			$user->setImage($imagePath);
 			$this->repositoryService->get('user')->update($user);
 
-			$newPhoto = new Tx_Community_Domain_Model_Photo;
+			$newPhoto = new Tx_Community_Domain_Model_Photo();
 			$newPhoto->setImage($imagePath);
 
 			$this->photoToSpecialAlbum($newPhoto, Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR);

@@ -376,11 +376,12 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 *
 	 * @author Steffen Ritter
 	 * @param string $property
-	 * @param string $uploadDir
-	 * @param string $types
-	 * @param string $maxSize
+	 * @param string $uploadDir upload directory
+	 * @param string $types file extension
+	 * @param integer $maxSize maximal size in byte
+	 * @return string file name|integer error number if something goes wrong
 	 */
-	protected function handleUpload($property, $uploadDir, $types = 'jpg,gif,png', $maxSize = '1000000') {
+	protected function handleUpload($property, $uploadDir, $types = 'jpg,gif,png', $maxSize = 1048576) {
 		$data = $_FILES['tx_' . strtolower($this->request->getControllerExtensionName())];
 		if (is_array($data) && count($data) > 0) {
 			$propertyPath = t3lib_div::trimExplode('.', $property);

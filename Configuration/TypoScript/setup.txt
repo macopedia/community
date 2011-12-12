@@ -28,6 +28,8 @@ plugin.tx_community {
 				prefix = uploads/tx_community/photos/
 				types = jpeg,jpg,png,gif
 				defaultImage = EXT:community/Resources/Public/Images/defaultProfileImage.png
+				# in bytes, default 1048576 bytes (1MB)
+				maxSize = 1048576
 			}
 			reasonForReportRequired = 1
 			details {
@@ -39,8 +41,8 @@ plugin.tx_community {
 			image {
 				prefix = uploads/tx_community/photos/
 				types = jpeg,jpg,png
-				# in bytes
-				maxSize = 1000000
+				# in bytes, default 1048576 bytes (1MB)
+				maxSize = 1048576
 			}
 			#the image we see on list of albums when we have no acces to album
 			unknownAlbumMainPhoto = EXT:community/Resources/Public/Images/unknownAlbumMainPhoto.png

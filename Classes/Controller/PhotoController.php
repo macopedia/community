@@ -54,7 +54,7 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 			'newPhoto.image',
 			$this->settings['album']['image']['prefix'],
 			$this->settings['album']['image']['types'],
-			$this->settings['album']['image']['maxSize']
+			intval($this->settings['album']['image']['maxSize'])
 		);
 		if (!is_int($fileName)) {
 			$newPhoto = new Tx_Community_Domain_Model_Photo();
