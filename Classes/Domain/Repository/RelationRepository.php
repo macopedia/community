@@ -53,25 +53,6 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	}
 
 	/**
-	 * Counts relations for a certain user.
-	 *
-	 * @param Tx_Community_Domain_Model_User $user
-	 */
-	public function countRelationsForUser(Tx_Community_Domain_Model_User $user) {
-		$query = $this->createQuery();
-		return $query->matching(
-			$query->logicalAnd(
-				$query->logicalOr(
-					$query->equals('initiatingUser', $user),
-					$query->equals('requestedUser', $user)
-				),
-				$query->equals('status', Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED)
-			)
-		)->execute()
-		->count();
-	}
-
-	/**
 	 * find the relation between users.
 	 *
 	 * @param Tx_Community_Domain_Model_User $requestedUser

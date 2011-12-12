@@ -39,7 +39,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 */
 	public function listSomeAction() {
 		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestedUser(), $this->settings['relations']['listSome']['limit']);
-		$relationNumber = $this->repositoryService->get('relation')->countRelationsForUser($this->getRequestedUser());
+		$relationNumber = $relations->count();
 		$users = array();
 		foreach($relations as $relation) {
 			if ($relation->getRequestedUser()->getUid() == $this->getRequestedUser()->getUid()) {
