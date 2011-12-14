@@ -309,19 +309,19 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	}
 
 	/**
-	 * Translate $key
+	 * Translate string
 	 *
 	 * @param string $key
 	 * @param array $arguments
 	 * @return string
 	 */
 	protected function _($key, $arguments = array()) {
-		$translator = new Tx_Extbase_Utility_Localization();
-		return $translator->translate($key, 'community', $arguments);
+		return Tx_Extbase_Utility_Localization::translate($key, 'community', $arguments);
 	}
 
 	/**
 	 * Check if the user is on his own profile
+	 *
 	 * @return boolean
 	 */
 	protected function ownProfile() {
