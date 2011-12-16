@@ -109,12 +109,17 @@ plugin.tx_community {
 		}
 
 		accessRules {
+			#guests (not logged in), and requested user not set
+			public {
+				access = 0
+				utils.access = 1
+			}
 			#guests (not logged in)
+			nobody < plugin.tx_community.settings.accessRules.public
 			nobody {
+				access = 0
 				profile.gallery.access = 1
 				profile.image.access = 1
-				utils.access = 1
-				access = 0
 			}
 
 			#logged in, but not a friend

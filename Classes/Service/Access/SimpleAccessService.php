@@ -34,7 +34,13 @@
 class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Service_Access_AccessServiceInterface, t3lib_Singleton {
 
 	/**
-	 * Logged out users
+	 * Logged out users, and requested user not set
+	 *
+	 * @var string
+	 */
+	const ACCESS_PUBLIC = 'public';
+	/**
+	 * Logged out users, requested user set
 	 *
 	 * @var string
 	 */
@@ -143,7 +149,11 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	) {
 		// first case: $requestingUser is NULL: anonymous rule
 		if ($requestingUser === NULL) {
-			return self::ACCESS_NOBODY;
+			if ($requestedUser === NULL) {
+				return self::ACCESS_PUBLIC;
+			} else {
+				return self::ACCESS_NOBODY;
+			}
 		}
 		// second case: friends
 		if ($requestingUser != NULL && $requestedUser != NULL) {
