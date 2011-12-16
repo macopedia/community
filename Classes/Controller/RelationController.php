@@ -68,6 +68,11 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * @see Tx_Community_Domain_Model_Relation
 	 */
 	public function requestAction(Tx_Community_Domain_Model_User $user) {
+		if (!$user->getUid() || !$this->getRequestingUser()->getUid()
+				|| $user->getUid() == $this->getRequestingUser()->getUid()) {
+			$this->flashMessageContainer->add($this->_('relation.request.fail'), t3lib_FlashMessage::NOTICE);
+			$this->redirectToUser($this->getRequestingUser());
+		}
 		$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
 		if ($relation === NULL) {
 			//Normal request

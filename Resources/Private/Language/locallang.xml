@@ -118,6 +118,7 @@
 			<label index="relation.request.alreadyPending">Your friendship request is already pending for approval.</label>
 			<label index="relation.request.alreadyFriends">You are already friends</label>
 			<label index="relation.request.alreadyCanceled">You can't be friends any more</label>
+			<label index="relation.request.fail">Relation couldn't be created.</label>
 			<label index="relation.cancel.warning">Do you really want to cancel this relation?</label>
 			<label index="relation.cancel.confirm">Yes</label>
 			<label index="relation.cancel.success">Relation has been canceled.</label>
