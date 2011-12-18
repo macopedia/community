@@ -20,6 +20,11 @@
 				</div>
 				<div class="content-wrap">
 					<div class="message-header">
+						<div class="item-delete">
+							<f:link.action action="delete" additionalParams="{tx_community : {message : message, redirectAction: 'inbox'}}" title="{f:translate(key:'message.list.delete')}">
+								X
+							</f:link.action>
+						</div>
 						<span>
 							<f:translate key="message.read.from"/>
 							<f:link.page additionalParams="{tx_community: {user: message.sender}}" pageUid="{settings.profilePage}">{message.sender.name}</f:link.page><br />

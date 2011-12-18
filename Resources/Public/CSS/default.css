@@ -187,6 +187,9 @@ ul.f3-widget-paginator {
 .messages .content-wrap {
 	margin-left: 70px;
 }
+.messages .message-header .item-delete {
+	float:right;
+}
 .messages .message {
 	overflow: hidden;
 	padding: 10px 0;

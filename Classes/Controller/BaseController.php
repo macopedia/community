@@ -100,8 +100,8 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 				'Controller: '.$controllerName."<br />".
 				'ActionName: '.$actionName."<br />".
 				'resourceName: '.$resourceName."<br />".
-				($this->getRequestingUser() ? "RequestingUser: ".$this->getRequestingUser()->getName() : '')."<br />".
-				($this->getRequestedUser() ? "RequestedUser: ".$this->getRequestedUser()->getName() : '')."<br />".
+				($this->getRequestingUser() ? "RequestingUser: ".htmlspecialchars($this->getRequestingUser()->getName(),ENT_QUOTES| ENT_HTML401): '')."<br />".
+				($this->getRequestedUser() ? "RequestedUser: ".htmlspecialchars($this->getRequestedUser()->getName(),ENT_QUOTES| ENT_HTML401) : '')."<br />".
 				'AccesType: '.$this->accessHelper->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
 				'Debug',
 				t3lib_FlashMessage::INFO

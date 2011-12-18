@@ -24,6 +24,14 @@
 	<f:if condition="{messages}">
 		<f:then>
 			<f:render partial="Message/ListOwn" arguments="{messages : messages, settings : settings}"/>
+			<script type="text/javascript">
+				jQuery('.messages .item-delete').click(function(){
+					var answer = confirm ("<f:translate key='message.delete.confirm'/>");
+					if (!answer) {
+						return false;
+					  }
+					});
+			</script>
 		</f:then>
 		<f:else>
 			<f:translate key="message.outbox.nomessages"/>
