@@ -109,7 +109,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		switch ($relation->getStatus()) {
 
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW:
-				if($relation->getRequestedUser() == $user) {
+				if ($relation->getRequestedUser() == $user) {
 					$this->flashMessageContainer->add($this->_('relation.request.alreadyPending'), '', t3lib_FlashMessage::NOTICE);
 				} else {
 					// if both sides request friendship, it's ok
@@ -123,16 +123,13 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				break;
 
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED:
-				if($relation->getRequestedUser() == $user && !$this->settings['relation']['request']['allowMultiple']) {
-					//It's too late for this friendship
+
+				if (!$this->settings['relation']['request']['allowRejected']){
 					$this->flashMessageContainer->add($this->_('relation.request.alreadyRejected'), '', t3lib_FlashMessage::ERROR);
 				} else {
-					// The user that already rejected request, changed his mind
-					// or an already rejected relation can be requested again
 					$this->flashMessageContainer->add($this->_('relation.request.pending'));
-					$requestedUser = $relation->getRequestedUser();
-					$relation->setRequestedUser($relation->getInitiatingUser());
-					$relation->setInitiatingUser($requestedUser);
+					$relation->setRequestedUser($user);
+					$relation->setInitiatingUser($this->getRequestingUser());
 					$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 					$this->repositoryService->get('relation')->update($relation);
 
@@ -141,7 +138,18 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				break;
 
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED:
-				$this->flashMessageContainer->add($this->_('relation.request.alreadyCanceled'), '', t3lib_FlashMessage::NOTICE);
+				if (!$this->settings['relation']['request']['allowCancelled']) {
+					$this->flashMessageContainer->add($this->_('relation.request.alreadyCancelled'), '', t3lib_FlashMessage::ERROR);
+				} else {
+					$this->flashMessageContainer->add($this->_('relation.request.pending'));
+					$requestedUser = $relation->getRequestedUser();
+					$relation->setRequestedUser($user);
+					$relation->setInitiatingUser($this->getRequestingUser());
+					$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
+					$this->repositoryService->get('relation')->update($relation);
+
+					$this->notify('relationRequest');
+				}
 				break;
 
 			default:

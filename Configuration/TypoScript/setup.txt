@@ -50,7 +50,8 @@ plugin.tx_community {
 
 		relation {
 			request {
-				allowMultiple = 1
+				allowRejected = 1
+				allowCancelled = 1
 			}
 		}
 

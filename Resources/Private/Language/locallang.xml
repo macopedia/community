@@ -91,6 +91,7 @@
 
 			<label index="profile.interaction.requestRelation">Add as friend</label>
 			<label index="profile.interaction.rejectedRelation">Rejected</label>
+			<label index="profile.interaction.cancelledRelation">Cancelled</label>
 			<label index="profile.interaction.cancelRelation">Unfriend</label>
 			<label index="profile.interaction.cancelRequest">Cancel friend request</label>
 			<label index="profile.interaction.search">Search users</label>
@@ -117,7 +118,7 @@
 			<label index="relation.request.pending">Your friendship request is pending for approval.</label>
 			<label index="relation.request.alreadyPending">Your friendship request is already pending for approval.</label>
 			<label index="relation.request.alreadyFriends">You are already friends</label>
-			<label index="relation.request.alreadyCanceled">You can't be friends any more</label>
+			<label index="relation.request.alreadyCancelled">You can't be friends any more</label>
 			<label index="relation.request.fail">Relation couldn't be created.</label>
 			<label index="relation.cancel.warning">Do you really want to cancel this relation?</label>
 			<label index="relation.cancel.confirm">Yes</label>

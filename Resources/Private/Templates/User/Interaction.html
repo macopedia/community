@@ -76,7 +76,7 @@
 							</f:link.action>
 						</f:if>
 						<f:if condition="{relation.status} == 4"><!-- rejected -->
-							<f:if condition="{settings.relation.request.allowMultiple}"><!-- allow multiple? -->
+							<f:if condition="{settings.relation.request.allowRejected}"><!-- allow requesting friendship again -->
 								<f:then>
 									<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
 										<f:translate key="profile.interaction.requestRelation"/>
@@ -88,9 +88,16 @@
 							</f:if>
 						</f:if>
 						<f:if condition="{relation.status} == 8"><!--cancelled-->
-							<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
-								<f:translate key="profile.interaction.requestRelation"/>
-							</f:link.action>
+							<f:if condition="{settings.relation.request.allowCancelled}"><!-- allow requesting cancelled friendship -->
+								<f:then>
+									<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
+										<f:translate key="profile.interaction.requestRelation"/>
+									</f:link.action>
+								</f:then>
+								<f:else>
+									<f:translate key="profile.interaction.cancelledRelation"/>
+								</f:else>
+							</f:if>
 						</f:if>
 					</f:then>
 					<f:else>
