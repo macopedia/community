@@ -218,6 +218,7 @@
 			<label index="message.list.subject">Subject</label>
 			<label index="message.list.date">Date</label>
 			<label index="message.list.readMore">read more...</label>
+			<label index="message.list.delete">Delete message</label>
 
 			<label index="message.read.title">Read a message</label>
 			<label index="message.read.date">Date:</label>
@@ -226,10 +227,13 @@
 			<label index="message.read.subject">Subject:</label>
 			<label index="message.read.message">Message:</label>
 			<label index="message.read.back">Back to messages</label>
+			<label index="message.read.delete">Delete message</label>
+
 
 			<label index="message.send.success">Your message has been sent.</label>
-
 			<label index="message.delete.success">Selected message has been deleted.</label>
+			<label index="message.delete.confirm">Do you really want to delete this message?</label>
+
 
 
 			<label index="tx_community_domain_model_wallpost">community wall post</label>

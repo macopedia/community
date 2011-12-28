@@ -123,16 +123,22 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * Delete the message
 	 *
 	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param string $redirectAction
 	 */
-	public function deleteAction(Tx_Community_Domain_Model_Message $message) {
+	public function deleteAction(Tx_Community_Domain_Model_Message $message, $redirectAction = NULL) {
 		if ($this->getRequestingUser()) {
-			if ($message->getSender()->getUid() == $this->getRequestingUser()) {
+			if ($message->getSender()->getUid() == $this->getRequestingUser()->getUid()) {
 				$message->setSenderDeleted(true);
-			}
-			if ($message->getRecipient()->getUid() == $this->getRequestingUser()) {
+			} elseif ($message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
 				$message->setRecipientDeleted(true);
+			} 
+			$this->flashMessageContainer->add($this->_('message.delete.success'));
+
+			if(isset($redirectAction)){
+				$this->redirect($redirectAction);
+			} else {
+				$this->redirect('inbox');
 			}
-			 $this->flashMessageContainer->add($this->_('message.delete.success'));
 		}
 	}
 }

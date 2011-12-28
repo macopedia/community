@@ -47,5 +47,20 @@
 	<div class="tx-community-message-body">
 		<f:format.nl2br><com:parseLinks string="{message.message}" /></f:format.nl2br>
 	</div>
+	<div class="item-delete">
+		<f:alias map="{backActionName: '{com:sameUser(requestingUser: requestingUser, requestedUser:  message.sender, then: \'outbox\', else: \'inbox\')}'}" >
+		<f:link.action action="delete" additionalParams="{tx_community : {message : message, redirectAction: backActionName}}" title="{f:translate(key:'message.list.delete')}">
+			<f:translate key="message.list.delete"/>
+		</f:link.action>
+		</f:alias>
+		<script type="text/javascript">
+				jQuery('.tx-community-message-header .item-delete').click(function(){
+					var answer = confirm ("<f:translate key='message.delete.confirm'/>");
+					if (!answer) {
+						return false;
+					  }
+					});
+			</script>
+	</div>
 	<div class="back-link"><a href="javascript: history.go(-1)">&lt;- <f:translate key="message.read.back" /> </a></div>
 </f:section>
