@@ -1,8 +1,8 @@
-<div id="search-box2">
+<f:layout name="Default"/>
+
+<f:section name="main">
 	<f:form action="search" controller="User" pageUid="{settings.searchPage}" >
-		<fieldset>
-			<f:form.textfield name="searchWord"/>
-			<f:form.submit name="submitSearch" value="{f:translate(key:'search.form.submit')}"/>
-		</fieldset>
+		<f:form.textfield name="searchWord"/>
+		<f:form.submit name="submitSearch" value="{f:translate(key:'search.form.submit')}"/>
 	</f:form>
-</div>
+</f:section>

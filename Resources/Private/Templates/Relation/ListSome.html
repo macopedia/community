@@ -1,24 +1,28 @@
-<div class="tx_community_relation_listsome">
-	<h3><f:translate key="relation.listSome.title"/></h3>
-	<f:if condition="{usersRelations}">
-		<f:then>
-			<f:for each="{usersRelations}" as="user" key="relationUid">
-				<div class="relation-item">
-					<div class="item-image">
-						<f:link.page additionalParams="{tx_community : {user : user}}" pageUid="{settings.profilePage}">
-							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
-							         class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
-						</f:link.page>
+<f:layout name="Default"/>
+
+<f:section name="main">
+	<div class="tx_community_relation_listsome">
+		<h3><f:translate key="relation.listSome.title"/></h3>
+		<f:if condition="{usersRelations}">
+			<f:then>
+				<f:for each="{usersRelations}" as="user" key="relationUid">
+					<div class="relation-item">
+						<div class="item-image">
+							<f:link.page additionalParams="{tx_community : {user : user}}" pageUid="{settings.profilePage}">
+								<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
+								         class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
+							</f:link.page>
+						</div>
+						<div class="item-content-wrap">
+							<f:link.page additionalParams="{tx_community : {user : user}}"  pageUid="{settings.profilePage}">{user.name}</f:link.page>
+						</div>
 					</div>
-					<div class="item-content-wrap">
-						<f:link.page additionalParams="{tx_community : {user : user}}"  pageUid="{settings.profilePage}">{user.name}</f:link.page>
-					</div>
-				</div>
-			</f:for>
-			<f:link.action action="list" controller="Relation" additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.relationPage}" ><f:translate key="relation.listSome.goTolist"/></f:link.action>
-		</f:then>
-		<f:else>
-			<f:translate key="relation.list.relation.list.noRelations"/>
-		</f:else>
-	</f:if>
-</div>
+				</f:for>
+				<f:link.action action="list" controller="Relation" additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.relationPage}" ><f:translate key="relation.listSome.goTolist"/></f:link.action>
+			</f:then>
+			<f:else>
+				<f:translate key="relation.list.relation.list.noRelations"/>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>

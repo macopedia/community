@@ -1,7 +1,6 @@
 <f:layout name="Default"/>
 
 <f:section name="main">
-
 	<h3>
 		<f:translate key="group.show.title" arguments="{name : group.name}"/>
 		<f:if condition="{canJoin}">
@@ -11,8 +10,8 @@
 			<f:link.action action="edit" controller="Group" arguments="{group : group}"><f:translate key="group.show.edit"/></f:link.action>
 		</f:if>
 	</h3>
-	
-	<f:render partial="Group/image" arguments="{group : group, settings : settings}"/>	
+
+	<f:render partial="Group/image" arguments="{group : group, settings : settings}"/>
 
 	<dl>
 		<dt>

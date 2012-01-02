@@ -1,28 +1,16 @@
 <f:layout name="Default"/>
 
-This template displays a NEW form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/Kickstarter/settings.yaml:
-Resources:
-Private:
-Templates:
-New.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the kickstarter
-
 <f:section name="main">
-	
 	<div class="new-news">
 		<p><f:translate key="wallPost.form.title"/></p>
 
 		<f:render partial="FormErrors"/>
-		<f:form class="tx_community_form" method="post" action="create" controller="WallPost" arguments="{user : recipient}" name="newWallPost" object="{newWallPost}">
 
+		<f:form class="tx_community_form" method="post" action="create" controller="WallPost" arguments="{user : recipient}" name="newWallPost" object="{newWallPost}">
 			<fieldset>
-			  <div class="row">
-				<f:form.textarea property="message" cols="40" rows="4"/>
-			  </div>
+				<div class="row">
+					<f:form.textarea property="message" cols="40" rows="4"/>
+				</div>
 				<f:form.submit value="{f:translate(key:'wallPost.form.submit')}"/>
 			</fieldset>
 		</f:form>

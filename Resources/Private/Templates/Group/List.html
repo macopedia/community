@@ -3,12 +3,12 @@
 <f:section name="main">
 	<h3><f:translate key="group.list.title"/></h3>
 	<table class="tx_community_group_list">
-			<thead>
-				<tr>
-					<td><f:translate key="group.list.name"/></td>
-					<td><f:translate key="group.list.members"/></td>
-				</tr>
-			</thead>
+		<thead>
+			<tr>
+				<td><f:translate key="group.list.name"/></td>
+				<td><f:translate key="group.list.members"/></td>
+			</tr>
+		</thead>
 		<f:for each="{groups}" as="group">
 			<tr>
 				<td><f:link.action action="show" controller="Group" arguments="{group : group}">{group.name}</f:link.action></td>

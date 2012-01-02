@@ -1,9 +1,13 @@
-<h1><f:translate key="search.results.title"/></h1>
-<f:if condition="{users}">
-	<f:then>
-		<f:render partial="User/ListUser" arguments="{users : users, settings : settings}" />
-	</f:then>
-	<f:else>
+<f:layout name="Default"/>
+
+<f:section name="main">
+	<h1><f:translate key="search.results.title"/></h1>
+	<f:if condition="{users}">
+		<f:then>
+			<f:render partial="User/ListUser" arguments="{users : users, settings : settings}" />
+		</f:then>
+		<f:else>
 			<f:translate key="search.results.nothingFound"/>
-	</f:else>
-</f:if>
+		</f:else>
+	</f:if>
+</f:section>

@@ -1,7 +1,11 @@
-<h2><f:translate key="relation.cancel.warning"/></h2>
-<f:link.action action="cancel" controller="Relation" arguments="{relation: relation, confirmCancel: 1}" >
-	<f:translate key="relation.cancel.confirm" />
-</f:link.action>
-<f:link.page pageUid="{settings.profilePage}">
-	<f:translate key="relation.cancel.backToProfile" />
-</f:link.page>
+<f:layout name="Default"/>
+
+<f:section name="main">
+	<h2><f:translate key="relation.cancel.warning"/></h2>
+	<f:link.action action="cancel" controller="Relation" arguments="{relation: relation, confirmCancel: 1}" >
+		<f:translate key="relation.cancel.confirm" />
+	</f:link.action>
+	<f:link.page pageUid="{settings.profilePage}">
+		<f:translate key="relation.cancel.backToProfile" />
+	</f:link.page>
+</f:section>
