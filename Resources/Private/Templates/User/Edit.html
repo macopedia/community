@@ -14,12 +14,20 @@
 				<f:form.textbox disabled="disabled" property="username"/>
 			</div>
 			<div class="row">
-				<label><f:translate key="profile.details.name"/></label>
-				<f:form.textbox property="name"/>
+				<label><f:translate key="profile.details.email"/></label>
+				<f:form.textbox property="email"/>
+			</div>
+			<div class="row">
+				<label><f:translate key="profile.details.firstName"/></label>
+				<f:form.textbox property="firstName"/>
+			</div>
+			<div class="row">
+				<label><f:translate key="profile.details.lastName"/></label>
+				<f:form.textbox property="lastName"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.gender"/></label>
-				<f:form.select property="gender" options="{0 : '{f:translate(key:\'profile.details.gender.male\')}', 1 : '{f:translate(key:\'profile.details.gender.female\')}'}"/>
+				<f:form.select property="gender" options="{0 : '{f:translate(key:\'profile.details.gender.0\')}', 1 : '{f:translate(key:\'profile.details.gender.1\')}'}"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.dateOfBirth"/></label>
@@ -88,10 +96,6 @@
 			<div class="row">
 				<label><f:translate key="profile.details.phone"/></label>
 				<f:form.textbox property="telephone"/>
-			</div>
-			<div class="row">
-				<label><f:translate key="profile.details.email"/></label>
-				<f:form.textbox property="email"/>
 			</div>
 			<f:form.submit value="{f:translate(key:'profile.details.edit.submit')}"/>
 		</f:form>

@@ -11,8 +11,8 @@
 			<label index="profile.details.title">Details</label>
 			<label index="profile.details.name">Name</label>
 			<label index="profile.details.username">Username</label>
-			<label index="profile.details.firtsname">Firstname</label>
-			<label index="profile.details.lastname">Lastname</label>
+			<label index="profile.details.firstName">Firstname</label>
+			<label index="profile.details.lastName">Lastname</label>
 			<label index="profile.details.dateOfBirth">Birthday</label>
 			<label index="profile.details.politicalView">Political view</label>
 			<label index="profile.details.religiousView">Religious view</label>
@@ -32,8 +32,8 @@
 			<label index="profile.details.phone">Phone</label>
 			<label index="profile.details.email">Email</label>
 			<label index="profile.details.gender">Gender</label>
-			<label index="profile.details.gender.1">female</label>
 			<label index="profile.details.gender.0">male</label>
+			<label index="profile.details.gender.1">female</label>
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
 			<label index="profile.details.profileImage">Profile image</label>

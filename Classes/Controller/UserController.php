@@ -132,6 +132,8 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * @param Tx_Community_Domain_Model_User $updatedUser
 	 */
 	public function updateAction(Tx_Community_Domain_Model_User $updatedUser) {
+		$fullName = $updatedUser->getFirstName().' '.$updatedUser->getLastName();
+		$updatedUser->setName($fullName);
 		$this->repositoryService->get('user')->update($updatedUser);
 		$this->redirect('edit');
 	}
@@ -170,7 +172,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 				'requestingUser' => $this->requestingUser,
 				'replyTo' => $this->requestingUser,
 				'user' => $user,
-				'reason' => $reason,
+				'reason' => $reason
 			);
 			$this->notificationService->notify($notifyArguments, 'userReport');
 		}
