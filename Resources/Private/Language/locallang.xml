@@ -102,7 +102,7 @@
 			<label index="relation.request.fail">Relation couldn't be created.</label>
 			<label index="relation.cancel.warning">Do you really want to cancel this relation?</label>
 			<label index="relation.cancel.confirm">Yes</label>
-			<label index="relation.cancel.success">Relation has been canceled.</label>
+			<label index="relation.cancel.success">%1$s has been removed from your friends.</label>
 			<label index="relation.cancel.backToProfile">Back to profile page</label>
 			<label index="relation.menu.list">Friends</label>
 			<label index="relation.menu.unconfirmed">Unconfirmed</label>
