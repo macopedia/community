@@ -37,26 +37,7 @@ class Tx_Community_ViewHelpers_ParseLinksViewHelper extends Tx_Fluid_ViewHelpers
 	 * @return string
 	 */
 	public function render($string) {
-		$regularExpressionsPattern = array(
-			'/(((f|ht){1}tp\:\/\/)[-a-zA-Z0-9@:%_+.~#?&\/\/=]+)/ei',
-			'/([[:space:][{}])?(www.[-a-zA-Z0-9@:%_+.~#?&\/\/=]+)/ei',
-			'/([_.0-9a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,3})/ei'
-		);
-		$regularExpressionsReplacement = array(
-			'"<a href=\"$1\" target=\"_blank\" rel=\"nofollow\">".$this->stringWrap("$1", 35)."</a>"',
-			'"$1<a href=\"http://$2\" target=\"_blank\" rel=\"nofollow\">".$this->stringWrap("$2", 35)."</a>"',
-			'"<a href=\"mailto:$1\" rel=\"nofollow\">".$this->stringWrap("$1", 35)."</a>"'
-		);
-		return preg_replace($regularExpressionsPattern, $regularExpressionsReplacement, $string);
-	}
-
-	/**
-	 * @param $string
-	 * @param $limit
-	 * @return string
-	 */
-	protected function stringWrap($string, $limit) {
-		return wordwrap($string, $limit, '<wbr />', TRUE);
+		return Tx_Community_Helper_UrlLinkerHelper::htmlEscapeAndLinkUrls($string);
 	}
 }
 ?>
