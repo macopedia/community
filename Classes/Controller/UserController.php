@@ -168,13 +168,13 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 		} else {
 			$this->flashMessageContainer->add($this->_('profile.report.reported'));
 
-			$notifyArguments = array(
-				'requestingUser' => $this->requestingUser,
-				'replyTo' => $this->requestingUser,
-				'user' => $user,
-				'reason' => $reason
+			$notification = new Tx_Community_Service_Notification_Notification(
+				'userReport',
+				$this->requestingUser,
+				$this->requestedUser
 			);
-			$this->notificationService->notify($notifyArguments, 'userReport');
+			$notification->setMessage($reason);
+			$this->notificationService->notify($notification);
 		}
 		$this->redirect('details', NULL, NULL, array('user'=>$user));
 	}

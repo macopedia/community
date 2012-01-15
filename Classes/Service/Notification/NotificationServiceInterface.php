@@ -35,10 +35,8 @@ interface Tx_Community_Service_Notification_NotificationServiceInterface {
 
 	/**
 	 * @abstract
-	 * @param Tx_Community_Domain_Model_User $sender
-	 * @param array $recipients
-	 * @param string $resourceName
+	 * @param Tx_Community_Service_Notification_Notification $notification used by handlers
 	 */
-	public function notify(array $arguments, $resourceName);
+	public function notify(Tx_Community_Service_Notification_Notification $notification);
 }
 ?>

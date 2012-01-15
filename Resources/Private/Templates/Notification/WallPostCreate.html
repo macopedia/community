@@ -1,1 +1,8 @@
-User {message.sender.username} posted message on your wall.
+<f:if condition="{subject}">
+	<f:then>
+		Community - somebody posted on you wall
+	</f:then>
+	<f:else>
+		User {notification.sender.username} posted message on your wall.
+	</f:else>
+</f:if>

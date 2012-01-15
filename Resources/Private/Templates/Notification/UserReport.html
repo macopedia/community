@@ -1,3 +1,12 @@
-User <f:link.action absolute="1" arguments="{user : sender}" pageUid="{settings.profilePage}" controller="User" action="details"> {sender.username} </f:link.action>
-reports profile <f:link.action absolute="1" arguments="{user : user}" pageUid="{settings.profilePage}"  controller="User" action="details"> {user.username} </f:link.action>
-<f:if condition="{reason}">Reason: {reason}</f:if>
+<f:if condition="{subject}">
+	<f:then>
+		Community - bad profile report
+	</f:then>
+	<f:else>
+		User <f:link.action absolute="1" arguments="{user : notification.sender}" pageUid="{settings.profilePage}"
+							controller="User" action="details"> {notification.sender.username} </f:link.action>
+		reports profile <f:link.action absolute="1" arguments="{user : notification.recipient}" pageUid="{settings.profilePage}"
+									   controller="User" action="details"> {notification.recipient.username} </f:link.action>
+		<f:if condition="{reason}"><f:then>Reason: {notification.message}</f:then></f:if>
+	</f:else>
+</f:if>

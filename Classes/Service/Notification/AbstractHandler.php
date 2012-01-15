@@ -24,14 +24,13 @@
 ***************************************************************/
 
 /**
- * Handler for single way of notifying user
+ * Abstract notification handler
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Service_Notification_HandlerInterface, t3lib_Singleton {
+abstract class Tx_Community_Service_Notification_AbstractHandler implements Tx_Community_Service_Notification_HandlerInterface, t3lib_Singleton {
 
 	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
@@ -82,30 +81,31 @@ class Tx_Community_Service_Notification_BaseHandler implements Tx_Community_Serv
 	 * You want to use render() inside
 	 *
 	 * @abstract
-	 * @param array $arguments Objects passed to fluid view (not only)
-	 *		Notable arguments:
-	 *			$arguments['sender'] Tx_Community_Domain_Model_User
-	 *			$arguments['recipient'] Tx_Community_Domain_Model_User
-	 *			$arguments['recipients'] array of Tx_Community_Domain_Model_User
-	 *			$arguments['subject'] string - some handlers set message subject
-	 * @param array $methodConfiguration from plugin.tx_community.settings.notification.rules.XXX.YYY
+	 * @param Tx_Community_Service_Notification_Notification $notification
+	 * @param array $configuration from plugin.tx_community.settings.notification.rules.XXX.YYY
 	 * @return void
 	 */
-	public function send(array $arguments, array $methodConfiguration) {
+	public function send(Tx_Community_Service_Notification_Notification $notification, array $configuration) {
 	}
 
 	/**
-	 * @param array $arguments Objects passed to fluid view
-	 * @param array $mathodConfiguration
+	 * @param Tx_Community_Service_Notification_Notification $notification Object passed to fluid view
+	 * @param array $methodConfiguration
 	 * @return string
 	 */
-	protected function render(array $arguments, array $methodConfiguration) {
+	protected function render(Tx_Community_Service_Notification_Notification $notification, array $methodConfiguration) {
 		$view = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		/* @var $view Tx_Fluid_View_StandaloneView */
-		$arguments['settings'] = $this->settingsService->get();
-		$view->setTemplatePathAndFilename(t3lib_div::getFileAbsFileName($arguments['settings']['notification']['templateRootPath'].'/Notification/'.$methodConfiguration['template'].'.html'));
-		$view->assignMultiple($arguments);
-		return $view->render();
+		$settings = $this->settingsService->get();
+		$view->setTemplatePathAndFilename(t3lib_div::getFileAbsFileName($settings['notification']['templateRootPath'].'/Notification/'.$methodConfiguration['template'].'.html'));
+
+		$view->assign('notification', $notification);
+		$view->assign('settings', $settings);
+		$view->assign('subject', true);
+		$subject = $view->render();
+		$view->assign('subject', false);
+		$body = $view->render();
+		return array('subject' => $subject, 'body' => $body);
 	}
 
 }

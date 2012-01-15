@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Tymoteusz Motylewski <t.motylewski@gmail.com>
+*  (c) 2012 Tymoteusz Motylewski <t.motylewski@gmail.com>
 *
 *  All rights reserved
 *
@@ -23,23 +23,34 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+
 /**
- * Handlers for NotificationService, each implements one way of notification
+ * Test for the notification class
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-interface Tx_Community_Service_Notification_HandlerInterface {
+class Tx_Community_Tests_Service_Notification_NotificationTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 
+	protected $notification;
+
+	public function setUp() {
+		$this->notification = new Tx_Community_Service_Notification_Notification();
+	}
 
 	/**
-	 * @abstract
-	 * @param  Tx_Community_Service_Notification_Notification $notification
-	 * @param  array $configuration
-	 * @return void
+	 * @test
 	 */
-	public function send(Tx_Community_Service_Notification_Notification $notification, array $configuration);
+	public function magicMethodsTest() {
+		$this->notification->setRelation('some string');
+		$this->assertEquals('some string',  $this->notification->getRelation());
 
+		$this->notification->setRule('ruleName'); //existing property
+		$this->assertEquals('ruleName',  $this->notification->getRule());
+
+		$this->assertEquals(NULL,  $this->notification->getNotSetbeforeProperty());
+	}
 }
-?>
+
+

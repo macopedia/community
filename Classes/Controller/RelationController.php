@@ -27,7 +27,6 @@
 /**
  * The relation controller.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
@@ -262,18 +261,15 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 */
 	protected function notify($resourceName) {
 		$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($this->getRequestedUser(), $this->getRequestingUser());
-		$notifyArguments = array(
-			'sender' => $this->requestingUser,
-			'recipient' => $this->requestedUser,
-			'relation' => $relation,
+
+		$notification = new Tx_Community_Service_Notification_Notification(
+			$resourceName,
+			$this->requestingUser,
+			$this->requestedUser
 		);
-		//TODO: this check should be moved to email notification,
-		// as this method is used also for non-mail notification types
-		if(t3lib_div::validEmail($this->requestedUser->getEmail())){
-			$this->notificationService->notify($notifyArguments, $resourceName);
-		} else {
-			t3lib_div::sysLog('User with id:'.$this->requestedUser->getUid()." has wrong email address.", "Community");
-		}
+		$notification->setRelation($relation);
+
+		$this->notificationService->notify($notification);
 	}
 }
 ?>

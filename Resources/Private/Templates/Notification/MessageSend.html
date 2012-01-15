@@ -1,1 +1,8 @@
-User {message.sender.username} sent a message to you.
+<f:if condition="{subject}">
+	<f:then>
+		Community - Private message
+	</f:then>
+	<f:else>
+		User {notification.sender.username} sent a message to you.
+	</f:else>
+</f:if>

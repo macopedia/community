@@ -85,14 +85,15 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		$this->flashMessageContainer->add($this->_('message.send.success'));
 		$this->request->setArgument('message', NULL);
 
-		$this->notificationService->notify(
-			array(
-				'sender' => $this->requestingUser,
-				'recipient' => $this->requestedUser,
-				'message' => $message,
-			),
-			'messageSend'
+		$notification = new Tx_Community_Service_Notification_Notification(
+			'messageSend',
+			$this->requestingUser,
+			$this->requestedUser
 		);
+		$notification->setMessage($message);
+
+		$this->notificationService->notify($notification);
+
 
 		if ($this->request->getPluginName() == 'MessageBox')
 			$this->redirect('read', NULL, NULL, array('user' => $message->getRecipient()));
@@ -131,7 +132,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 				$message->setSenderDeleted(true);
 			} elseif ($message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
 				$message->setRecipientDeleted(true);
-			} 
+			}
 			$this->flashMessageContainer->add($this->_('message.delete.success'));
 
 			if(isset($redirectAction)){

@@ -151,67 +151,51 @@ plugin.tx_community {
 		notification {
 			// Layouts and partials not supported
 			templateRootPath = EXT:community/Resources/Private/Templates
+			defaults {
+				handler = Tx_Community_Service_Notification_MailHandler
+				serverEmail = {$plugin.tx_community.serverEmail}
+			}
 			rules {
 
 				relationRequest {
 					10 {
-						handler = Tx_Community_Service_Notification_MailService
 						template = RelationRequest
-						subject = requestRelation
-						sender = {$plugin.tx_community.serverEmail}
 					}
 				}
 				relationConfirm {
 					10 {
-						handler = Tx_Community_Service_Notification_MailService
 						template = RelationConfirm
-						subject = confirmedRelation
-						sender = {$plugin.tx_community.serverEmail}
 					}
 				}
 				relationReject {
 					10 {
-						handler = Tx_Community_Service_Notification_MailService
 						template = RelationReject
-						subject = rejectedRelation
-						sender = {$plugin.tx_community.serverEmail}
 					}
 				}
 				relationCancel {
 					10 {
-						handler = Tx_Community_Service_Notification_MailService
 						template = RelationCancel
-						subject = canceledRelation
-						sender = {$plugin.tx_community.serverEmail}
 					}
 				}
 				#admin notification about bad profile
 				userReport {
 					10 {
-						handler = Tx_Community_Service_Notification_MailService
 						template = UserReport
-						subject = Profile report
 						recipient = {$plugin.tx_community.adminEmail}
-						sender = {$plugin.tx_community.serverEmail}
-						useSenderFromArgumentsAsReplyTo = 1
+						overrideRecipient = 1
+						replyToSenderUser = 1
 					}
 				}
 				#notification about private message
 				messageSend {
 					10 {
-						handler = Tx_Community_Service_Notification_MailService
 						template = MessageSend
-						subject = Community - Private message
-						sender = {$plugin.tx_community.serverEmail}
 					}
 				}
 				#notification about wall message
 				wallPostCreate {
 					10 {
-						handler = Tx_Community_Service_Notification_MailService
 						template = WallPostCreate
-						subject = Community - Private message
-						sender = {$plugin.tx_community.serverEmail}
 					}
 				}
 			}

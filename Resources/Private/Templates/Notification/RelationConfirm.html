@@ -1,1 +1,8 @@
-User <f:link.action absolute="1" arguments="{user: sender}" pageUid="{settings.profilePage}"  controller="User" action="details"> {sender.username} </f:link.action> confirmed your friendship.
+<f:if condition="{subject}">
+	<f:then>
+		Community - your relation request was confirmed
+	</f:then>
+	<f:else>
+		User <f:link.action absolute="1" arguments="{user: notification.sender}" pageUid="{settings.profilePage}"  controller="User" action="details"> {notification.sender.username} </f:link.action> confirmed your friendship request.
+	</f:else>
+</f:if>

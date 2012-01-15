@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2011 Tymoteusz Motylewski <t.motylewski@gmail.com>
+*  (c) 2012 Tymoteusz Motylewski <t.motylewski@gmail.com>
 *
 *  All rights reserved
 *
@@ -24,22 +24,27 @@
 ***************************************************************/
 
 /**
- * Handlers for NotificationService, each implements one way of notification
+ * Notify user with wall message
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-interface Tx_Community_Service_Notification_HandlerInterface {
-
+class Tx_Community_Service_Notification_WallHandler extends Tx_Commmunity_Service_Notification_BaseHandler {
 
 	/**
-	 * @abstract
-	 * @param  Tx_Community_Service_Notification_Notification $notification
+	 * @param  array $arguments
 	 * @param  array $configuration
 	 * @return void
 	 */
-	public function send(Tx_Community_Service_Notification_Notification $notification, array $configuration);
+	public function send(array $arguments, array $configuration) {
 
+		$message = t3lib_div::makeInstance('Tx_Community_Domain_Model_WallPost');
+		$message->setSender($arguments['sender']);
+		$message->setRecipient($arguments['recipient']);
+		$message->setSubject($arguments['sender']->getName());
+		$message->setMessage($this->render($arguments, $configuration));
+		$this->repositoryService->get('wallPost')->add($message);
+	}
 }
 ?>
