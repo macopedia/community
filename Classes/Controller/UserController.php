@@ -143,7 +143,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 */
 	public function searchAction() {
 		$users = array();
-		if ($this->request->hasArgument('searchWord')) {
+		if ($this->request->hasArgument('searchWord') && $this->request->getArgument('searchWord') != '') {
 			$word = $this->request->getArgument('searchWord');
 			$users = $this->repositoryService->get('user')->searchByString($word);
 		}
