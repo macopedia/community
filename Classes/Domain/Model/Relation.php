@@ -26,7 +26,6 @@
 /**
  * A relation between two users.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
@@ -116,13 +115,25 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 *
 	 * @param Tx_Community_Domain_Model_User $requestedUser
 	 */
 	public function setRequestedUser($requestedUser) {
 		$this->requestedUser = $requestedUser;
 	}
 
+	/**
+	 * @return DateTime
+	 */
+	public function getInitiationTime() {
+		return $this->initiatingUser;
+	}
+
+	/**
+	 * @param DateTime $initiationTime
+	 */
+	public function setInitiationTime($initiationTime) {
+		$this->initiationTime = $initiationTime;
+	}
 	/**
 	 *
 	 * @return Tx_Community_Domain_Model_AclRole

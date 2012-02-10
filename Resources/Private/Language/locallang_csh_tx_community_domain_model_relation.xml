@@ -7,7 +7,10 @@
     </meta>
     <data type="array">
         <languageKey index="default" type="array">
-			<label index=".description"></label>
+			<label index="initiating_user.description">Initiating user</label>
+			<label index="requested_user.description">Requested user</label>
+			<label index="initiation_time.description">Initiation time</label>
+			<label index="status.description">Current status of relation</label>
 		</languageKey>
     </data>
 </T3locallang>

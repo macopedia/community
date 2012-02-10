@@ -10,7 +10,7 @@
 		</span>
 		<f:link.page additionalParams="{tx_community : {user : requestedUser}}" pageUid="{settings.profilePage}">
 			<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : requestedUser, settings : settings}')}"
-			         class="user-photo" width="155" height="180m" alt="{requestedUser.name}"
+						class="user-photo" width="155" height="180m" alt="{requestedUser.name}"
 			/>
 		</f:link.page>
 		<div class="user-panel">
@@ -41,11 +41,14 @@
 					<f:else>
 						<f:if condition="{relation}">
 							<f:then>
-								<li>
-									<f:link.action action="write" controller="Message" arguments="{user : requestedUser}" pageUid="{settings.messagePage}">
-										<f:translate key="profile.interaction.writeMessage"/>
-									</f:link.action>
-								</li>
+								<f:if condition="{relation.status} == 2">
+									<f:then>
+										<li>
+											<f:link.action action="write" controller="Message" arguments="{user : requestedUser}" pageUid="{settings.messagePage}">
+												<f:translate key="profile.interaction.writeMessage"/>
+											</f:link.action>
+										</li>
+									</f:then>
 							</f:then>
 						</f:if>
 					</f:else>
@@ -69,8 +72,8 @@
 					<f:if condition="{relation}">
 						<f:then>
 							<f:if condition="{relation.status} == 1"><!--pending (new)-->
-								<f:link.action action="cancel" class="remove-from-friends" controller="Relation" arguments="{relation : relation}" pageUid="{settings.relationPage}">
-									<f:translate key="profile.interaction.cancelRequest"/>
+								<f:link.action action="reject" class="remove-from-friends" controller="Relation" arguments="{relation : relation}" pageUid="{settings.relationPage}">
+									<f:translate key="profile.interaction.rejectRequest"/>
 								</f:link.action>
 							</f:if>
 							<f:if condition="{relation.status} == 2"><!--confirmed-->
@@ -79,28 +82,14 @@
 								</f:link.action>
 							</f:if>
 							<f:if condition="{relation.status} == 4"><!-- rejected -->
-								<f:if condition="{settings.relation.request.allowRejected}"><!-- allow requesting friendship again -->
-									<f:then>
-										<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
-											<f:translate key="profile.interaction.requestRelation"/>
-										</f:link.action>
-									</f:then>
-									<f:else>
-										<f:translate key="profile.interaction.rejectedRelation"/>
-									</f:else>
-								</f:if>
+								<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
+									<f:translate key="profile.interaction.requestRelation"/>
+								</f:link.action>
 							</f:if>
 							<f:if condition="{relation.status} == 8"><!--cancelled-->
-								<f:if condition="{settings.relation.request.allowCancelled}"><!-- allow requesting cancelled friendship -->
-									<f:then>
-										<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
-											<f:translate key="profile.interaction.requestRelation"/>
-										</f:link.action>
-									</f:then>
-									<f:else>
-										<f:translate key="profile.interaction.cancelledRelation"/>
-									</f:else>
-								</f:if>
+								<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
+									<f:translate key="profile.interaction.requestRelation"/>
+								</f:link.action>
 							</f:if>
 						</f:then>
 						<f:else>

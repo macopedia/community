@@ -48,13 +48,6 @@ plugin.tx_community {
 			dafaultAlbumMainPhoto = EXT:community/Resources/Public/Images/defaultAlbumMainPhoto.png
 		}
 
-		relation {
-			request {
-				allowRejected = 1
-				allowCancelled = 1
-			}
-		}
-
 		caching {
 			Group = list,show
 			User = image,details

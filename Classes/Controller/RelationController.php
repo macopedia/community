@@ -41,7 +41,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestedUser(), $this->settings['relations']['listSome']['limit']);
 		$relationNumber = $relations->count();
 		$users = array();
-		foreach($relations as $relation) {
+		foreach($relations as $relation) { /* @var $relation Tx_Community_Domain_Model_Relation */
 			if ($relation->getRequestedUser()->getUid() == $this->getRequestedUser()->getUid()) {
 				$users[$relation->getUid()] = $relation->getInitiatingUser();
 			} else {
@@ -77,15 +77,19 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		if ($relation === NULL) {
 			//Normal request
 			$this->flashMessageContainer->add($this->_('relation.request.pending'));
-			$relation = new Tx_Community_Domain_Model_Relation();
 
-			// we must notify before new relation is created
+
 			$this->notify('relationRequest');
+
 			// set the details for the relation
+			$relation = new Tx_Community_Domain_Model_Relation();
 			$relation->setInitiatingUser($this->getRequestingUser());
 			$relation->setRequestedUser($user);
 			$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 			$this->repositoryService->get('relation')->add($relation);
+
+			// we must notify about new relation
+			$this->notify('relationRequest');
 		} elseif ($relation instanceof Tx_Community_Domain_Model_Relation) {
 			$this->requestedExistingRelation($relation, $user);
 		} else {
@@ -101,7 +105,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	/**
 	 * Used in requestAction() when requested relation exists
 	 * @param Tx_Community_Domain_Model_Relation $relation
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Tx_Community_Domain_Model_User $user user with who we want to be friends
 	 * @return void
 	 */
 	protected function requestedExistingRelation(Tx_Community_Domain_Model_Relation $relation, Tx_Community_Domain_Model_User $user) {
@@ -123,33 +127,14 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				break;
 
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED:
-
-				if (!$this->settings['relation']['request']['allowRejected']){
-					$this->flashMessageContainer->add($this->_('relation.request.alreadyRejected'), '', t3lib_FlashMessage::ERROR);
-				} else {
-					$this->flashMessageContainer->add($this->_('relation.request.pending'));
-					$relation->setRequestedUser($user);
-					$relation->setInitiatingUser($this->getRequestingUser());
-					$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
-					$this->repositoryService->get('relation')->update($relation);
-
-					$this->notify('relationRequest');
-				}
-				break;
-
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED:
-				if (!$this->settings['relation']['request']['allowCancelled']) {
-					$this->flashMessageContainer->add($this->_('relation.request.alreadyCancelled'), '', t3lib_FlashMessage::ERROR);
-				} else {
-					$this->flashMessageContainer->add($this->_('relation.request.pending'));
-					$requestedUser = $relation->getRequestedUser();
+
 					$relation->setRequestedUser($user);
 					$relation->setInitiatingUser($this->getRequestingUser());
 					$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 					$this->repositoryService->get('relation')->update($relation);
-
+					$this->flashMessageContainer->add($this->_('relation.request.pending'));
 					$this->notify('relationRequest');
-				}
 				break;
 
 			default:
@@ -238,6 +223,9 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 */
 	protected function confirmRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED);
+		$initiationTime = new DateTime();
+		$initiationTime->setTimestamp($GLOBALS['EXEC_TIME']);
+		$relation->setInitiationTime($initiationTime);
 		$this->repositoryService->get('relation')->update($relation);
 		$this->notify('relationConfirm');
 	}
@@ -263,6 +251,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 */
 	protected function cancelRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED);
+		$this->repositoryService->get('relation')->update($relation);
 		$this->notify('relationCancel');
 	}
 
@@ -282,8 +271,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 		// as this method is used also for non-mail notification types
 		if(t3lib_div::validEmail($this->requestedUser->getEmail())){
 			$this->notificationService->notify($notifyArguments, $resourceName);
-		}
-		else {
+		} else {
 			t3lib_div::sysLog('User with id:'.$this->requestedUser->getUid()." has wrong email address.", "Community");
 		}
 	}

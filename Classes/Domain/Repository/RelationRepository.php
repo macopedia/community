@@ -26,7 +26,6 @@
 /**
  * Repository for Tx_Community_Domain_Model_Relation
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
@@ -34,12 +33,11 @@
 class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Persistence_Cacheable_AbstractCacheableRepository {
 
 	/**
-	 * Find relations for a certain user.
+	 * Find confirmed relations for a certain user.
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
-	 * @param integer $limit
 	 */
-	public function findRelationsForUser(Tx_Community_Domain_Model_User $user, $limit = 8) {
+	public function findRelationsForUser(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
 		return $query->matching(
 			$query->logicalAnd(
@@ -57,7 +55,8 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	 *
 	 * @param Tx_Community_Domain_Model_User $requestedUser
 	 * @param Tx_Community_Domain_Model_User $requestingUser
-	 * @return array
+	 * @param integer || NULL $status
+	 * @return Tx_Community_Domain_Model_Relation
 	 * @throws Tx_Community_Exception_UnexpectedException
 	 */
 	public function findRelationBetweenUsers(
