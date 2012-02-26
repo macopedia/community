@@ -99,15 +99,31 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 *
 	 * @param Tx_Community_Domain_Model_User $initiatingUser
 	 */
 	public function setInitiatingUser(Tx_Community_Domain_Model_User $initiatingUser) {
 		$this->initiatingUser = $initiatingUser;
 	}
 
+
+
 	/**
-	 *
+	 * @return DateTime
+	 */
+	public function getInitiationTime() {
+		return $this->initiatingUser;
+	}
+
+	/**
+	 * @param DateTime $initiationTime
+	 */
+	public function setInitiationTime($initiationTime) {
+		$this->initiationTime = $initiationTime;
+	}
+
+
+
+	/**
 	 * @return Tx_Community_Domain_Model_User
 	 */
 	public function getRequestedUser() {
@@ -138,37 +154,38 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 	 *
 	 * @return Tx_Community_Domain_Model_AclRole
 	 */
-//	private function getInitiatingRole()
-//	{
-//	    return $this->initiatingRole;
-//	}
+	// private function getInitiatingRole() {
+	// 	return $this->initiatingRole;
+	// }
 
 	/**
-	 *
 	 * @param Tx_Community_Domain_Model_AclRole $initiatingRole
 	 */
-//	private function setInitiatingRole($initiatingRole)
-//	{
-//	    $this->initiatingRole = $initiatingRole;
-//	}
+	// private function setInitiatingRole($initiatingRole) {
+	// 	$this->initiatingRole = $initiatingRole;
+	// }
 
 	/**
-	 *
 	 * @return Tx_Community_Domain_Model_AclRole
 	 */
-//	private function getRequestedRole()
-//	{
-//	    return $this->requestedRole;
-//	}
+	// private function getRequestedRole() {
+	// 	return $this->requestedRole;
+	// }
 
 	/**
-	 *
 	 * @param Tx_Community_Domain_Model_AclRole $requestedRole
 	 */
-//        private  function setRequestedRole($requestedRole)
-//	{
-//	    $this->requestedRole = $requestedRole;
-//	}
+	// private function setRequestedRole($requestedRole) {
+	// 	$this->requestedRole = $requestedRole;
+	// }
+
+
+	/**
+	 * @return integer
+	 */
+	public function getStatus() {
+		return $this->status;
+	}
 
 	/**
 	 * @param integer $status
@@ -177,12 +194,6 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 		$this->status = $status;
 	}
 
-	/**
-	 * @return integer
-	 */
-	public function getStatus() {
-		return $this->status;
-	}
 
 	/*public function _isDirty($propertyName = NULL) {
 		t3lib_div::debug($this->_cleanProperties);

@@ -26,7 +26,6 @@
 /**
  * A Helper class for all kinds of relations.
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
@@ -52,12 +51,12 @@ class Tx_Community_Helper_RelationHelper {
 	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
 	 * @param Tx_Community_Domain_Model_User $user
-	 * @param Tx_Community_Controller_AclRoleController $role
+	 * @param Tx_Community_Domain_Model_AclRole $role
 	 */
 	static public function setAclRole(
 		Tx_Community_Domain_Model_Relation &$relation,
 		Tx_Community_Domain_Model_User $user,
-		Tx_Community_Domain_Model_AclRole  $role
+		Tx_Community_Domain_Model_AclRole $role
 	) {
 		if ($relation->getRequestedUser()->getUid() == $user->getUid()) {
 			$relation->setRequestedRole($role);
@@ -71,9 +70,7 @@ class Tx_Community_Helper_RelationHelper {
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
 	 */
-	static public function getRolesForUser(Tx_Community_Domain_Model_User $user, $defaultRoles = NULL) {
-		debug_print_backtrace();
-		die();
+	static public function getRolesForUser(Tx_Community_Domain_Model_User $user) {
 		$relations = Tx_Community_Helper_RepositoryHelper::getRepository('Relation')->findRelationsForUser($user);
 		foreach($relations as $relation) {
 			$roles[] = Tx_Community_Helper_RelationHelper::getAclRole($relation, $user);

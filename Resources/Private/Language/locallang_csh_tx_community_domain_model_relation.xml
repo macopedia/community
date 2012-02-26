@@ -12,5 +12,5 @@
 			<label index="initiation_time.description">Initiation time</label>
 			<label index="status.description">Current status of relation</label>
 		</languageKey>
-    </data>
+	</data>
 </T3locallang>
