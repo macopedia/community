@@ -138,19 +138,6 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 	}
 
 	/**
-	 * @return DateTime
-	 */
-	public function getInitiationTime() {
-		return $this->initiatingUser;
-	}
-
-	/**
-	 * @param DateTime $initiationTime
-	 */
-	public function setInitiationTime($initiationTime) {
-		$this->initiationTime = $initiationTime;
-	}
-	/**
 	 *
 	 * @return Tx_Community_Domain_Model_AclRole
 	 */
