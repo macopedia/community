@@ -51,11 +51,13 @@ class Tx_Community_Service_Notification_Notification {
 	 */
 	protected $rule = '';
 
+
+
 	/**
 	 * @param Tx_Community_Domain_Model_User $recipient
 	 */
 	public function setRecipient($recipient) {
-		if($recipient instanceof Tx_Community_Domain_Model_User) {
+		if ($recipient instanceof Tx_Community_Domain_Model_User) {
 			$this->recipient = $recipient;
 		}
 	}
@@ -71,7 +73,7 @@ class Tx_Community_Service_Notification_Notification {
 	 * @param Tx_Community_Domain_Model_User $sender
 	 */
 	public function setSender($sender) {
-		if($sender instanceof Tx_Community_Domain_Model_User) {
+		if ($sender instanceof Tx_Community_Domain_Model_User) {
 			$this->sender = $sender;
 		}
 	}
@@ -108,8 +110,9 @@ class Tx_Community_Service_Notification_Notification {
 		$this->setRecipient($recipient);
 	}
 
-	public function __call($methodName, $args) {
-		if (preg_match('~^(set|get)([A-Z])(.*)$~', $methodName, $matches)) {
+
+	public function __call($methodName, array $args) {
+		if (preg_match('/^(set|get)([A-Z])(.*)$/', $methodName, $matches)) {
 			$property = $matches[2].$matches[3];
 			switch($matches[1]) {
 				case 'set':
@@ -119,6 +122,5 @@ class Tx_Community_Service_Notification_Notification {
 			}
 		}
 	}
-
 }
-
+?>
