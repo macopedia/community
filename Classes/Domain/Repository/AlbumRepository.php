@@ -52,5 +52,21 @@ class Tx_Community_Domain_Repository_AlbumRepository extends Tx_Extbase_Persiste
 			->execute()
 			->getFirst();
 	}
+
+	/**
+	 * Deletes all albums for user - useful when we delete him
+	 *
+	 * @param Tx_Community_Domain_Model_User $user
+	 * @return void
+	 */
+	public function deleteAllForUser(Tx_Community_Domain_Model_User $user) {
+		$query = $this->createQuery();
+		$albums = $query->matching(
+			$query->equals('user', $user)
+		)->execute();
+		foreach ($albums as $album) {
+			$this->remove($album);
+		}
+	}
 }
 ?>

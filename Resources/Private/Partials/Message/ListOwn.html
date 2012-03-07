@@ -4,12 +4,20 @@
 		<f:for each="{messages}" as="message">
 			<div class="message sent">
 				<div class="icon-wrap">
-					<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}">
-						<f:image
-							src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.recipient, settings: settings}')}"
-							class="user-photo-thumbnail" width="60" height="80m" alt="{message.recipient}"
-						/>
-					</f:link.page>
+					<f:if condition="{message.recipient}">
+						<f:then>
+							<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}">
+							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: message.recipient, settings: settings}')}"
+								class="user-photo-thumbnail" width="60" height="80m" alt="{message.recipient}"
+							/>
+							</f:link.page>
+						</f:then>
+						<f:else>
+							<f:image src="{settings.profile.image.defaultImage}"
+								class="user-photo-thumbnail" width="60" height="80m" alt="{f:translate(key:'profile.deletedUserName')}"
+							/>
+						</f:else>
+					</f:if>
 				</div>
 				<div class="content-wrap">
 					<div class="message-header">
@@ -20,7 +28,8 @@
 						</div>
 						<span>
 							<f:translate key="message.read.to"/>
-							<f:link.page additionalParams="{tx_community: {user: message.recipient}}" pageUid="{settings.profilePage}">{message.recipient.name}</f:link.page><br />
+							<f:render partial="Profile/LinkToProfile" arguments="{user: message.recipient, settings: settings}"/>
+							<br />
 							<small><f:format.date format="d.m.Y, H:i">{message.sentDate}</f:format.date></small>
 						</span>
 						<p class="message-title">

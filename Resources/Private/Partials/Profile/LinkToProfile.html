@@ -1,0 +1,8 @@
+<f:if condition="{user}">
+	<f:then>
+		<f:link.page additionalParams="{tx_community: {user: user}}" pageUid="{settings.profilePage}">{user.name}</f:link.page>
+	</f:then>
+	<f:else>
+		<f:translate key="profile.deletedUserName"/>
+	</f:else>
+</f:if>

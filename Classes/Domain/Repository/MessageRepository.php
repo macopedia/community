@@ -29,6 +29,7 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 	 * Find outgoing messages for the current user
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @return Tx_Extbase_Persistence_QueryResultInterface
 	 */
 	public function findOutgoingForUser(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
@@ -45,6 +46,7 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 	 * Find incoming messages
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @return Tx_Extbase_Persistence_QueryResultInterface
 	 */
 	public function findIncomingForUser(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
@@ -61,6 +63,7 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 	 * Find unread messages for a user
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @return Tx_Extbase_Persistence_QueryResultInterface
 	 */
 	public function findUnreadForUser(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
@@ -76,5 +79,30 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 			)
 		)->execute();
 	}
+
+	/**
+	 * Deletes all (sent,receved...) messages for given user - useful when we delete him
+	 *
+	 * @param Tx_Community_Domain_Model_User $user
+	 * @return void
+	 */
+	public function deleteAllForUser(Tx_Community_Domain_Model_User $user) {
+		$query = $this->createQuery();
+		$messages = $query->matching(
+			$query->logicalOr(
+				$query->equals('sender', $user),
+				$query->equals('recipient', $user)
+			)
+		)->execute();
+		foreach ($messages as $message) { /* @var $message Tx_Community_Domain_Model_Message */
+			if ($user->getUid() == $message->getSender()->getUid()) {
+				$message->setSenderDeleted(TRUE);
+			} else {
+				$message->setRecipientDeleted(TRUE);
+			}
+			$this->update($message);
+		}
+	}
+
 }
 ?>

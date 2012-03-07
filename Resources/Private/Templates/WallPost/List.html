@@ -1,5 +1,5 @@
 {namespace com=Tx_Community_ViewHelpers}
-<f:layout name="Default" />
+<f:layout name="Default"/>
 
 <f:section name="main">
 	<div class="community-wall">
@@ -10,9 +10,18 @@
 			<f:for each="{paginatedWallPosts}" as="wallPost">
 				<div class="wall-item-wrap">
 					<div class="wall-item">
-						<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}" class="item-image">
-							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : wallPost.sender, settings : settings}')}" class="user-photo-thumbnail" width="48c" height="47c" alt="{wallPost.sender.name}" />
-						</f:link.page>
+						<f:if condition="{wallPost.sender}">
+							<f:then>
+								<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}" class="item-image">
+									<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : wallPost.sender, settings : settings}')}" class="user-photo-thumbnail" width="48c" height="47c" alt="{wallPost.sender.name}" />
+								</f:link.page>
+							</f:then>
+							<f:else>
+								<f:image src="{settings.profile.image.defaultImage}"
+									class="user-photo-thumbnail item-image" width="48c" height="47c" alt="{f:translate(key:'profile.deletedUserName')}"
+								/>
+							</f:else>
+						</f:if>
 						<div class="item-content-wrap">
 							<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
 								<div class="item-delete">
@@ -22,9 +31,16 @@
 								</div>
 							</com:sameUser>
 							<div class="content-row">
-								<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}">
-									{wallPost.subject}
-								</f:link.page>
+								<f:if condition="{wallPost.sender}">
+									<f:then>
+										<f:link.page additionalParams="{tx_community : {user : wallPost.sender}}">
+											{wallPost.subject}
+										</f:link.page>
+									</f:then>
+									<f:else>
+										{wallPost.subject}
+									</f:else>
+								</f:if>
 							</div>
 							<div class="content-row">
 								<div class="content-text">

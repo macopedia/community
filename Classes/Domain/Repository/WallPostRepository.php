@@ -29,13 +29,35 @@ class Tx_Community_Domain_Repository_WallPostRepository extends Tx_Extbase_Persi
 	 * Finds most recent posts by the specified blog
 	 *
 	 * @param Tx_Community_Domain_Model_User $user The owner of wall
-	 * @return array The posts
+	 * @return Tx_Extbase_Persistence_QueryResultInterface Wall posts
 	 */
 	public function findRecentByRecipient(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('recipient', $user))
 			->setOrderings(array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
 			->execute();
+	}
+
+	/**
+	 * Deletes  all (sent,receved...) wall posts for given user - useful when we delete him
+	 *
+	 * @param Tx_Community_Domain_Model_User $user
+	 * @return void
+	 */
+	public function deleteAllForUser(Tx_Community_Domain_Model_User $user) {
+		$query = $this->createQuery();
+		$messages = $query->matching(
+			$query->logicalOr(
+				$query->equals('sender', $user),
+				$query->equals('recipient', $user)
+			)
+		)->execute();
+		foreach ($messages as $message) {
+			if (!$message->getRecipient() || $message->getRecipient()->getUid() == $user->getUid()) {
+				//delete all messages from my own wall, and all I send to already deleted user
+				$this->remove($message);
+			}
+		}
 	}
 
 }
