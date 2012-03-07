@@ -99,6 +99,16 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	 */
 	protected $dateOfBirth;
 
+
+	/**
+	 * Returns the name value if empty the username
+	 *
+	 * @return string
+	 */
+	public function getName() {
+		return $this->name ? $this->name : $this->username;
+	}
+
 	/**
 	 *
 	 * @return string
