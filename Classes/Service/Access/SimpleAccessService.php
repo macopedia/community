@@ -79,7 +79,7 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 * Return resource name for given action and controller name
 	 * @param string $controllerName
 	 * @param string $actionName
-	 * @return
+	 * @return string
 	 */
 	public function getResourceName($controllerName, $actionName) {
 		$settings = $this->settingsService->get();
@@ -92,6 +92,7 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 * @param Tx_Community_Domain_Model_User $requestingUser
 	 * @param Tx_Community_Domain_Model_User $requestedUser
 	 * @param string $resource
+	 * @return boolean
 	 */
 	public function hasAccess(
 		Tx_Community_Domain_Model_User $requestingUser = NULL,
@@ -103,6 +104,20 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 		}
 		$type = $this->getAccessType($requestingUser, $requestedUser);
 		return $this->typeHasAccessToResource($type, $resource);
+	}
+
+	/**
+	 * Check if the user is on his own profile
+	 * @param Tx_Community_Domain_Model_User $requestingUser
+	 * @param Tx_Community_Domain_Model_User $requestedUser
+	 * @return boolean
+	 */
+	public function sameUser($requestingUser, $requestedUser) {
+		if ($requestingUser) {
+			return $requestingUser->getUid() == $requestedUser->getUid();
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -170,16 +185,16 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	/**
 	 * Check if a type has access to a resource.
 	 *
-	 * @param string $type
+	 * @param string $type e.g. "friend"
 	 * @param string $resource
-	 * @return
+	 * @return boolean
 	 */
 	protected function typeHasAccessToResource($type, $resource) {
-		//TODO: what type should it return? bool? int? string?
+
 		$resourcePath = array_merge(array($type), explode('.', $resource));
 		$settings = $this->settingsService->get();
-
-		return $this->traverseResourcePath($settings['accessRules'], $resourcePath);
+		$value = $this->traverseResourcePath($settings['accessRules'], $resourcePath);
+		return $value == 1;
 	}
 
 	/**
@@ -187,15 +202,18 @@ class Tx_Community_Service_Access_SimpleAccessService implements Tx_Community_Se
 	 *
 	 * @param array $settings
 	 * @param array $resourcePath
+	 * @param $lastAccess
+	 * @return string
 	 */
 	protected function traverseResourcePath($settings, $resourcePath, $lastAccess = 0) {
 		$element = array_shift($resourcePath);
 
+		$lastAccess = isset($settings['access']) ? $settings['access'] : $lastAccess;
 		if (is_array($settings[$element])) {
-			return $this->traverseResourcePath($settings[$element], $resourcePath, (isset($settings['access']) ? $settings['access'] : $lastAccess));
-		} else {
-			return isset($settings['access']) ? $settings['access'] : $lastAccess;
+			return $this->traverseResourcePath($settings[$element], $resourcePath, $lastAccess);
 		}
+		return $lastAccess;
 	}
+
 }
 ?>

@@ -42,6 +42,7 @@ interface Tx_Community_Service_Access_AccessServiceInterface {
 	 * @param Tx_Community_Domain_Model_User $requestingUser
 	 * @param Tx_Community_Domain_Model_User $requestedUser
 	 * @param string $resource
+	 * @return boolean
 	 */
 	public function hasAccess(
 		Tx_Community_Domain_Model_User $requestingUser = NULL,
