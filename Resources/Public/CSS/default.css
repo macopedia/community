@@ -48,6 +48,7 @@ input.f3-form-error {
 .tx_community_profile_details dd {
 	float: left;
 	margin-left: 2px;
+	margin-top: 5px;
 }
 .tx_community_profile_details dl {
     overflow: hidden;

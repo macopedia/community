@@ -61,7 +61,7 @@
 	</com:sameUser>
 
 	<div class="tx-community-message-body">
-		<f:format.nl2br><com:parseLinks string="{message.message}" /></f:format.nl2br>
+		<f:format.nl2br><com:parseSmilies><com:parseLinks string="{message.message}" /></com:parseSmilies></f:format.nl2br>
 	</div>
 	<div class="item-delete">
 		<f:alias map="{backActionName: '{com:sameUser(requestingUser: requestingUser, requestedUser:  message.sender, then: \'outbox\', else: \'inbox\')}'}" >

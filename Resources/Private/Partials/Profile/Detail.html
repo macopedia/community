@@ -2,6 +2,6 @@
 <f:if condition="{value}">
 	<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:label)}">
 		<dt><f:translate key="profile.details.{label}"/></dt>
-		<dd>{value}</dd>
+		<dd><com:parseSmilies><com:parseLinks string="{value}" /></com:parseSmilies></dd>
 	</f:if>
 </f:if>
