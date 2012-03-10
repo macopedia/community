@@ -50,6 +50,7 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 		$this->view->assign('relation', $this->getRelation());
 	}
 
+
 	/**
 	 * Redirects to show freshest album of requestedUser
 	 *
@@ -59,6 +60,7 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 		$album = $this->repositoryService->get('album')->findOneByUser($this->requestedUser);
 		$this->redirect('show', NULL, NULL, array('album'=>$album));
 	}
+
 
 	/**
 	 * Displays a form for creating a new Album
@@ -109,6 +111,7 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 		$this->redirect('list');
 	}
 
+
 	/**
 	 * Deletes an existing Album
 	 *
@@ -120,6 +123,5 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 		$this->flashMessageContainer->add($this->_('profile.album.removedAlbum'));
 		$this->redirect('list');
 	}
-
 }
 ?>
