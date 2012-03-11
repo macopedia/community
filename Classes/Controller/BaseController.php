@@ -60,7 +60,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 *
 	 * @var Tx_Community_Service_Access_AccessServiceInterface
 	 */
-	protected $accessHelper;
+	protected $accessService;
 
 	/**
 	 * @var Tx_Community_Service_SettingsService
@@ -74,14 +74,14 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * If we have already benn redirected, don't show the flashmessages
-	 * @var bool
+	 * @var boolean
 	 */
 	static protected $redirected = FALSE;
 
 	/**
-	 * @var bool
+	 * @var boolean
 	 */
-	protected $noAccess;
+	protected $accessDenied;
 
 	/**
 	 * Initialize before every action.
@@ -92,8 +92,8 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$this->settingsService->set($this->settings);
 		$controllerName = $this->request->getControllerName();
 		$actionName = $this->request->getControllerActionName();
-		$resourceName = $this->accessHelper->getResourceName($controllerName, $actionName);
-		$this->noAccess = 0;
+		$resourceName = $this->accessService->getResourceName($controllerName, $actionName);
+		$this->accessDenied = false;
 
 		if ($this->settings['debug']) {
 			$this->flashMessageContainer->add(
@@ -102,13 +102,13 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 				'resourceName: '.$resourceName."<br />".
 				($this->getRequestingUser() ? "RequestingUser: ".htmlspecialchars($this->getRequestingUser()->getName(),ENT_QUOTES| ENT_HTML401): '')."<br />".
 				($this->getRequestedUser() ? "RequestedUser: ".htmlspecialchars($this->getRequestedUser()->getName(),ENT_QUOTES| ENT_HTML401) : '')."<br />".
-				'AccesType: '.$this->accessHelper->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
+				'AccesType: '.$this->accessService->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
 				'Debug',
 				t3lib_FlashMessage::INFO
 			);
 		}
 
-		if ($this->hasAccess($resourceName) != '1') {
+		if (!$this->hasAccess($resourceName)) {
 			//access denied
 			if ($this->settings['debug']) {
 				$this->flashMessageContainer->add(
@@ -117,12 +117,12 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 					", ActionName: ".$actionName.
 					($this->getRequestingUser()?", RequestingUser: ".$this->getRequestingUser()->getUid():"").
 					($this->getRequestedUser()?", RequestedUser:".$this->getRequestedUser()->getUid():"").
-					", AccesType: ".$this->accessHelper->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
+					", AccesType: ".$this->accessService->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
 					"Debug",
 					t3lib_FlashMessage::WARNING
 				);
 			}
-			$this->noAccess = 1;
+			$this->accessDenied = true;
 		}
 	}
 
@@ -139,13 +139,13 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * Doesn't call action method if no access, otherwise acts normally
+	 * @return void
 	 */
 	protected function callActionMethod() {
-		if ($this->noAccess) {
+		if ($this->accessDenied) {
 			$this->response->appendContent("");
-			return ;
 		} else {
-			return parent::callActionMethod();
+			parent::callActionMethod();
 		}
 	}
 
@@ -164,10 +164,10 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	/**
 	 * Inject the access helper.
 	 *
-	 * @param Tx_Community_Helper_AccessHelperInterface $accessHelper
+	 * @param Tx_Community_Service_Access_AccessServiceInterface $accessHelper
 	 */
 	public function injectAccessHelper(Tx_Community_Service_Access_AccessServiceInterface $accessHelper) {
-		$this->accessHelper = $accessHelper;
+		$this->accessService = $accessHelper;
 	}
 
 	/**
@@ -325,20 +325,17 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @return boolean
 	 */
 	protected function ownProfile() {
-		if ($this->getRequestingUser()) {
-			return $this->getRequestingUser()->getUid() == $this->getRequestedUser()->getUid();
-		} else {
-			return false;
-		}
+			return $this->accessService->sameUser($this->getRequestingUser(), $this->getRequestedUser());
 	}
 
 	/**
 	 * Checks if a user or visitor has the right to view a $resource
 	 *
 	 * @param string $resource
+	 * @return boolean
 	 */
 	public function hasAccess($resource) {
-		return $this->accessHelper->hasAccess($this->getRequestingUser(), $this->getRequestedUser(), $resource);
+		return $this->accessService->hasAccess($this->getRequestingUser(), $this->getRequestedUser(), $resource);
 	}
 
 	/**
@@ -419,7 +416,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * Puts image into special album of given type owned by requesting user
 	 * Adds/updates album and adds photo to repo, you dont need to care about it
 	 *
-	 * @param Tx_Community_Domain_Model_Photo $photo
+	 * @param Tx_Community_Domain_Model_Photo $newPhoto
 	 * @param integer $albumType like Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR
 	 */
 	protected function photoToSpecialAlbum(Tx_Community_Domain_Model_Photo $newPhoto, $albumType) {
