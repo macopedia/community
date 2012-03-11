@@ -360,6 +360,16 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 
 	/**
+	 * Redirects to a wall page. Makes sure that there is always a "user" argument in the url
+	 *
+	 * @param Tx_Community_Domain_Model_User $user
+	 */
+	protected function redirectToWall(Tx_Community_Domain_Model_User $user) {
+		$this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['wallPage'] ? $this->settings['wallPage'] : $GLOBALS['TSFE']->id));
+	}
+
+
+	/**
 	 * Handles an uploaded file
 	 *
 	 * @author Steffen Ritter

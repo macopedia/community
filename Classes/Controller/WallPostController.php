@@ -79,7 +79,7 @@
 		$notification->setMessage($newPost);
 		$this->notificationService->notify($notification);
 
-		$this->redirect('new');
+		$this->redirectToWall($this->getRequestedUser());
 	}
 
 	/**
