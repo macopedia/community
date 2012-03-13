@@ -62,21 +62,24 @@
 	 * @return void
 	 *
 	 */
-	public function createAction(Tx_Community_Domain_Model_WallPost $newWallPost ) {
-		$newPost = t3lib_div::makeInstance('Tx_Community_Domain_Model_WallPost');
-		$newPost->setMessage($newWallPost->getMessage());
-		$newPost->setRecipient($this->getRequestedUser());
-		$newPost->setSender($this->getRequestingUser());
-		$newPost->setSubject($this->getRequestingUser()->getName());
-		$this->repositoryService->get('wallPost')->add($newPost);
+	public function createAction(Tx_Community_Domain_Model_WallPost $newWallPost) {
+		$newWallPost->setRecipient($this->getRequestedUser());
+		$newWallPost->setSender($this->getRequestingUser());
+		$newWallPost->setSubject($this->getRequestingUser()->getName());
+
+		$this->repositoryService->get('wallPost')->add($newWallPost);
 		$this->flashMessageContainer->add($this->_('wallPost.form.created'));
+
+		// we have to persist now to get the uid of the new created wall post in email notification
+		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager'); /* @var $persistenceManager Tx_Extbase_Persistence_Manager */
+		$persistenceManager->persistAll();
 
 		$notification = new Tx_Community_Service_Notification_Notification(
 			'wallPostCreate',
 			$this->requestingUser,
 			$this->requestedUser
 		);
-		$notification->setMessage($newPost);
+		$notification->setMessage($newWallPost);
 		$this->notificationService->notify($notification);
 
 		$this->redirectToWall($this->getRequestedUser());

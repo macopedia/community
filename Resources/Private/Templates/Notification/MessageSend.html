@@ -1,8 +1,62 @@
-<f:if condition="{subject}">
-	<f:then>
-		Community - Private message
-	</f:then>
-	<f:else>
-		User {notification.sender.username} sent a message to you.
-	</f:else>
-</f:if>
+{namespace com=Tx_Community_ViewHelpers}<f:if condition="{subject}"><f:then>New message from {notification.sender.name}</f:then><f:else><f:if condition="{plainText}"><f:then>Hi {notification.recipient.name},
+
+{notification.sender.firstname} {notification.sender.lastname} sent you a message.
+
+"{notification.message.message}"
+
+To reply to this message, follow the link below:
+<f:uri.action action="read" controller="Message" arguments="{message: notification.message.uid}" pageUid="{settings.messagePage}" absolute="1" />
+</f:then><f:else>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Community</title>
+</head>
+<body style="margin: 0; padding: 0;" dir="ltr">
+<table border="0" cellpadding="0" cellspacing="0" style="width: 500px;">
+	<tbody>
+		<tr>
+			<td style="padding: 10px 0 0 10px; font-size: 11px; font-family: tahoma,verdana,arial,sans-serif;">
+				<table style="font-size: 11px; width: 100%;">
+					<tbody>
+						<tr>
+							<td style="padding: 3px 5px 5px 0px; width: 57px;" valign="top">
+								<f:link.page absolute="1" additionalParams="{tx_community: {user: notification.sender}}" pageUid="{settings.profilePage}" style="text-decoration: none; font-weight: bold;" title="{notification.sender.name}">
+									<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: notification.sender, settings: settings}')}"
+											 alt="{notification.sender.name}" width="50c" height="50c"
+											 style="border: 0; height: 50px; width: 50px;"
+									/>
+								</f:link.page>
+							</td>
+							<td align="left" style="padding: 5px 5px 5px 0; font-family: tahoma,verdana,arial,sans-serif;" valign="top">
+								<table cellpadding="0" cellspacing="0" style="width: 100%; padding-bottom: 5px;">
+									<tbody>
+										<tr>
+											<td style="font-family: tahoma,verdana,arial,sans-serif; font-size: 11px;" valign="top">
+												<f:link.page absolute="1" additionalParams="{tx_community: {user: notification.sender}}" pageUid="{settings.profilePage}" style="text-decoration: none; font-weight: bold;">{notification.sender.name}</f:link.page>
+											</td>
+											<td style="text-align: right; color: #999999; padding-right: 5px; font-family: tahoma,verdana,arial,sans-serif; font-size: 11px;" valign="top">
+												{f:format.date(date: '{notification.message.sentDate}', format:'g:ia M j')}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div style="width: 458px; word-wrap: break-word; padding-bottom: 7px; font-size: 11px;">
+									<f:format.nl2br><com:parseLinks string="{notification.message.message}" /></f:format.nl2br>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" style="padding: 10px 5px 15px 10px; border-top: #E9E9E9 1px solid; line-height: 18px; font-size: 12px; font-family: tahoma,verdana,arial,sans-serif;">
+								<f:link.action absolute="1" action="read" controller="Message" arguments="{message: notification.message.uid}" pageUid="{settings.messagePage}" style="text-decoration: none; font-weight: bold;">View Message</f:link.action>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</body></html>
+</f:else></f:if></f:else></f:if>

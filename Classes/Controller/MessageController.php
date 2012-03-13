@@ -79,11 +79,15 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 */
 	public function sendAction(Tx_Community_Domain_Model_Message $message) {
 		$message->setSent(true);
-		$message->setSentDate(time());
+		$message->setSentDate(new DateTime());
 		$message->setSender($this->getRequestingUser());
 		$this->repositoryService->get('message')->add($message);
 		$this->flashMessageContainer->add($this->_('message.send.success'));
 		$this->request->setArgument('message', NULL);
+
+		// we have to persist now to get the uid of the new created wall post in email notification
+		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager'); /* @var $persistenceManager Tx_Extbase_Persistence_Manager */
+		$persistenceManager->persistAll();
 
 		$notification = new Tx_Community_Service_Notification_Notification(
 			'messageSend',
@@ -91,14 +95,14 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 			$this->requestedUser
 		);
 		$notification->setMessage($message);
-
 		$this->notificationService->notify($notification);
 
-
-		if ($this->request->getPluginName() == 'MessageBox')
+		if ($this->request->getPluginName() == 'MessageBox') {
 			$this->redirect('read', NULL, NULL, array('user' => $message->getRecipient()));
-		else
+		}
+		else {
 			$this->forward('write');
+		}
 	}
 
 	/**

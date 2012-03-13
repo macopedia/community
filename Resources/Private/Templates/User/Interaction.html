@@ -73,14 +73,47 @@
 					<f:if condition="{relation}">
 						<f:then>
 							<f:if condition="{relation.status} == 1"><!--pending (new)-->
-								<f:link.action action="reject" class="remove-from-friends" controller="Relation" arguments="{relation : relation}" pageUid="{settings.relationPage}">
-									<f:translate key="profile.interaction.rejectRequest"/>
-								</f:link.action>
+								<f:if condition="{relation.initiatingUser} == {requestingUser}">
+									<f:then>
+										<f:link.action action="reject" class="remove-from-friends" controller="Relation" arguments="{relation : relation}" pageUid="{settings.relationPage}">
+											<f:translate key="profile.interaction.abandonRequest"/>
+										</f:link.action>
+										<script type="text/javascript">
+											jQuery('.remove-from-friends').click(function(){
+												var answer = confirm ("<f:translate key='relation.abandon.warning'/>");
+												if (!answer) {
+													return false;
+												}
+											});
+										</script>
+									</f:then>
+									<f:else>
+										<f:link.action action="reject" class="remove-from-friends" controller="Relation" arguments="{relation : relation}" pageUid="{settings.relationPage}">
+											<f:translate key="profile.interaction.rejectRequest"/>
+										</f:link.action>
+										<script type="text/javascript">
+											jQuery('.remove-from-friends').click(function(){
+												var answer = confirm ("<f:translate key='relation.reject.warning'/>");
+												if (!answer) {
+													return false;
+												}
+											});
+										</script>
+									</f:else>
+								</f:if>
 							</f:if>
 							<f:if condition="{relation.status} == 2"><!--confirmed-->
 								<f:link.action action="cancel" class="remove-from-friends" controller="Relation" arguments="{relation : relation}" pageUid="{settings.relationPage}">
 									<f:translate key="profile.interaction.cancelRelation"/>
 								</f:link.action>
+								<script type="text/javascript">
+									jQuery('.remove-from-friends').click(function(){
+										var answer = confirm ("<f:translate key='relation.cancel.warning'/>");
+										if (!answer) {
+											return false;
+										}
+									});
+								</script>
 							</f:if>
 							<f:if condition="{relation.status} == 4"><!-- rejected -->
 								<f:link.action action="request" class="add-to-friends" controller="Relation" arguments="{user : requestedUser}" pageUid="{settings.relationPage}">
