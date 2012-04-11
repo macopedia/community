@@ -52,6 +52,7 @@ class Tx_Community_Domain_Repository_WallPostRepository extends Tx_Extbase_Persi
 				$query->equals('recipient', $user)
 			)
 		)->execute();
+
 		foreach ($messages as $message) {
 			if (!$message->getRecipient() || $message->getRecipient()->getUid() == $user->getUid()) {
 				//delete all messages from my own wall, and all I send to already deleted user

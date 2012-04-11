@@ -64,7 +64,6 @@ class Tx_Community_Hook_Tcemain {
 				}
 			}
 		}
-
 	}
 
 
@@ -99,7 +98,7 @@ class Tx_Community_Hook_Tcemain {
 
 		if ($status === 'update' && $table === 'fe_users' && $fieldArray['disable'] == 1 && is_int($id)) {
 
-			$dataArr = array ();
+			$dataArr = array();
 
 			$relations = $this->getRelations($id);
 			foreach ($relations as $relation) {
@@ -142,3 +141,4 @@ class Tx_Community_Hook_Tcemain {
 	}
 
 }
+?>

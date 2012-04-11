@@ -22,16 +22,16 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-
 /**
  * Repository for Tx_Community_Domain_Model_Album
  */
 class Tx_Community_Domain_Repository_AlbumRepository extends Tx_Extbase_Persistence_Repository {
+
 	public function __construct() {
 		parent::__construct();
 
 		$this->setDefaultOrderings(array('crdate'=>Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
-			//requied in AlbumController->showMostRecentAction
+		//requied in AlbumController->showMostRecentAction
 	}
 
 	/**
@@ -45,12 +45,12 @@ class Tx_Community_Domain_Repository_AlbumRepository extends Tx_Extbase_Persiste
 		$query = $this->createQuery();
 		return $query->matching(
 			$query->logicalAnd(
-					$query->equals('user', $user),
-					$query->equals('albumType', $albumType)
-				)
+				$query->equals('user', $user),
+				$query->equals('albumType', $albumType)
 			)
-			->execute()
-			->getFirst();
+		)
+		->execute()
+		->getFirst();
 	}
 
 	/**

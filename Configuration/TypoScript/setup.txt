@@ -1,7 +1,5 @@
 page.includeCSS.community = EXT:community/Resources/Public/CSS/default.css
 
-tt_content.list.20.community_pi10 = USER_INT
-
 plugin.tx_community {
 
 	# set the namespace so any plugin can share arguments
@@ -59,6 +57,12 @@ plugin.tx_community {
 			User = image,details
 			Relation = listSome,unconfirmed
 			AclRole = list,assign
+		}
+
+		userlist {
+			limit = 20
+			pagebrowser = 1
+			itemsPerPage = 10
 		}
 
 		//Allows to set access to multiple actions with one 'variable'

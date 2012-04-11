@@ -23,7 +23,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-
 /**
  * The relation controller.
  *
@@ -127,7 +126,6 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED:
 			case Tx_Community_Domain_Model_Relation::RELATION_STATUS_CANCELLED:
-
 					$relation->setRequestedUser($user);
 					$relation->setInitiatingUser($this->getRequestingUser());
 					$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);

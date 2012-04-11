@@ -192,6 +192,5 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 			$this->update($message);
 		}
 	}
-
 }
 ?>

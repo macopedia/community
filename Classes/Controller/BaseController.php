@@ -325,7 +325,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @return boolean
 	 */
 	protected function ownProfile() {
-			return $this->accessService->sameUser($this->getRequestingUser(), $this->getRequestedUser());
+		return $this->accessService->sameUser($this->getRequestingUser(), $this->getRequestedUser());
 	}
 
 	/**
@@ -358,7 +358,6 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['profilePage'] ? $this->settings['profilePage'] : $GLOBALS['TSFE']->id));
 	}
 
-
 	/**
 	 * Redirects to a wall page. Makes sure that there is always a "user" argument in the url
 	 *
@@ -367,7 +366,6 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	protected function redirectToWall(Tx_Community_Domain_Model_User $user) {
 		$this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['wallPage'] ? $this->settings['wallPage'] : $GLOBALS['TSFE']->id));
 	}
-
 
 	/**
 	 * Handles an uploaded file

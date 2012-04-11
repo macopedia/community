@@ -70,24 +70,81 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persist
 	public function getChatmates(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
 		$query->statement("SELECT * FROM fe_users
+			WHERE
+				EXISTS (SELECT * FROM tx_community_domain_model_message
 						WHERE
-							EXISTS (SELECT * FROM tx_community_domain_model_message
-									WHERE
-										((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
-										OR
-										(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
-										{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
-									)
-							{$GLOBALS['TSFE']->sys_page->enableFields('fe_users')}
-						ORDER BY
-							(SELECT MAX(sent_date) FROM tx_community_domain_model_message
-								WHERE
-									((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
-									OR
-									(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
-									{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
-							) DESC");
+							((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
+							OR
+							(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
+							{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
+						)
+				{$GLOBALS['TSFE']->sys_page->enableFields('fe_users')}
+			ORDER BY
+				(SELECT MAX(sent_date) FROM tx_community_domain_model_message
+					WHERE
+						((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
+						OR
+						(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
+						{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
+				) DESC");
 		return $query->execute();
+	}
+
+	/**
+	 * Returns all objects of this repository
+	 * @param $orderBy
+	 * @param $orderDirection
+	 * @return array An array of objects, empty if no objects found
+	 */
+	public function findAllOrderBy($orderBy, $orderDirection) {
+		$query = $this->createQuery();
+
+		//Helmut Hummel told me to do so ;)
+		if (in_array($orderBy, array('datetime','username')) && in_array($orderDirection, array(
+			Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING,
+			Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+		))) {
+			$query->setOrderings(array($orderBy => $orderDirection));
+		}
+		return $query->execute();
+	}
+
+	/*
+	 * Find users by Usergroup
+	 *
+	 * default findByUsergroup doesn´t work if the user has more then one group
+	 *
+	 * @param int $group Id of the Usergroup
+	 * @param string $orderBy order by field
+	 * @param string $orderDirection order direction
+	 * @return array
+	 */
+	public function findByUsergroup($group, $orderBy, $orderDirection) {
+		$query = $this->createQuery();
+
+		//Helmut Hummel told me to do so ;)
+		if (in_array($orderBy, array('datetime','username')) && in_array($orderDirection, array(
+			Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING,
+			Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+		))) {
+			$query->setOrderings(array($orderBy => $orderDirection));
+		}
+
+		return $query->matching(
+			$query->contains('usergroup', $group)
+		)->execute();
+	}
+
+	/**
+	 * Finds the latest users
+	 *
+	 * @param int $limit Limit
+	 * @return array
+	 */
+	public function findLatest($limit) {
+		$query = $this->createQuery();
+		$query->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+		return $query->setLimit($limit)->execute();
 	}
 }
 ?>

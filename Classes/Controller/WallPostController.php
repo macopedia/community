@@ -22,7 +22,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-
 /**
  * Controller for the WallPost object
  *
@@ -30,8 +29,7 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-
- class Tx_Community_Controller_WallPostController extends Tx_Community_Controller_BaseController {
+class Tx_Community_Controller_WallPostController extends Tx_Community_Controller_BaseController {
 
 	/**
 	 * Displays all WallPosts
@@ -96,6 +94,5 @@
 		$this->flashMessageContainer->add($this->_('wallPost.list.deleted'));
 		$this->redirect('list');
 	}
-
 }
 ?>

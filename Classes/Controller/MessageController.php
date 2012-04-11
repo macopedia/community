@@ -25,7 +25,7 @@
 
 /**
  * The controller for messages
- * 
+ *
  * There are 2 ways of displaying message box:
  * - classic view with inbox, outbox and unreaded box
  * - threaded view (like on Facebook)
@@ -105,7 +105,6 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		$this->view->assign('message', $message);
 	}
 
-
 	/**
 	 * Display a form for writing a message
 	 *
@@ -145,7 +144,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 
 	/**
 	 * Sending a message - needed by few actions
-	 * @param Tx_Community_Domain_Model_Message $message 
+	 * @param Tx_Community_Domain_Model_Message $message
 	 */
 	private function sendMessage(Tx_Community_Domain_Model_Message $message) {
 		$message->setSent(true);

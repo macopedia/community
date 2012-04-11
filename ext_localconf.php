@@ -1,7 +1,6 @@
 <?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
-
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'UserImage',
@@ -180,6 +179,16 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'ListUsers',
+	array(
+		'User' => 'list',
+	),
+	array(
+		'User' => 'list',
+	)
+);
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
@@ -192,7 +201,7 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][] = 'EXT:community/Classes/Hook/Tcemain.php:&Tx_Community_Hook_Tcemain';
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:community/Classes/Hook/Tcemain.php:&Tx_Community_Hook_Tcemain';
+
 ?>

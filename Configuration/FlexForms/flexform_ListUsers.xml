@@ -1,0 +1,168 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+	</meta>
+	<sheets>
+		<sDEF>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>General Settings</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.userlist.whatToDisplay>
+						<TCEforms>
+							<onChange>reload</onChange>
+							<label>What to display</label>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">ALL</numIndex>
+										<numIndex index="1">all</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">GROUP</numIndex>
+										<numIndex index="1">group</numIndex>
+									</numIndex>
+									<numIndex index="2" type="array">
+										<numIndex index="0">LATEST</numIndex>
+										<numIndex index="1">latest</numIndex>
+									</numIndex>
+								</items>
+								<maxitems>1</maxitems>
+								<size>1</size>
+							</config>
+						</TCEforms>
+					</settings.userlist.whatToDisplay>
+					<settings.userlist.groupId>
+						<TCEforms>
+							<label>Group</label>
+							<displayCond>FIELD:settings.userlist.whatToDisplay:=:group</displayCond>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0"></numIndex>
+										<numIndex index="1"></numIndex>
+									</numIndex>
+								</items>
+								<foreign_table>be_groups</foreign_table>
+								<foreign_table_where>
+									AND be_groups.hidden = 0 AND be_groups.deleted = 0 ORDER BY title
+								</foreign_table_where>
+							</config>
+						</TCEforms>
+					</settings.userlist.groupId>
+					<settings.userlist.orderBy>
+						<TCEforms>
+							<label>LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.orderBy</label>
+							<displayCond>FIELD:settings.userlist.whatToDisplay:IN:all,group</displayCond>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.datetime</numIndex>
+										<numIndex index="1">datetime</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.username</numIndex>
+										<numIndex index="1">username</numIndex>
+									</numIndex>
+								</items>
+								<maxitems>1</maxitems>
+								<size>1</size>
+							</config>
+						</TCEforms>
+					</settings.userlist.orderBy>
+					<settings.userlist.orderDirection>
+						<TCEforms>
+							<label>LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.ascDesc</label>
+							<displayCond>FIELD:settings.userlist.whatToDisplay:IN:all,group</displayCond>
+							<config>
+								<type>select</type>
+								<items type="array">
+									<numIndex index="0" type="array">
+										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.ascDesc_asc</numIndex>
+										<numIndex index="1">ASC</numIndex>
+									</numIndex>
+									<numIndex index="1" type="array">
+										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.ascDesc_desc</numIndex>
+										<numIndex index="1">DESC</numIndex>
+									</numIndex>
+								</items>
+								<maxitems>1</maxitems>
+								<size>1</size>
+							</config>
+						</TCEforms>
+					</settings.userlist.orderDirection>
+					<settings.userlist.limit>
+						<TCEforms>
+						<label>Limit: max items to show</label>
+						<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:all,group</displayCond>
+						<config>
+							<type>input</type>
+							<eval>num</eval>
+							<size>3</size>
+						</config>
+						</TCEforms>
+					</settings.userlist.limit>
+					<settings.userlist.pagebrowser>
+						<TCEforms>
+						<label>Use pagebrowser</label>
+						<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:latest,random</displayCond>
+						<config>
+							<type>check</type>
+						</config>
+						</TCEforms>
+					</settings.userlist.pagebrowser>
+					<settings.userlist.itemsPerPage>
+						<TCEforms>
+						<label>Pagebrowser: items per page</label>
+						<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:latest,random</displayCond>
+						<config>
+							<type>input</type>
+							<eval>num</eval>
+							<size>3</size>
+						</config>
+						</TCEforms>
+					</settings.userlist.itemsPerPage>
+				</el>
+			</ROOT>
+		</sDEF>
+		<!--<s_template>
+			<ROOT>
+				<TCEforms>
+					<sheetTitle>LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.sheet_template</sheetTitle>
+				</TCEforms>
+				<type>array</type>
+				<el>
+					<settings.userlist.template_file>
+						<TCEforms>
+							<label>LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.template_file_ref</label>
+							<config>
+								<type>input</type>
+								<eval>trim</eval>
+								<default></default>
+								<wizards type="array">
+									<_PADDING>2</_PADDING>
+									<link type="array">
+										<type>popup</type>
+										<title>Link</title>
+										<icon>link_popup.gif</icon>
+										<script>browse_links.php?mode=wizard&amp;act=file</script>
+										<params type="array">
+											<blindLinkOptions>page,url,mail,spec</blindLinkOptions>
+											<allowedExtensions>htm,html,tmpl,tpl</allowedExtensions>
+										</params>
+										<JSopenParams>height=500,width=600,status=0,menubar=0,scrollbars=1</JSopenParams>
+									</link>
+								</wizards>
+							</config>
+						</TCEforms>
+					</settings.userlist.template_file>
+				</el>
+			</ROOT>
+		</s_template>-->
+	</sheets>
+</T3DataStructure>

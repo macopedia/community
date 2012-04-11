@@ -27,7 +27,6 @@
  */
 class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_BaseController {
 
-
 	/**
 	 * Displays a form for creating a new  Photo
 	 *
@@ -40,7 +39,6 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 		$this->view->assign('album', $album);
 	}
 
-
 	/**
 	 * Creates a new Photo and forwards to the list action.
 	 *
@@ -48,7 +46,6 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 	 * @return void
 	 */
 	public function createAction(Tx_Community_Domain_Model_Album $album) {
-
 		// handleUpload() returns numer in case of error
 		$fileName = $this->handleUpload(
 			'newPhoto.image',
@@ -72,7 +69,6 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 		}
 	}
 
-
 	/**
 	 * Deletes an existing Photo
 	 *
@@ -95,7 +91,6 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 		$this->flashMessageContainer->add($this->_('profile.album.photoRemoved'));
 		$this->redirect('show','Album',NULL,array('album'=>$album));
 	}
-
 
 	/**
 	 * Sets an existing photo as user's avatar

@@ -68,6 +68,14 @@
 			<label index="tx_community_domain_model_photo">Photo</label>
 			<label index="tx_community_domain_model_photo.image">Image</label>
 			<label index="tx_community_domain_model_photo.album">Album</label>
+
+			<label index="flexform.orderBy">Order By</label>
+			<label index="flexform.datetime">datetime</label>
+			<label index="flexform.username">username</label>
+			<label index="flexform.random">random</label>
+			<label index="flexform.ascDesc">Ascending or Descending</label>
+			<label index="flexform.ascDesc_asc">Ascending</label>
+			<label index="flexform.ascDesc_desc">Descending</label>
 		</languageKey>
 	</data>
 </T3locallang>

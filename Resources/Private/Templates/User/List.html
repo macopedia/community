@@ -1,0 +1,22 @@
+<f:layout name="Default"/>
+
+<f:section name="main">
+	<h1><f:translate key="user.list.title"/></h1>
+	<f:if condition="{users}">
+		<f:then>
+			<f:if condition="{pagebrowser}">
+				<f:then>
+					<f:widget.paginate objects="{users}" as="paginatedUsers" configuration="{itemsPerPage: itemsPerPage, insertAbove: 1, insertBelow: 1}">
+						<f:render partial="User/ListUser" arguments="{users : paginatedUsers, settings : settings}" />
+					</f:widget.paginate>
+				</f:then>
+				<f:else>
+					<f:render partial="User/ListUser" arguments="{users : users, settings : settings}" />
+				</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			<f:translate key="user.list.emptyList"/>
+		</f:else>
+	</f:if>
+</f:section>

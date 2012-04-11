@@ -225,7 +225,6 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 		}
 	}
 
-
 	/**
 	 * Get an identifier
 	 *

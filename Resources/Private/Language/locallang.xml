@@ -148,7 +148,10 @@
 			<label index="role.assign.role">Role</label>
 			<label index="role.assign.submit">Assign</label>
 
-			<label index="group.new.title">Found a group</label>
+			<label index="user.list.title">Users</label>
+			<label index="user.list.emptyList">No users to display</label>
+
+			<label index="group.new.title">New Group</label>
 			<label index="group.new.name">Groupname</label>
 			<label index="group.new.description">Description</label>
 			<label index="group.new.image">Image</label>

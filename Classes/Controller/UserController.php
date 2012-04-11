@@ -35,6 +35,36 @@
 class Tx_Community_Controller_UserController extends Tx_Community_Controller_BaseController implements Tx_Community_Controller_Cacheable_ControllerInterface {
 
 	/**
+	 * Shows a list of users
+	 */
+	public function listAction() {
+		$users 		    = array();
+		$groupId        = intval($this->settings['userlist']['groupId']);
+		$orderBy        = $this->settings['userlist']['orderBy'];
+		$orderDirection = $this->settings['userlist']['orderDirection'];
+		$limit          = intval($this->settings['userlist']['limit']);
+		$pagebrowser    = intval($this->settings['userlist']['pagebrowser']);
+		$itemsPerPage   = intval($this->settings['userlist']['itemsPerPage']);
+
+		switch ($this->settings['userlist']['whatToDisplay']) {
+			case 'all':
+				$users = $this->repositoryService->get('user')->findAllOrderBy($orderBy, $orderDirection);
+				break;
+			case 'group':
+				$users = $this->repositoryService->get('user')->findByUsergroup($groupId, $orderBy, $orderDirection);
+				break;
+			case 'latest':
+				// pagebrowser overwrites limit option, so disable it here
+				$pagebrowser = 0;
+				$users = $this->repositoryService->get('user')->findLatest($limit);
+				break;
+		}
+		$this->view->assign('users', $users);
+		$this->view->assign('pagebrowser', $pagebrowser);
+		$this->view->assign('itemsPerPage', $itemsPerPage);
+	}
+
+	/**
 	 * Get a profile image. We simply assign the user to the view and
 	 * let a viewhelper do the work.
 	 */
@@ -42,14 +72,12 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 		$this->view->assign('user', $this->getRequestedUser());
 	}
 
-
 	/**
 	 * Show the details like name, contact, homepage and so on.
 	 */
 	public function detailsAction() {
 		$this->view->assign('displayWallList', $this->hasAccess('profile.wall.list'));
 		$this->view->assign('displayWallForm', $this->hasAccess('profile.wall.form'));
-
 		$this->view->assign('user', $this->getRequestedUser());
 	}
 
@@ -92,7 +120,6 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * @param Tx_Community_Domain_Model_User $user
 	 */
 	public function updateImageAction(Tx_Community_Domain_Model_User $user) {
-
 		$imagePath = $this->handleUpload(
 			'user.image',
 			$this->settings['profile']['image']['prefix'],
@@ -148,7 +175,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 		$this->repositoryService->get('wallPost')->deleteAllForUser($user);
 		$this->repositoryService->get('album')->deleteAllForUser($user); //we don't need to delete photos, because of @cascade remove
 		$this->repositoryService->get('user')->remove($user);
-		
+
 		$redirectPage = $this->settings['afterAccountDeletePage'];
 		$this->redirect(NULL, NULL, NULL, NULL, $redirectPage);
 	}
@@ -170,6 +197,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 *
 	 */
 	public function searchBoxAction() {
+		//everything is done in the template
 	}
 
 	/**
