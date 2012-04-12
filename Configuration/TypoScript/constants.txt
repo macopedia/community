@@ -12,6 +12,9 @@ plugin.tx_community {
 		# cat=plugin.tx_community//a; type=int+; label=Page PID with message plugin
 		messagePage =
 
+		# cat=plugin.tx_community//a; type=int+; label=Page PID with threaded message plugin
+		threadedMessagePage =
+
 		# cat=plugin.tx_community//a; type=int+; label=Page PID with gallery plugin
 		galleryPage =
 
@@ -21,7 +24,7 @@ plugin.tx_community {
 		# cat=plugin.tx_community//a; type=int+; label=Page PID with relations management plugin
 		relationPage =
 
-		# cat=plugin.tx_community//a; type=int+; label=Page PID with wall 
+		# cat=plugin.tx_community//a; type=int+; label=Page PID with wall
 		wallPage =
 	}
 	persistence {

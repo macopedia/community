@@ -63,6 +63,18 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 
 Tx_Extbase_Utility_Extension::registerPlugin(
 	$_EXTKEY,
+	'ThreadedMessageBox',
+	'Community: Threaded Messages'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'ThreadedMessageWriteBox',
+	'Community: Write Threaded Message'
+);
+
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
 	'SearchResults',
 	'Community: Search Results'
 );

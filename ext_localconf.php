@@ -103,6 +103,28 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 
 Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
+	'ThreadedMessageBox',
+	array(
+		'Message' => 'listThreads,thread',
+	),
+	array(
+		'Message' => 'listThreads,thread',
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'ThreadedMessageWriteBox',
+	array(
+		'Message' => 'writeThreaded,send',
+	),
+	array(
+		'Message' => 'writeThreaded,send',
+	)
+);
+
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
 	'SearchBox',
 	array(
 		'User' => 'searchBox',

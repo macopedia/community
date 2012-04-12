@@ -184,6 +184,8 @@
 			<label index="search.results.title">Search results</label>
 			<label index="search.results.nothingFound">Nothing was found.</label>
 
+			<label index="message.new">New</label>
+
 			<label index="message.write.title">Send a message to %1$s</label>
 			<label index="message.write.subject">Subject</label>
 			<label index="message.write.message">Message</label>

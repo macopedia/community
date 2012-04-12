@@ -14,6 +14,7 @@ plugin.tx_community {
 		profilePage = {$plugin.tx_community.settings.profilePage}
 		editProfilePage = {$plugin.tx_community.settings.editProfilePage}
 		messagePage = {$plugin.tx_community.settings.messagePage}
+		threadedMessagePage = {$plugin.tx_community.settings.threadedMessagePage}
 		galleryPage = {$plugin.tx_community.settings.galleryPage}
 		searchPage = {$plugin.tx_community.settings.searchPage}
 		relationPage = {$plugin.tx_community.settings.relationPage}
@@ -62,6 +63,8 @@ plugin.tx_community {
 			Message {
 				write = message.write
 				send = message.write
+				thread = message.thread
+				writeThreaded = message.write
 			}
 			User {
 				image = profile.image
@@ -137,15 +140,17 @@ plugin.tx_community {
 
 				profile.gallery.access = 1
 				profile.wall.list.access = 1
+
+				message.thread.access = 1
 			}
 
 			friend < plugin.tx_community.settings.accessRules.other
 			friend {
 				access = 0
-				message.write.access = 1
 				profile.relation.access = 1
 				profile.relation.cancel.access = 1
 				profile.wall.write.access = 1
+				message.write.access = 1
 			}
 		}
 
@@ -170,7 +175,7 @@ plugin.tx_community {
 					}
 				}
 
-				/* enable it if you want - not used by default!
+				/* enable it if you want - not used by default
 				relationAbandonRequest {
 					10 {
 						template = RelationAbandonRequest

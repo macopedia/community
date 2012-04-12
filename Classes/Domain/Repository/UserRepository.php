@@ -61,5 +61,33 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persist
 			)
 		)->execute();
 	}
+
+	/**
+	 * Find users that chat with given user, to make list of people he chats with
+	 * @param Tx_Community_Domain_Model_User $user
+	 * @return Tx_Extbase_Persistence_QueryResult
+	 */
+	public function getChatmates(Tx_Community_Domain_Model_User $user) {
+		$query = $this->createQuery();
+		$query->statement("SELECT * FROM fe_users
+						WHERE
+							EXISTS (SELECT * FROM tx_community_domain_model_message
+									WHERE
+										((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
+										OR
+										(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
+										{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
+									)
+							{$GLOBALS['TSFE']->sys_page->enableFields('fe_users')}
+						ORDER BY
+							(SELECT MAX(sent_date) FROM tx_community_domain_model_message
+								WHERE
+									((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
+									OR
+									(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
+									{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
+							) DESC");
+		return $query->execute();
+	}
 }
 ?>

@@ -25,6 +25,10 @@
 
 /**
  * The controller for messages
+ * 
+ * There are 2 ways of displaying message box:
+ * - classic view with inbox, outbox and unreaded box
+ * - threaded view (like on Facebook)
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -57,7 +61,35 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	}
 
 	/**
-	 * Write a message
+	 * Show people you chated with
+	 */
+	public function listThreadsAction() {
+		$users = $this->repositoryService->get('user')->getChatmates($this->getRequestingUser());
+		$this->view->assign('users', $users);
+	}
+
+	/**
+	 * Show messages between you and given user
+	 * Also send a message from form included in thread view
+	 *
+	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Tx_Community_Domain_Model_Message $message
+	 */
+	public function threadAction(Tx_Community_Domain_Model_User $user) {
+		$messages = $this->repositoryService->get('message')->findBetweenUsers($this->getRequestingUser(), $user);
+		foreach ($messages as $message) {
+			// Set read date for messages we read first time
+			// When we read message that we have sent, it is still unread by recipient
+			if ($message->getSender()->getUid() == $user->getUid() && !$message->getReadDate()) {
+				$message->setReadDate(new DateTime());
+			}
+		}
+
+		$this->view->assign('messages', $messages);
+	}
+
+	/**
+	 * Display a form for writing a message
 	 *
 	 * @param Tx_Community_Domain_Model_User $user recipient
 	 * @param Tx_Community_Domain_Model_Message $message
@@ -66,8 +98,27 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	public function writeAction(
 		Tx_Community_Domain_Model_User $user = NULL,
 		Tx_Community_Domain_Model_Message $message =  NULL) {
-		if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid())
+		if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
 			return '';
+		}
+		$this->view->assign('recipient', $this->getRequestedUser());
+		$this->view->assign('message', $message);
+	}
+
+
+	/**
+	 * Display a form for writing a message
+	 *
+	 * @param Tx_Community_Domain_Model_User $user recipient
+	 * @param Tx_Community_Domain_Model_Message $message
+	 * @dontvalidate $message
+	 */
+	public function writeThreadedAction(
+		Tx_Community_Domain_Model_User $user = NULL,
+		Tx_Community_Domain_Model_Message $message =  NULL) {
+		if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
+			return '';
+		}
 		$this->view->assign('recipient', $this->getRequestedUser());
 		$this->view->assign('message', $message);
 	}
@@ -78,12 +129,32 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * @param Tx_Community_Domain_Model_Message $message
 	 */
 	public function sendAction(Tx_Community_Domain_Model_Message $message) {
+		$this->sendMessage($message);
+
+		//We reset message argument, so that we don't see old message in write message form
+		$this->request->setArgument('message', NULL);
+
+		if ($this->request->getPluginName() == 'MessageBox') {
+			$this->redirect('read', NULL, NULL, array('user' => $message->getRecipient()));
+		} elseif($this->request->getPluginName() == 'ThreadedMessageWriteBox') {
+			$this->redirect('thread', NULL, NULL, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
+		} else {
+			$this->forward('write');
+		}
+	}
+
+	/**
+	 * Sending a message - needed by few actions
+	 * @param Tx_Community_Domain_Model_Message $message 
+	 */
+	private function sendMessage(Tx_Community_Domain_Model_Message $message) {
 		$message->setSent(true);
 		$message->setSentDate(new DateTime());
 		$message->setSender($this->getRequestingUser());
+		$message->setRecipient($this->getRequestedUser());
 		$this->repositoryService->get('message')->add($message);
+
 		$this->flashMessageContainer->add($this->_('message.send.success'));
-		$this->request->setArgument('message', NULL);
 
 		// we have to persist now to get the uid of the new created wall post in email notification
 		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager'); /* @var $persistenceManager Tx_Extbase_Persistence_Manager */
@@ -96,13 +167,6 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		);
 		$notification->setMessage($message);
 		$this->notificationService->notify($notification);
-
-		if ($this->request->getPluginName() == 'MessageBox') {
-			$this->redirect('read', NULL, NULL, array('user' => $message->getRecipient()));
-		}
-		else {
-			$this->forward('write');
-		}
 	}
 
 	/**
@@ -121,7 +185,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 
 			//do not flag message as read when reading your own message
 			$message->setRead(true);
-			$message->setReadDate(time());
+			$message->setReadDate(new DateTime());
 			$this->repositoryService->get('message')->update($message);
 		}
 

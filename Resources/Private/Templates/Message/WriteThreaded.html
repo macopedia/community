@@ -1,0 +1,18 @@
+<f:layout name="Default"/>
+
+<f:section name="main">
+	<div id="write-message">
+		<h1><f:translate key="message.write.title" arguments="{name : requestedUser.name}"/></h1>
+		<f:render partial="FormErrors"/>
+		<f:form class="tx_community_form" object="{message}" name="message"
+				action="send" controller="Message" arguments="{user : requestedUser}">
+			<fieldset>
+				<div class="row">
+					<label><f:translate key="message.write.message"/></label>
+					<f:form.textarea property="message" rows="5" cols="30"/>
+				</div>
+				<f:form.submit value="{f:translate(key:'message.write.submit')}"/>
+			</fieldset>
+		</f:form>
+	</div>
+</f:section>
