@@ -77,7 +77,8 @@
 			<label index="profile.interaction.rejectedRelation">Rejected</label>
 			<label index="profile.interaction.cancelledRelation">Cancelled</label>
 			<label index="profile.interaction.cancelRelation">Unfriend</label>
-			<label index="profile.interaction.rejectRequest">Cancel friend request</label>
+			<label index="profile.interaction.rejectRequest">Reject friend request</label>
+			<label index="profile.interaction.abandonRequest">Abandon friend request</label>
 			<label index="profile.interaction.search">Search users</label>
 			<label index="profile.interaction.user.edit">Edit profile</label>
 			<label index="profile.interaction.aclRole.list">List access roles</label>
@@ -112,6 +113,9 @@
 			<label index="relation.menu.unconfirmed">Unconfirmed</label>
 
 			<label index="relation.confirmed.cancel">(cancel)</label>
+
+			<label index="relation.abandon.warning">Do you really want to abandon your friend request?</label>
+			<label index="relation.abandon.success">Friend request has been abandoned.</label>
 
 			<label index="relation.reject.warning">Do you really want to reject this relation?</label>
 			<label index="relation.reject.confirm">Yes</label>

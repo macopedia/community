@@ -94,18 +94,27 @@ abstract class Tx_Community_Service_Notification_AbstractHandler implements Tx_C
 	 * @return string
 	 */
 	protected function render(Tx_Community_Service_Notification_Notification $notification, array $methodConfiguration) {
-		$view = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
-		/* @var $view Tx_Fluid_View_StandaloneView */
-		$settings = $this->settingsService->get();
-		$view->setTemplatePathAndFilename(t3lib_div::getFileAbsFileName($settings['notification']['templateRootPath'].'/Notification/'.$methodConfiguration['template'].'.html'));
+		$view = $this->objectManager->get('Tx_Fluid_View_StandaloneView'); /* @var $view Tx_Fluid_View_StandaloneView */
 
+		$settings = $this->settingsService->get();
+		$view->setTemplatePathAndFilename(t3lib_div::getFileAbsFileName($settings['notification']['templateRootPath'].$methodConfiguration['template'].'.html'));
+		$view->setLayoutRootPath(t3lib_div::getFileAbsFileName($settings['notification']['layoutRootPath']));
+		$view->setPartialRootPath(t3lib_div::getFileAbsFileName($settings['notification']['partialRootPath']));
+
+		$view->assign('plainText', false);
 		$view->assign('notification', $notification);
 		$view->assign('settings', $settings);
+
 		$view->assign('subject', true);
 		$subject = $view->render();
+
 		$view->assign('subject', false);
-		$body = $view->render();
-		return array('subject' => $subject, 'body' => $body);
+		$bodyHTML = $view->render();
+
+		$view->assign('plainText', true);
+		$bodyPlain = $view->render();
+
+		return array('subject' => $subject, 'bodyHTML' => $bodyHTML, 'bodyPlain' => $bodyPlain);
 	}
 
 }

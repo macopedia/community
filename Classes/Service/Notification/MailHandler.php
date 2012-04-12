@@ -72,24 +72,21 @@ class Tx_Community_Service_Notification_MailHandler extends Tx_Community_Service
 
 		//We can't send from user's email, as other servers won't accept mails from foreign domains from us
 		if ($configuration['replyToSenderUser'] && $notification->getSender()) {
-				$mail->addReplyTo($notification->getSender()->getEmail(), $notification->getSender()->getUsername());
+			$mail->addReplyTo($notification->getSender()->getEmail(), $notification->getSender()->getUsername());
 		}
 
 		if ($notification->getReplyTo()) {
 			$mail->addReplyTo($notification->getReplyTo()->getEmail(), $notification->getReplyTo()->getUsername());
 		}
-
 		try {
 			$content = $this->render($notification, $configuration);
 			$mail->setSubject($content['subject']);
-			$mail->setBody($content['body'], 'text/html')
-				->send();
+			$mail->setBody($content['bodyPlain'], 'text/plain');
+			$mail->addPart($content['bodyHTML'], 'text/html');
+			$mail->send();
 		} catch(Exception $e) {
 			t3lib_div::sysLog("Couldn't send email: ".$e->getMessage(), 'community', t3lib_div::SYSLOG_SEVERITY_ERROR);
 		}
-
-		// TODO: Add plain version
-		// $mail->addPart($bodyText, 'text/plain');
 	}
 }
 ?>

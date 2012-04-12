@@ -38,7 +38,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 */
 	public function listSomeAction() {
 		$relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestedUser(), $this->settings['relations']['listSome']['limit']);
-		$relationNumber = $relations->count();
+		$relationNumber = $relations->count(); // TODO: this only counts until the limit is reached!
 		$users = array();
 		foreach($relations as $relation) { /* @var $relation Tx_Community_Domain_Model_Relation */
 			if ($relation->getRequestedUser()->getUid() == $this->getRequestedUser()->getUid()) {
@@ -47,9 +47,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 				$users[$relation->getUid()] = $relation->getRequestedUser();
 			}
 		}
-		$usersRelations = $users;
-		$this->view->assign('usersRelations', $usersRelations);
-		$this->view->assign('countRelations',$relationNumber);
+		$this->view->assign('usersRelations', $users);
+		$this->view->assign('countRelations', $relationNumber);
 	}
 
 	/**
@@ -77,15 +76,16 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			//Normal request
 			$this->flashMessageContainer->add($this->_('relation.request.pending'));
 
-
-			$this->notify('relationRequest');
-
 			// set the details for the relation
 			$relation = new Tx_Community_Domain_Model_Relation();
 			$relation->setInitiatingUser($this->getRequestingUser());
 			$relation->setRequestedUser($user);
 			$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW);
 			$this->repositoryService->get('relation')->add($relation);
+
+			// we have to persist now to get the uid of the new created relation in email notification
+			$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager'); /* @var $persistenceManager Tx_Extbase_Persistence_Manager */
+			$persistenceManager->persistAll();
 
 			// we must notify about new relation
 			$this->notify('relationRequest');
@@ -138,8 +138,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 
 			default:
 				throw new Tx_Community_Exception_UnexpectedException(
-						'Unknown relation status between user ' . $user->getUid() . ' and user ' . $this->getRequestingUser()->getUid()
-					);
+					'Unknown relation status between user ' . $user->getUid() . ' and user ' . $this->getRequestingUser()->getUid()
+				);
 				break;
 		}
 	}
@@ -165,14 +165,17 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * @return void
 	 */
 	public function rejectAction(Tx_Community_Domain_Model_Relation $relation) {
-		if ($this->request->hasArgument('confirmReject')) {
-			$this->rejectRelation($relation);
-			$this->flashMessageContainer->add($this->_('relation.reject.success'));
-
-			$this->redirectToUser($this->getRequestedUser());
+		$this->rejectRelation($relation);
+		if ($this->getRequestingUser()->getUid() == $relation->getInitiatingUser()->getUid()) {
+			//abondonging my friend request
+			$this->flashMessageContainer->add($this->_('relation.abandon.success'));
+			$this->notify('relationAbandonRequest');
 		} else {
-			$this->view->assign('relation', $relation);
+			//rejecting somebody else's friend request
+			$this->flashMessageContainer->add($this->_('relation.reject.success'));
+			$this->notify('relationRejectRequest');
 		}
+		$this->redirectToUser($this->getRequestedUser());
 	}
 
 	/**
@@ -238,7 +241,18 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	protected function rejectRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED);
 		$this->repositoryService->get('relation')->update($relation);
-		$this->notify('relationReject');
+	}
+
+	/**
+	 * Cancel a friend request and notify the initiating user
+	 *
+	 * @param Tx_Community_Domain_Model_Relation $relation
+	 * @return void
+	 */
+	protected function cancelFriendRequest(Tx_Community_Domain_Model_Relation $relation) {
+		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_REJECTED);
+		$this->repositoryService->get('relation')->update($relation);
+		$this->notify('relationRequestCancel');
 	}
 
 	/**

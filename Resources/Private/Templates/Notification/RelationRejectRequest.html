@@ -1,6 +1,6 @@
-{namespace com=Tx_Community_ViewHelpers}<f:if condition="{subject}"><f:then>{notification.sender.name} confirmed you as a friend</f:then><f:else><f:if condition="{plainText}"><f:then>Hi {notification.recipient.name},
+{namespace com=Tx_Community_ViewHelpers}<f:if condition="{subject}"><f:then>{notification.sender.name} rejected your friend request</f:then><f:else><f:if condition="{plainText}"><f:then>Hi {notification.recipient.name},
 
-{notification.sender.name} confirmed you as a friend.
+{notification.sender.name} rejected your friend request.
 
 Go to <f:if condition="{notification.sender.gender} == 0"><f:then>his</f:then><f:else>her</f:else></f:if> profile:
 
@@ -17,7 +17,7 @@ Go to <f:if condition="{notification.sender.gender} == 0"><f:then>his</f:then><f
 	<tbody>
 		<tr>
 			<td style="padding: 10px 0 0 10px; font-size: 11px; font-family: tahoma,verdana,arial,sans-serif;">
-				<f:link.page absolute="1" additionalParams="{tx_community: {user: notification.sender}}" pageUid="{settings.profilePage}" style="text-decoration: none;">{notification.sender.name}</f:link.page> confirmed you as a friend.
+				<f:link.page absolute="1" additionalParams="{tx_community: {user: notification.sender}}" pageUid="{settings.profilePage}" style="text-decoration: none;">{notification.sender.firstnaname}</f:link.page> rejected your friend request.
 			</td>
 		</tr>
 	</tbody>

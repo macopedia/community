@@ -150,8 +150,9 @@ plugin.tx_community {
 		}
 
 		notification {
-			// Layouts and partials not supported
-			templateRootPath = EXT:community/Resources/Private/Templates
+			templateRootPath = EXT:community/Resources/Private/Templates/Notification/
+			layoutRootPath = EXT:community/Resources/Private/Layouts/
+			partialRootPath = EXT:community/Resources/Private/Partials/
 			defaults {
 				handler = Tx_Community_Service_Notification_MailHandler
 				serverEmail = {$plugin.tx_community.serverEmail}
@@ -168,9 +169,17 @@ plugin.tx_community {
 						template = RelationConfirm
 					}
 				}
-				relationReject {
+
+				/* enable it if you want - not used by default!
+				relationAbandonRequest {
 					10 {
-						template = RelationReject
+						template = RelationAbandonRequest
+					}
+				}*/
+
+				relationRejectRequest {
+					10 {
+						template = RelationRejectRequest
 					}
 				}
 				relationCancel {
@@ -178,6 +187,7 @@ plugin.tx_community {
 						template = RelationCancel
 					}
 				}
+
 				#admin notification about bad profile
 				userReport {
 					10 {
