@@ -61,7 +61,12 @@ class Tx_Community_Service_Notification_NotificationService implements Tx_Commun
 				$method = array_merge($defaults, $method); //override defaults with method settings
 				if ($this->isValidNotification($notification, $method)) {
 					$handler = $this->objectManager->get($method['handler']);
-					$handler->send($notification, $method);
+					try {
+						$handler->send($notification, $method);
+					}
+					catch(Exception $e) {
+						t3lib_div::sysLog("Couldn't send email: ".$e->getMessage(), 'community', t3lib_div::SYSLOG_SEVERITY_ERROR);
+					}
 				}
 			}
 		}

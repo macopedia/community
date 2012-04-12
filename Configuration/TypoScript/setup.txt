@@ -175,7 +175,8 @@ plugin.tx_community {
 					10 {
 						template = RelationAbandonRequest
 					}
-				}*/
+				}
+				*/
 
 				relationRejectRequest {
 					10 {
