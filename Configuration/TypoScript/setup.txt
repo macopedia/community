@@ -1,10 +1,14 @@
 page.includeCSS.community = EXT:community/Resources/Public/CSS/default.css
 
 tt_content.list.20.community_pi10 = USER_INT
-# set the namespace so any plugin can share arguments
-plugin.tx_community.view.pluginNamespace = tx_community
 
 plugin.tx_community {
+
+	# set the namespace so any plugin can share arguments
+	view.pluginNamespace = tx_community
+
+	mvc.callDefaultActionIfActionCantBeResolved = 1
+
 	persistence {
 		storagePid = {$plugin.tx_community.persistence.storagePid}
 	}
@@ -61,10 +65,10 @@ plugin.tx_community {
 		//Actions that user can do only on himself don't need to be here
 		accessActionResourceMap {
 			Message {
+				writeThreaded = message.write
+				thread = message.thread
 				write = message.write
 				send = message.write
-				thread = message.thread
-				writeThreaded = message.write
 			}
 			User {
 				image = profile.image
@@ -140,7 +144,6 @@ plugin.tx_community {
 
 				profile.gallery.access = 1
 				profile.wall.list.access = 1
-
 				message.thread.access = 1
 			}
 
@@ -163,11 +166,11 @@ plugin.tx_community {
 				serverEmail = {$plugin.tx_community.serverEmail}
 			}
 			rules {
-
 				relationRequest {
 					10 {
 						template = RelationRequest
 					}
+
 				}
 				relationConfirm {
 					10 {
