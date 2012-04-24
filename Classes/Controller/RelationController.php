@@ -225,8 +225,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 */
 	protected function confirmRelation(Tx_Community_Domain_Model_Relation $relation) {
 		$relation->setStatus(Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED);
-		$initiationTime = new DateTime();
-		$initiationTime->setTimestamp($GLOBALS['EXEC_TIME']);
+		$initiationTime = new DateTime('@' . $GLOBALS['EXEC_TIME']);
 		$relation->setInitiationTime($initiationTime);
 		$this->repositoryService->get('relation')->update($relation);
 		$this->notify('relationConfirm');

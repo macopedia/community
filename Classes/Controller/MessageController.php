@@ -81,7 +81,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 			// Set read date for messages we read first time
 			// When we read message that we have sent, it is still unread by recipient
 			if ($message->getSender()->getUid() == $user->getUid() && !$message->getReadDate()) {
-				$message->setReadDate(new DateTime());
+				$message->setReadDate(new DateTime('@' . $GLOBALS['EXEC_TIME']));
 			}
 		}
 
@@ -149,7 +149,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 */
 	private function sendMessage(Tx_Community_Domain_Model_Message $message) {
 		$message->setSent(true);
-		$message->setSentDate(new DateTime());
+		$message->setSentDate(new DateTime('@' . $GLOBALS['EXEC_TIME']));
 		$message->setSender($this->getRequestingUser());
 		$message->setRecipient($this->getRequestedUser());
 		$this->repositoryService->get('message')->add($message);
@@ -185,7 +185,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 
 			//do not flag message as read when reading your own message
 			$message->setRead(true);
-			$message->setReadDate(new DateTime());
+			$message->setReadDate(new DateTime('@' . $GLOBALS['EXEC_TIME']));
 			$this->repositoryService->get('message')->update($message);
 		}
 
