@@ -4,50 +4,50 @@
 <f:section name="main">
 
 	<div class="tx_community_profile_details">
-	    <h2>{user.name}</h2>
+	    <h2>{requestedUser.name}</h2>
 		<h3><f:translate key="profile.details.title"/></h3>
 		<dl>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'username', value : user.username}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'username', value : requestedUser.username}"/>
 
-			<f:if condition="{user.gender}">
+			<f:if condition="{requestedUser.gender}">
 				<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:'gender')}">
 					<dt><f:translate key="profile.details.gender"/></dt>
 					<dd><f:translate key="profile.details.gender.{user.gender}"/></dd>
 				</f:if>
 			</f:if>
 
-			<f:if condition="{user.dateOfBirth}">
+			<f:if condition="{requestedUser.dateOfBirth}">
 				<f:if condition="{com:inList(list:settings.profile.details.showDetails, value:'dateOfBirth')}">
 					<dt><f:translate key="profile.details.dateOfBirth"/></dt>
-					<dd>{user.dateOfBirth->f:format.date(format:'d.m.Y')}</dd>
+					<dd>{requestedUser.dateOfBirth->f:format.date(format:'d.m.Y')}</dd>
 				</f:if>
 			</f:if>
 
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'politicalView', value : user.politicalView}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'religiousView', value : user.religiousView}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'activities', value : user.activities}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'interests', value : user.interests}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'music', value : user.music}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'movies', value : user.movies}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'books', value : user.books}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'quotes', value : user.quotes}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'aboutMe', value : user.aboutMe}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'address', value : user.address}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'city', value : user.city}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'zip', value : user.zip}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : user.country}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'www', value : user.www}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'cellphone', value : user.cellphone}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'phone', value : user.phone}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'email', value : user.email}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'politicalView', value : requestedUser.politicalView}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'religiousView', value : requestedUser.religiousView}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'activities', value : requestedUser.activities}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'interests', value : requestedUser.interests}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'music', value : requestedUser.music}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'movies', value : requestedUser.movies}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'books', value : requestedUser.books}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'quotes', value : requestedUser.quotes}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'aboutMe', value : requestedUser.aboutMe}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'address', value : requestedUser.address}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'city', value : requestedUser.city}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'zip', value : requestedUser.zip}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : requestedUser.country}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'www', value : requestedUser.www}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'cellphone', value : requestedUser.cellphone}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'phone', value : requestedUser.phone}"/>
+			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'email', value : requestedUser.email}"/>
 		</dl>
-		<com:sameUser requestingUser="{requestingUser}" requestedUser="{user}">
+		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
 			<f:then></f:then>
 			<f:else>
 			    <div class="report-profile">
 					<a href="#" class="report-link"><f:translate key="profile.details.reportProfile"/></a>
 					<br style="clear:both"/>
-					<f:form id="report-form" style="display:none;" action="report" controller="User" additionalParams="{tx_community : {user: user}}">
+					<f:form id="report-form" style="display:none;" action="report" controller="User" additionalParams="{tx_community : {user: requestedUser}}">
 						<f:translate key="profile.report.writeReason"/>
 						<f:form.textarea rows="3" cols="30" name="reason" />
 						<f:form.submit value="{f:translate(key:'profile.report.submit')}"/>

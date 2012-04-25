@@ -1,12 +1,12 @@
 <f:layout name="Default"/>
 <f:section name="main">
-	<h2>{user.name}</h2>
-	<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
-			 class="user-photo photo-edit" width="180c" height="180c" alt="{user.name}" />
+	<h2>{requestedUser.name}</h2>
+	<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: requestedUser, settings: settings}')}"
+			 class="user-photo photo-edit" width="180c" height="180c" alt="{requestedUser.name}" />
 	<f:link.action action="editImage" class="button-link" controller="User"><f:translate key="profile.details.editImage"/></f:link.action>
 
 	<div id="data-edition-form" class="tx_community_profile_edit tx_community_form">
-		<f:form action="update" controller="User" object="{user}" name="updatedUser">
+		<f:form action="update" controller="User" object="{requestedUser}" name="updatedUser">
 			<h3><f:translate key="profile.details.title"/></h3>
 			<div class="row">
 				<label><f:translate key="profile.details.username"/></label>
@@ -30,7 +30,7 @@
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.dateOfBirth"/></label>
-				<f:form.textbox property="dateOfBirth" value="{user.dateOfBirth->f:format.date(format:'d.m.Y')}"/>
+				<f:form.textbox property="dateOfBirth" value="{requestedUser.dateOfBirth->f:format.date(format:'d.m.Y')}"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.politicalView"/></label>

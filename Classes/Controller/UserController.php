@@ -69,7 +69,6 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * let a viewhelper do the work.
 	 */
 	public function imageAction() {
-		$this->view->assign('user', $this->getRequestedUser());
 	}
 
 	/**
@@ -78,39 +77,24 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	public function detailsAction() {
 		$this->view->assign('displayWallList', $this->hasAccess('profile.wall.list'));
 		$this->view->assign('displayWallForm', $this->hasAccess('profile.wall.form'));
-		$this->view->assign('user', $this->getRequestedUser());
 	}
 
 	/**
 	 * Interactions on the userprofile. Like adding relations and initiating a message.
 	 */
 	public function interactionAction() {
-		$this->view->assign('requestedUser', $this->getRequestedUser());
-		$this->view->assign('requestingUser', $this->getRequestingUser());
 	}
 
 	/**
 	 * Edit the details of a user.
-	 *
-	 * @param Tx_Community_Domain_Model_User $user
-	 * @dontvalidate $user
 	 */
-	public function editAction(Tx_Community_Domain_Model_User $user = NULL) {
-		// we can implement the possibility to edit users in the FE for admins
-		if ($this->ownProfile()) {
-			$requestedUser = $user ? $user : $this->getRequestedUser();
-			$this->view->assign('user', $requestedUser);
-			$this->view->assign('requestingUser', $this->getRequestingUser());
-		}
+	public function editAction() {
 	}
 
 	/**
 	 * Show form to edit/upload profile image
-	 *
-	 * @param Tx_Community_Domain_Model_User $user
 	 */
 	public function editImageAction() {
-		$this->view->assign('user', $this->getRequestingUser());
 	}
 
 	/**
