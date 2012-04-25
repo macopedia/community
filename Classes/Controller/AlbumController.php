@@ -35,7 +35,6 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	public function listAction() {
 		$albums = $this->repositoryService->get('album')->findByUser($this->requestedUser);
 		$this->view->assign('albums', $albums);
-		$this->view->assign('relation', $this->getRelation());
 	}
 
 	/**
@@ -46,7 +45,6 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	 */
 	public function showAction(Tx_Community_Domain_Model_Album $album) {
 		$this->view->assign('album', $album);
-		$this->view->assign('relation', $this->getRelation());
 	}
 
 	/**

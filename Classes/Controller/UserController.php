@@ -87,7 +87,6 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	public function interactionAction() {
 		$this->view->assign('requestedUser', $this->getRequestedUser());
 		$this->view->assign('requestingUser', $this->getRequestingUser());
-		$this->view->assign('relation', $this->getRelation());
 	}
 
 	/**

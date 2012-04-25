@@ -210,8 +210,6 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 			$requestedUser = $this->getRequestedUser();
 			$this->flashMessageContainer->add($this->_('relation.cancel.success', array($requestedUser->getName())));
 			$this->redirectToUser($requestedUser);
-		} else {
-			$this->view->assign('relation', $relation);
 		}
 	}
 

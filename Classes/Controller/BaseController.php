@@ -135,6 +135,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		parent::initializeView($view);
 		$this->view->assign('requestedUser',$this->getRequestedUser());
 		$this->view->assign('requestingUser',$this->getRequestingUser());
+		$this->view->assign('relation', $this->getRelation());
 	}
 
 	/**
