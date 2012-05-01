@@ -266,6 +266,7 @@ config.tx_extbase {
 }
 
 config.tx_extbase.objects {
+	Tx_Extbase_Persistence_Storage_BackendInterface.className = Tx_Community_Persistence_Storage_Typo3DbBackend
 	Tx_Community_Service_Access_AccessServiceInterface {
 		className = Tx_Community_Service_Access_SimpleAccessService
 	}

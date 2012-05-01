@@ -30,7 +30,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persistence_Cacheable_AbstractCacheableRepository {
+class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persistence_Repository {
 
 	/**
 	 * Find the current user
@@ -67,26 +67,24 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persist
 	 * @param Tx_Community_Domain_Model_User $user
 	 * @return Tx_Extbase_Persistence_QueryResult
 	 */
-	public function getChatmates(Tx_Community_Domain_Model_User $user) {
+	public function getChatMates(Tx_Community_Domain_Model_User $user) {
 		$query = $this->createQuery();
-		$query->statement("SELECT * FROM fe_users
-			WHERE
-				EXISTS (SELECT * FROM tx_community_domain_model_message
-						WHERE
-							((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
-							OR
-							(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
-							{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
-						)
-				{$GLOBALS['TSFE']->sys_page->enableFields('fe_users')}
-			ORDER BY
-				(SELECT MAX(sent_date) FROM tx_community_domain_model_message
-					WHERE
-						((sender = fe_users.uid  AND recipient = {$user->getUid()} AND recipient_deleted=0)
-						OR
-						(recipient = fe_users.uid  AND sender = {$user->getUid()} AND sender_deleted=0))
-						{$GLOBALS['TSFE']->sys_page->enableFields('tx_community_domain_model_message')}
-				) DESC");
+		$query->matching(
+		new Tx_Community_Persistence_QOM_SQL("
+		  EXISTS (SELECT * FROM tx_community_domain_model_message m WHERE
+			(m.sender = fe_users.uid  AND m.recipient = {$user->getUid()} AND m.recipient_deleted=0)
+			OR
+			(m.recipient = fe_users.uid  AND m.sender = {$user->getUid()} AND m.sender_deleted=0)
+		  )
+		")
+		);
+		$query->setOrderings(
+			array("(SELECT MAX(sent_date) FROM tx_community_domain_model_message m WHERE
+				(m.sender = fe_users.uid  AND m.recipient = {$user->getUid()} AND m.recipient_deleted=0)
+				OR
+				(m.recipient = fe_users.uid  AND m.sender = {$user->getUid()} AND m.sender_deleted=0)
+				)"=> Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+		);
 		return $query->execute();
 	}
 
@@ -112,7 +110,7 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persist
 	/*
 	 * Find users by Usergroup
 	 *
-	 * default findByUsergroup doesnÂ´t work if the user has more then one group
+	 * default findByUsergroup doesn´t work if the user has more then one group
 	 *
 	 * @param int $group Id of the Usergroup
 	 * @param string $orderBy order by field

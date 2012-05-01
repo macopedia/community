@@ -64,7 +64,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * Show people you chated with
 	 */
 	public function listThreadsAction() {
-		$users = $this->repositoryService->get('user')->getChatmates($this->getRequestingUser());
+		$users = $this->repositoryService->get('user')->getChatMates($this->getRequestingUser());
 		$this->view->assign('users', $users);
 	}
 
