@@ -5,20 +5,20 @@
 		<h3><f:translate key="relation.unconfirmed.title"/></h3>
 		<f:if condition="{unconfirmedRelations}">
 			<f:then>
-				<f:for each="{unconfirmedRelations}" as="relation">
+				<f:for each="{unconfirmedRelations}" as="loopRelation">
 					<div class="friend-request">
-						<f:link.page additionalParams="{tx_community : {user : relation.initiatingUser}}" pageUid="{settings.profilePage}">
-							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : relation.initiatingUser, settings : settings}')}"
-							         class="user-photo-thumbnail" width="48c" height="47c" alt="{relation.initiatingUser.name}"
+						<f:link.page additionalParams="{tx_community : {user : loopRelation.initiatingUser}}" pageUid="{settings.profilePage}">
+							<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : loopRelation.initiatingUser, settings : settings}')}"
+							         class="user-photo-thumbnail" width="48c" height="47c" alt="{loopRelation.initiatingUser.name}"
 							/>
 						</f:link.page>
-						<f:link.page additionalParams="{tx_community : {user : relation.initiatingUser}}" pageUid="{settings.profilePage}">
-							{relation.initiatingUser.name}
+						<f:link.page additionalParams="{tx_community : {user : loopRelation.initiatingUser}}" pageUid="{settings.profilePage}">
+							{loopRelation.initiatingUser.name}
 						</f:link.page>
-						<f:link.action action="confirm" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}" class="confirm">
+						<f:link.action action="confirm" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : loopRelation}" class="confirm">
 							<f:translate key="relation.unconfirmed.confirm"/>
 						</f:link.action>
-						<f:link.action action="reject" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}" class="reject">
+						<f:link.action action="reject" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : loopRelation}" class="reject">
 							<f:translate key="relation.unconfirmed.reject"/>
 						</f:link.action>
 					</div>

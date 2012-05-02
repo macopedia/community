@@ -6,8 +6,8 @@
 		<f:if condition="{relations}">
 			<f:then>
 				<f:widget.paginate objects="{relations}" as="paginatedRelations" configuration="{itemsPerPage: 10, insertAbove : 0, insertBelow: 1}">
-					<f:for each="{paginatedRelations}" as="relation">
-						<f:alias map="{user: '{com:sameUser(requestingUser: requestedUser, requestedUser: relation.initiatingUser, then: relation.requestedUser, else: relation.initiatingUser)}'}" >
+					<f:for each="{paginatedRelations}" as="loopRelation">
+						<f:alias map="{user: '{com:sameUser(requestingUser: requestedUser, requestedUser: loopRelation.initiatingUser, then: loopRelation.requestedUser, else: loopRelation.initiatingUser)}'}" >
 							<div class="user-single">
 								<f:link.action action="details" controller="User" arguments="{user: user}" pageUid="{settings.profilePage}">
 									<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
@@ -18,7 +18,7 @@
 								<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
 									<f:then>
 										<!-- we view our own friends -->
-										<f:link.action action="cancel" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : relation}">
+										<f:link.action action="cancel" controller="Relation" pageUid="{settings.relationPage}" arguments="{relation : loopRelation}">
 											<f:translate key="relation.confirmed.cancel"/>
 										</f:link.action>
 									</f:then>
