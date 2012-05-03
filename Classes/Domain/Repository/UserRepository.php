@@ -55,9 +55,9 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Community_Persist
 		$query = $this->createQuery();
 		return $query->matching(
 			$query->logicalOr(
-				$query->like('name', '%' . $word . '%'),
-				$query->like('username', '%' . $word . '%'),
-				$query->like('email', $word) //only full email address
+				$query->like('name', '%' . str_replace(array('_','%'), '', $word) . '%'),
+				$query->like('username', '%' . str_replace(array('_','%'), '', $word) . '%'),
+				$query->equals('email', $word) //only full email address
 			)
 		)->execute();
 	}
