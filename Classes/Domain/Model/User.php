@@ -99,14 +99,54 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	 */
 	protected $dateOfBirth;
 
+	/**
+	 * Sets the name value
+	 *
+	 * @param string $name
+	 * @return void
+	 */
+	public function setName($name) {
+		$this->name = trim($name);
+	}
 
 	/**
-	 * Returns the name value if empty the username
+	 * Returns the name value, if empty it returns the username
 	 *
 	 * @return string
 	 */
 	public function getName() {
-		return $this->name ? $this->name : $this->username;
+		$name = trim($this->name);
+		return $name ? $name : $this->username;
+	}
+
+	/**
+	 * Sets the firstName value
+	 *
+	 * @param string $firstName
+	 * @return void
+	 */
+	public function setFirstName($firstName) {
+		$this->firstName = trim($firstName);
+	}
+
+	/**
+	 * Sets the middleName value
+	 *
+	 * @param string $middleName
+	 * @return void
+	 */
+	public function setMiddleName($middleName) {
+		$this->middleName = trim($middleName);
+	}
+
+	/**
+	 * Sets the lastName value
+	 *
+	 * @param string $lastName
+	 * @return void
+	 */
+	public function setLastName($lastName) {
+		$this->lastName = trim($lastName);
 	}
 
 	/**
