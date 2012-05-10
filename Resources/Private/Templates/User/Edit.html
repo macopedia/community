@@ -82,7 +82,7 @@
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.country"/></label>
-				<f:form.textfield property="country"/>
+				<f:form.select property="country" name="country" options="{countries}" optionLabelField="shortName" />
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.www"/></label>

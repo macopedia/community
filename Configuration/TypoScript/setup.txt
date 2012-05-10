@@ -8,7 +8,9 @@ plugin.tx_community {
 	mvc.callDefaultActionIfActionCantBeResolved = 1
 
 	persistence {
-		storagePid = {$plugin.tx_community.persistence.storagePid}
+		storagePid = 0,{$plugin.tx_community.persistence.storagePid}
+		# Add mappings for static info tables
+		classes < plugin.tx_staticinfotablesextbase.persistence.classes
 	}
 
 	settings {

@@ -35,6 +35,22 @@
 class Tx_Community_Controller_UserController extends Tx_Community_Controller_BaseController implements Tx_Community_Controller_Cacheable_ControllerInterface {
 
 	/**
+	 * @var Tx_StaticInfoTablesExtbase_Domain_Repository_StaticCountryRepository
+	 */
+	protected $staticCountryRepository = NULL;
+
+	/**
+	 * Injects the staticCountryRepository
+	 *
+	 * @param Tx_StaticInfoTablesExtbase_Domain_Repository_StaticCountryRepository $repository repository to inject
+	 *
+	 * @return void
+	 */
+	public function injectStaticCountryRepository(Tx_StaticInfoTablesExtbase_Domain_Repository_StaticCountryRepository $repository) {
+		$this->staticCountryRepository = $repository;
+	}
+
+	/**
 	 * Shows a list of users
 	 */
 	public function listAction() {
@@ -77,6 +93,8 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	public function detailsAction() {
 		$this->view->assign('displayWallList', $this->hasAccess('profile.wall.list'));
 		$this->view->assign('displayWallForm', $this->hasAccess('profile.wall.form'));
+		$country = $this->staticCountryRepository->findByUid($this->requestedUser->getCountry());
+		$this->view->assign('country', $country);
 	}
 
 	/**
@@ -89,6 +107,8 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * Edit the details of a user.
 	 */
 	public function editAction() {
+		$countries = $this->staticCountryRepository->findAllOrderedBy('shortName', 'asc');
+		$this->view->assign('countries', $countries);
 	}
 
 	/**
