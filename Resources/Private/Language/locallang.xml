@@ -230,8 +230,9 @@
 			<label index="wallPost.list.noMessages">There are no messages.</label>
 			<label index="wallPost.form.title">Write new message!</label>
 			<label index="wallPost.form.submit">Submit</label>
-			<label index="wallPost.form.created">You added post</label>
-			<label index="wallPost.list.deleted">You deleted post</label>
+			<label index="wallPost.form.created">Your post has been created.</label>
+			<label index="wallPost.list.confirm">Do you really want to delete this post?</label>
+			<label index="wallPost.list.deleted">Selected post has been deleted.</label>
 
 			<label index="tx_community_domain_model_user.albums">albums</label>
 			<label index="tx_community_domain_model_album">Album that may contain images</label>

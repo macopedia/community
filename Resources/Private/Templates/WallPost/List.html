@@ -51,6 +51,14 @@
 					</div>
 				</div>
 			</f:for>
+			<script type="text/javascript">
+				jQuery('.wall-item .item-delete').click(function(){
+					var answer = confirm ("<f:translate key='wallPost.list.confirm'/>");
+					if (!answer) {
+						return false;
+					}
+				});
+			</script>
 		</f:widget.paginate>
 	</div>
 </f:section>
