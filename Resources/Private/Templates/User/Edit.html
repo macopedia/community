@@ -10,19 +10,19 @@
 			<h3><f:translate key="profile.details.title"/></h3>
 			<div class="row">
 				<label><f:translate key="profile.details.username"/></label>
-				<f:form.textbox disabled="disabled" property="username"/>
+				<f:form.textfield disabled="disabled" property="username"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.email"/></label>
-				<f:form.textbox property="email"/>
+				<f:form.textfield property="email"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.firstName"/></label>
-				<f:form.textbox property="firstName"/>
+				<f:form.textfield property="firstName"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.lastName"/></label>
-				<f:form.textbox property="lastName"/>
+				<f:form.textfield property="lastName"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.gender"/></label>
@@ -30,7 +30,7 @@
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.dateOfBirth"/></label>
-				<f:form.textbox property="dateOfBirth" value="{requestedUser.dateOfBirth->f:format.date(format:'d.m.Y')}"/>
+				<f:form.textfield property="dateOfBirth" value="{requestedUser.dateOfBirth->f:format.date(format:'d.m.Y')}"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.politicalView"/></label>
@@ -74,27 +74,27 @@
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.city"/></label>
-				<f:form.textbox property="city"/>
+				<f:form.textfield property="city"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.zip"/></label>
-				<f:form.textbox property="zip"/>
+				<f:form.textfield property="zip"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.country"/></label>
-				<f:form.textbox property="country"/>
+				<f:form.textfield property="country"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.www"/></label>
-				<f:form.textbox property="www"/>
+				<f:form.textfield property="www"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.cellphone"/></label>
-				<f:form.textbox property="cellphone"/>
+				<f:form.textfield property="cellphone"/>
 			</div>
 			<div class="row">
 				<label><f:translate key="profile.details.phone"/></label>
-				<f:form.textbox property="telephone"/>
+				<f:form.textfield property="telephone"/>
 			</div>
 			<f:form.submit value="{f:translate(key:'profile.details.edit.submit')}"/>
 		</f:form>
