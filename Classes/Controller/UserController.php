@@ -145,6 +145,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 		$fullName = $updatedUser->getFirstName().' '.$updatedUser->getLastName();
 		$updatedUser->setName($fullName);
 		$this->repositoryService->get('user')->update($updatedUser);
+		$this->flashMessageContainer->add($this->_('profile.update.success'));
 		$this->redirect('edit');
 	}
 

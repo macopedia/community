@@ -38,6 +38,7 @@
 			<label index="profile.details.edit.submit">Submit</label>
 			<label index="profile.details.editImage">Set a new profile image</label>
 			<label index="profile.details.profileImage">Profile image</label>
+			<label index="profile.update.success">Your profile has been successfully updated.</label>
 
 			<label index="profile.details.reportProfile">Report profile</label>
 			<label index="profile.report.writeReason">Write what's inappropriate on this profile.</label>
