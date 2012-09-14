@@ -61,7 +61,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	}
 
 	/**
-	 * Show people you chated with
+	 * Show people you chatted with
 	 */
 	public function listThreadsAction() {
 		$users = $this->repositoryService->get('user')->getChatMates($this->getRequestingUser());
@@ -200,26 +200,50 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	}
 
 	/**
-	 * Delete the message
+	 * Delete the message action used in classic message view
 	 *
 	 * @param Tx_Community_Domain_Model_Message $message
 	 * @param string $redirectAction
 	 */
 	public function deleteAction(Tx_Community_Domain_Model_Message $message, $redirectAction = NULL) {
-		if ($this->getRequestingUser()) {
-			if ($message->getSender() && $message->getSender()->getUid() == $this->getRequestingUser()->getUid()) {
-				$message->setSenderDeleted(true);
-			} elseif ($message->getRecipient() && $message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
-				$message->setRecipientDeleted(true);
-			}
-			$this->flashMessageContainer->add($this->_('message.delete.success'));
-
-			if(isset($redirectAction)){
-				$this->redirect($redirectAction);
-			} else {
-				$this->redirect('inbox');
-			}
+		if (!$this->getRequestingUser()) {
+			return;
 		}
+		$this->deleteMessage($message);
+
+		if (isset($redirectAction)) {
+			$this->redirect($redirectAction);
+		} else {
+			$this->redirect('inbox');
+		}
+	}
+
+	/**
+	 * Delete message used in threaded view
+	 *
+	 * @param Tx_Community_Domain_Model_Message $message
+	 */
+	public function deleteThreadedAction(Tx_Community_Domain_Model_Message $message) {
+		if (!$this->getRequestingUser()) {
+			return;
+		}
+		$this->deleteMessage($message);
+
+		$this->redirect('thread', NULL, NULL, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
+	}
+
+	/**
+	 * Delete message
+	 *
+	 * @param Tx_Community_Domain_Model_Message $message
+	 */
+	protected function deleteMessage($message) {
+		if ($message->getSender() && $message->getSender()->getUid() == $this->getRequestingUser()->getUid()) {
+			$message->setSenderDeleted(true);
+		} elseif ($message->getRecipient() && $message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
+			$message->setRecipientDeleted(true);
+		}
+		$this->flashMessageContainer->add($this->_('message.delete.success'));
 	}
 }
 ?>

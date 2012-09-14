@@ -213,6 +213,9 @@
 			<label index="message.list.date">Date</label>
 			<label index="message.list.readMore">read more...</label>
 			<label index="message.list.delete">Delete message</label>
+			<label index="message.thread.delete">Delete</label>
+			<label index="message.thread.header">Conversation with %s</label>
+			<label index="message.threads.header">All conversations</label>
 
 			<label index="message.read.title">Read a message</label>
 			<label index="message.read.date">Date:</label>

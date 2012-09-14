@@ -1,32 +1,40 @@
 {namespace com=Tx_Community_ViewHelpers}
 <div class="messages threaded threads-list">
-	<f:widget.paginate objects="{users}" as="paginatedUsers" configuration="{itemsPerPage: 10, insertAbove : 0, insertBelow: 1}">
-		<f:for each="{paginatedUsers}" as="user">
-			<div class="message {com:unreadMessages(recipient:'{requestingUser}', sender:'{user}', then:'read', else:'show')}">
-				<div class="icon-wrap">
-					<f:link.action class="message-profile-photo" action="thread" arguments="{user : user}">
-						<f:image class="user-photo-thumbnail" src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : user, settings : settings}')}"
-								alt="{user.name}" width="48c" height="47c"
-							/>
-					</f:link.action>
-				</div>
-				<div class="content-wrap">
-					<div class="message-header">
-						<div class="text-info">
-							<f:link.action action="thread" arguments="{user : user}">
-								{user.name}
+	<f:if condition="{users}">
+		<f:then>
+			<h2><f:translate key="message.threads.header" /></h2>
+			<f:widget.paginate objects="{users}" as="paginatedUsers" configuration="{itemsPerPage: 10, insertAbove : 0, insertBelow: 1}">
+				<f:for each="{paginatedUsers}" as="user">
+					<div class="message {com:unreadMessages(recipient:'{requestingUser}', sender:'{user}', then:'read', else:'show')}">
+						<div class="icon-wrap">
+							<f:link.action class="message-profile-photo" action="thread" arguments="{user : user}">
+								<f:image class="user-photo-thumbnail" src="{f:render(partial:'Profile/ImageUrl', arguments:'{user : user, settings : settings}')}"
+										alt="{user.name}" width="48c" height="47c"
+									/>
 							</f:link.action>
-							<div class="message-date last-message-date {com:unreadMessages(recipient:'{requestingUser}', sender:'{user}', then:'new-message')}">
-								<f:format.date format="d.m.Y H:i"><com:lastMessageDate user1="{requestingUser}" user2="{user}" /></f:format.date>
-							</div>
 						</div>
-						<com:unreadMessages recipient="{requestingUser}" sender="{user}">
-							<div class="new-label"><f:translate key="message.new"/></div>
-						</com:unreadMessages>
+						<div class="content-wrap">
+							<div class="message-header">
+								<div class="text-info">
+									<f:link.action action="thread" arguments="{user : user}">
+										{user.name}
+									</f:link.action>
+									<div class="message-date last-message-date {com:unreadMessages(recipient:'{requestingUser}', sender:'{user}', then:'new-message')}">
+										<f:format.date format="d.m.Y H:i"><com:lastMessageDate user1="{requestingUser}" user2="{user}" /></f:format.date>
+									</div>
+								</div>
+								<com:unreadMessages recipient="{requestingUser}" sender="{user}">
+									<div class="new-label"><f:translate key="message.new"/></div>
+								</com:unreadMessages>
+							</div>
+							<div class="content"><!--TODO: last message here--></div>
+						</div>
 					</div>
-					<div class="content"><!--TODO: last message here--></div>
-				</div>
-			</div>
-		</f:for>
-	</f:widget.paginate>
+				</f:for>
+			</f:widget.paginate>
+		</f:then>
+		<f:else>
+			<f:translate key="message.inbox.nomessages"/>
+		</f:else>
+	</f:if>
 </div>

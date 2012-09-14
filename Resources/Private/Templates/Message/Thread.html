@@ -3,6 +3,7 @@
 <f:section name="main">
 {namespace com=Tx_Community_ViewHelpers}
 <div class="messages threaded">
+	<h2><f:translate key="message.thread.header" arguments="{0: '{requestedUser.name}'}"/> </h2>
 	<f:for each="{messages}" as="message">
 		<div class="message {com:sameUser(requestingUser:'{requestingUser}', requestedUser:'{message.sender}', then:'sent', else:'show')}">
 			<div class="icon-wrap">
@@ -31,8 +32,20 @@
 				<div class="content">
 					<p><f:format.nl2br>{message.message}</f:format.nl2br></p>
 				</div>
+				<com:sameUser requestingUser="{requestingUser}" requestedUser="{message.sender}">
+				<div class="message-tools">
+					<f:link.action class="delete" action="deleteThreaded" controller="Message" arguments="{message: message}">
+						<f:translate key="message.thread.delete"/>
+					</f:link.action>
+				</div>
+				</com:sameUser>
 			</div>
 		</div>
 	</f:for>
+	<script type="text/javascript">
+		jQuery('.messages .message .delete').click(function(){
+			return confirm ("<f:translate key='message.delete.confirm'/>");
+			});
+	</script>
 </div>
 </f:section>

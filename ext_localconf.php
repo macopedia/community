@@ -104,10 +104,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'ThreadedMessageBox',
 	array(
-		'Message' => 'listThreads,thread',
+		'Message' => 'listThreads,thread,deleteThreaded',
 	),
 	array(
-		'Message' => 'listThreads,thread',
+		'Message' => 'listThreads,thread,deleteThreaded',
 	)
 );
 

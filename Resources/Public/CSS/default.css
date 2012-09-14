@@ -198,3 +198,4 @@ ul.f3-widget-paginator {
 .threaded .message-header {overflow: hidden;}
 .threaded .text-info {overflow: hidden;}
 .threaded .message-date {float: right;}
+.threaded .message-tools { float: right; }

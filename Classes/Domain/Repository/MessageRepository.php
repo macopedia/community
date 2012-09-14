@@ -106,6 +106,32 @@ class Tx_Community_Domain_Repository_MessageRepository extends Tx_Extbase_Persis
 	}
 
 	/**
+	 * Find all threaded messages between users (there are no deleted messages )
+	 * When using threaded messages only sender can delete the message
+	 * @param Tx_Community_Domain_Model_User $user1
+	 * @param Tx_Community_Domain_Model_User $user2
+	 */
+	public function findBetweenUsersThreaded(Tx_Community_Domain_Model_User $user1, Tx_Community_Domain_Model_User $user2) {
+		$query = $this->createQuery();
+		$query->matching(
+			$query->logicalOr(
+				$query->logicalAnd(
+					$query->equals('sender', $user1),
+					$query->equals('senderDeleted', false),
+					$query->equals('recipient', $user2)
+				),
+				$query->logicalAnd(
+					$query->equals('sender', $user2),
+					$query->equals('recipient', $user1),
+					$query->equals('senderDeleted', false)
+				)
+			)
+		);
+		$query->setOrderings(array('sentDate' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING));
+		return $query->execute();
+	}
+
+	/**
 	 * Find newest message between users (don't have to be new)
 	 * @param Tx_Community_Domain_Model_User $user1
 	 * @param Tx_Community_Domain_Model_User $user2
