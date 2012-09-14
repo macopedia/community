@@ -317,7 +317,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @return string
 	 */
 	protected function _($key, $arguments = array()) {
-		return Tx_Extbase_Utility_Localization::translate($key, 'community', $arguments);
+		return Tx_Extbase_Utility_Localization::translate($key, $this->extensionName, $arguments);
 	}
 
 	/**
