@@ -11,8 +11,8 @@
 							<div class="user-single">
 								<f:link.action action="details" controller="User" arguments="{user: user}" pageUid="{settings.profilePage}">
 									<f:image src="{f:render(partial:'Profile/ImageUrl', arguments:'{user: user, settings: settings}')}"
-									         class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
-									</f:link.action>
+										class="user-photo-thumbnail" width="48c" height="47c" alt="{user.name}" />
+								</f:link.action>
 								<f:link.action action="details" controller="User" arguments="{user: user}" pageUid="{settings.profilePage}"><span>{user.name}</span></f:link.action>
 
 								<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">

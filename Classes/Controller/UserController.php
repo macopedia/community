@@ -80,7 +80,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	}
 
 	/**
-	 * Interactions on the userprofile. Like adding relations and initiating a message.
+	 * Interactions on the user profile. Like adding relations and initiating a message.
 	 */
 	public function interactionAction() {
 	}
@@ -188,7 +188,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * @param Tx_Community_Domain_Model_User $user
 	 * @param string $reason
 	 */
-	public function reportAction (Tx_Community_Domain_Model_User $user, $reason = '') {
+	public function reportAction(Tx_Community_Domain_Model_User $user, $reason = '') {
 		if ($this->settings['profile']['reasonForReportRequired'] && strlen($reason)==0) {
 			$this->flashMessageContainer->add($this->_('profile.report.needReason'),'',t3lib_FlashMessage::ERROR);
 		} else {
@@ -209,6 +209,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * Get the identifier for this request (used for caching)
 	 *
 	 * @param object $request
+	 * @return array
 	 */
 	public function getIdentifier($request) {
 		$requestSettings = array(

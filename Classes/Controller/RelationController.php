@@ -62,6 +62,8 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 * Requests a relation between two users. It will set the status to NEW.
 	 *
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @throws Tx_Community_Exception_UnexpectedException
+	 * @return void
 	 * @see Tx_Community_Domain_Model_Relation
 	 */
 	public function requestAction(Tx_Community_Domain_Model_User $user) {
@@ -102,8 +104,10 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 
 	/**
 	 * Used in requestAction() when requested relation exists
+	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
 	 * @param Tx_Community_Domain_Model_User $user user with who we want to be friends
+	 * @throws Tx_Community_Exception_UnexpectedException
 	 * @return void
 	 */
 	protected function requestedExistingRelation(Tx_Community_Domain_Model_Relation $relation, Tx_Community_Domain_Model_User $user) {
@@ -165,7 +169,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	public function rejectAction(Tx_Community_Domain_Model_Relation $relation) {
 		$this->rejectRelation($relation);
 		if ($this->getRequestingUser()->getUid() == $relation->getInitiatingUser()->getUid()) {
-			//abondonging my friend request
+			//abandoning my friend request
 			$this->flashMessageContainer->add($this->_('relation.abandon.success'));
 			$this->notify('relationAbandonRequest');
 		} else {
@@ -178,6 +182,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 
 	/**
 	 * List all unconfirmed relations
+	 *
 	 * @return void
 	 */
 	public function unconfirmedAction() {
@@ -195,6 +200,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 	 *
 	 * @param Tx_Community_Domain_Model_Relation $relation
 	 * @param Tx_Community_Domain_Model_User $user
+	 * @throws Tx_Community_Exception_UnexpectedException
 	 * @return void
 	 */
 	public function cancelAction(Tx_Community_Domain_Model_Relation $relation = NULL, Tx_Community_Domain_Model_User $user = NULL) {
@@ -265,6 +271,7 @@ class Tx_Community_Controller_RelationController extends Tx_Community_Controller
 
 	/**
 	 * Send notification from requestingUser to requestedUser
+	 *
 	 * @param string $resourceName
 	 * @return void
 	 */
