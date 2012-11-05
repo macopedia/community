@@ -84,6 +84,7 @@ plugin.tx_community {
 				interaction = profile.menu
 				editImage = profile.edit.image
 				report = profile.report
+				list = user.list
 			}
 			Relation {
 				listSome = profile.relation.listSome
@@ -149,6 +150,8 @@ plugin.tx_community {
 				profile.gallery.access = 1
 				profile.wall.list.access = 1
 				message.thread.access = 1
+
+				user.list.access = 1
 			}
 
 			friend < plugin.tx_community.settings.accessRules.other
