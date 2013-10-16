@@ -340,4 +340,12 @@ $TCA['tx_community_domain_model_photo'] = array(
 	),
 );
 
+/**
+* Add "community" plugin to new content element wizard
+* see here for more info http://docs.typo3.org/TYPO3/CoreApiReference/ApiOverview/Examples/ContentElementWizard/Index.html
+*/
+if (TYPO3_MODE == 'BE') {
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['Tx_Community_Resources_Private_Php_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . '/Resources/Private/Php/class.community_wizicon.php';
+}
+
 ?>

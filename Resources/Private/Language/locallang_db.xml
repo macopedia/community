@@ -76,6 +76,9 @@
 			<label index="flexform.ascDesc">Ascending or Descending</label>
 			<label index="flexform.ascDesc_asc">Ascending</label>
 			<label index="flexform.ascDesc_desc">Descending</label>
+
+			<label index="wizard.title">Community extension</label>
+			<label index="wizard.description">Displays a plugin from the community extension (Profile, Wall, Messages ...)</label>
 		</languageKey>
 	</data>
 </T3locallang>
