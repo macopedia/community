@@ -35,7 +35,16 @@
 			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'address', value : requestedUser.address}"/>
 			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'city', value : requestedUser.city}"/>
 			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'zip', value : requestedUser.zip}"/>
-			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : country.shortName}"/>
+
+			<f:if condition="{settings.profile.showCountryIcon}">
+				<f:then>
+					<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : '{com:countryFlag(country: \'{country}\')} {country.shortName}', raw: 'true'}"/>
+				</f:then>
+				<f:else>
+					<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : country.shortName}"/>
+				</f:else>
+			</f:if>
+
 			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'www', value : requestedUser.www}"/>
 			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'cellphone', value : requestedUser.cellphone}"/>
 			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'phone', value : requestedUser.phone}"/>

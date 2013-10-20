@@ -35,6 +35,7 @@ plugin.tx_community {
 				# in bytes, default 1048576 bytes (1MB)
 				maxSize = 1048576
 			}
+			showCountryIcon = 1
 			reasonForReportRequired = 1
 			details {
 				showDetails = username,gender,dateOfBirth,politicalView,religiousView,activities,interests,music,movies,books,quotes,aboutMe,address,city,zip,country,www,cellphone,phone,email
