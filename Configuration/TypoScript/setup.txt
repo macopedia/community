@@ -102,6 +102,7 @@ plugin.tx_community {
 				list = profile.wall.list
 				new = profile.wall.write
 				create = profile.wall.write
+				delete = profile.wall.write
 			}
 			Album {
 				list = profile.gallery

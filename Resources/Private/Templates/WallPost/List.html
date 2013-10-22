@@ -24,11 +24,22 @@
 						</f:if>
 						<div class="item-content-wrap">
 							<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
-								<div class="item-delete">
-									<f:link.action action="delete" additionalParams="{tx_community : {wallPost : wallPost}}">
-										X
-									</f:link.action>
-								</div>
+								<f:then>
+									<div class="item-delete">
+										<f:link.action action="delete" additionalParams="{tx_community : {wallPost : wallPost}}">
+											X
+										</f:link.action>
+									</div>
+								</f:then>
+								<f:else>
+									<com:sameUser requestingUser="{requestingUser}" requestedUser="{wallPost.sender}">
+										<div class="item-delete">
+											<f:link.action action="delete" additionalParams="{tx_community : {user : requestedUser, wallPost : wallPost}}">
+												X
+											</f:link.action>
+										</div>
+									</com:sameUser>
+								</f:else>
 							</com:sameUser>
 							<div class="content-row">
 								<f:if condition="{wallPost.sender}">

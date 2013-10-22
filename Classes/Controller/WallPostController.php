@@ -92,7 +92,7 @@ class Tx_Community_Controller_WallPostController extends Tx_Community_Controller
 	public function deleteAction(Tx_Community_Domain_Model_WallPost $wallPost) {
 		$this->repositoryService->get('wallPost')->remove($wallPost);
 		$this->flashMessageContainer->add($this->_('wallPost.list.deleted'));
-		$this->redirect('list');
+		$this->redirectToWall($this->getRequestedUser());
 	}
 }
 ?>
