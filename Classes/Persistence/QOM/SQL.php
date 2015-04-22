@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Persistence\QOM;
 /***************************************************************
 *  Copyright notice
 *
@@ -25,9 +26,9 @@
 
 /**
  * Enables usage of raw SQL in queries
- * Requires change in Tx_Extbase_Persistence_Storage_Typo3DbBackend to work
+ * Requires change in \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend to work
  */
-class Tx_Community_Persistence_QOM_SQL implements Tx_Extbase_Persistence_QOM_ConstraintInterface {
+class SQL implements \TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface {
 
 	/**
 	* The SQL code that is to be inserted in query
@@ -39,7 +40,7 @@ class Tx_Community_Persistence_QOM_SQL implements Tx_Extbase_Persistence_QOM_Con
 	* @param string $SQL
 	*/
 	public function __construct($SQL = '') {
-	$this->code = $SQL;
+		$this->code = $SQL;
 	}
 
 	/**
@@ -47,14 +48,26 @@ class Tx_Community_Persistence_QOM_SQL implements Tx_Extbase_Persistence_QOM_Con
 	* @return void
 	*/
 	public function setCode($code) {
-	$this->code = $code;
+		$this->code = $code;
 	}
 
 	/**
 	* @return string
 	*/
 	public function getCode() {
-	return $this->code;
+		return $this->code;
 	}
+
+	public function __tostring() {
+		return str_replace(PHP_EOL, '', $this->getCode());
+	}
+
+	/**
+	 * Fills an array with the names of all bound variables in the constraints
+	 *
+	 * @param array &$boundVariables
+	 * @return void
+	 */
+	public function collectBoundVariableNames(&$boundVariables) {}
 }
 ?>

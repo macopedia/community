@@ -1,5 +1,5 @@
 <?php
-
+namespace Macopedia\Community\Core;
 /**
  * A custom bootstrap. Wee need this to implement our own caching
  *
@@ -9,6 +9,6 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Core_Bootstrap extends Tx_Extbase_Core_Bootstrap {
+class Bootstrap extends \TYPO3\CMS\Extbase\Core\Bootstrap {
 }
 ?>

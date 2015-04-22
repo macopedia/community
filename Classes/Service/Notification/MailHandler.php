@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -31,7 +32,7 @@
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  * @author Konrad
  */
-class Tx_Community_Service_Notification_MailHandler extends Tx_Community_Service_Notification_AbstractHandler {
+class MailHandler extends AbstractHandler {
 
 	/**
 	 * Sends e-mail to recipients
@@ -41,20 +42,20 @@ class Tx_Community_Service_Notification_MailHandler extends Tx_Community_Service
 	 * Info about mails
 	 * @see http://buzz.typo3.org/article/your-first-blog/
 	 *
-	 * @param  Tx_Community_Service_Notification_Notification $notification
+	 * @param  Notification $notification
 	 * @param  array $configuration
 	 * @return void
 	 */
-	public function send(Tx_Community_Service_Notification_Notification $notification, array $configuration) {
+	public function send(Notification $notification, array $configuration) {
 
-		/* @var $mail t3lib_mail_Message */
-		$mail = t3lib_div::makeInstance('t3lib_mail_Message');
+		/* @var $mail \TYPO3\CMS\Core\Mail\MailMessage */
+		$mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Core\Mail\MailMessage');
 
 		$notifySenderFlag = $configuration['notifySender'];
 		if ($notifySenderFlag == 1) { //sending message to sender user instead of recipient e.g "copy of message to my email"
 			$recipient = $notification->getSender();
 		} else {
-			/* @var $recipient Tx_Community_Domain_Model_User */
+			/* @var $recipient User */
 			$recipient = $notification->getRecipient();
 		}
 		if (isset($recipient) && empty($configuration['overrideRecipient'])) {
@@ -67,7 +68,7 @@ class Tx_Community_Service_Notification_MailHandler extends Tx_Community_Service
 		if ($configuration['serverEmail']) {
 			$mail->setFrom($configuration['serverEmail']);
 		} else {
-			throw new Tx_Community_Exception_UnexpectedException('No sender while sending mail via MailHandler', 1316515689);
+			throw new \Macopedia\Community\Exception\UnexpectedException('No sender while sending mail via MailHandler', 1316515689);
 		}
 
 		//We can't send from user's email, as other servers won't accept mails from foreign domains from us
@@ -85,7 +86,7 @@ class Tx_Community_Service_Notification_MailHandler extends Tx_Community_Service
 			$mail->addPart($content['bodyHTML'], 'text/html');
 			$mail->send();
 		} catch(Exception $e) {
-			t3lib_div::sysLog("Couldn't send email: ".$e->getMessage(), 'community', t3lib_div::SYSLOG_SEVERITY_ERROR);
+			\TYPO3\CMS\Core\Utility\GeneralUtility::sysLog("Couldn't send email: ".$e->getMessage(), 'community', \TYPO3\CMS\Core\Utility\GeneralUtility::SYSLOG_SEVERITY_ERROR);
 		}
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Cache;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,7 +24,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Service_Cache_NoCacheService implements Tx_Community_Service_Cache_CacheServiceInterface,t3lib_Singleton {
+class NoCacheService implements \Macopedia\Community\Service\Cache\CacheServiceInterface,\TYPO3\CMS\Core\SingletonInterface {
 
 	/**
 	 * Sets a cache entry
@@ -65,17 +66,17 @@ class Tx_Community_Service_Cache_NoCacheService implements Tx_Community_Service_
 	/**
 	 * Drop the tags for a certain entity
 	 *
-	 * @param Tx_Extbase_DomainObject_AbstractEntity $entity
+	 * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity
 	 */
-	public function dropTagsForEntity(Tx_Extbase_DomainObject_AbstractEntity $entity) {
+	public function dropTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity) {
 		return;
 	}
 
 	/**
 	 *
-	 * @param Tx_Extbase_DomainObject_AbstractEntity $object
+	 * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object
 	 */
-	public function getTagsForEntity(Tx_Extbase_DomainObject_AbstractEntity $object) {
+	public function getTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object) {
 		return;
 	}
 }

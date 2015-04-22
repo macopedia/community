@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model\Observer;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,9 +24,9 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-interface Tx_Community_Domain_Model_Observer_ObservableInterface {
-	public function attach(Tx_Community_Domain_Model_Observer_ObserverInterface $observer);
-	public function detach(Tx_Community_Domain_Model_Observer_ObserverInterface $observer);
+interface ObservableInterface {
+	public function attach(ObserverInterface $observer);
+	public function detach(ObserverInterface $observer);
 	public function notify();
 }
 ?>

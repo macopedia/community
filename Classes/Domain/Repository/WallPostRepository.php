@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Repository;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,28 +24,30 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Domain_Repository_WallPostRepository extends Tx_Extbase_Persistence_Repository {
+use Macopedia\Community\Domain\Model\User;
+
+class WallPostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Finds most recent posts by the specified blog
 	 *
-	 * @param Tx_Community_Domain_Model_User $user The owner of wall
-	 * @return Tx_Extbase_Persistence_QueryResultInterface Wall posts
+	 * @param User $user The owner of wall
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface Wall posts
 	 */
-	public function findRecentByRecipient(Tx_Community_Domain_Model_User $user) {
+	public function findRecentByRecipient(User $user) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('recipient', $user))
-			->setOrderings(array('crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING))
+			->setOrderings(array('crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING))
 			->execute();
 	}
 
 	/**
 	 * Deletes  all (sent,receved...) wall posts for given user - useful when we delete him
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param User $user
 	 * @return void
 	 */
-	public function deleteAllForUser(Tx_Community_Domain_Model_User $user) {
+	public function deleteAllForUser(User $user) {
 		$query = $this->createQuery();
 		$messages = $query->matching(
 			$query->logicalOr(

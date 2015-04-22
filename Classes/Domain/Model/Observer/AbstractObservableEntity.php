@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model\Observer;
 /***************************************************************
 *  Copyright notice
 *
@@ -31,9 +32,9 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-abstract class Tx_Community_Domain_Model_Observer_AbstractObservableEntity
-	extends Tx_Extbase_DomainObject_AbstractEntity
-	implements Tx_Community_Domain_Model_Observer_ObservableInterface {
+abstract class AbstractObservableEntity
+	extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+	implements ObservableInterface {
 
 	public function initializeObject() {
 		parent::initializeObject();
@@ -64,18 +65,18 @@ abstract class Tx_Community_Domain_Model_Observer_AbstractObservableEntity
 	/**
 	 * Attach an observer to this object
 	 *
-	 * @param Tx_Community_Domain_Model_Observer_ObserverInterface $observer
+	 * @param ObserverInterface $observer
 	 */
-	public function attach(Tx_Community_Domain_Model_Observer_ObserverInterface $observer) {
+	public function attach(ObserverInterface $observer) {
 		$this->observers[] = $observer;
 	}
 
 	/**
 	 * Detach an observer from this object
 	 *
-	 * @param Tx_Community_Domain_Model_Observer_ObserverInterface $observer
+	 * @param ObserverInterface $observer
 	 */
-	public function detach(Tx_Community_Domain_Model_Observer_ObserverInterface $observer) {
+	public function detach(ObserverInterface $observer) {
 		$this->observers = array_diff($this->observers, array($observer));
 	}
 
@@ -93,10 +94,10 @@ abstract class Tx_Community_Domain_Model_Observer_AbstractObservableEntity
 	/**
 	 * inject the object manager
 	 *
-	 * @var Tx_Extbase_Object_ObjectManager
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
 	 */
-	public function injectObjectManager(Tx_Extbase_Object_ObjectManager $objectManager) {
-		$this->attach($objectManager->get('Tx_Community_Domain_Model_Observer_CacheObserver'));
+	public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager) {
+		$this->attach($objectManager->get('Macopedia\Community\Domain\Model\Observer\CacheObserver'));
 	}
 }
 ?>

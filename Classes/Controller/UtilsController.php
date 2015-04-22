@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Controller;
 /***************************************************************
 *  Copyright notice
 *
@@ -25,14 +26,14 @@
 /**
  * Varoius Actions that didn't fit anywhere
  */
-class Tx_Community_Controller_UtilsController extends Tx_Community_Controller_BaseController {
+class UtilsController extends BaseController {
 
 	/**
 	 * Manages printing messages from flashMessages queue
 	 * @return mixed
 	 */
 	public function flashMessagesDisplayAction() {
-		if (Tx_Community_Controller_BaseController::$redirected) {
+		if (BaseController::$redirected) {
 			return ''; //Dont show messages
 		}
 	}

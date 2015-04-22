@@ -1,5 +1,5 @@
 <?php
-
+namespace Macopedia\Community\Domain\Model;
 /***************************************************************
 *  Copyright notice
 *
@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUser implements Tx_Community_Domain_Model_Observer_ObservableInterface  {
+class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Observer\ObservableInterface  {
 
 	/**
 	 * @var string
@@ -95,7 +95,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	protected $gender;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $dateOfBirth;
 
@@ -337,7 +337,7 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 
 	/**
 	 *
-	 * @return DateTime
+	 * @return \DateTime
 	 */
 	public function getDateOfBirth() {
 		return $this->dateOfBirth;
@@ -345,9 +345,9 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 
 	/**
 	 *
-	 * @param DateTime $dateOfBirth
+	 * @param \DateTime $dateOfBirth
 	 */
-	public function setDateOfBirth(DateTime $dateOfBirth) {
+	public function setDateOfBirth(\DateTime $dateOfBirth = NULL) {
 		$this->dateOfBirth = $dateOfBirth;
 	}
 
@@ -368,15 +368,15 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 
 	public function initializeObject() {
 		parent::initializeObject();
-		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-		$cacheObserver = $objectManager->get('Tx_Community_Domain_Model_Observer_CacheObserver');
+		$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+		$cacheObserver = $objectManager->get('Macopedia\Community\Domain\Model\Observer\CacheObserver');
 		$this->attach($cacheObserver);
 	}
 
 	/**
-	 * @var Tx_Community_Domain_Model_Observer_CacheObserver $cacheObserver
+	 * @var \Macopedia\Community\Domain\Model\Observer\CacheObserver $cacheObserver
 	 */
-	public function injectCacheObserver(Tx_Community_Domain_Model_Observer_CacheObserver $cacheObserver) {
+	public function injectCacheObserver(\Macopedia\Community\Domain\Model\Observer\CacheObserver $cacheObserver) {
 		$this->attach($cacheObserver);
 	}
 
@@ -406,18 +406,18 @@ class Tx_Community_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUse
 	/**
 	 * Attach an observer to this object
 	 *
-	 * @param Tx_Community_Domain_Model_Observer_ObserverInterface $observer
+	 * @param \Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer
 	 */
-	public function attach(Tx_Community_Domain_Model_Observer_ObserverInterface $observer) {
+	public function attach(\Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer) {
 		$this->observers[] = $observer;
 	}
 
 	/**
 	 * Detach an observer from this object
 	 *
-	 * @param Tx_Community_Domain_Model_Observer_ObserverInterface $observer
+	 * @param \Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer
 	 */
-	public function detach(Tx_Community_Domain_Model_Observer_ObserverInterface $observer) {
+	public function detach(\Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer) {
 		$this->observers = array_diff($this->observers, array($observer));
 	}
 

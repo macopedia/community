@@ -62,8 +62,8 @@
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.datetime</numIndex>
-										<numIndex index="1">datetime</numIndex>
+										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.crdate</numIndex>
+										<numIndex index="1">crdate</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
 										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.username</numIndex>

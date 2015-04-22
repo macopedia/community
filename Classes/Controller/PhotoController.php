@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Controller;
 /***************************************************************
 *  Copyright notice
 *
@@ -22,18 +23,20 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model;
+
 /**
  * Controller for the Photo object
  */
-class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_BaseController {
+class PhotoController extends BaseController {
 
 	/**
 	 * Displays a form for creating a new  Photo
 	 *
-	 * @param Tx_Community_Domain_Model_Album $album album we create photo in
+	 * @param Model\Album $album album we create photo in
 	 * @return void
 	 */
-	public function newAction(Tx_Community_Domain_Model_Album $album) {
+	public function newAction(Model\Album $album) {
 		//$photo = $this->repositoryService->get('photo')->findByUid(3);
 		//$album->addPhoto($photo);
 		$this->view->assign('album', $album);
@@ -42,10 +45,10 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 	/**
 	 * Creates a new Photo and forwards to the list action.
 	 *
-	 * @param Tx_Community_Domain_Model_Album $album album we create photo in
+	 * @param Model\Album $album album we create photo in
 	 * @return void
 	 */
-	public function createAction(Tx_Community_Domain_Model_Album $album) {
+	public function createAction(Model\Album $album) {
 		// handleUpload() returns numer in case of error
 		$fileName = $this->handleUpload(
 			'newPhoto.image',
@@ -53,18 +56,20 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 			$this->settings['album']['image']['types'],
 			intval($this->settings['album']['image']['maxSize'])
 		);
+
 		if (!is_int($fileName)) {
-			$newPhoto = new Tx_Community_Domain_Model_Photo();
+			$newPhoto = new Model\Photo();
 			$newPhoto->setImage($fileName);
 			$album->addPhoto($newPhoto);
 			if (!$album->getMainPhoto()) {
 				$album->setMainPhoto($newPhoto);
 			}
 			$this->repositoryService->get('photo')->add($newPhoto);
-			$this->flashMessageContainer->add($this->_('photo.album.uploadSuccess'));
+			$this->repositoryService->get('album')->update($album);
+			$this->addFlashMessage($this->_('photo.album.uploadSuccess'));
 			$this->redirect('show','album', NULL, array('album' => $album->getUid()));
 		} else {
-			$this->flashMessageContainer->add($this->_('profile.album.uploadError'));
+			$this->addFlashMessage($this->_('profile.album.uploadError'));
 			$this->redirect('new');
 		}
 	}
@@ -72,10 +77,10 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 	/**
 	 * Deletes an existing Photo
 	 *
-	 * @param Tx_Community_Domain_Model_Photo $photo the Photo to be deleted
+	 * @param Model\Photo $photo the Photo to be deleted
 	 * @return void
 	 */
-	public function deleteAction(Tx_Community_Domain_Model_Photo $photo) {
+	public function deleteAction(Model\Photo $photo) {
 		$album = $photo->getAlbum();
 		$album->removePhoto($photo);
 		if (! $album->getPhotos()->contains($album->getMainPhoto())) {
@@ -88,7 +93,7 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 			}
 		}
 		$this->repositoryService->get('photo')->remove($photo);
-		$this->flashMessageContainer->add($this->_('profile.album.photoRemoved'));
+		$this->addFlashMessage($this->_('profile.album.photoRemoved'));
 		$this->redirect('show','Album',NULL,array('album'=>$album));
 	}
 
@@ -96,26 +101,26 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 	 * Sets an existing photo as user's avatar
 	 * It's posible to set other user's photo as own avatar
 	 *
-	 * @param Tx_Community_Domain_Model_Photo $photo the Photo to be set as avatar
+	 * @param Model\Photo $photo the Photo to be set as avatar
 	 * @return void
 	 */
-	public function avatarAction(Tx_Community_Domain_Model_Photo $photo) {
+	public function avatarAction(Model\Photo $photo) {
 		$album = $photo->getAlbum();
 		if ($this->hasAccessToAlbum($album)) {
 			$imagePath = $photo->getImage();
 			$this->requestingUser->setImage($imagePath);
-			if ($album->getAlbumType() == Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR
+			if ($album->getAlbumType() == Model\Album::ALBUM_TYPE_AVATAR
 					&& $album->getUser() == $this->requestingUser) {
 				//don't have to copy photo to apecial album
 			} else {
-				$newPhoto = new Tx_Community_Domain_Model_Photo();
+				$newPhoto = new Model\Photo();
 				$newPhoto->setImage($imagePath);
 
-				$this->photoToSpecialAlbum($newPhoto, Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR);
+				$this->photoToSpecialAlbum($newPhoto, Model\Album::ALBUM_TYPE_AVATAR);
 			}
-			$this->flashMessageContainer->add($this->_('profile.album.photoSetAsAvatar'));
+			$this->addFlashMessage($this->_('profile.album.photoSetAsAvatar'));
 		} else {
-			$this->flashMessageContainer->add($this->_('profile.album.accessDenied'));
+			$this->addFlashMessage($this->_('profile.album.accessDenied'));
 		}
 		$this->redirect('show','Album',NULL,array('album'=>$album));
 	}
@@ -123,27 +128,27 @@ class Tx_Community_Controller_PhotoController extends Tx_Community_Controller_Ba
 	/**
 	 * Sets an existing photo as main photo of it's album
 	 *
-	 * @param Tx_Community_Domain_Model_Photo $photo the Photo to be set as main
+	 * @param Model\Photo $photo the Photo to be set as main
 	 * @return void
 	 */
-	public function mainPhotoAction(Tx_Community_Domain_Model_Photo $photo) {
+	public function mainPhotoAction(Model\Photo $photo) {
 		$photo->getAlbum()->setMainPhoto($photo);
-		$this->flashMessageContainer->add($this->_('profile.album.photoSetAsMainPhoto'));
+		$this->addFlashMessage($this->_('profile.album.photoSetAsMainPhoto'));
 		$this->redirect('show','Album',NULL,array('album'=>$photo->getAlbum()));
 	}
 
 	/**
 	 * Checks if requesting user can see given album
 	 *
-	 * @param Tx_Community_Domain_Model_Album $album
+	 * @param Model\Album $album
 	 * @return bool
 	 */
-	public function hasAccessToAlbum(Tx_Community_Domain_Model_Album $album) {
+	public function hasAccessToAlbum(Model\Album $album) {
 		$requestingUser = $this->requestingUser;
 		$relation = $this->getRelation();
 
 		if (($requestingUser && ($album->getUser()->getUid() === $requestingUser->getUid())) ||
-				$relation->getStatus() === Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED ||
+				$relation->getStatus() === Model\Relation::RELATION_STATUS_CONFIRMED ||
 				($album->getPrivate() <= 1 && $requestingUser) ||
 				$album->getPrivate() === 0) {
 			return TRUE;

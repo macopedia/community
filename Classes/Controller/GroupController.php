@@ -1,5 +1,5 @@
 <?php
-
+namespace Macopedia\Community\Controller;
 /***************************************************************
 *  Copyright notice
 *
@@ -24,6 +24,11 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Group,
+	Macopedia\Community\Domain\Model\User,
+	Macopedia\Community\Helper\RepositoryHelper,
+	Macopedia\Community\Helper\GroupHelper;
+
 /**
  * Controller for the Group object
  *
@@ -32,15 +37,15 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Controller_GroupController extends Tx_Community_Controller_BaseController implements Tx_Community_Controller_Cacheable_ControllerInterface {
+class GroupController extends BaseController implements \Macopedia\Community\Controller\Cacheable\ControllerInterface {
 
 	/**
 	 * Show the form to create a new grop
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
+	 * @param Group $group
 	 * @dontverify $group
 	 */
-	public function newAction(Tx_Community_Domain_Model_Group $group = NULL) {
+	public function newAction(Group $group = NULL) {
 		$this->view->assign('group', $group);
 		$this->view->assign('groupOwner', $this->getRequestingUser());
 	}
@@ -48,9 +53,9 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	/**
 	 * Create a new group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
+	 * @param Group $group
 	 */
-	public function createAction(Tx_Community_Domain_Model_Group $group) {
+	public function createAction(Group $group) {
 		$group->setCreator($this->getRequestingUser());
 
 		$image = $this->handleUpload(
@@ -74,19 +79,19 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	/**
 	 *  Display the form to edit a group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
+	 * @param Group $group
 	 * @dontvalidate $group
 	 */
-	public function editAction(Tx_Community_Domain_Model_Group $group) {
+	public function editAction(Group $group) {
 		$this->view->assign('group', $group);
 	}
 
 	/**
 	 * Update a group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
+	 * @param Group $group
 	 */
-	public function updateAction(Tx_Community_Domain_Model_Group $group) {
+	public function updateAction(Group $group) {
 		$image = $this->handleUpload(
 			'group.image',
 			$this->settings['group']['image']['prefix'],
@@ -107,11 +112,11 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	/**
 	 * Delete an action if the creator confirms the deletion
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
+	 * @param Group $group
 	 */
-	public function deleteAction(Tx_Community_Domain_Model_Group $group) {
+	public function deleteAction(Group $group) {
 		if($this->request->hasArgument('confirmedDelete') && ($this->getRequestingUser()->getUid() == $group->getCreator()->getUid())) {
-			Tx_Community_Helper_RepositoryHelper::getRepository('group')->remove($group);
+			RepositoryHelper::getRepository('group')->remove($group);
 		} else {
 			$this->view->assign('group', $group);
 		}
@@ -120,13 +125,13 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	/**
 	 * Show a certain group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
+	 * @param Group $group
 	 */
-	public function showAction(Tx_Community_Domain_Model_Group $group) {
+	public function showAction(Group $group) {
 		if ($this->getRequestingUser()) {
-			if(!Tx_Community_Helper_GroupHelper::isAdmin($group, $this->getRequestingUser()) &&
-			!Tx_Community_Helper_GroupHelper::isMember($group, $this->getRequestingUser()) &&
-			!Tx_Community_Helper_GroupHelper::isPendingMember($group, $this->getRequestingUser())) {
+			if(!GroupHelper::isAdmin($group, $this->getRequestingUser()) &&
+			!GroupHelper::isMember($group, $this->getRequestingUser()) &&
+			!GroupHelper::isPendingMember($group, $this->getRequestingUser())) {
 				$this->view->assign('canJoin', true);
 			} else {
 				$this->view->assign('canJoin', false);
@@ -136,22 +141,22 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 		}
 		$this->view->assign('group', $group);
 		if ($this->getRequestingUser()) {
-			$this->view->assign('isAdmin', Tx_Community_Helper_GroupHelper::isAdmin($group, $this->getRequestingUser()));
+			$this->view->assign('isAdmin', GroupHelper::isAdmin($group, $this->getRequestingUser()));
 		}
 	}
 
 	/**
 	 * Request a membership
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
+	 * @param Group $group
 	 */
-	public function requestMembershipAction(Tx_Community_Domain_Model_Group $group) {
-		if ($this->getRequestingUser() instanceof Tx_Community_Domain_Model_User) {
-			if ($group->getGrouptype() == Tx_Community_Domain_Model_Group::GROUP_TYPE_PRIVATE) {
-				Tx_Community_Helper_GroupHelper::addPendingMember($group, $this->getRequestingUser());
-			} elseif ($group->getGrouptype() == Tx_Community_Domain_Model_Group::GROUP_TYPE_PUBLIC) {
-				if (!Tx_Community_Helper_GroupHelper::isAdmin($group, $this->getRequestingUser())) {
-					Tx_Community_Helper_GroupHelper::confirmMember($group, $this->getRequestingUser());
+	public function requestMembershipAction(Group $group) {
+		if ($this->getRequestingUser() instanceof User) {
+			if ($group->getGrouptype() == Group::GROUP_TYPE_PRIVATE) {
+				GroupHelper::addPendingMember($group, $this->getRequestingUser());
+			} elseif ($group->getGrouptype() == Group::GROUP_TYPE_PUBLIC) {
+				if (!GroupHelper::isAdmin($group, $this->getRequestingUser())) {
+					GroupHelper::confirmMember($group, $this->getRequestingUser());
 				}
 			}
 		}
@@ -160,16 +165,16 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	/**
 	 * Confirm a user's requested membership
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
 	public function confirmMembershipAction(
-		Tx_Community_Domain_Model_Group $group,
-		Tx_Community_Domain_Model_User $user
+		Group $group,
+		User $user
 	) {
-		if ($this->getRequestingUser() instanceof Tx_Community_Domain_Model_User) {
-			if (Tx_Community_Helper_GroupHelper::isAdmin($group, $this->getRequestingUser())) {
-				Tx_Community_Helper_GroupHelper::confirmMember($group, $user);
+		if ($this->getRequestingUser() instanceof User) {
+			if (GroupHelper::isAdmin($group, $this->getRequestingUser())) {
+				GroupHelper::confirmMember($group, $user);
 				$this->flashMessages->add($this->_('group.confirm.success'));
 			}
 		}
@@ -186,14 +191,14 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	/**
 	 * Make a user an admin of the group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
-	public function adminAction(Tx_Community_Domain_Model_Group $group, Tx_Community_Domain_Model_User $user) {
+	public function adminAction(Group $group, User $user) {
 		if ($this->request->hasArgument('confirmAdmin') &&
-			$this->getRequestingUser() && (Tx_Community_Helper_GroupHelper::isAdmin($group, $this->getRequestingUser()))
+			$this->getRequestingUser() && (GroupHelper::isAdmin($group, $this->getRequestingUser()))
 		) {
-			if (Tx_Community_Helper_GroupHelper::isMember($group, $user)) {
+			if (GroupHelper::isMember($group, $user)) {
 				$group->removeMember($user);
 				$group->addAdmin($user);
 				$this->repositoryService->get('group')->update($group);
@@ -207,14 +212,14 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	/**
 	 * Remove the admin status from a user
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
-	public function unAdminAction(Tx_Community_Domain_Model_Group $group, Tx_Community_Domain_Model_User $user) {
+	public function unAdminAction(Group $group, User $user) {
 		if ($this->request->hasArgument('confirmUnAdmin') &&
-			$this->getRequestingUser() && (Tx_Community_Helper_GroupHelper::isAdmin($group, $this->getRequestingUser()))
+			$this->getRequestingUser() && (GroupHelper::isAdmin($group, $this->getRequestingUser()))
 		) {
-			if (Tx_Community_Helper_GroupHelper::isAdmin($group, $user)) {
+			if (GroupHelper::isAdmin($group, $user)) {
 				$group->removeAdmin($user);
 				$group->addMember($user);
 				$this->repositoryService->get('group')->update($group);
@@ -244,7 +249,7 @@ class Tx_Community_Controller_GroupController extends Tx_Community_Controller_Ba
 	 * Get the tags for this request (caching)
 	 */
 	public function getTags() {
-		$repo = Tx_Community_Helper_RepositoryHelper::getRepository('Group');
+		$repo = RepositoryHelper::getRepository('Group');
 		return $repo->getTags();
 	}
 }

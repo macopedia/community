@@ -9,8 +9,6 @@ plugin.tx_community {
 
 	persistence {
 		storagePid = 0,{$plugin.tx_community.persistence.storagePid}
-		# Add mappings for static info tables
-		classes < plugin.tx_staticinfotablesextbase.persistence.classes
 	}
 
 	settings {
@@ -173,7 +171,7 @@ plugin.tx_community {
 			layoutRootPath = EXT:community/Resources/Private/Layouts/
 			partialRootPath = EXT:community/Resources/Private/Partials/
 			defaults {
-				handler = Tx_Community_Service_Notification_MailHandler
+				handler = Macopedia\Community\Service\Notification\MailHandler
 				serverEmail = {$plugin.tx_community.serverEmail}
 			}
 			rules {
@@ -192,6 +190,7 @@ plugin.tx_community {
 				/* enable it if you want - not used by default
 				relationAbandonRequest {
 					10 {
+						subject = Relation Abandon
 						template = RelationAbandonRequest
 					}
 				}
@@ -244,28 +243,28 @@ plugin.tx_community {
 
 config.tx_extbase {
 	persistence.classes {
-		Tx_Community_Domain_Model_User {
+		Macopedia\Community\Domain\Model\User {
 			mapping {
 				tableName = fe_users
-				userGroup.foreignClass = Tx_Extbase_Domain_Model_FrontendUserGroup
+				userGroup.foreignClass = \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
 				columns {
 					profile_image.mapOnProperty = image
 				}
 			}
 		}
-		Tx_Extbase_Domain_Model_FrontendUserGroup {
+		Macopedia\Community\Domain\Model\FrontendUserGroup {
 			mapping {
 				tableName = fe_groups
-				recordType = Tx_Extbase_Domain_Model_FrontendUserGroup
+				recordType = \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
 				columns {
 					lockToDomain.mapOnProperty = lockToDomain
 				}
 			}
 		}
-		Tx_Community_Domain_Model_Message {
+		Macopedia\Community\Domain\Model\Message {
 			mapping {
 				columns {
-					tx_community_read.mapOnProperty = read
+					Macopedia\Community\read.mapOnProperty = read
 				}
 			}
 		}
@@ -273,22 +272,23 @@ config.tx_extbase {
 }
 
 config.tx_extbase.objects {
-	Tx_Extbase_Persistence_Storage_BackendInterface.className = Tx_Community_Persistence_Storage_Typo3DbBackend
-	Tx_Community_Service_Access_AccessServiceInterface {
-		className = Tx_Community_Service_Access_SimpleAccessService
+	TYPO3\CMS\Extbase\Persistence\Generic\Storage\BackendInterface.className = Macopedia\Community\Persistence\Storage\Typo3DbBackend
+	TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser.className = Macopedia\Community\Persistence\Storage\Typo3DbQueryParser
+	Macopedia\Community\Service\Access\AccessServiceInterface {
+		className = Macopedia\Community\Service\Access\SimpleAccessService
 	}
-	Tx_Community_Service_Cache_CacheServiceInterface {
+	Macopedia\Community\Service\Cache\CacheServiceInterface {
 		# disable internal caching
-		className = Tx_Community_Service_Cache_NoCacheService
+		className = Macopedia\Community\Service\Cache\NoCacheService
 	}
-	Tx_Community_Service_Notification_NotificationServiceInterface {
-		className = Tx_Community_Service_Notification_NotificationService
+	Macopedia\Community\Service\Notification\NotificationServiceInterface {
+		className = Macopedia\Community\Service\Notification\NotificationService
 	}
 }
 
 plugin.tx_community.flashMessagesDisplayer = USER_INT
 plugin.tx_community.flashMessagesDisplayer {
-	userFunc = tx_extbase_core_bootstrap->run
+	userFunc = \TYPO3\CMS\Extbase\Core\Bootstrap->run
 	extensionName = Community
 	pluginName = FlashMessagesDisplayer
 }

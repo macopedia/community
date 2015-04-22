@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Controller;
 /***************************************************************
 *  Copyright notice
 *
@@ -22,10 +23,12 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Album;
+
 /**
  * Controller for the Album object
  */
-class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_BaseController {
+class AlbumController extends BaseController {
 
 	/**
 	 * Displays all Albums of requested user
@@ -40,10 +43,10 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	/**
 	 * Displays a single Album with it's photos
 	 *
-	 * @param Tx_Community_Domain_Model_Album $album the Album to display
+	 * @param Album $album the Album to display
 	 * @return void
 	 */
-	public function showAction(Tx_Community_Domain_Model_Album $album) {
+	public function showAction(Album $album) {
 		$this->view->assign('album', $album);
 	}
 
@@ -60,58 +63,58 @@ class Tx_Community_Controller_AlbumController extends Tx_Community_Controller_Ba
 	/**
 	 * Displays a form for creating a new Album
 	 *
-	 * @param Tx_Community_Domain_Model_Album $newAlbum a fresh Album object which has not yet been added to the repository
+	 * @param Album $newAlbum a fresh Album object which has not yet been added to the repository
 	 * @return void
 	 * @dontvalidate $newAlbum
 	 */
-	public function newAction(Tx_Community_Domain_Model_Album $newAlbum = NULL) {
+	public function newAction(Album $newAlbum = NULL) {
 		$this->view->assign('newAlbum', $newAlbum);
 	}
 
 	/**
 	 * Creates a new Album and forwards to the list action.
 	 *
-	 * @param Tx_Community_Domain_Model_Album $newAlbum a fresh Album object which has not yet been added to the repository
+	 * @param Album $newAlbum a fresh Album object which has not yet been added to the repository
 	 * @return void
 	 */
-	public function createAction(Tx_Community_Domain_Model_Album $newAlbum) {
+	public function createAction(Album $newAlbum) {
 		$newAlbum->setUser($this->requestingUser);
 		$this->repositoryService->get('album')->add($newAlbum);
-		$this->flashMessageContainer->add($this->_('profile.album.createdAlbum'));
-		$this->redirect('showMostRecent');
+		$this->addFlashMessage($this->_('profile.album.createdAlbum'));
+		$this->redirect('showAction');
 	}
 
 	/**
 	 * Displays a form for editing an existing Album
 	 *
-	 * @param Tx_Community_Domain_Model_Album $album the Album to display
+	 * @param Album $album the Album to display
 	 * @return string A form to edit a Album
 	 */
-	public function editAction(Tx_Community_Domain_Model_Album $album) {
+	public function editAction(Album $album) {
 		$this->view->assign('album', $album);
 	}
 
 	/**
 	 * Updates an existing Album and forwards to the list action afterwards.
 	 *
-	 * @param Tx_Community_Domain_Model_Album $album the Album to display
+	 * @param Album $album the Album to display
 	 * @return void
 	 */
-	public function updateAction(Tx_Community_Domain_Model_Album $album) {
+	public function updateAction(Album $album) {
 		$this->repositoryService->get('album')->update($album);
-		$this->flashMessageContainer->add($this->_('profile.album.updatedAlbum'));
+		$this->addFlashMessage($this->_('profile.album.updatedAlbum'));
 		$this->redirect('list');
 	}
 
 	/**
 	 * Deletes an existing Album
 	 *
-	 * @param Tx_Community_Domain_Model_Album $album the Album to be deleted
+	 * @param Album $album the Album to be deleted
 	 * @return void
 	 */
-	public function deleteAction(Tx_Community_Domain_Model_Album $album) {
+	public function deleteAction(Album $album) {
 		$this->repositoryService->get('album')->remove($album);
-		$this->flashMessageContainer->add($this->_('profile.album.removedAlbum'));
+		$this->addFlashMessage($this->_('profile.album.removedAlbum'));
 		$this->redirect('list');
 	}
 }

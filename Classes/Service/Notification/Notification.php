@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,12 +24,14 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User;
+
 /**
  * Class containing information needed to notify an user
  *
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Service_Notification_Notification {
+class Notification {
 
 	/**
 	 * Location for overloaded data.
@@ -37,12 +40,12 @@ class Tx_Community_Service_Notification_Notification {
 	protected $data = array();
 
 	/**
-	 * @var Tx_Community_Domain_Model_User
+	 * @var User
 	 */
 	protected $sender;
 
 	/**
-	 * @var Tx_Community_Domain_Model_User
+	 * @var User
 	 */
 	protected $recipient;
 
@@ -54,32 +57,32 @@ class Tx_Community_Service_Notification_Notification {
 
 
 	/**
-	 * @param Tx_Community_Domain_Model_User $recipient
+	 * @param User $recipient
 	 */
 	public function setRecipient($recipient) {
-		if ($recipient instanceof Tx_Community_Domain_Model_User) {
+		if ($recipient instanceof User) {
 			$this->recipient = $recipient;
 		}
 	}
 
 	/**
-	 * @return Tx_Community_Domain_Model_User
+	 * @return User
 	 */
 	public function getRecipient() {
 		return $this->recipient;
 	}
 
 	/**
-	 * @param Tx_Community_Domain_Model_User $sender
+	 * @param User $sender
 	 */
 	public function setSender($sender) {
-		if ($sender instanceof Tx_Community_Domain_Model_User) {
+		if ($sender instanceof User) {
 			$this->sender = $sender;
 		}
 	}
 
 	/**
-	 * @return Tx_Community_Domain_Model_User
+	 * @return User
 	 */
 	public function getSender() {
 		return $this->sender;
@@ -101,10 +104,10 @@ class Tx_Community_Service_Notification_Notification {
 
 	/**
 	 * @param string $rule
-	 * @param Tx_Community_Domain_Model_User $sender
-	 * @param Tx_Community_Domain_Model_User $recipient
+	 * @param User $sender
+	 * @param User $recipient
 	 */
-	public function __construct($rule = '', Tx_Community_Domain_Model_User $sender = NULL, Tx_Community_Domain_Model_User $recipient = NULL) {
+	public function __construct($rule = '', User $sender = NULL, User $recipient = NULL) {
 		$this->setRule($rule);
 		$this->setSender($sender);
 		$this->setRecipient($recipient);

@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Service_Notification_WallService extends Tx_Commmunity_Service_Notification_BaseHandler {
+class WallService extends \Macopedia\Community\Service\Notification\BaseHandler {
 
 	/**
 	 * @param  array $arguments
@@ -40,7 +41,7 @@ class Tx_Community_Service_Notification_WallService extends Tx_Commmunity_Servic
 	 */
 	public function send(array $arguments, array $configuration) {
 
-		$message = t3lib_div::makeInstance('Tx_Community_Domain_Model_WallPost');
+		$message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\WallPost');
 		$message->setSender($arguments['sender']);
 		$message->setRecipient($arguments['recipient']);
 		$message->setSubject($arguments['sender']->getName());

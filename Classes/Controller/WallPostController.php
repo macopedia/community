@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Controller;
 /***************************************************************
 *  Copyright notice
 *
@@ -22,6 +23,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model;
+
 /**
  * Controller for the WallPost object
  *
@@ -29,7 +32,7 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Community_Controller_WallPostController extends Tx_Community_Controller_BaseController {
+class WallPostController extends BaseController {
 
 	/**
 	 * Displays all WallPosts
@@ -44,11 +47,11 @@ class Tx_Community_Controller_WallPostController extends Tx_Community_Controller
 	/**
 	 * Creates a new WallPost and forwards to the list action.
 	 *
-	 * @param Tx_Community_Domain_Model_WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
+	 * @param Model\WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
 	 * @return string An HTML form for creating a new WallPost
 	 * @dontvalidate $newWallPost
 	 */
-	public function newAction(Tx_Community_Domain_Model_WallPost $newWallPost = null) {
+	public function newAction(Model\WallPost $newWallPost = null) {
 		$this->view->assign('newWallPost', $newWallPost);
 		$this->view->assign('recipient', $this->getRequestedUser());
 	}
@@ -56,23 +59,23 @@ class Tx_Community_Controller_WallPostController extends Tx_Community_Controller
 	/**
 	 * Creates a new WallPost and forwards to the list action.
 	 *
-	 * @param Tx_Community_Domain_Model_WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
+	 * @param Model\WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
 	 * @return void
 	 *
 	 */
-	public function createAction(Tx_Community_Domain_Model_WallPost $newWallPost) {
+	public function createAction(Model\WallPost $newWallPost) {
 		$newWallPost->setRecipient($this->getRequestedUser());
 		$newWallPost->setSender($this->getRequestingUser());
 		$newWallPost->setSubject($this->getRequestingUser()->getName());
 
 		$this->repositoryService->get('wallPost')->add($newWallPost);
-		$this->flashMessageContainer->add($this->_('wallPost.form.created'));
+		$this->addFlashMessage($this->_('wallPost.form.created'));
 
 		// we have to persist now to get the uid of the new created wall post in email notification
-		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager'); /* @var $persistenceManager Tx_Extbase_Persistence_Manager */
+		$persistenceManager = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager'); /* @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
 		$persistenceManager->persistAll();
 
-		$notification = new Tx_Community_Service_Notification_Notification(
+		$notification = new \Macopedia\Community\Service\Notification\Notification(
 			'wallPostCreate',
 			$this->requestingUser,
 			$this->requestedUser
@@ -86,12 +89,12 @@ class Tx_Community_Controller_WallPostController extends Tx_Community_Controller
 	/**
 	 * Deletes an existing WallPost
 	 *
-	 * @param Tx_Community_Domain_Model_WallPost $wallPost the WallPost to be deleted
+	 * @param Model\WallPost $wallPost the WallPost to be deleted
 	 * @return void
 	 */
-	public function deleteAction(Tx_Community_Domain_Model_WallPost $wallPost) {
+	public function deleteAction(Model\WallPost $wallPost) {
 		$this->repositoryService->get('wallPost')->remove($wallPost);
-		$this->flashMessageContainer->add($this->_('wallPost.list.deleted'));
+		$this->addFlashMessage($this->_('wallPost.list.deleted'));
 		$this->redirectToWall($this->getRequestedUser());
 	}
 }

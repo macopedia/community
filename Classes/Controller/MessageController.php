@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Controller;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User,
+	Macopedia\Community\Domain\Model\Message,
+	Macopedia\Community\Service\Notification\Notification;
+
 /**
  * The controller for messages
  *
@@ -34,7 +39,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Controller_MessageController extends Tx_Community_Controller_BaseController {
+class MessageController extends BaseController {
 
 	/**
 	 * Show the inbox of a user
@@ -72,16 +77,16 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	 * Show messages between you and given user
 	 * Also send a message from form included in thread view
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param User $user
+	 * @param Message $message
 	 */
-	public function threadAction(Tx_Community_Domain_Model_User $user) {
+	public function threadAction(User $user) {
 		$messages = $this->repositoryService->get('message')->findBetweenUsers($this->getRequestingUser(), $user);
 		foreach ($messages as $message) {
 			// Set read date for messages we read first time
 			// When we read message that we have sent, it is still unread by recipient
 			if ($message->getSender()->getUid() == $user->getUid() && !$message->getReadDate()) {
-				$message->setReadDate(new DateTime('@' . $GLOBALS['EXEC_TIME']));
+				$message->setReadDate(new \DateTime('@' . $GLOBALS['EXEC_TIME']));
 			}
 		}
 
@@ -91,13 +96,13 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Display a form for writing a message
 	 *
-	 * @param Tx_Community_Domain_Model_User $user recipient
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param User $user recipient
+	 * @param Message $message
 	 * @dontvalidate $message
 	 */
 	public function writeAction(
-		Tx_Community_Domain_Model_User $user = NULL,
-		Tx_Community_Domain_Model_Message $message =  NULL) {
+		User $user = NULL,
+		Message $message =  NULL) {
 		if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
 			return '';
 		}
@@ -108,13 +113,13 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Display a form for writing a message
 	 *
-	 * @param Tx_Community_Domain_Model_User $user recipient
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param User $user recipient
+	 * @param Message $message
 	 * @dontvalidate $message
 	 */
 	public function writeThreadedAction(
-		Tx_Community_Domain_Model_User $user = NULL,
-		Tx_Community_Domain_Model_Message $message =  NULL) {
+		User $user = NULL,
+		Message $message =  NULL) {
 		if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
 			return '';
 		}
@@ -125,9 +130,9 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Send a private message
 	 *
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param Message $message
 	 */
-	public function sendAction(Tx_Community_Domain_Model_Message $message) {
+	public function sendAction(Message $message) {
 		$this->sendMessage($message);
 
 		//We reset message argument, so that we don't see old message in write message form
@@ -144,22 +149,22 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 
 	/**
 	 * Sending a message - needed by few actions
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param Message $message
 	 */
-	private function sendMessage(Tx_Community_Domain_Model_Message $message) {
+	private function sendMessage(Message $message) {
 		$message->setSent(true);
-		$message->setSentDate(new DateTime('@' . $GLOBALS['EXEC_TIME']));
+		$message->setSentDate(new \DateTime('@' . $GLOBALS['EXEC_TIME']));
 		$message->setSender($this->getRequestingUser());
 		$message->setRecipient($this->getRequestedUser());
 		$this->repositoryService->get('message')->add($message);
 
-		$this->flashMessageContainer->add($this->_('message.send.success'));
+		$this->addFlashMessage($this->_('message.send.success'));
 
 		// we have to persist now to get the uid of the new created wall post in email notification
-		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager'); /* @var $persistenceManager Tx_Extbase_Persistence_Manager */
+		$persistenceManager = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager'); /* @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
 		$persistenceManager->persistAll();
 
-		$notification = new Tx_Community_Service_Notification_Notification(
+		$notification = new Notification(
 			'messageSend',
 			$this->requestingUser,
 			$this->requestedUser
@@ -171,9 +176,9 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Read a certain message
 	 *
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param Message $message
 	 */
-	public function readAction(Tx_Community_Domain_Model_Message $message) {
+	public function readAction(Message $message) {
 
 		//We can read only when we are sender or recipient of this message
 		$hasAccess = FALSE;
@@ -184,7 +189,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 
 			//do not flag message as read when reading your own message
 			$message->setRead(true);
-			$message->setReadDate(new DateTime('@' . $GLOBALS['EXEC_TIME']));
+			$message->setReadDate(new \DateTime('@' . $GLOBALS['EXEC_TIME']));
 			$this->repositoryService->get('message')->update($message);
 		}
 
@@ -202,10 +207,10 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Delete the message action used in classic message view
 	 *
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param Message $message
 	 * @param string $redirectAction
 	 */
-	public function deleteAction(Tx_Community_Domain_Model_Message $message, $redirectAction = NULL) {
+	public function deleteAction(Message $message, $redirectAction = NULL) {
 		if (!$this->getRequestingUser()) {
 			return;
 		}
@@ -221,9 +226,9 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Delete message used in threaded view
 	 *
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param Message $message
 	 */
-	public function deleteThreadedAction(Tx_Community_Domain_Model_Message $message) {
+	public function deleteThreadedAction(Message $message) {
 		if (!$this->getRequestingUser()) {
 			return;
 		}
@@ -235,7 +240,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 	/**
 	 * Delete message
 	 *
-	 * @param Tx_Community_Domain_Model_Message $message
+	 * @param Message $message
 	 */
 	protected function deleteMessage($message) {
 		if ($message->getSender() && $message->getSender()->getUid() == $this->getRequestingUser()->getUid()) {
@@ -243,7 +248,7 @@ class Tx_Community_Controller_MessageController extends Tx_Community_Controller_
 		} elseif ($message->getRecipient() && $message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
 			$message->setRecipientDeleted(true);
 		}
-		$this->flashMessageContainer->add($this->_('message.delete.success'));
+		$this->addFlashMessage($this->_('message.delete.success'));
 	}
 }
 ?>

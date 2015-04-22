@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Repository;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,30 +24,33 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User,
+	Macopedia\Community\Domain\Model\Relation;
+
 /**
- * Repository for Tx_Community_Domain_Model_Relation
+ * Repository for Relation
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Persistence_Cacheable_AbstractCacheableRepository {
+class RelationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Find confirmed relations for a certain user.
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
-	 * @return Tx_Extbase_Persistence_QueryResultInterface
+	 * @param User $user
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findRelationsForUser(Tx_Community_Domain_Model_User $user) {
+	public function findRelationsForUser(User $user) {
 		$query = $this->createQuery();
 		return $query->matching(
 			$query->logicalAnd(
 				$query->logicalOr(
-					$query->equals('initiatingUser', $user),
-					$query->equals('requestedUser', $user)
+					$query->equals('initiatingUser', $user->getUid()),
+					$query->equals('requestedUser', $user->getUid())
 				),
-				$query->equals('status', Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED)
+				$query->equals('status', Relation::RELATION_STATUS_CONFIRMED)
 			)
 		)->execute();
 	}
@@ -54,15 +58,15 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	/**
 	 * find the relation between users.
 	 *
-	 * @param Tx_Community_Domain_Model_User $requestedUser
-	 * @param Tx_Community_Domain_Model_User $requestingUser
+	 * @param User $requestedUser
+	 * @param User $requestingUser
 	 * @param integer | NULL $status
-	 * @return Tx_Community_Domain_Model_Relation | NULL
-	 * @throws Tx_Community_Exception_UnexpectedException
+	 * @return Relation | NULL
+	 * @throws \Macopedia\Community\Exception\UnexpectedException
 	 */
 	public function findRelationBetweenUsers(
-		Tx_Community_Domain_Model_User $requestedUser,
-		Tx_Community_Domain_Model_User $requestingUser,
+		User $requestedUser,
+		User $requestingUser,
 		$status = NULL
 	) {
 		$query = $this->createQuery();
@@ -88,7 +92,7 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 		)->execute();
 
 		if (count($relations) > 1) {
-			throw new Tx_Community_Exception_UnexpectedException(
+			throw new \Macopedia\Community\Exception\UnexpectedException(
 				'There are more than one relations from user ' . $requestedUser->getUid() .' to ' . $requestingUser->getUid()
 			);
 		} elseif(count($relations) == 1) {
@@ -101,15 +105,15 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	/**
 	 * find relationships waiting for a given user approval
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
-	 * @return Tx_Extbase_Persistence_QueryResultInterface
+	 * @param User $user
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findUnconfirmedForUser(Tx_Community_Domain_Model_User $user) {
+	public function findUnconfirmedForUser(User $user) {
 		$query = $this->createQuery();
 		return $query->matching(
 			$query->logicalAnd(
 				$query->equals('requestedUser', $user),
-				$query->equals('status', Tx_Community_Domain_Model_Relation::RELATION_STATUS_NEW)
+				$query->equals('status', Relation::RELATION_STATUS_NEW)
 			)
 		)->execute();
 	}
@@ -117,7 +121,7 @@ class Tx_Community_Domain_Repository_RelationRepository extends Tx_Community_Per
 	/**
 	 * Deletes all (confirmed,unconfirmed...) relations for given user - useful when we delete him
 	 *
-	 * @param Tx_Community_Domain_Model_User |int $user
+	 * @param User |int $user
 	 * @return void
 	 */
 	public function deleteAllForUser($user) {

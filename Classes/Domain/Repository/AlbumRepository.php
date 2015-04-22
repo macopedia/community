@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Repository;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,25 +24,23 @@
 ***************************************************************/
 
 /**
- * Repository for Tx_Community_Domain_Model_Album
+ * Repository for Macopedia\Community\Domain\Model\Album
  */
-class Tx_Community_Domain_Repository_AlbumRepository extends Tx_Extbase_Persistence_Repository {
+class AlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-	public function __construct() {
-		parent::__construct();
-
-		$this->setDefaultOrderings(array('crdate'=>Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+	public function initialize() {
+		$this->setDefaultOrderings(array('crdate'=>\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
 		//requied in AlbumController->showMostRecentAction
 	}
 
 	/**
 	 * Finds albums by user and special
 	 *
-	 * @param Tx_Community_Domain_Model_User $user The owner of album
+	 * @param \Macopedia\Community\Domain\Model\User $user The owner of album
 	 * @param integer $albumType The type of special album
 	 * @return array The posts
 	 */
-	public function findOneByUserAndType(Tx_Community_Domain_Model_User $user, $albumType) {
+	public function findOneByUserAndType(\Macopedia\Community\Domain\Model\User $user, $albumType) {
 		$query = $this->createQuery();
 		return $query->matching(
 			$query->logicalAnd(
@@ -56,10 +55,10 @@ class Tx_Community_Domain_Repository_AlbumRepository extends Tx_Extbase_Persiste
 	/**
 	 * Deletes all albums for user - useful when we delete him
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param \Macopedia\Community\Domain\Model\User $user
 	 * @return void
 	 */
-	public function deleteAllForUser(Tx_Community_Domain_Model_User $user) {
+	public function deleteAllForUser(\Macopedia\Community\Domain\Model\User $user) {
 		$query = $this->createQuery();
 		$albums = $query->matching(
 			$query->equals('user', $user)

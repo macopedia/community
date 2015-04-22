@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Helper;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,9 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Group,
+	Macopedia\Community\Domain\Model\User;
+
 /**
  * A helper to manage group related functions
  *
@@ -31,48 +35,48 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Helper_GroupHelper {
+class GroupHelper {
 
 	/**
 	 * Add a pending member to the group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
 	static public function addPendingMember(
-		Tx_Community_Domain_Model_Group $group,
-		Tx_Community_Domain_Model_User $user
+		Group $group,
+		User $user
 	) {
 		$group->addPendingMember($user);
-		Tx_Community_Helper_RepositoryHelper::getRepository('Group')->update($group);
+		RepositoryHelper::getRepository('Group')->update($group);
 		// TODO: message the admins/creator
 	}
 
 	/**
 	 * Confirm that a user can join a group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
 	static public function confirmMember(
-		Tx_Community_Domain_Model_Group $group,
-		Tx_Community_Domain_Model_User $user
+		Group $group,
+		User $user
 	) {
 		$group->removePendingMember($user);
 		$group->addMember($user);
-		Tx_Community_Helper_RepositoryHelper::getRepository('Group')->update($group);
+		RepositoryHelper::getRepository('Group')->update($group);
 		// TODO: message the user
 	}
 
 	/**
 	 * Checks if a user is an admin of a group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
 	static public function isAdmin(
-		Tx_Community_Domain_Model_Group $group,
-		Tx_Community_Domain_Model_User $user
+		Group $group,
+		User $user
 	) {
 		$userId = $user->getUid();
 
@@ -87,12 +91,12 @@ class Tx_Community_Helper_GroupHelper {
 	/**
 	 * Checks if a user is a member of the group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
 	static public function isMember(
-		Tx_Community_Domain_Model_Group $group,
-		Tx_Community_Domain_Model_User $user
+		Group $group,
+		User $user
 	) {
 		return $group->getMembers()->contains($user);
 
@@ -101,12 +105,12 @@ class Tx_Community_Helper_GroupHelper {
 	/**
 	 * Checks if a user is currently a pending member of a group
 	 *
-	 * @param Tx_Community_Domain_Model_Group $group
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param Group $group
+	 * @param User $user
 	 */
 	static public function isPendingMember(
-		Tx_Community_Domain_Model_Group $group,
-		Tx_Community_Domain_Model_User $user
+		Group $group,
+		User $user
 	) {
 		return $group->getPendingMembers()->contains($user);
 

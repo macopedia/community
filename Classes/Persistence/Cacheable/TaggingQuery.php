@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Persistence\Cacheable;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,7 +24,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Persistence_Cacheable_TaggingQuery extends Tx_Extbase_Persistence_Query {
+class TaggingQuery extends \TYPO3\CMS\Extbase\Persistence\Generic\Query {
 
 	/**
 	 * @var array
@@ -31,12 +32,12 @@ class Tx_Community_Persistence_Cacheable_TaggingQuery extends Tx_Extbase_Persist
 	protected $tags = array();
 
 	/**
-	 * @var Tx_Community_Persistence_Cacheable_AsbtractCacheableRepository
+	 * @var AsbtractCacheableRepository
 	 */
 	protected $repository;
 
 	/**
-	 * @var Tx_Community_Service_Cache_CacheService
+	 * @var \Macopedia\Community\Service\Cache\CacheService
 	 */
 	protected $cacheService;
 
@@ -54,7 +55,7 @@ class Tx_Community_Persistence_Cacheable_TaggingQuery extends Tx_Extbase_Persist
 			}
 		}
 
-		// very important! otherwise Tx_Extbase_Persistence_Repository::update will blow up in your face.
+		// very important! otherwise \TYPO3\CMS\Extbase\Persistence\Repository::update will blow up in your face.
 		reset($objects);
 		return $objects;
 	}
@@ -62,13 +63,13 @@ class Tx_Community_Persistence_Cacheable_TaggingQuery extends Tx_Extbase_Persist
 	/**
 	 * Inject the cache service
 	 *
-	 * @param Tx_Community_Service_Cache_CacheService $cacheService
+	 * @param \Macopedia\Community\Service\Cache\CacheService $cacheService
 	 */
-	public function injectCacheService(Tx_Community_Service_Cache_CacheService $cacheService) {
+	public function injectCacheService(\Macopedia\Community\Service\Cache\CacheService $cacheService) {
 		$this->cacheService = $cacheService;
 	}
 
-	public function injectRepository(Tx_Community_Persistence_Cacheable_AbstractCacheableRepository $repository) {
+	public function injectRepository(AbstractCacheableRepository $repository) {
 		$this->repository = $repository;
 	}
 }

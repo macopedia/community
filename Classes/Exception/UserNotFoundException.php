@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Exception;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,7 +24,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Exception_UserNotFoundException extends Tx_Extbase_Exception {
+class UserNotFoundException extends \TYPO3\CMS\Extbase\Exception {
 }
 
 ?>

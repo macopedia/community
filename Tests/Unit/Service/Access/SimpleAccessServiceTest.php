@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Tests\Unit\Service\Access;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,9 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User,
+	Macopedia\Community\Service\Access\SimpleAccessService;
+
 /**
  * Test for the simple access service
  *
@@ -31,17 +35,17 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Service_Access_SimpleAccessServiceTest extends Tx_Extbase_BaseTestCase {
+class SimpleAccessServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
 	 */
 	public function hasAccessReturnsTrueForSameUser() {
-        $stub = $this->getMock('Tx_Community_Domain_Model_User');
+        $stub = $this->getMock('User');
         $stub->expects($this->any())
              ->method('getUid')
              ->will($this->returnValue(1));
-		$accessService = new Tx_Community_Service_Access_SimpleAccessService();
+		$accessService = new SimpleAccessService();
 		$this->assertEquals(true, $accessService->hasAccess($stub, $stub));
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,19 +24,19 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observer_AbstractObservableEntity {
+class Message extends Observer\AbstractObservableEntity {
 
 	/**
 	 * The sender
 	 *
-	 * @var Tx_Community_Domain_Model_User
+	 * @var \Macopedia\Community\Domain\Model\User
 	 */
 	protected $sender;
 
 	/**
 	 * The recipient
 	 *
-	 * @var Tx_Community_Domain_Model_User
+	 * @var \Macopedia\Community\Domain\Model\User
 	 */
 	protected $recipient;
 
@@ -50,12 +51,12 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	protected $read;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $sentDate;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $readDate;
 
@@ -83,7 +84,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	 * Get value of $this->sender
 	 *
 	 * @access public
-	 * @return Tx_Community_Domain_Model_User
+	 * @return \Macopedia\Community\Domain\Model\User
 	 */
 	public function getSender() {
 		return $this->sender;
@@ -92,7 +93,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	/**
 	 * Set the value of $this->sender
 	 *
-	 * @param Tx_Community_Domain_Model_User $value
+	 * @param \Macopedia\Community\Domain\Model\User $value
 	 * @access public
 	 */
 	public function setSender($value) {
@@ -103,7 +104,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	 * Get value of $this->recipient
 	 *
 	 * @access public
-	 * @return Tx_Community_Domain_Model_User
+	 * @return \Macopedia\Community\Domain\Model\User
 	 */
 	public function getRecipient() {
 		return $this->recipient;
@@ -112,7 +113,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	/**
 	 * Set the value of $this->recipient
 	 *
-	 * @param Tx_Community_Domain_Model_User $value
+	 * @param \Macopedia\Community\Domain\Model\User $value
 	 * @access public
 	 */
 	public function setRecipient($value) {
@@ -163,7 +164,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	 * Get value of $this->sentDate
 	 *
 	 * @access public
-	 * @return DateTime
+	 * @return \DateTime
 	 */
 	public function getSentDate() {
 		return $this->sentDate;
@@ -172,7 +173,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	/**
 	 * Set the value of $this->sentDate
 	 *
-	 * @param DateTime $value
+	 * @param \DateTime $value
 	 * @access public
 	 */
 	public function setSentDate($value) {
@@ -183,7 +184,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	 * Get value of $this->readDate
 	 *
 	 * @access public
-	 * @return DateTime
+	 * @return \DateTime
 	 */
 	public function getReadDate() {
 		return $this->readDate;
@@ -192,7 +193,7 @@ class Tx_Community_Domain_Model_Message extends Tx_Community_Domain_Model_Observ
 	/**
 	 * Set the value of $this->readDate
 	 *
-	 * @param DateTime $value
+	 * @param \DateTime $value
 	 * @access public
 	 */
 	public function setReadDate($value) {

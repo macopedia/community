@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -29,7 +30,7 @@
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  * @author Konrad Baumgart
  */
-class Tx_Community_Service_Notification_NotificationService implements Tx_Community_Service_Notification_NotificationServiceInterface, t3lib_Singleton {
+class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Core\SingletonInterface {
 
 	/**
 	 * @var array
@@ -37,22 +38,22 @@ class Tx_Community_Service_Notification_NotificationService implements Tx_Commun
 	protected $settings;
 
 	/**
-	 * @var Tx_Community_Service_SettingsService
+	 * @var \Macopedia\Community\Service\SettingsService
 	 */
 	protected $settingsService;
 
 
 	/**
-	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
 	 */
 	protected $objectManager;
 
 	/**
 	 * Iterate through settings and send message using appropriate handler (mail/wall/PM/....)
-	 * @param Tx_Community_Service_Notification_Notification $notification used by handlers
+	 * @param Notification $notification used by handlers
 	 * @return void
 	 */
-	public function notify(Tx_Community_Service_Notification_Notification $notification) {
+	public function notify(Notification $notification) {
 
 		$methods = $this->getNotificationMethods($notification->getRule());
 		if ($methods) {
@@ -65,7 +66,7 @@ class Tx_Community_Service_Notification_NotificationService implements Tx_Commun
 						$handler->send($notification, $method);
 					}
 					catch(Exception $e) {
-						t3lib_div::sysLog("Couldn't send email: ".$e->getMessage(), 'community', t3lib_div::SYSLOG_SEVERITY_ERROR);
+						\TYPO3\CMS\Core\Utility\GeneralUtility::sysLog("Couldn't send email: ".$e->getMessage(), 'community', \TYPO3\CMS\Core\Utility\GeneralUtility::SYSLOG_SEVERITY_ERROR);
 					}
 				}
 			}
@@ -74,11 +75,11 @@ class Tx_Community_Service_Notification_NotificationService implements Tx_Commun
 
 	/**
 	 * Prevents from sending notification to user himself
-	 * @param Tx_Community_Service_Notification_Notification $notification
+	 * @param Notification $notification
 	 * @param array $configuration
 	 * @return array
 	 */
-	protected function isValidNotification(Tx_Community_Service_Notification_Notification $notification, array $configuration) {
+	protected function isValidNotification(Notification $notification, array $configuration) {
 		if ($notification->getSender() && $notification->getRecipient()) {
 			if($notification->getRecipient()->getUid() != $notification->getSender()->getUid()
 			|| $configuration['allowSelfNotification'] == 1) {
@@ -114,18 +115,18 @@ class Tx_Community_Service_Notification_NotificationService implements Tx_Commun
 	/**
 	 * Inject the object manager so we can create objects on our own.
 	 *
-	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
 	 */
-	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
+	public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
 
 	/**
 	 * Inject the settings service
 	 *
-	 * @param Tx_Community_Service_SettingsService $settingsService
+	 * @param \Macopedia\Community\Service\SettingsService $settingsService
 	 */
-	public function injectSettingsService(Tx_Community_Service_SettingsService $settingsService) {
+	public function injectSettingsService(\Macopedia\Community\Service\SettingsService $settingsService) {
 		$this->settingsService = $settingsService;
 	}
 

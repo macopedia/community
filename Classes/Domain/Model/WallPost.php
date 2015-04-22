@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,19 +24,20 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Observer_AbstractObservableEntity {
+
+class WallPost extends Observer\AbstractObservableEntity {
 
 	/**
 	 * Sender
 	 *
-	 * @var Tx_Community_Domain_Model_User $sender
+	 * @var \Macopedia\Community\Domain\Model\User $sender
 	 */
 	protected $sender;
 
 	/**
 	 * recipient
 	 *
-	 * @var Tx_Community_Domain_Model_User $recipient
+	 * @var \Macopedia\Community\Domain\Model\User $recipient
 	 */
 	protected $recipient;
 
@@ -57,7 +59,7 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	/**
 	 * Setter for sender
 	 *
-	 * @param Tx_Community_Domain_Model_User $sender
+	 * @param \Macopedia\Community\Domain\Model\User $sender
 	 * @return void
 	 */
 	public function setSender($sender) {
@@ -67,7 +69,7 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	/**
 	 * Getter for sender
 	 *
-	 * @return Tx_Community_Domain_Model_User sender
+	 * @return \Macopedia\Community\Domain\Model\User sender
 	 */
 	public function getSender() {
 		return $this->sender;
@@ -76,7 +78,7 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	/**
 	 * Setter for recipient
 	 *
-	 * @param Tx_Community_Domain_Model_User $recipient
+	 * @param \Macopedia\Community\Domain\Model\User $recipient
 	 * @return void
 	 */
 	public function setRecipient($recipient) {
@@ -86,7 +88,7 @@ class Tx_Community_Domain_Model_WallPost extends Tx_Community_Domain_Model_Obser
 	/**
 	 * Getter for recipient
 	 *
-	 * @return Tx_Community_Domain_Model_User recipient
+	 * @return \Macopedia\Community\Domain\Model\User recipient
 	 */
 	public function getRecipient() {
 		return $this->recipient;

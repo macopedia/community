@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Tests\Unit\Domain\Model\Observer;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,9 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Observer\CacheObserver,
+	Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
+
 /**
  * Test for the cache observer
  *
@@ -31,7 +35,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Domain_Model_Observer_AbstractObservableEntityTest extends Tx_Extbase_BaseTestCase {
+class AbstractObservableEntityTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	private $cacheService;
 
@@ -40,7 +44,7 @@ class Tx_Community_Domain_Model_Observer_AbstractObservableEntityTest extends Tx
 	private $observer;
 
 	public function setUp() {
-		$this->observable = $this->getMock('Tx_Community_Domain_Model_Observer_AbstractObservableEntity');
-		$this->observer = new Tx_Community_Domain_Model_Observer_CacheObserver();
+		$this->observable = $this->getMock('AbstractObservableEntity');
+		$this->observer = new CacheObserver();
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service;
 /***************************************************************
 *  Copyright notice
 *
@@ -32,13 +33,13 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-interface Tx_Community_Service_RepositoryServiceInterface {
+interface RepositoryServiceInterface {
 
 	/**
 	 * Get the repository for the model $repositoryName (e.g. "user")
 	 *
 	 * @param string $repositoryName
-	 * @return Tx_Extbase_Persistence_Repository
+	 * @return \TYPO3\CMS\Extbase\Persistence\Repository
 	 */
 	public function get($repositoryName);
 }

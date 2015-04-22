@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -30,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Service_Notification_PrivateMessageHandler extends Tx_Community_Service_Notification_AbstractHandler {
+class PrivateMessageHandler extends AbstractHandler {
 
 	/**
 	 * @param  array $notification
@@ -39,8 +40,8 @@ class Tx_Community_Service_Notification_PrivateMessageHandler extends Tx_Communi
 	 */
 	public function send(array $notification, array $configuration) {
 
-		$message = t3lib_div::makeInstance('Tx_Community_Domain_Model_Message');
-		/* @var $message Tx_Community_Domain_Model_Message */
+		$message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\Message');
+		/* @var $message Message */
 		$message->setSent(true);
 		$message->setSentDate(time());
 		$message->setSender($notification['sender']);

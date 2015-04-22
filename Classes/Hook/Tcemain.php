@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Hook;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +29,7 @@
  *
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Hook_Tcemain {
+class Tcemain {
 
 	/**
 	 * This method is called by a hook in the TYPO3 Core Engine (TCEmain), e.g. by list module if deleting a record
@@ -37,10 +38,10 @@ class Tx_Community_Hook_Tcemain {
 	 * @param string $table Table we are working on
 	 * @param int $id Record uid of the updated record
 	 * @param mixed $value
-	 * @param t3lib_TCEmain &$pObj reference to parent object
+	 * @param \TYPO3\CMS\Core\DataHandling\DataHandler &$pObj reference to parent object
 	 * @return void
 	 */
-	public function processCmdmap_postProcess($command, $table, $id, $value, t3lib_TCEmain &$pObj) {
+	public function processCmdmap_postProcess($command, $table, $id, $value, \TYPO3\CMS\Core\DataHandling\DataHandler &$pObj) {
 
 		if ($command === 'delete' && $table === 'fe_users' && is_int($id)) {
 
@@ -49,8 +50,8 @@ class Tx_Community_Hook_Tcemain {
 
 			$cmdmap = array_merge($relationsCmdMap, $wallPostsCmdMap);
 			if (count($cmdmap)) {
-				/* @var $tce t3lib_TCEmain */
-				$tce = t3lib_div::makeInstance('t3lib_TCEmain');
+				/* @var $tce \TYPO3\CMS\Core\DataHandling\DataHandler */
+				$tce = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Core\DataHandling\DataHandler');
 				$tce->start(FALSE, $cmdmap, $pObj->BE_USER);
 
 				$GLOBALS['TYPO3_DB']->sql_query('START TRANSACTION');
@@ -110,7 +111,7 @@ class Tx_Community_Hook_Tcemain {
 				$dataArr['tx_community_domain_model_wallpost'][$wallPost['uid']]['hidden'] = 1;
 			}
 
-			$tce = t3lib_div::makeInstance('t3lib_TCEmain');
+			$tce = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Core\DataHandling\DataHandler');
 			$tce->start($dataArr, array());
 
 			$GLOBALS['TYPO3_DB']->sql_query('START TRANSACTION');
@@ -128,7 +129,7 @@ class Tx_Community_Hook_Tcemain {
 	protected function getRelations($userId) {
 		$relations = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows('uid', 'tx_community_domain_model_relation',
 					'(initiating_user='.$userId.' OR requested_user='.$userId.')'.
-					t3lib_BEfunc::deleteClause('tx_community_domain_model_relation'));
+					\TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause('tx_community_domain_model_relation'));
 		return $relations;
 	}
 
@@ -136,7 +137,7 @@ class Tx_Community_Hook_Tcemain {
 		$w = 'tx_community_domain_model_wallpost';
 		$wallPosts = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows("$w.uid", 'tx_community_domain_model_wallpost, fe_users',
 					"fe_users.uid = $w.recipient AND ($w.recipient=$userId OR ($w.sender=$userId AND (fe_users.deleted=1 OR fe_users.disable=1)))".
-					t3lib_BEfunc::deleteClause($w));
+					\TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause($w));
 		return $wallPosts;
 	}
 

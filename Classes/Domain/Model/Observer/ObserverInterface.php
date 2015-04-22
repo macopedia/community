@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model\Observer;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,8 +24,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-interface Tx_Community_Domain_Model_Observer_ObserverInterface {
-	public function update(Tx_Community_Domain_Model_Observer_ObservableInterface $observable);
+interface ObserverInterface {
+	public function update(ObservableInterface $observable);
 	public function __toString();
 }
 ?>

@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'A flexible community / social network system based on Extbase and Fluid. Friends (buddies), messages, user profile, wall, gallery, notification service, and a lot more.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '0.8.0',
+	'version' => '1.0.0',
 	'dependencies' => 'cms,extbase,fluid',
 	'conflicts' => '',
 	'priority' => '',
@@ -34,10 +34,10 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'cms' => '',
+			'typo3' => '6.2.0-7.2.99',
 			'extbase' => '',
 			'fluid' => '',
-			'static_info_tables_extbase' => '',
+			'static_info_tables' => '6.0.0-6.99.99',
 		),
 		'conflicts' => array(
 		),

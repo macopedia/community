@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model;
 /***************************************************************
 *  Copyright notice
 *
@@ -25,7 +26,7 @@
 /**
  * Image that is in user's gallery
  */
-class Tx_Community_Domain_Model_Photo extends Tx_Extbase_DomainObject_AbstractEntity {
+class Photo extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * image
@@ -38,7 +39,7 @@ class Tx_Community_Domain_Model_Photo extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * album
 	 *
-	 * @var Tx_Community_Domain_Model_Album
+	 * @var \Macopedia\Community\Domain\Model\Album
 	 * @validate NotEmpty
 	 * @lazy
 	 */
@@ -61,7 +62,7 @@ class Tx_Community_Domain_Model_Photo extends Tx_Extbase_DomainObject_AbstractEn
 
 
 	/**
-	 * @param Tx_Community_Domain_Model_Album $album
+	 * @param \Macopedia\Community\Domain\Model\Album $album
 	 * @return void
 	 */
 	public function setAlbum($album) {
@@ -69,7 +70,7 @@ class Tx_Community_Domain_Model_Photo extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * @return Tx_Community_Domain_Model_Album
+	 * @return \Macopedia\Community\Domain\Model\Album
 	 */
 	public function getAlbum() {
 		return $this->album;

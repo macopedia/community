@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model\Observer;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,19 +24,19 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Domain_Model_Observer_CacheObserver implements Tx_Community_Domain_Model_Observer_ObserverInterface,t3lib_Singleton {
+class CacheObserver implements ObserverInterface, \TYPO3\CMS\Core\SingletonInterface {
 
 	/**
-	 * @var Tx_Community_Service_Cache_CacheServiceInterface
+	 * @var \Macopedia\Community\Service\Cache\CacheServiceInterface
 	 */
 	protected $cacheService;
 
 	/**
 	 * Update an observable object
 	 *
-	 * @param Tx_Community_Domain_Model_Observer_ObservableInterface $observable
+	 * @param  ObservableInterface $observable
 	 */
-	public function update(Tx_Community_Domain_Model_Observer_ObservableInterface $observable) {
+	public function update(ObservableInterface $observable) {
 		$this->cacheService->dropTagsForEntity($observable);
 		$observable->detach($this);
 	}
@@ -43,7 +44,7 @@ class Tx_Community_Domain_Model_Observer_CacheObserver implements Tx_Community_D
 	/**
 	 * Inject the cache service
 	 */
-	public function injectCacheService(Tx_Community_Service_Cache_CacheServiceInterface $cacheService) {
+	public function injectCacheService(\Macopedia\Community\Service\Cache\CacheServiceInterface $cacheService) {
 		$this->cacheService = $cacheService;
 	}
 

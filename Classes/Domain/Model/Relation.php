@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+
 /**
  * A relation between two users.
  *
@@ -30,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_AbstractEntity {
+class Relation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * the relation has just been initiated
@@ -61,22 +63,22 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 	const RELATION_STATUS_CANCELLED = 8;
 
 	/**
-	 * @var Tx_Community_Domain_Model_User
+	 * @var \Macopedia\Community\Domain\Model\User
 	 */
 	protected $initiatingUser;
 
 	/**
-	 * @var Tx_Community_Domain_Model_User
+	 * @var \Macopedia\Community\Domain\Model\User
 	 */
 	protected $requestedUser;
 
 	/**
-	 * @var Tx_Community_Domain_Model_AclRole
+	 * @var AclRole
 	 */
 	//protected $initiatingRole;
 
 	/**
-	 * @var Tx_Community_Domain_Model_AclRole
+	 * @var AclRole
 	 */
 //	protected $requestedRole;
 
@@ -86,36 +88,36 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 	protected $status;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $initiationTime;
 
 	/**
 	 *
-	 * @return Tx_Community_Domain_Model_User
+	 * @return \Macopedia\Community\Domain\Model\User
 	 */
 	public function getInitiatingUser() {
 		return $this->initiatingUser;
 	}
 
 	/**
-	 * @param Tx_Community_Domain_Model_User $initiatingUser
+	 * @param \Macopedia\Community\Domain\Model\User $initiatingUser
 	 */
-	public function setInitiatingUser(Tx_Community_Domain_Model_User $initiatingUser) {
+	public function setInitiatingUser(\Macopedia\Community\Domain\Model\User $initiatingUser) {
 		$this->initiatingUser = $initiatingUser;
 	}
 
 
 
 	/**
-	 * @return DateTime
+	 * @return \DateTime
 	 */
 	public function getInitiationTime() {
-		return $this->initiatingUser;
+		return $this->initiationTime;
 	}
 
 	/**
-	 * @param DateTime $initiationTime
+	 * @param \DateTime $initiationTime
 	 */
 	public function setInitiationTime($initiationTime) {
 		$this->initiationTime = $initiationTime;
@@ -124,43 +126,43 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 
 
 	/**
-	 * @return Tx_Community_Domain_Model_User
+	 * @return \Macopedia\Community\Domain\Model\User
 	 */
 	public function getRequestedUser() {
 		return $this->requestedUser;
 	}
 
 	/**
-	 * @param Tx_Community_Domain_Model_User $requestedUser
+	 * @param \Macopedia\Community\Domain\Model\User $requestedUser
 	 */
-	public function setRequestedUser($requestedUser) {
+	public function setRequestedUser(\Macopedia\Community\Domain\Model\User $requestedUser) {
 		$this->requestedUser = $requestedUser;
 	}
 
 	/**
 	 *
-	 * @return Tx_Community_Domain_Model_AclRole
+	 * @return AclRole
 	 */
 	// private function getInitiatingRole() {
 	// 	return $this->initiatingRole;
 	// }
 
 	/**
-	 * @param Tx_Community_Domain_Model_AclRole $initiatingRole
+	 * @param AclRole $initiatingRole
 	 */
 	// private function setInitiatingRole($initiatingRole) {
 	// 	$this->initiatingRole = $initiatingRole;
 	// }
 
 	/**
-	 * @return Tx_Community_Domain_Model_AclRole
+	 * @return AclRole
 	 */
 	// private function getRequestedRole() {
 	// 	return $this->requestedRole;
 	// }
 
 	/**
-	 * @param Tx_Community_Domain_Model_AclRole $requestedRole
+	 * @param AclRole $requestedRole
 	 */
 	// private function setRequestedRole($requestedRole) {
 	// 	$this->requestedRole = $requestedRole;
@@ -183,11 +185,11 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 
 
 	/*public function _isDirty($propertyName = NULL) {
-		t3lib_div::debug($this->_cleanProperties);
+		\TYPO3\CMS\Core\Utility\GeneralUtility::debug($this->_cleanProperties);
 		if (empty($this->_cleanProperties)) return TRUE;
 
-		// if (!is_array($this->_cleanProperties)) throw new Tx_Extbase_Persistence_Exception_CleanStateNotMemorized('The clean state of the object "' . get_class($this) . '" has not been memorized before asking _isDirty().', 1233309106);
-		if ($this->uid !== NULL && $this->uid != $this->_cleanProperties['uid']) throw new Tx_Extbase_Persistence_Exception_TooDirty('The uid "' . $this->uid . '" has been modified, that is simply too much.', 1222871239);
+		// if (!is_array($this->_cleanProperties)) throw new \TYPO3\CMS\Extbase\Persistence\Generic\Exception\CleanStateNotMemorizedException('The clean state of the object "' . get_class($this) . '" has not been memorized before asking _isDirty().', 1233309106);
+		if ($this->uid !== NULL && $this->uid != $this->_cleanProperties['uid']) throw new \TYPO3\CMS\Extbase\Persistence\Generic\Exception\TooDirtyException('The uid "' . $this->uid . '" has been modified, that is simply too much.', 1222871239);
 		$result = FALSE;
 		if ($propertyName !== NULL) {
 			if (is_object($this->$propertyName)) {
@@ -220,5 +222,3 @@ class Tx_Community_Domain_Model_Relation extends Tx_Extbase_DomainObject_Abstrac
 		parent::_memorizePropertyCleanState($propertyName);
 	}*/
 }
-
-?>

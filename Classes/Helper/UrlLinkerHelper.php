@@ -1,5 +1,5 @@
 <?php
-
+namespace Macopedia\Community\Helper;
 /**
  *  UrlLinker - facilitates turning plain text URLs into HTML links.
  *
@@ -10,7 +10,7 @@
  *  and related or neighboring rights to UrlLinker.
  *  http://creativecommons.org/publicdomain/zero/1.0/
  */
-class Tx_Community_Helper_UrlLinkerHelper {
+class UrlLinkerHelper {
 
 	/**
 	 * Transforms plain text into valid HTML, escaping special characters and

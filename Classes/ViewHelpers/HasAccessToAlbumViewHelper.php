@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Album,
+	Macopedia\Community\Domain\Model\User,
+	Macopedia\Community\Domain\Model\Relation;
+
 /**
  * Checks if the requestedUser and the requestingUser are the same.
  *
@@ -31,18 +36,18 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Konrad Baumgart
  */
-class Tx_Community_ViewHelpers_HasAccessToAlbumViewHelper extends Tx_Fluid_ViewHelpers_IfViewHelper {
+class HasAccessToAlbumViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 
 	/**
-	 * @param Tx_Community_Domain_Model_Album $album
-	 * @param Tx_Community_Domain_Model_Relation $relation
-	 * @param Tx_Community_Domain_Model_User $requestingUser
+	 * @param Album $album
+	 * @param Relation $relation
+	 * @param User $requestingUser
 	 */
-	public function render(Tx_Community_Domain_Model_Album $album, Tx_Community_Domain_Model_Relation $relation = NULL, Tx_Community_Domain_Model_User $requestingUser = NULL) {
+	public function render(Album $album, Relation $relation = NULL, User $requestingUser = NULL) {
 		if (
 				($album->getPrivate() == 0) || //public
 				($requestingUser && $requestingUser->getUid() === $album->getUser()->getUid()) || // my album
-				($requestingUser && $relation && $relation->getStatus() === Tx_Community_Domain_Model_Relation::RELATION_STATUS_CONFIRMED && ($album->getPrivate() == 2)) //friends can see it
+				($requestingUser && $relation && $relation->getStatus() === Relation::RELATION_STATUS_CONFIRMED && ($album->getPrivate() == 2)) //friends can see it
 			) {
 			return $this->renderThenChild();
 		} else {

@@ -1,4 +1,6 @@
 <?php
+namespace Macopedia\Community\Tests\ViewHelpers;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -23,28 +25,30 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-require_once(t3lib_extmgm::extPath('fluid') . 'Tests/Unit/ViewHelpers/ViewHelperBaseTestcase.php');
+use Macopedia\Community\Domain\Model\User;
+
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('fluid') . 'Tests/Unit/ViewHelpers/ViewHelperBaseTestcase.php');
 
 /**
  * Test for the SameUserViewHelper
  *
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Tests_ViewHelpers_SameUserViewHelperTest extends Tx_Fluid_ViewHelpers_ViewHelperBaseTestcase {
+class SameUserViewHelperTest extends \TYPO3\CMS\Fluid\Tests\Unit\ViewHelpers\ViewHelperBaseTestcase {
 
 	/**
-	 * @var Tx_Community_ViewHelpers_SameUserViewHelper
+	 * @var \Macopedia\Community\ViewHelpers\SameUserViewHelper
 	 */
 	protected $viewHelper;
 
 	/**
-	 * @var Tx_Fluid_Core_ViewHelper_Arguments
+	 * @var \TYPO3\CMS\Fluid\Core\ViewHelper\Arguments
 	 */
 	protected $mockArguments;
 
 	public function setUp() {
 		parent::setUp();
-		$this->viewHelper = $this->getAccessibleMock('Tx_Community_ViewHelpers_SameUserViewHelper', array('renderThenChild', 'renderElseChild'));
+		$this->viewHelper = $this->getAccessibleMock('\Macopedia\Community\ViewHelpers\SameUserViewHelper', array('renderThenChild', 'renderElseChild'));
 		$this->injectDependenciesIntoViewHelper($this->viewHelper);
 		$this->viewHelper->initializeArguments();
 	}
@@ -75,11 +79,11 @@ class Tx_Community_Tests_ViewHelpers_SameUserViewHelperTest extends Tx_Fluid_Vie
 
 
 	public function thenProvider() {
-		$user1 = $this->getAccessibleMock('Tx_Community_Domain_Model_User', array('getUid'));
+		$user1 = $this->getAccessibleMock('User', array('getUid'));
 		$user1->_set('uid', 1);
-		$user2 = $this->getAccessibleMock('Tx_Community_Domain_Model_User', array('getUid'));
+		$user2 = $this->getAccessibleMock('User', array('getUid'));
 		$user2->_set('uid', 1);
-		$user3 = $this->getAccessibleMock('Tx_Community_Domain_Model_User', array('getUid'));
+		$user3 = $this->getAccessibleMock('User', array('getUid'));
 		$user3->_set('uid', 10);
 
 		return array(
@@ -94,9 +98,9 @@ class Tx_Community_Tests_ViewHelpers_SameUserViewHelperTest extends Tx_Fluid_Vie
 	}
 
 	public function elseProvider() {
-		$user1 = $this->getAccessibleMock('Tx_Community_Domain_Model_User', array('getUid'));
+		$user1 = $this->getAccessibleMock('User', array('getUid'));
 		$user1->_set('uid', 1);
-		$user2 = $this->getAccessibleMock('Tx_Community_Domain_Model_User', array('getUid'));
+		$user2 = $this->getAccessibleMock('User', array('getUid'));
 		$user2->_set('uid', 8);
 
 		return array(

@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Cache;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,7 +24,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-interface Tx_Community_Service_Cache_CacheServiceInterface {
+interface CacheServiceInterface {
 
 	/**
 	 * Sets a cache entry
@@ -57,13 +58,13 @@ interface Tx_Community_Service_Cache_CacheServiceInterface {
 	/**
 	 * Drop the tags for a certain entity
 	 *
-	 * @param Tx_Extbase_DomainObject_AbstractEntity $entity
+	 * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity
 	 */
-	public function dropTagsForEntity(Tx_Extbase_DomainObject_AbstractEntity $entity);
+	public function dropTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity);
 
 	/**
 	 *
-	 * @param Tx_Extbase_DomainObject_AbstractEntity $object
+	 * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object
 	 */
-	public function getTagsForEntity(Tx_Extbase_DomainObject_AbstractEntity $object);
+	public function getTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object);
 }

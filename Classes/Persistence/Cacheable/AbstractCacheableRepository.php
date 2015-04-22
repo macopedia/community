@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Persistence\Cacheable;
 /***************************************************************
 *  Copyright notice
 *
@@ -32,7 +33,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-abstract class Tx_Community_Persistence_Cacheable_AbstractCacheableRepository extends Tx_Extbase_Persistence_Repository {
+abstract class AbstractCacheableRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * The tags that were used fetched
@@ -48,9 +49,14 @@ abstract class Tx_Community_Persistence_Cacheable_AbstractCacheableRepository ex
 		return self::$tags;
 	}
 
-	public function __construct() {
-		parent::__construct();
-		$this->queryFactory = t3lib_div::makeInstance('Tx_Community_Persistence_Cacheable_TaggingQueryFactory');
+	/**
+	 * Constructs a new Repository
+	 *
+	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+	 */
+	public function __construct(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager) {
+		parent::__construct($objectManager);
+		$this->queryFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\Macopedia\Community\Persistence\Cacheable\TaggingQueryFactory');
 		$this->queryFactory->injectRepository($this);
 	}
 

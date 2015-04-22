@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Persistence\Cacheable;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,10 +24,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-class Tx_Community_Persistence_Cacheable_TaggingQueryFactory extends Tx_Extbase_Persistence_QueryFactory {
+class TaggingQueryFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\QueryFactory {
 
 	/**
-	 * @var Tx_Community_Persistence_Cacheable_AbstractCacheableRepository
+	 * @var \Macopedia\Community\Persistence\Cacheable\AbstractCacheableRepository
 	 */
 	protected $repository;
 
@@ -36,24 +37,26 @@ class Tx_Community_Persistence_Cacheable_TaggingQueryFactory extends Tx_Extbase_
 	 * @param string $className
 	 */
 	public function create($className) {
-		$persistenceManager = Tx_Extbase_Dispatcher::getPersistenceManager();
+		$objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+		$persistenceManager = $objectManager->get('\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface');
+		$backend = $objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\Backend');
 
-		$reflectionService = $persistenceManager->getBackend()->getReflectionService();
+		$reflectionService = $backend->getReflectionService();
 
-		$dataMapFactory = t3lib_div::makeInstance('Tx_Extbase_Persistence_Mapper_DataMapFactory');
+		$dataMapFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory');
 		$dataMapFactory->injectReflectionService($reflectionService);
 
-		$dataMapper = t3lib_div::makeInstance('Tx_Extbase_Persistence_Mapper_DataMapper');
-		$dataMapper->injectIdentityMap($persistenceManager->getBackend()->getIdentityMap());
-		$dataMapper->injectSession($persistenceManager->getSession());
+		$dataMapper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper');
+		$dataMapper->injectIdentityMap($backend->getIdentityMap());
+		$dataMapper->injectSession($backend->getSession());
 		$dataMapper->injectReflectionService($reflectionService);
 		$dataMapper->injectDataMapFactory($dataMapFactory);
 
-		$querySettings = t3lib_div::makeInstance('Tx_Extbase_Persistence_Typo3QuerySettings');
+		$querySettings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
 
-		$query = t3lib_div::makeInstance('Tx_Community_Persistence_Cacheable_TaggingQuery', $className);
+		$query = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\Macopedia\Community\Persistence\Cacheable\TaggingQuery', $className);
 		$query->injectPersistenceManager($persistenceManager);
-		$query->injectCacheService(t3lib_div::makeinstance('Tx_Community_Service_Cache_CacheService'));
+		$query->injectCacheService(\TYPO3\CMS\Core\Utility\GeneralUtility::makeinstance('\Macopedia\Community\Service\Cache\CacheService'));
 		$query->injectRepository($this->repository);
 		$query->injectDataMapper($dataMapper);
 		$query->setQuerySettings($querySettings);
@@ -61,7 +64,7 @@ class Tx_Community_Persistence_Cacheable_TaggingQueryFactory extends Tx_Extbase_
 		return $query;
 	}
 
-	public function injectRepository(Tx_Community_Persistence_Cacheable_AbstractCacheableRepository $repository) {
+	public function injectRepository(\Macopedia\Community\Persistence\Cacheable\AbstractCacheableRepository $repository) {
 		$this->repository = $repository;
 	}
 }

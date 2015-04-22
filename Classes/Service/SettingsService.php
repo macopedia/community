@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service;
 /***************************************************************
 *  Copyright notice
 *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Service_SettingsService implements t3lib_Singleton {
+class SettingsService implements \TYPO3\CMS\Core\SingletonInterface {
 
 	protected $settings;
 

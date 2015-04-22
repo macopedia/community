@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers\Widget;
 /***************************************************************
 *  Copyright notice
 *
@@ -35,32 +36,32 @@
  * </f:widget.paginate>
  * </code>
  */
-class Tx_Community_ViewHelpers_Widget_PaginateViewHelper extends Tx_Fluid_Core_Widget_AbstractWidgetViewHelper {
+class PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper {
 
 	/**
-	 * @var Tx_Community_ViewHelpers_Widget_Controller_PaginateController
+	 * @var Controller\PaginateController
 	 */
 	protected $controller;
 
 	/**
 	 * Inject controller
 	 *
-	 * @param Tx_Community_ViewHelpers_Widget_Controller_PaginateController $controller
+	 * @param Controller\PaginateController $controller
 	 * @return void
 	 */
-	public function injectController(Tx_Community_ViewHelpers_Widget_Controller_PaginateController $controller) {
+	public function injectController(Controller\PaginateController $controller) {
 		$this->controller = $controller;
 	}
 
 	/**
 	 * Render everything
 	 *
-	 * @param Tx_Extbase_Persistence_QueryResultInterface $objects
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
 	 * @param string $as
 	 * @param mixed $configuration
 	 * @return string
 	 */
-	public function render(Tx_Extbase_Persistence_QueryResultInterface $objects, $as, $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE)) {
+	public function render(\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects, $as, $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE)) {
 		return $this->initiateSubRequest();
 	}
 }

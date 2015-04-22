@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Access;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User;
+
 /**
  * AccessHelper interface. To implement your own access mechanism, simple implement this
  * interface and inject it into the BaseController. All you have to do is return true or false
@@ -33,20 +36,20 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-interface Tx_Community_Service_Access_AccessServiceInterface {
+interface AccessServiceInterface {
 
 	/**
 	 * Check if requestingUser has access to $resource of $requestedUser. $requestingUser may be empty if
 	 * "anonymous" is requesting a resource.
 	 *
-	 * @param Tx_Community_Domain_Model_User $requestingUser
-	 * @param Tx_Community_Domain_Model_User $requestedUser
+	 * @param User $requestingUser
+	 * @param User $requestedUser
 	 * @param string $resource
 	 * @return boolean
 	 */
 	public function hasAccess(
-		Tx_Community_Domain_Model_User $requestingUser = NULL,
-		Tx_Community_Domain_Model_User $requestedUser = NULL,
+		User $requestingUser = NULL,
+		User $requestedUser = NULL,
 		$resource = ''
 	);
 }

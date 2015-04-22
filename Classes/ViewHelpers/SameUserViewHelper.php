@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User;
+
 /**
  * Checks if the requestedUser and the requestingUser are the same.
  *
@@ -30,18 +33,18 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_ViewHelpers_SameUserViewHelper extends Tx_Fluid_ViewHelpers_IfViewHelper {
+class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 
 	/**
-	 * @param Tx_Community_Domain_Model_User $requestingUser
-	 * @param Tx_Community_Domain_Model_User $requestedUser
+	 * @param User $requestingUser
+	 * @param User $requestedUser
 	 */
 	public function render($requestingUser, $requestedUser) {
-		if($requestingUser instanceof Tx_Community_Domain_Model_User) {
+		if($requestingUser instanceof User) {
 			$requestingUser = $requestingUser->getUid();
 		}
 
-		if($requestedUser instanceof Tx_Community_Domain_Model_User) {
+		if($requestedUser instanceof User) {
 			$requestedUser = $requestedUser->getUid();
 		}
 

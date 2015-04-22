@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Controller\Cacheable;
 /***************************************************************
 *  Copyright notice
 *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-interface Tx_Community_Controller_Cacheable_ControllerInterface {
+interface ControllerInterface {
 
 	/**
 	 * Get the tags that should be flushed

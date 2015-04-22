@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,6 +24,15 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Domain\Model\Photo;
+use Macopedia\Community\Domain\Model\Album;
+use Macopedia\Community\Service\RepositoryServiceInterface;
+use Macopedia\Community\Service\Access\AccessServiceInterface;
+use Macopedia\Community\Service\SettingsService;
+use Macopedia\Community\Service\Notification\NotificationServiceInterface;
+use Macopedia\Community\Exception\UnexpectedException;
+
 /**
  * A base controller that implements basic functions that are needed
  * all over the project. Holds the requested and requesting user.
@@ -32,43 +42,43 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_ActionController {
+class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * the user who is requested to view
 	 *
-	 * @var Tx_Community_Domain_Model_User
+	 * @var User
 	 */
 	protected $requestedUser = NULL;
 
 	/**
 	 * The requesting user. Normally the logged in fe_user
 	 *
-	 * @var Tx_Community_Domain_Model_User
+	 * @var User
 	 */
 	protected $requestingUser = NULL;
 
 	/**
 	 * Repository service. Get all your repositories with it.
 	 *
-	 * @var Tx_Community_Service_RepositoryServiceInterface
+	 * @var RepositoryServiceInterface
 	 */
 	protected $repositoryService;
 
 	/**
 	 * The access helper. It mainly is a wrapper class for all permissions.
 	 *
-	 * @var Tx_Community_Service_Access_AccessServiceInterface
+	 * @var AccessServiceInterface
 	 */
 	protected $accessService;
 
 	/**
-	 * @var Tx_Community_Service_SettingsService
+	 * @var SettingsService
 	 */
 	protected $settingsService;
 
 	/**
-	 * @var Tx_Community_Service_Notification_NotificationServiceInterface $notificationService
+	 * @var NotificationServiceInterface $notificationService
 	 */
 	protected $notificationService;
 
@@ -89,6 +99,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	protected function initializeAction() {
 
 		$this->findRequestedAndRequestingUser();
+
 		$this->settingsService->set($this->settings);
 		$controllerName = $this->request->getControllerName();
 		$actionName = $this->request->getControllerActionName();
@@ -96,7 +107,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 		$this->accessDenied = false;
 
 		if ($this->settings['debug']) {
-			$this->flashMessageContainer->add(
+			$this->addFlashMessage(
 				'Controller: '.$controllerName."<br />".
 				'ActionName: '.$actionName."<br />".
 				'resourceName: '.$resourceName."<br />".
@@ -104,14 +115,14 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 				($this->getRequestedUser() ? "RequestedUser: ".htmlspecialchars($this->getRequestedUser()->getName(),ENT_QUOTES| ENT_HTML401) : '')."<br />".
 				'AccesType: '.$this->accessService->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
 				'Debug',
-				t3lib_FlashMessage::INFO
+				\TYPO3\CMS\Core\Messaging\FlashMessage::INFO
 			);
 		}
 
 		if (!$this->hasAccess($resourceName)) {
 			//access denied
 			if ($this->settings['debug']) {
-				$this->flashMessageContainer->add(
+				$this->addFlashMessage(
 					"You do not have permission (".$this->hasAccess($resourceName).
 					") to access  resource: ".$resourceName.
 					", ActionName: ".$actionName.
@@ -119,7 +130,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 					($this->getRequestedUser()?", RequestedUser:".$this->getRequestedUser()->getUid():"").
 					", AccesType: ".$this->accessService->getAccessType($this->getRequestingUser(),$this->getRequestedUser()),
 					"Debug",
-					t3lib_FlashMessage::WARNING
+					\TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
 				);
 			}
 			$this->accessDenied = true;
@@ -128,10 +139,10 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * Prepare view - assign requestedUser and requestingUser
-	 * @param Tx_Extbase_MVC_View_ViewInterface $view
+	 * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
 	 * @return void
 	 */
-	protected function initializeView(Tx_Extbase_MVC_View_ViewInterface $view) {
+	protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view) {
 		parent::initializeView($view);
 		$this->view->assign('requestedUser',$this->getRequestedUser());
 		$this->view->assign('requestingUser',$this->getRequestingUser());
@@ -154,47 +165,47 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * Injects the Configuration Manager and is initializing the framework settings
 	 * Function is used to override the merge of settings via TS & flexforms
 	 *
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface An instance of the Configuration Manager
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface An instance of the Configuration Manager
 	 * @return void
 	 */
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
-		$this->settings = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+		$this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
 	}
 
 	/**
 	 * Inject the access helper.
 	 *
-	 * @param Tx_Community_Service_Access_AccessServiceInterface $accessHelper
+	 * @param AccessServiceInterface $accessHelper
 	 */
-	public function injectAccessHelper(Tx_Community_Service_Access_AccessServiceInterface $accessHelper) {
+	public function injectAccessHelper(AccessServiceInterface $accessHelper) {
 		$this->accessService = $accessHelper;
 	}
 
 	/**
 	 * Inject the repository service.
 	 *
-	 * @param Tx_Community_Service_RepositoryServiceInterface $repositoryService
+	 * @param RepositoryServiceInterface $repositoryService
 	 */
-	public function injectRepositoryService(Tx_Community_Service_RepositoryServiceInterface $repositoryService) {
+	public function injectRepositoryService(RepositoryServiceInterface $repositoryService) {
 		$this->repositoryService = $repositoryService;
 	}
 
 	/**
 	 * Inject the settings service
 	 *
-	 * @param Tx_Community_Service_SettingsService $settingsService
+	 * @param SettingsService $settingsService
 	 */
-	public function injectSettingsService(Tx_Community_Service_SettingsService $settingsService) {
+	public function injectSettingsService(SettingsService $settingsService) {
 		$this->settingsService = $settingsService;
 	}
 
 	/**
 	 * Inject notification service
 	 *
-	 * @param Tx_Community_Service_Notification_NotificationServiceInterface $notificationService
+	 * @param NotificationServiceInterface $notificationService
 	 */
-	public function injectNotificationService(Tx_Community_Service_Notification_NotificationServiceInterface $notificationService) {
+	public function injectNotificationService(NotificationServiceInterface $notificationService) {
 		$this->notificationService = $notificationService;
 	}
 
@@ -210,7 +221,6 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	protected function fetchRequestedUserFromRequestArguments() {
 		$argumentsPriority = array('photo','album','relation','user');
-
 		$foundUser = false;
 		foreach ($argumentsPriority as $argument) {
 			if ($foundUser) {
@@ -240,7 +250,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 						} elseif ($relation->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
 							$this->requestedUser = $relation->getInitiatingUser();
 						} else {
-							throw new Tx_Community_Exception_UnexpectedException(
+							throw new UnexpectedException(
 									'User ' . $this->getRequestingUser()->getUid() . ' is not in relation ' . $this->request->getArgument('relation')
 							);
 						}
@@ -267,8 +277,8 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 */
 	protected function findRequestedAndRequestingUser() {
 		$this->requestingUser = $this->repositoryService->get('user')->findCurrentUser();
-
 		$this->fetchRequestedUserFromRequestArguments();
+
 		if ($this->requestedUser === NULL) {
 			$this->requestedUser = $this->getRequestingUser();
 		}
@@ -277,7 +287,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	/**
 	 * Get the requested user
 	 *
-	 * @return Tx_Community_Domain_Model_User
+	 * @return User
 	 */
 	protected function getRequestedUser() {
 		return $this->requestedUser;
@@ -286,7 +296,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	/**
 	 * Get the requesting user
 	 *
-	 * @return Tx_Community_Domain_Model_User
+	 * @return User
 	 */
 	protected function getRequestingUser() {
 		return $this->requestingUser;
@@ -295,11 +305,12 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	/**
 	 * Get relation between requesting and requested user
 	 *
-	 * @return Tx_Community_Domain_Model_Relation
+	 * @return Relation
 	 */
 	public function getRelation() {
 		if ($this->getRequestingUser()) {
-			$relation = $this->repositoryService->get('relation')->findRelationBetweenUsers(
+			$rel = $this->repositoryService->get('relation');
+			$relation = $rel->findRelationBetweenUsers(
 				$this->getRequestedUser(),
 				$this->getRequestingUser()
 			);
@@ -317,7 +328,8 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * @return string
 	 */
 	protected function _($key, $arguments = array()) {
-		return Tx_Extbase_Utility_Localization::translate($key, $this->extensionName, $arguments);
+		$translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, $this->extensionName, $arguments);
+		return !empty($translation)?$translation:'';
 	}
 
 	/**
@@ -353,18 +365,18 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	/**
 	 * Redirects to a user page. Makes sure that there is always a "user" argument in the url
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param User $user
 	 */
-	protected function redirectToUser(Tx_Community_Domain_Model_User $user) {
+	protected function redirectToUser(User $user) {
 		$this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['profilePage'] ? $this->settings['profilePage'] : $GLOBALS['TSFE']->id));
 	}
 
 	/**
 	 * Redirects to a wall page. Makes sure that there is always a "user" argument in the url
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param User $user
 	 */
-	protected function redirectToWall(Tx_Community_Domain_Model_User $user) {
+	protected function redirectToWall(User $user) {
 		$this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['wallPage'] ? $this->settings['wallPage'] : $GLOBALS['TSFE']->id));
 	}
 
@@ -381,7 +393,7 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	protected function handleUpload($property, $uploadDir, $types = 'jpg,gif,png', $maxSize = 1048576) {
 		$data = $_FILES['tx_' . strtolower($this->request->getControllerExtensionName())];
 		if (is_array($data) && count($data) > 0) {
-			$propertyPath = t3lib_div::trimExplode('.', $property);
+			$propertyPath = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('.', $property);
 			$namePath = $data['name'];
 			$tmpPath = $data['tmp_name'];
 			$sizePath = $data['size'];
@@ -407,14 +419,14 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 			return 2;
 		}
 		$fileInfo = pathinfo($fileArray['name']);
-		if (!t3lib_div::inList($types, strtolower($fileInfo['extension']))) {
+		if (!\TYPO3\CMS\Core\Utility\GeneralUtility::inList($types, strtolower($fileInfo['extension']))) {
 			return 3;
 		}
 
 		if (file_exists(PATH_site . $uploadDir . $fileArray['name'])) {
 			$fileArray['name'] = $fileInfo['filename'] . '-' . time() . '.' . $fileInfo['extension'];
 		}
-		if (t3lib_div::upload_copy_move($fileArray['tmp'], PATH_site . $uploadDir . $fileArray['name'])) {
+		if (\TYPO3\CMS\Core\Utility\GeneralUtility::upload_copy_move($fileArray['tmp'], PATH_site . $uploadDir . $fileArray['name'])) {
 			return $fileArray['name'];
 		} else {
 			return 4;
@@ -425,14 +437,14 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 	 * Puts image into special album of given type owned by requesting user
 	 * Adds/updates album and adds photo to repo, you dont need to care about it
 	 *
-	 * @param Tx_Community_Domain_Model_Photo $newPhoto
-	 * @param integer $albumType like Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR
+	 * @param Photo $newPhoto
+	 * @param integer $albumType like Album::ALBUM_TYPE_AVATAR
 	 */
-	protected function photoToSpecialAlbum(Tx_Community_Domain_Model_Photo $newPhoto, $albumType) {
+	protected function photoToSpecialAlbum(Photo $newPhoto, $albumType) {
 		$user = $this->requestingUser;
 		$album = $this->repositoryService->get('album')->findOneByUserAndType($user,$albumType);
 		if (!$album) {
-			$album = new Tx_Community_Domain_Model_Album();
+			$album = new Album();
 			$album->setAlbumType($albumType);
 			$album->setName($this->_('profile.album.albumTypeName.'.$albumType));
 			$album->setUser($user);
@@ -445,27 +457,27 @@ class Tx_Community_Controller_BaseController extends Tx_Extbase_MVC_Controller_A
 
 	/**
 	 * We want to know if we were already redirected
-	 * @see Tx_Extbase_MVC_Controller_AbstractController::redirect()
+	 * @see \TYPO3\CMS\Extbase\Mvc\Controller\AbstractController::redirect()
 	 *
 	 * @param string $actionName Name of the action to forward to
 	 * @param string $controllerName Unqualified object name of the controller to forward to. If not specified, the current controller is used.
 	 * @param string $extensionName Name of the extension containing the controller to forward to. If not specified, the current extension is assumed.
-	 * @param Tx_Extbase_MVC_Controller_Arguments $arguments Arguments to pass to the target action
+	 * @param \TYPO3\CMS\Extbase\Mvc\Controller\Arguments $arguments Arguments to pass to the target action
 	 * @param integer $pageUid Target page uid. If NULL, the current page uid is used
 	 * @param integer $delay (optional) The delay in seconds. Default is no delay.
 	 * @param integer $statusCode (optional) The HTTP status code for the redirect. Default is "303 See Other"
 	 * @return void
-	 * @throws Tx_Extbase_MVC_Exception_UnsupportedRequestType If the request is not a web request
-	 * @throws Tx_Extbase_MVC_Exception_StopAction
+	 * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException If the request is not a web request
+	 * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
 	 */
 	protected function redirect($actionName, $controllerName = NULL, $extensionName = NULL, array $arguments = NULL, $pageUid = NULL, $delay = 0, $statusCode = 303) {
-		Tx_Community_Controller_BaseController::$redirected = TRUE;
+		BaseController::$redirected = TRUE;
 		parent::redirect($actionName, $controllerName, $extensionName, $arguments, $pageUid, $delay, $statusCode);
 	}
 
 	/**
 	 * If there were validation errors, we don't want to write details like
-	 * "An error occurred while trying to call Tx_Community_Controller_UserController->updateAction()"
+	 * "An error occurred while trying to call UserController->updateAction()"
 	 *
 	 * @return string|boolean The flash message or FALSE if no flash message should be set
 	 */

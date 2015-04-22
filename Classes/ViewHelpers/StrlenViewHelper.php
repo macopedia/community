@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
 *  Copyright notice
 *
@@ -30,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Simon Schaufelberger <simonschaufi@googlemail.com>
  */
-class Tx_Community_ViewHelpers_StrlenViewHelper extends Tx_Fluid_ViewHelpers_BaseViewHelper {
+class StrlenViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\BaseViewHelper {
 
 	/**
 	 * @param string $value The string

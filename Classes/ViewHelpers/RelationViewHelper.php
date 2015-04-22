@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,16 +24,18 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User;
+
 /**
  * Returns the relaton between requestingUser and requestedUser
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Community_ViewHelpers_RelationViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class RelationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
-	 * @var Tx_Community_Domain_Repository_RelationRepository
+	 * @var \Macopedia\Community\Domain\Repository\RelationRepository
 	 */
 	protected $relationRepository;
 
@@ -40,9 +43,9 @@ class Tx_Community_ViewHelpers_RelationViewHelper extends Tx_Fluid_Core_ViewHelp
 	/**
 	 * Inject the repository
 	 *
-	 * @param Tx_Community_Domain_Repository_RelationRepository $relationRepository
+	 * @param \Macopedia\Community\Domain\Repository\RelationRepository $relationRepository
 	 */
-	public function injectRelationRepository(Tx_Community_Domain_Repository_RelationRepository $relationRepository) {
+	public function injectRelationRepository(\Macopedia\Community\Domain\Repository\RelationRepository $relationRepository) {
 		$this->relationRepository = $relationRepository;
 	}
 
@@ -50,11 +53,11 @@ class Tx_Community_ViewHelpers_RelationViewHelper extends Tx_Fluid_Core_ViewHelp
 	/**
 	 * returns the relation between 2 users. If the users are the same, return true, if there is no relation at all, return false
 	 *
-	 * @param Tx_Community_Domain_Model_User $requestingUser
-	 * @param Tx_Community_Domain_Model_User $requestedUser
-	 * @return Tx_Community_Domain_Model_Relation|TRUE|FALSE
+	 * @param User $requestingUser
+	 * @param User $requestedUser
+	 * @return Relation|TRUE|FALSE
 	 */
-	public function render(Tx_Community_Domain_Model_User $requestingUser, Tx_Community_Domain_Model_User $requestedUser) {
+	public function render(User $requestingUser, User $requestedUser) {
 		if ($requestingUser === $requestedUser) {
 			return TRUE;
 		}

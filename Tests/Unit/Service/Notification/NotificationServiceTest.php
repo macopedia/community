@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Tests\Unit\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,9 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Service\Notification\NotificationService,
+	Macopedia\Community\Service\Notification\Notification,
+	Macopedia\Community\Domain\Model\User;
 
 /**
  * Test for the notification service
@@ -31,25 +35,25 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Tests_Service_Notification_NotificationServiceTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 
 	protected $service;
 
 	public function setUp() {
-		$this->service = new Tx_Community_Service_Notification_NotificationService();
+		$this->service = new NotificationService();
 	}
 
 	/**
 	 * @test
 	 * @dataProvider isValidNotificationProvider
-	 * @param Tx_Community_Service_Notification_Notification $notification
+	 * @param Notification $notification
 	 * @param array $configuration
 	 * @param boolean $result
 	 */
-	public function isValidNotificationTest(Tx_Community_Service_Notification_Notification $notification, array $configuration, $result) {
+	public function isValidNotificationTest(Notification $notification, array $configuration, $result) {
 		/* we are going to test protected method, so we have to use reflection (requires PHP 5.3)*/
-		$reflection = new ReflectionClass('Tx_Community_Service_Notification_NotificationService');
+		$reflection = new ReflectionClass('NotificationService');
 		$method = $reflection->getMethod('isValidNotification');
 		$method->setAccessible(true);
 
@@ -57,14 +61,14 @@ class Tx_Community_Tests_Service_Notification_NotificationServiceTest extends Tx
 	}
 
 	public function isValidNotificationProvider() {
-		$user1 = $this->getAccessibleMock('Tx_Community_Domain_Model_User', array('getUid'));
+		$user1 = $this->getAccessibleMock('User', array('getUid'));
 		$user1->_set('uid', 1);
-		$user2 = $this->getAccessibleMock('Tx_Community_Domain_Model_User', array('getUid'));
+		$user2 = $this->getAccessibleMock('User', array('getUid'));
 		$user2->_set('uid', 8);
 
-		$correctNotification = new Tx_Community_Service_Notification_Notification("someRule", $user1, $user2);
-		$wrongNotification = new Tx_Community_Service_Notification_Notification("someRule", $user1, $user1);
-		$wrongNotification2 = new Tx_Community_Service_Notification_Notification("someRule", $user1, NULL);
+		$correctNotification = new Notification("someRule", $user1, $user2);
+		$wrongNotification = new Notification("someRule", $user1, $user1);
+		$wrongNotification2 = new Notification("someRule", $user1, NULL);
 
 		$dataSets = array();
 		$dataSets[0] = array( //first test case: different users, empty configuration

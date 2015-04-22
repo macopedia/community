@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service;
 /***************************************************************
 *  Copyright notice
 *
@@ -35,10 +36,10 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Service_RepositoryService implements Tx_Community_Service_RepositoryServiceInterface, t3lib_Singleton {
+class RepositoryService implements \Macopedia\Community\Service\RepositoryServiceInterface, \TYPO3\CMS\Core\SingletonInterface {
 
 	/**
-	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
 	 */
 	protected $objectManager;
 
@@ -46,18 +47,18 @@ class Tx_Community_Service_RepositoryService implements Tx_Community_Service_Rep
 	 * Get the repository for the model $repositoryName (e.g. "user")
 	 *
 	 * @param string $repositoryName
-	 * @return Tx_Extbase_Persistence_Repository
+	 * @return \TYPO3\CMS\Extbase\Persistence\Repository
 	 */
 	public function get($repositoryName) {
-		return $this->repositories[$repositoryName] = $this->objectManager->get('Tx_Community_Domain_Repository_' . ucfirst($repositoryName) . 'Repository');
+		return $this->repositories[$repositoryName] = $this->objectManager->get('Macopedia\Community\Domain\Repository\\' . ucfirst($repositoryName) . 'Repository');
 	}
 
 	/**
 	 * Inject the object manager so we can create objects on our own.
 	 *
-	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
+	 * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
 	 */
-	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
+	public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
 }

@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
 * Copyright notice
 *
@@ -29,17 +30,17 @@
 * @copyright Copyright belongs to the respective authors
 * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
 */
-class Tx_Community_ViewHelpers_CountryFlagViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class CountryFlagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	* Renders the CountryFlagViewHelper
 	*
-	* @param Tx_StaticInfoTablesExtbase_Domain_Model_StaticCountry $country Country-Object
+	* @param \SJBR\StaticInfoTables\Domain\Model\Country $country Country-Object
 	* @return string Country Flag Image
 	*/
-	public function render(Tx_StaticInfoTablesExtbase_Domain_Model_StaticCountry $country) {
-		return '<span title="'.$country->getShortName().'" class="tx_community_flags tx_community_flag_'
-			.strtolower($country->getIsoCodeA2()).'">&nbsp;</span>';
+	public function render(\SJBR\StaticInfoTables\Domain\Model\Country $country = null) {
+		return !empty($country) ? '<span title="'.$country->getShortNameEn().'" class="tx_community_flags tx_community_flag_'
+			.strtolower($country->getIsoCodeA2()).'">&nbsp;</span>' : '';
 	}
 }
 ?>

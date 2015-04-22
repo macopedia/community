@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Model;
 /***************************************************************
 *  Copyright notice
 *
@@ -25,7 +26,7 @@
 /**
  * Album that may contain images
  */
-class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEntity {
+class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * totaly public album
@@ -65,7 +66,7 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Owner of the album
 	 *
-	 * @var Tx_Community_Domain_Model_User
+	 * @var \Macopedia\Community\Domain\Model\User
 	 */
 	protected $user;
 
@@ -96,7 +97,7 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * photos
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_Photo>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\Photo>
 	 * @lazy
 	 * @cascade remove
 	 */
@@ -105,7 +106,7 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * mainPhoto - the proto that represents the album on list
 	 *
-	 * @var Tx_Community_Domain_Model_Photo
+	 * @var \Macopedia\Community\Domain\Model\Photo
 	 * @lazy
 	 */
 	protected $mainPhoto;
@@ -115,12 +116,12 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage instances.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage instances.
 	 *
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		$this->photos = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->photos = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -170,16 +171,16 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 
 	/**
 	 * Set main photo of album
-	 * @param Tx_Community_Domain_Model_Photo $photo
+	 * @param \Macopedia\Community\Domain\Model\Photo $photo
 	 * @return void
 	 */
-	public function setMainPhoto(Tx_Community_Domain_Model_Photo $photo = NULL) {
+	public function setMainPhoto(\Macopedia\Community\Domain\Model\Photo $photo = NULL) {
 		$this->mainPhoto = $photo;
 	}
 
 	/**
 	 * Get main photo of album
-	 * @return Tx_Community_Domain_Model_Photo
+	 * @return \Macopedia\Community\Domain\Model\Photo
 	 */
 	public function getMainPhoto() {
 		return $this->mainPhoto;
@@ -187,49 +188,49 @@ class Tx_Community_Domain_Model_Album extends Tx_Extbase_DomainObject_AbstractEn
 
 	/**
 	 * Set owner of album
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param \Macopedia\Community\Domain\Model\User $user
 	 * @return void
 	 */
-	public function setUser(Tx_Community_Domain_Model_User $user) {
+	public function setUser(\Macopedia\Community\Domain\Model\User $user) {
 		$this->user = $user;
 	}
 
 	/**
 	 * Get owner of album
-	 * @return Tx_Community_Domain_Model_User
+	 * @return \Macopedia\Community\Domain\Model\User
 	 */
 	public function getUser() {
 		return $this->user;
 	}
 
 	/**
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_Photo> $photos
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\Photo> $photos
 	 * @return void
 	 */
-	public function setPhotos(Tx_Extbase_Persistence_ObjectStorage $photos) {
+	public function setPhotos(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $photos) {
 		$this->photos = $photos;
 	}
 
 	/**
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_Photo>
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\Photo>
 	 */
 	public function getPhotos() {
 		return $this->photos;
 	}
 
 	/**
-	 * @param Tx_Community_Domain_Model_Photo the Photo to be added
+	 * @param \Macopedia\Community\Domain\Model\Photo the Photo to be added
 	 * @return void
 	 */
-	public function addPhoto(Tx_Community_Domain_Model_Photo $photo) {
+	public function addPhoto(\Macopedia\Community\Domain\Model\Photo $photo) {
 		$this->photos->attach($photo);
 	}
 
 	/**
-	 * @param Tx_Community_Domain_Model_Photo the Photo to be removed
+	 * @param \Macopedia\Community\Domain\Model\Photo the Photo to be removed
 	 * @return void
 	 */
-	public function removePhoto(Tx_Community_Domain_Model_Photo $photoToRemove) {
+	public function removePhoto(\Macopedia\Community\Domain\Model\Photo $photoToRemove) {
 		$this->photos->detach($photoToRemove);
 	}
 

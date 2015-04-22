@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Tests\Unit\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,6 +24,7 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Service\Notification\Notification;
 
 /**
  * Test for the notification class
@@ -31,12 +33,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-class Tx_Community_Tests_Service_Notification_NotificationTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class NotificationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	protected $notification;
 
 	public function setUp() {
-		$this->notification = new Tx_Community_Service_Notification_Notification();
+		$this->notification = new Notification();
 	}
 
 	/**

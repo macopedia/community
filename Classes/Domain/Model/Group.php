@@ -1,5 +1,5 @@
 <?php
-
+namespace Macopedia\Community\Domain\Model;
 /***************************************************************
 *  Copyright notice
 *
@@ -31,7 +31,7 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Community_Domain_Model_Group extends Tx_Community_Domain_Model_Observer_AbstractObservableEntity {
+class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup {
 
 	/**
 	 * The group is public: anyone can join
@@ -74,25 +74,25 @@ class Tx_Community_Domain_Model_Group extends Tx_Community_Domain_Model_Observer
 
 	/**
 	 * creator
-	 * @var Tx_Community_Domain_Model_User
+	 * @var \Macopedia\Community\Domain\Model\User
 	 */
 	protected $creator;
 
 	/**
 	 * admins
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<User>
 	 */
 	protected $admins;
 
 	/**
 	 * members
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<User>
 	 */
 	protected $members;
 
 	/**
 	 * pendingMembers
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<User>
 	 */
 	protected $pendingMembers;
 
@@ -176,17 +176,17 @@ class Tx_Community_Domain_Model_Group extends Tx_Community_Domain_Model_Observer
 	/**
 	 * Setter for creator
 	 *
-	 * @param Tx_Community_Domain_Model_User $creator creator
+	 * @param \Macopedia\Community\Domain\Model\User $creator creator
 	 * @return void
 	 */
-	public function setCreator(Tx_Community_Domain_Model_User $creator) {
+	public function setCreator(\Macopedia\Community\Domain\Model\User $creator) {
 		$this->creator = $creator;
 	}
 
 	/**
 	 * Getter for creator
 	 *
-	 * @return Tx_Community_Domain_Model_User creator
+	 * @return \Macopedia\Community\Domain\Model\User creator
 	 */
 	public function getCreator() {
 		return $this->creator;
@@ -195,17 +195,17 @@ class Tx_Community_Domain_Model_Group extends Tx_Community_Domain_Model_Observer
 	/**
 	 * Setter for admins
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User> $admins admins
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $admins admins
 	 * @return void
 	 */
-	public function setAdmins(Tx_Extbase_Persistence_ObjectStorage $admins) {
+	public function setAdmins(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $admins) {
 		$this->admins = $admins;
 	}
 
 	/**
 	 * Getter for admins
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User> admins
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> admins
 	 */
 	public function getAdmins() {
 		return $this->admins;
@@ -214,37 +214,37 @@ class Tx_Community_Domain_Model_Group extends Tx_Community_Domain_Model_Observer
 	/**
 	 * Adds a User
 	 *
-	 * @param Tx_Community_Domain_Model_User The User to be added
+	 * @param \Macopedia\Community\Domain\Model\User The User to be added
 	 * @return void
 	 */
-	public function addAdmin(Tx_Community_Domain_Model_User $admin) {
+	public function addAdmin(\Macopedia\Community\Domain\Model\User $admin) {
 		$this->admins->attach($admin);
 	}
 
 	/**
 	 * Removes a User
 	 *
-	 * @param Tx_Community_Domain_Model_User The User to be removed
+	 * @param \Macopedia\Community\Domain\Model\User The User to be removed
 	 * @return void
 	 */
-	public function removeAdmin(Tx_Community_Domain_Model_User $admin) {
+	public function removeAdmin(\Macopedia\Community\Domain\Model\User $admin) {
 		$this->admins->detach($admin);
 	}
 
 	/**
 	 * Setter for members
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User> $members members
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $members members
 	 * @return void
 	 */
-	public function setMembers(Tx_Extbase_Persistence_ObjectStorage $members) {
+	public function setMembers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $members) {
 		$this->members = $members;
 	}
 
 	/**
 	 * Getter for members
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User> members
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> members
 	 */
 	public function getMembers() {
 		return $this->members;
@@ -253,37 +253,37 @@ class Tx_Community_Domain_Model_Group extends Tx_Community_Domain_Model_Observer
 	/**
 	 * Adds a User
 	 *
-	 * @param Tx_Community_Domain_Model_User The User to be added
+	 * @param \Macopedia\Community\Domain\Model\User The User to be added
 	 * @return void
 	 */
-	public function addMember(Tx_Community_Domain_Model_User $member) {
+	public function addMember(\Macopedia\Community\Domain\Model\User $member) {
 		$this->members->attach($member);
 	}
 
 	/**
 	 * Removes a User
 	 *
-	 * @param Tx_Community_Domain_Model_User The User to be removed
+	 * @param \Macopedia\Community\Domain\Model\User The User to be removed
 	 * @return void
 	 */
-	public function removeMember(Tx_Community_Domain_Model_User $member) {
+	public function removeMember(\Macopedia\Community\Domain\Model\User $member) {
 		$this->members->detach($member);
 	}
 
 	/**
 	 * Setter for pendingMembers
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User> $pendingMembers pendingMembers
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $pendingMembers pendingMembers
 	 * @return void
 	 */
-	public function setPendingMembers(Tx_Extbase_Persistence_ObjectStorage $pendingMembers) {
+	public function setPendingMembers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $pendingMembers) {
 		$this->pendingMembers = $pendingMembers;
 	}
 
 	/**
 	 * Getter for pendingMembers
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Community_Domain_Model_User> pendingMembers
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> pendingMembers
 	 */
 	public function getPendingMembers() {
 		return $this->pendingMembers;
@@ -292,20 +292,20 @@ class Tx_Community_Domain_Model_Group extends Tx_Community_Domain_Model_Observer
 	/**
 	 * Adds a User
 	 *
-	 * @param Tx_Community_Domain_Model_User The User to be added
+	 * @param \Macopedia\Community\Domain\Model\User The User to be added
 	 * @return void
 	 */
-	public function addPendingMember(Tx_Community_Domain_Model_User $pendingMember) {
+	public function addPendingMember(\Macopedia\Community\Domain\Model\User $pendingMember) {
 		$this->pendingMembers->attach($pendingMember);
 	}
 
 	/**
 	 * Removes a User
 	 *
-	 * @param Tx_Community_Domain_Model_User The User to be removed
+	 * @param \Macopedia\Community\Domain\Model\User The User to be removed
 	 * @return void
 	 */
-	public function removePendingMember(Tx_Community_Domain_Model_User $pendingMember) {
+	public function removePendingMember(\Macopedia\Community\Domain\Model\User $pendingMember) {
 		$this->pendingMembers->detach($pendingMember);
 	}
 

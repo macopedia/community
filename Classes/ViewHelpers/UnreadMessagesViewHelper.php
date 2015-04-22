@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,33 +24,35 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User;
+
 /**
  * Checks if there are new messages to user1 from user2
  *
  * @author Konrad Baumgart
  */
-class Tx_Community_ViewHelpers_UnreadMessagesViewHelper extends Tx_Fluid_ViewHelpers_IfViewHelper {
+class UnreadMessagesViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 
 	/**
 	 * Repository service. Get all your repositories with it.
 	 *
-	 * @var Tx_Community_Service_RepositoryServiceInterface
+	 * @var \Macopedia\Community\Service\RepositoryServiceInterface
 	 */
 	protected $repositoryService;
 
 	/**
 	 * Inject the repository service.
 	 *
-	 * @param Tx_Community_Service_RepositoryServiceInterface $repositoryService
+	 * @param \Macopedia\Community\Service\RepositoryServiceInterface $repositoryService
 	 */
-	public function injectRepositoryService(Tx_Community_Service_RepositoryServiceInterface $repositoryService) {
+	public function injectRepositoryService(\Macopedia\Community\Service\RepositoryServiceInterface $repositoryService) {
 		$this->repositoryService = $repositoryService;
 	}
 
 	/**
 	 * Checks if there are new messages from $sender to $recipient
-	 * @param Tx_Community_Domain_Model_User $recipient
-	 * @param Tx_Community_Domain_Model_User $sender
+	 * @param User $recipient
+	 * @param User $sender
 	 * @return string the rendered string
 	 */
 	public function render($recipient, $sender) {

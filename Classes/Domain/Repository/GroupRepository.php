@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Repository;
 /***************************************************************
 *  Copyright notice
 *
@@ -23,14 +24,13 @@
 ***************************************************************/
 
 /**
- * Repository for Tx_Community_Domain_Model_Group
+ * Repository for Macopedia\Community\Domain\Model\Group
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Domain_Repository_GroupRepository
-	extends Tx_Community_Persistence_Cacheable_AbstractCacheableRepository {
+class GroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	public function getTags() {
 		return self::$tags;

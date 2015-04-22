@@ -1,4 +1,4 @@
-{namespace com=Tx_Community_ViewHelpers}
+{namespace com=Macopedia\Community\ViewHelpers}
 <f:layout name="Default"/>
 
 <f:section name="main">
@@ -38,10 +38,10 @@
 
 			<f:if condition="{settings.profile.showCountryIcon}">
 				<f:then>
-					<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : '{com:countryFlag(country: \'{country}\')} {country.shortName}', raw: 'true'}"/>
+					<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : '{com:countryFlag(country: \'{country}\')} {country.shortNameEn}', raw: 'true'}"/>
 				</f:then>
 				<f:else>
-					<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : country.shortName}"/>
+					<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'country', value : country.shortNameEn}"/>
 				</f:else>
 			</f:if>
 
@@ -51,7 +51,6 @@
 			<f:render partial="Profile/Detail" arguments="{settings : settings, label : 'email', value : requestedUser.email}"/>
 		</dl>
 		<com:sameUser requestingUser="{requestingUser}" requestedUser="{requestedUser}">
-			<f:then></f:then>
 			<f:else>
 			    <div class="report-profile">
 					<a href="#" class="report-link"><f:translate key="profile.details.reportProfile"/></a>

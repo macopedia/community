@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Domain\Repository;
 /***************************************************************
 *  Copyright notice
 *
@@ -22,20 +23,28 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\User;
+
 /**
- * Repository for Tx_Community_Domain_Model_User
+ * Repository for User
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persistence_Repository {
+class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+
+	/**
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+	 * @inject
+	 */
+	protected $cObj;
 
 	/**
 	 * Find the current user
 	 *
-	 * @return Tx_Community_Domain_Model_User|NULL if user is not logged in
+	 * @return User|NULL if user is not logged in
 	 */
 	public function findCurrentUser() {
 		$uid = (integer) $GLOBALS['TSFE']->fe_user->user['uid'];
@@ -45,7 +54,7 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persisten
 		return $this->findByUid($uid);
 	}
 
-	/*
+	/**
 	 * Find users by string
 	 *
 	 * @param string $word
@@ -64,13 +73,13 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persisten
 
 	/**
 	 * Find users that chat with given user, to make list of people he chats with
-	 * @param Tx_Community_Domain_Model_User $user
-	 * @return Tx_Extbase_Persistence_QueryResult
+	 * @param User $user
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
-	public function getChatMates(Tx_Community_Domain_Model_User $user) {
+	public function getChatMates(User $user) {
 		$query = $this->createQuery();
 		$query->matching(
-		new Tx_Community_Persistence_QOM_SQL("
+		new \TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement("
 		  EXISTS (SELECT * FROM tx_community_domain_model_message m WHERE
 			(m.sender = fe_users.uid  AND m.recipient = {$user->getUid()} AND m.recipient_deleted=0)
 			OR
@@ -83,7 +92,7 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persisten
 				(m.sender = fe_users.uid  AND m.recipient = {$user->getUid()} AND m.recipient_deleted=0)
 				OR
 				(m.recipient = fe_users.uid  AND m.sender = {$user->getUid()} AND m.sender_deleted=0)
-				)"=> Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+				)"=> \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
 		);
 		return $query->execute();
 	}
@@ -96,21 +105,21 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persisten
 	 */
 	public function findAllOrderBy($orderBy, $orderDirection) {
 		$query = $this->createQuery();
-
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		//Helmut Hummel told me to do so ;)
-		if (in_array($orderBy, array('datetime','username')) && in_array($orderDirection, array(
-			Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING,
-			Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+		if (in_array($orderBy, array('crdate','username')) && in_array($orderDirection, array(
+			\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+			\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
 		))) {
 			$query->setOrderings(array($orderBy => $orderDirection));
 		}
 		return $query->execute();
 	}
 
-	/*
+	/**
 	 * Find users by Usergroup
 	 *
-	 * default findByUsergroup doesn´t work if the user has more then one group
+	 * default findByUsergroup doesn't work if the user has more then one group
 	 *
 	 * @param int $group Id of the Usergroup
 	 * @param string $orderBy order by field
@@ -122,8 +131,8 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persisten
 
 		//Helmut Hummel told me to do so ;)
 		if (in_array($orderBy, array('datetime','username')) && in_array($orderDirection, array(
-			Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING,
-			Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+			\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
+			\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
 		))) {
 			$query->setOrderings(array($orderBy => $orderDirection));
 		}
@@ -141,7 +150,7 @@ class Tx_Community_Domain_Repository_UserRepository extends Tx_Extbase_Persisten
 	 */
 	public function findLatest($limit) {
 		$query = $this->createQuery();
-		$query->setOrderings(array('uid' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING));
+		$query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
 		return $query->setLimit($limit)->execute();
 	}
 }

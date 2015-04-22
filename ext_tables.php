@@ -1,124 +1,124 @@
 <?php
 if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'ListUsers',
 	'Community: List Users'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'UserImage',
 	'Community: User image'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'UserDetails',
 	'Community: User details'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'InteracionMenu',
 	'Community: User menu'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'ListRelations',
 	'Community: List relations'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'UnconfirmedRelations',
 	'Community: Unconfirmed relations'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'RelationManagement',
 	'Community: Relation Management'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Wall',
 	'Community: User wall'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'WallForm',
 	'Community: User wall form'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'MessageBox',
 	'Community: Messages'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'MessageWriteBox',
 	'Community: Write Message'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'ThreadedMessageBox',
 	'Community: Threaded Messages'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'ThreadedMessageWriteBox',
 	'Community: Write Threaded Message'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'SearchResults',
 	'Community: Search Results'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'SearchBox',
 	'Community: SearchBox'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'EditProfile',
 	'Community: Edit Profile'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Gallery',
 	'Community: Gallery'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'FlashMessagesDisplayer',
 	'Community: FlashMessagesDisplayer'
 );
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Community');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Community');
 
 // Flexforms
 $pluginSignature = str_replace('_','',$_EXTKEY) . '_listusers';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_ListUsers.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_ListUsers.xml');
 
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_relation','EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_relation.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_relation');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_community_domain_model_relation','EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_relation.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_community_domain_model_relation');
 $TCA['tx_community_domain_model_relation'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation',
@@ -131,13 +131,12 @@ $TCA['tx_community_domain_model_relation'] = array (
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Relation.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_relation.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Relation.php',
+		'iconfile' 			=> \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_relation.gif'
 	)
 );
 
 // extend fe_users
-t3lib_div::loadTCA('fe_users');
 $feUserColumns  = array(
 	'political_view' => array(
 		'exclude' => 0,
@@ -265,13 +264,13 @@ $feUserColumns  = array(
 	),
 );
 
-t3lib_extMgm::addTCAcolumns('fe_users',$feUserColumns, 1);
-t3lib_extMgm::addToAllTCATypes('fe_users','gender','', 'after:name');
-t3lib_extMgm::addToAllTCATypes('fe_users','--div--;Community,political_view,religious_view,activities,interests,music,movies,books,quotes,about_me,cellphone,date_of_birth,profile_image;;;;1-1-1');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users',$feUserColumns, 1);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCATypes('fe_users','gender','', 'after:name');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCATypes('fe_users','--div--;Community,political_view,religious_view,activities,interests,music,movies,books,quotes,about_me,cellphone,date_of_birth,profile_image;;;;1-1-1');
 
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_message','EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_message.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_message');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_community_domain_model_message','EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_message.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_community_domain_model_message');
 $TCA['tx_community_domain_model_message'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message',
@@ -282,13 +281,13 @@ $TCA['tx_community_domain_model_message'] = array (
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Message.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_message.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Message.php',
+		'iconfile' 			=> \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_message.gif'
 	)
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_wallpost', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_wallpost.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_wallpost');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_community_domain_model_wallpost', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_wallpost.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_community_domain_model_wallpost');
 $TCA['tx_community_domain_model_wallpost'] = array (
 	'ctrl' => array (
 		'title'             => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_wallpost',
@@ -299,13 +298,13 @@ $TCA['tx_community_domain_model_wallpost'] = array (
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden'
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/WallPost.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_wallpost.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/WallPost.php',
+		'iconfile' 			=> \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_wallpost.gif'
 	)
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_album', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_album.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_album');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_community_domain_model_album', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_album.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_community_domain_model_album');
 $TCA['tx_community_domain_model_album'] = array(
 	'ctrl' => array(
 		'title'				=> 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_album',
@@ -317,13 +316,13 @@ $TCA['tx_community_domain_model_album'] = array(
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Album.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_album.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Album.php',
+		'iconfile' 			=> \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_album.gif'
 	),
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_community_domain_model_photo', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_photo.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_community_domain_model_photo');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_community_domain_model_photo', 'EXT:community/Resources/Private/Language/locallang_csh_tx_community_domain_model_photo.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_community_domain_model_photo');
 $TCA['tx_community_domain_model_photo'] = array(
 	'ctrl' => array(
 		'title'				=> 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_photo',
@@ -335,8 +334,8 @@ $TCA['tx_community_domain_model_photo'] = array(
 		'enablecolumns' 	=> array(
 			'disabled' => 'hidden',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Photo.php',
-		'iconfile' 			=> t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_photo.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Photo.php',
+		'iconfile' 			=> \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_community_domain_model_photo.gif'
 	),
 );
 
@@ -345,7 +344,7 @@ $TCA['tx_community_domain_model_photo'] = array(
 * see here for more info http://docs.typo3.org/TYPO3/CoreApiReference/ApiOverview/Examples/ContentElementWizard/Index.html
 */
 if (TYPO3_MODE == 'BE') {
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['Tx_Community_Resources_Private_Php_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . '/Resources/Private/Php/class.community_wizicon.php';
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['Tx_Community_Resources_Private_Php_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . '/Resources/Private/Php/class.community_wizicon.php';
 }
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'UserImage',
 	array(
 		'User' => 'image',
@@ -12,8 +12,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'UserDetails',
 	array(
 		'User' => 'details,report',
@@ -23,8 +23,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'InteracionMenu',
 	array(
 		'User' => 'interaction',
@@ -34,8 +34,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'ListRelations',
 	array(
 		'Relation' => 'listSome',
@@ -45,8 +45,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'UnconfirmedRelations',
 	array(
 		'Relation' => 'unconfirmed',
@@ -56,8 +56,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'Wall',
 	array(
 		'WallPost' => 'list',
@@ -67,8 +67,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'WallForm',
 	array(
 		'WallPost' => 'new,delete,create',
@@ -78,8 +78,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'MessageBox',
 	array(
 		'Message' => 'inbox,outbox,unread,read,delete',
@@ -89,8 +89,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'MessageWriteBox',
 	array(
 		'Message' => 'write,send',
@@ -100,8 +100,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'ThreadedMessageBox',
 	array(
 		'Message' => 'listThreads,thread,deleteThreaded',
@@ -111,8 +111,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'ThreadedMessageWriteBox',
 	array(
 		'Message' => 'writeThreaded,send',
@@ -122,8 +122,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'SearchBox',
 	array(
 		'User' => 'searchBox',
@@ -133,8 +133,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'SearchResults',
 	array(
 		'User' => 'search',
@@ -144,8 +144,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'EditProfile',
 	array(
 		'User' => 'edit,update,editImage,updateImage,deleteImage,deleteAccount',
@@ -155,8 +155,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'RelationManagement',
 	array(
 		'Relation' => 'list,request,cancel,confirm,reject,unconfirmed',
@@ -166,8 +166,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'Gallery',
 	array(
 		'Album' => 'list,show,new,create,edit,update,delete,showMostRecent',
@@ -179,8 +179,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'ListUsers',
 	array(
 		'User' => 'list',
@@ -190,8 +190,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Macopedia.'.$_EXTKEY,
 	'FlashMessagesDisplayer',
 	array(
 		'Utils' => 'flashMessagesDisplay',

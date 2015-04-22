@@ -1,5 +1,5 @@
 <?php
-
+namespace Macopedia\Community\Controller;
 /***************************************************************
 *  Copyright notice
 *
@@ -24,6 +24,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User,
+	Macopedia\Community\Domain\Model\Album,
+	Macopedia\Community\Domain\Model\Photo;
+
 /**
  * Controller for the User object
  *
@@ -32,21 +36,21 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_Controller_UserController extends Tx_Community_Controller_BaseController implements Tx_Community_Controller_Cacheable_ControllerInterface {
+class UserController extends BaseController implements \Macopedia\Community\Controller\Cacheable\ControllerInterface {
 
 	/**
-	 * @var Tx_StaticInfoTablesExtbase_Domain_Repository_StaticCountryRepository
+	 * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
 	 */
 	protected $staticCountryRepository = NULL;
 
 	/**
 	 * Injects the staticCountryRepository
 	 *
-	 * @param Tx_StaticInfoTablesExtbase_Domain_Repository_StaticCountryRepository $repository repository to inject
+	 * @param \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $repository repository to inject
 	 *
 	 * @return void
 	 */
-	public function injectStaticCountryRepository(Tx_StaticInfoTablesExtbase_Domain_Repository_StaticCountryRepository $repository) {
+	public function injectStaticCountryRepository(\SJBR\StaticInfoTables\Domain\Repository\CountryRepository $repository) {
 		$this->staticCountryRepository = $repository;
 	}
 
@@ -95,6 +99,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 		$this->view->assign('displayWallForm', $this->hasAccess('profile.wall.form'));
 		$country = $this->staticCountryRepository->findByUid($this->requestedUser->getCountry());
 		$this->view->assign('country', $country);
+		$this->view->assign('user', $this->getRequestedUser());
 	}
 
 	/**
@@ -107,22 +112,30 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * Edit the details of a user.
 	 */
 	public function editAction() {
-		$countries = $this->staticCountryRepository->findAllOrderedBy('shortName', 'asc');
+		$countries = $this->staticCountryRepository->findAllOrderedBy('shortNameLocal', 'asc');
 		$this->view->assign('countries', $countries);
+		$this->view->assign('user', $this->getRequestedUser());
 	}
 
 	/**
 	 * Show form to edit/upload profile image
 	 */
 	public function editImageAction() {
+		$this->view->assign('user', $this->getRequestedUser());
+	}
+
+	protected function initializeUpdateImageAction()
+	{
+		$userConfiguration = $this->arguments->getArgument('user')->getPropertyMappingConfiguration();
+		$userConfiguration->skipProperties('image');
 	}
 
 	/**
 	 * Update the image
 	 *
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param User $user
 	 */
-	public function updateImageAction(Tx_Community_Domain_Model_User $user) {
+	public function updateImageAction(User $user) {
 		$imagePath = $this->handleUpload(
 			'user.image',
 			$this->settings['profile']['image']['prefix'],
@@ -133,15 +146,15 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 			$user->setImage($imagePath);
 			$this->repositoryService->get('user')->update($user);
 
-			$newPhoto = new Tx_Community_Domain_Model_Photo();
+			$newPhoto = new Photo();
 			$newPhoto->setImage($imagePath);
 
-			$this->photoToSpecialAlbum($newPhoto, Tx_Community_Domain_Model_Album::ALBUM_TYPE_AVATAR);
+			$this->photoToSpecialAlbum($newPhoto, Album::ALBUM_TYPE_AVATAR);
 
-			$this->flashMessageContainer->add($this->_('profile.updateImage.success'));
+			$this->addFlashMessage($this->_('profile.updateImage.success'));
 			$this->redirect('edit', 'User', NULL, array('user' => $user));
 		} else {
-			$this->flashMessageContainer->add($this->_('profile.updateImage.error'),'',t3lib_FlashMessage::ERROR);
+			$this->addFlashMessage($this->_('profile.updateImage.error'),'',\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
 			$this->redirect('editImage', 'User', NULL, array('user' => $user));
 		}
 	}
@@ -152,20 +165,24 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	public function deleteImageAction() {
 		$this->requestingUser->setImage('');
 		$this->repositoryService->get('user')->update($this->requestingUser);
-		$this->flashMessageContainer->add($this->_('profile.deleteImage.success'));
+		$this->addFlashMessage($this->_('profile.deleteImage.success'));
 		$this->redirect('edit', 'User');
 	}
 
 	/**
 	 * Update the edited user.
 	 *
-	 * @param Tx_Community_Domain_Model_User $updatedUser
+	 * @param User $updatedUser
 	 */
-	public function updateAction(Tx_Community_Domain_Model_User $updatedUser) {
+	public function updateAction(User $updatedUser) {
 		$fullName = $updatedUser->getFirstName().' '.$updatedUser->getLastName();
 		$updatedUser->setName($fullName);
+
 		$this->repositoryService->get('user')->update($updatedUser);
-		$this->flashMessageContainer->add($this->_('profile.update.success'));
+
+		$msg = $this->_('profile.update.success');
+
+		$this->addFlashMessage($msg);
 		$this->redirect('edit');
 	}
 
@@ -206,16 +223,16 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 
 	/**
 	 * Reports a profile with gore and nudity
-	 * @param Tx_Community_Domain_Model_User $user
+	 * @param User $user
 	 * @param string $reason
 	 */
-	public function reportAction(Tx_Community_Domain_Model_User $user, $reason = '') {
+	public function reportAction(User $user, $reason = '') {
 		if ($this->settings['profile']['reasonForReportRequired'] && strlen($reason)==0) {
-			$this->flashMessageContainer->add($this->_('profile.report.needReason'),'',t3lib_FlashMessage::ERROR);
+			$this->addFlashMessage($this->_('profile.report.needReason'),'',\TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
 		} else {
-			$this->flashMessageContainer->add($this->_('profile.report.reported'));
+			$this->addFlashMessage($this->_('profile.report.reported'));
 
-			$notification = new Tx_Community_Service_Notification_Notification(
+			$notification = new \Macopedia\Community\Service\Notification\Notification(
 				'userReport',
 				$this->requestingUser,
 				$this->requestedUser
@@ -245,7 +262,7 @@ class Tx_Community_Controller_UserController extends Tx_Community_Controller_Bas
 	 * Get the tags for this request (caching)
 	 */
 	public function getTags() {
-		return Tx_Community_Helper_RepositoryHelper::getRepository('User')->getTags();
+		return \Macopedia\Community\Helper\RelationHelper::getRepository('User')->getTags();
 	}
 }
 ?>

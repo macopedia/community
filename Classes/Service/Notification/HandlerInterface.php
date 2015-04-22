@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\Service\Notification;
 /***************************************************************
 *  Copyright notice
 *
@@ -30,16 +31,16 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
  */
-interface Tx_Community_Service_Notification_HandlerInterface {
+interface HandlerInterface {
 
 
 	/**
 	 * @abstract
-	 * @param  Tx_Community_Service_Notification_Notification $notification
+	 * @param  Notification $notification
 	 * @param  array $configuration
 	 * @return void
 	 */
-	public function send(Tx_Community_Service_Notification_Notification $notification, array $configuration);
+	public function send(Notification $notification, array $configuration);
 
 }
 ?>

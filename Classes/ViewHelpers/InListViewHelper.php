@@ -1,4 +1,5 @@
 <?php
+namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
 *  Copyright notice
 *
@@ -30,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Tx_Community_ViewHelpers_InListViewHelper extends Tx_Fluid_ViewHelpers_BaseViewHelper {
+class InListViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\BaseViewHelper {
 
 	/**
 	 * @param string $list A list seperated by $seperator

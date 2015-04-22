@@ -70,7 +70,7 @@
 			<label index="tx_community_domain_model_photo.album">Album</label>
 
 			<label index="flexform.orderBy">Order By</label>
-			<label index="flexform.datetime">datetime</label>
+			<label index="flexform.crdate">created date</label>
 			<label index="flexform.username">username</label>
 			<label index="flexform.random">random</label>
 			<label index="flexform.ascDesc">Ascending or Descending</label>
