@@ -50,7 +50,7 @@ class ext_update {
 				);
 
 		$entry = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-
+		$message = '';
 		if ($entry['count(*)'] <=0 ) {
 			$message = "Everything is up to date";
 		} else {
