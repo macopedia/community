@@ -36,6 +36,7 @@ $TCA['tx_community_domain_model_album'] = array(
 			'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_album.private',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'items' => array(
 					array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.album.public', 0),
 					array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.album.loggedInOnly', 1),
@@ -82,6 +83,7 @@ $TCA['tx_community_domain_model_album'] = array(
 			'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_album.user',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'foreign_table' => 'fe_users',
 				'maxitems'      => 1
 			),

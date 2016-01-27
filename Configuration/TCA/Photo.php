@@ -40,6 +40,7 @@ $TCA['tx_community_domain_model_photo'] = array(
 			'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_photo.album',
 			'config' => array(
 				'type' => 'select',
+				'renderType' => 'selectSingle',
 				'foreign_table' => 'tx_community_domain_model_album',
 				'maxitems'      => 1
 			),
