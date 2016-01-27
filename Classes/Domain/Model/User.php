@@ -367,7 +367,6 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Obser
 	}
 
 	public function initializeObject() {
-		parent::initializeObject();
 		$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
 		$cacheObserver = $objectManager->get('Macopedia\Community\Domain\Model\Observer\CacheObserver');
 		$this->attach($cacheObserver);

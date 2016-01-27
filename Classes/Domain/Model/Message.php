@@ -48,7 +48,7 @@ class Message extends Observer\AbstractObservableEntity {
 	/**
 	 * @var bool
 	 */
-	protected $read;
+	protected $tx_community_read;
 
 	/**
 	 * @var \DateTime
@@ -141,23 +141,23 @@ class Message extends Observer\AbstractObservableEntity {
 	}
 
 	/**
-	 * Get value of $this->read
+	 * Get value of $this->tx_community_read
 	 *
 	 * @access public
 	 * @return bool
 	 */
 	public function getRead() {
-		return $this->read;
+		return $this->tx_community_read;
 	}
 
 	/**
-	 * Set the value of $this->read
+	 * Set the value of $this->tx_community_read
 	 *
 	 * @param bool $value
 	 * @access public
 	 */
 	public function setRead($value) {
-		$this->read = $value;
+		$this->tx_community_read = $value;
 	}
 
 	/**

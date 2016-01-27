@@ -23,7 +23,7 @@ namespace Macopedia\Community\Domain\Repository;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-use Macopedia\Community\Domain\User;
+use Macopedia\Community\Domain\Model\User;
 
 /**
  * Repository for User

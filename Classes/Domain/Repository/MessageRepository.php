@@ -24,7 +24,7 @@ namespace Macopedia\Community\Domain\Repository;
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-use Macopedia\Community\Domain\User;
+use Macopedia\Community\Domain\Model\User;
 
 class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
@@ -76,7 +76,7 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				$query->logicalNot(
 					$query->logicalOr(
 						$query->equals('recipientDeleted', true),
-						$query->equals('read', true)
+						$query->equals('tx_community_read', true)
 					)
 				)
 			)
