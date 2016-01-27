@@ -31,7 +31,7 @@ namespace Macopedia\Community\ViewHelpers;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class InListViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\BaseViewHelper {
+class InListViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * @param string $list A list seperated by $seperator

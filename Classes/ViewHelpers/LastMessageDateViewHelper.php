@@ -31,7 +31,7 @@ use Macopedia\Community\Domain\Model\User;
  *
  * @author Konrad Baumgart
  */
-class LastMessageDateViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
+class LastMessageDateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Repository service. Get all your repositories with it.

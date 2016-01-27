@@ -31,7 +31,7 @@ namespace Macopedia\Community\ViewHelpers;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Simon Schaufelberger <simonschaufi@googlemail.com>
  */
-class StrlenViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\BaseViewHelper {
+class StrlenViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * @param string $value The string
