@@ -38,7 +38,7 @@ class TaggingQueryFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\QueryFa
 	 */
 	public function create($className) {
 		$objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager();
-		$persistenceManager = $objectManager->get('\TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface');
+		$persistenceManager = $objectManager->get('TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface');
 		$backend = $objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\Backend');
 
 		$reflectionService = $backend->getReflectionService();

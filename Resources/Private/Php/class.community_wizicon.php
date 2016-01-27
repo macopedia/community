@@ -46,7 +46,7 @@ class Tx_Community_Resources_Private_Php_wizicon {
         $extKeyPlugin = 'community_listusers';
 
         $wizardItems['plugins_tx_community'] = array(
-        	'icon' => t3lib_extMgm::extRelPath('community').'Resources/Public/Images/newElementWizardIcon.png',
+        	'icon' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('community').'Resources/Public/Images/newElementWizardIcon.png',
             'title' => $GLOBALS['LANG']->sL('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:wizard.title'),
             'description' => $GLOBALS['LANG']->sL('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:wizard.description'),
             'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=' . $extKeyPlugin

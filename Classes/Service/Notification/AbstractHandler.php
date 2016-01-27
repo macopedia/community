@@ -98,7 +98,7 @@ abstract class AbstractHandler implements HandlerInterface, \TYPO3\CMS\Core\Sing
 	 * @return string
 	 */
 	protected function render(Notification $notification, array $methodConfiguration) {
-		$view = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView'); /* @var $view \TYPO3\CMS\Fluid\View\StandaloneView */
+		$view = $this->objectManager->get('TYPO3\CMS\Fluid\View\StandaloneView'); /* @var $view \TYPO3\CMS\Fluid\View\StandaloneView */
 
 		$settings = $this->settingsService->get();
 		$view->setTemplatePathAndFilename(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($settings['notification']['templateRootPath'].$methodConfiguration['template'].'.html'));

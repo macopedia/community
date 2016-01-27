@@ -72,7 +72,7 @@ class WallPostController extends BaseController {
 		$this->addFlashMessage($this->_('wallPost.form.created'));
 
 		// we have to persist now to get the uid of the new created wall post in email notification
-		$persistenceManager = $this->objectManager->get('\TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager'); /* @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
+		$persistenceManager = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager'); /* @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
 		$persistenceManager->persistAll();
 
 		$notification = new \Macopedia\Community\Service\Notification\Notification(

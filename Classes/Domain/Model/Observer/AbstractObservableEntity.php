@@ -36,10 +36,6 @@ abstract class AbstractObservableEntity
 	extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 	implements ObservableInterface {
 
-	public function initializeObject() {
-		parent::initializeObject();
-	}
-
 	/**
 	 * Overrides the normal _isDirty function and notifies the observers if something has changed
 	 */

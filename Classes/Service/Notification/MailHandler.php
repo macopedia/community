@@ -49,7 +49,7 @@ class MailHandler extends AbstractHandler {
 	public function send(Notification $notification, array $configuration) {
 
 		/* @var $mail \TYPO3\CMS\Core\Mail\MailMessage */
-		$mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Core\Mail\MailMessage');
+		$mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
 
 		$notifySenderFlag = $configuration['notifySender'];
 		if ($notifySenderFlag == 1) { //sending message to sender user instead of recipient e.g "copy of message to my email"
