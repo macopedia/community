@@ -264,7 +264,7 @@ config.tx_extbase {
 		Macopedia\Community\Domain\Model\Message {
 			mapping {
 				columns {
-					Macopedia\Community\read.mapOnProperty = read
+					tx_community_read.mapOnProperty = read
 				}
 			}
 		}
