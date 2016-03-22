@@ -1,0 +1,12 @@
+﻿.. |img-1|      image:: Images/manual_html_img-1.png
+.. :align: left
+.. :border: 0
+.. :height: 44
+.. :id: graphics5
+.. :name: graphics5
+.. :vspace: 57
+.. :width: 161
+
+.. |img-2|      image:: Images/manual_html_img-2.png
+.. :align: left
+

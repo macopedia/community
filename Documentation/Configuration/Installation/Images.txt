@@ -1,0 +1,7 @@
+﻿.. |img-3|      image:: ../../Images/manual_html_img-3.png
+.. :align: left
+.. :border: 0
+.. :height: 141
+.. :id: graphics1
+.. :name: graphics1
+.. :width: 276
