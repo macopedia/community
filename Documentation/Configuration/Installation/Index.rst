@@ -61,7 +61,7 @@ TYPO3 introduction package.
    
    #. On “Edit profile” page add “Edit profile” plugin
 
-#. You need to set the following values:
+#. You need to set the following values in the TypoScript Constants:
 
    ::
 
@@ -73,19 +73,18 @@ TYPO3 introduction package.
 
       plugin.tx_community.settings {
 
-          //to pid where the login form is
+          //Default login page PID, should be different from profile and action page
           loginPage =
 
           profilePage =
 
-          //to “My Community” page pid
-          actionPage =
-
-          //to “Edit Prodile” page pid
-          editProfilePage
+          //PID with edit profile plugin
+          editProfilePage =
 
           //to “Messages” page pid
           messagePage =
+
+          threadedMessagePage =
 
           //to “Gallery” page pid
           galleryPage =
@@ -95,9 +94,13 @@ TYPO3 introduction package.
 
           //to “Relations” page pid
           relationPage =
+
+          wallPage =
+
+          threadedMessagePage =
       }
 
-.. important:: IMPORTANT: Login page has to be different page than profile page
+   .. important:: IMPORTANT: Login page has to be different page than profile page
 
 #. Flash messages
    

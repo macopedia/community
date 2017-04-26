@@ -71,23 +71,6 @@ editProfilePage
       {$plugin.tx\_community.settings.editProfilePage}
 
 
-.. _actionPage:
-
-actionPage
-~~~~~~~~~~
-
-.. container:: table-row
-
-   Property
-      actionPage
-
-   Data type
-      int (page id)
-
-   Default
-      {$plugin.tx\_community.settings.actionPage}
-
-
 .. _messagePage:
 
 messagePage
