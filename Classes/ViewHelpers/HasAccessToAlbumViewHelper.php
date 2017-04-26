@@ -38,12 +38,23 @@ use Macopedia\Community\Domain\Model\Album,
  */
 class HasAccessToAlbumViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 
-	/**
-	 * @param Album $album
-	 * @param Relation $relation
-	 * @param User $requestingUser
-	 */
-	public function render(Album $album, Relation $relation = NULL, User $requestingUser = NULL) {
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('album', 'object', 'Album Object.');
+        $this->registerArgument('relation', 'object', 'Relation Object.');
+        $this->registerArgument('requestingUser', 'object', 'Requesting User Object.');
+    }
+
+    public function render()
+    {
+        /** @var Album $album */
+        $album = $this->arguments['album'];
+        /** @var Relation $relation */
+        $relation = $this->arguments['relation'];
+        /** @var User $requestingUser */
+        $requestingUser = $this->arguments['requestingUser'];
+
 		if (
 				($album->getPrivate() == 0) || //public
 				($requestingUser && $requestingUser->getUid() === $album->getUser()->getUid()) || // my album
@@ -55,4 +66,3 @@ class HasAccessToAlbumViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelp
 		}
 	}
 }
-?>
