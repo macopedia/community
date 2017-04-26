@@ -35,11 +35,18 @@ use Macopedia\Community\Domain\Model\User;
  */
 class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 
-	/**
-	 * @param User $requestingUser
-	 * @param User $requestedUser
-	 */
-	public function render($requestingUser, $requestedUser) {
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('requestingUser', 'object', 'Requesting User.');
+        $this->registerArgument('requestedUser', 'object', 'Requested User.');
+    }
+
+
+    public function render() {
+        $requestingUser = $this->arguments['requestingUser'];
+        $requestedUser = $this->arguments['requestedUser'];
+
 		if($requestingUser instanceof User) {
 			$requestingUser = $requestingUser->getUid();
 		}
@@ -56,4 +63,3 @@ class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper {
 		}
 	}
 }
-?>
