@@ -1,4 +1,5 @@
 <?php
+
 namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
  *  Copyright notice
@@ -30,15 +31,18 @@ namespace Macopedia\Community\ViewHelpers;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ParseLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ParseLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	 * @see http://www.flashnutz.com/2010/07/find-links-within-text-and-convert-to-active-links-with-php/
-	 * @param string $string The data to be parsed for links
-	 * @return string
-	 */
-	public function render($string) {
-		return \Macopedia\Community\Helper\UrlLinkerHelper::htmlEscapeAndLinkUrls($string);
-	}
+    /**
+     * @see http://www.flashnutz.com/2010/07/find-links-within-text-and-convert-to-active-links-with-php/
+     * @param string $string The data to be parsed for links
+     * @return string
+     */
+    public function render($string)
+    {
+        return \Macopedia\Community\Helper\UrlLinkerHelper::htmlEscapeAndLinkUrls($string);
+    }
 }
+
 ?>

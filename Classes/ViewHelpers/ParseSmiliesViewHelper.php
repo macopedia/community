@@ -1,4 +1,5 @@
 <?php
+
 namespace Macopedia\Community\ViewHelpers;
 /***************************************************************
  *  Copyright notice
@@ -30,25 +31,29 @@ namespace Macopedia\Community\ViewHelpers;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ParseSmiliesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ParseSmiliesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
-	/**
-	* Renders the SmiliesViewHelper
-	*
-	* @param string $string String with smilie codes
-	*
-	* @return string String with smilie images
-	*/
-	public function render($string = '') {
-		if ($string === '') {
-			$string = $this->renderChildren();
-		}
-		// if ext:smilie is installed we will automatically replace the smilies
-		if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('smilie')) {
-			$smilie = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_smilie'); /* @var $smilie tx_smilie */
-			return $smilie->replaceSmilies($string);
-		}
-		return $string;
-	}
+    /**
+     * Renders the SmiliesViewHelper
+     *
+     * @param string $string String with smilie codes
+     *
+     * @return string String with smilie images
+     */
+    public function render($string = '')
+    {
+        if ($string === '') {
+            $string = $this->renderChildren();
+        }
+        // if ext:smilie is installed we will automatically replace the smilies
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('smilie')) {
+            $smilie = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_smilie');
+            /* @var $smilie tx_smilie */
+            return $smilie->replaceSmilies($string);
+        }
+        return $string;
+    }
 }
+
 ?>

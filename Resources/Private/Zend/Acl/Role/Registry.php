@@ -55,7 +55,7 @@ class Zend_Acl_Role_Registry
      * will have the least priority, and the last parent added will have the
      * highest priority.
      *
-     * @param  Zend_Acl_Role_Interface              $role
+     * @param  Zend_Acl_Role_Interface $role
      * @param  Zend_Acl_Role_Interface|string|array $parents
      * @throws Zend_Acl_Role_Registry_Exception
      * @return Zend_Acl_Role_Registry Provides a fluent interface
@@ -100,9 +100,9 @@ class Zend_Acl_Role_Registry
 
         $this->_roles[$roleId] = array(
             'instance' => $role,
-            'parents'  => $roleParents,
+            'parents' => $roleParents,
             'children' => array()
-            );
+        );
 
         return $this;
     }
@@ -121,7 +121,7 @@ class Zend_Acl_Role_Registry
         if ($role instanceof Zend_Acl_Role_Interface) {
             $roleId = $role->getRoleId();
         } else {
-            $roleId = (string) $role;
+            $roleId = (string)$role;
         }
 
         if (!$this->has($role)) {
@@ -148,7 +148,7 @@ class Zend_Acl_Role_Registry
         if ($role instanceof Zend_Acl_Role_Interface) {
             $roleId = $role->getRoleId();
         } else {
-            $roleId = (string) $role;
+            $roleId = (string)$role;
         }
 
         return isset($this->_roles[$roleId]);
@@ -186,7 +186,7 @@ class Zend_Acl_Role_Registry
      *
      * @param  Zend_Acl_Role_Interface|string $role
      * @param  Zend_Acl_Role_Interface|string $inherit
-     * @param  boolean                        $onlyParents
+     * @param  boolean $onlyParents
      * @throws Zend_Acl_Role_Registry_Exception
      * @return boolean
      */
@@ -197,7 +197,7 @@ class Zend_Acl_Role_Registry
          */
         require_once 'Acl/Role/Registry/Exception.php';
         try {
-            $roleId     = $this->get($role)->getRoleId();
+            $roleId = $this->get($role)->getRoleId();
             $inheritId = $this->get($inherit)->getRoleId();
         } catch (Zend_Acl_Role_Registry_Exception $e) {
             throw new Zend_Acl_Role_Registry_Exception($e->getMessage(), $e->getCode(), $e);

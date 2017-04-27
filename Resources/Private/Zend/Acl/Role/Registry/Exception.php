@@ -33,4 +33,5 @@ require_once 'Acl/Exception.php';
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Acl_Role_Registry_Exception extends Zend_Acl_Exception
-{}
+{
+}
