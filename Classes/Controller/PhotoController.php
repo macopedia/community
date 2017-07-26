@@ -117,7 +117,7 @@ class PhotoController extends BaseController
             $imagePath = $photo->getImage();
             $this->requestingUser->setImage($imagePath);
             if ($album->getAlbumType() == Model\Album::ALBUM_TYPE_AVATAR
-                && $album->getUser() == $this->requestingUser
+                && $album->getUser()->getUid() == $this->requestingUser->getUid()
             ) {
                 //don't have to copy photo to apecial album
             } else {
@@ -168,5 +168,3 @@ class PhotoController extends BaseController
         }
     }
 }
-
-?>

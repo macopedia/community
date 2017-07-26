@@ -63,9 +63,12 @@ class SQL implements \TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterf
         return $this->code;
     }
 
+    /**
+     * @return string
+     */
     public function __tostring()
     {
-        return str_replace(PHP_EOL, '', $this->getCode());
+        return (string)str_replace(PHP_EOL, '', $this->getCode());
     }
 
     /**
@@ -78,5 +81,3 @@ class SQL implements \TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterf
     {
     }
 }
-
-?>

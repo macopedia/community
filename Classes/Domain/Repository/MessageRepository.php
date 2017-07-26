@@ -24,6 +24,7 @@ namespace Macopedia\Community\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Message;
 use Macopedia\Community\Domain\Model\User;
 
 class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
@@ -91,6 +92,7 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Find all messages between users (for user1 - we see messages that user1 hasn't deleted)
      * @param User $user1
      * @param User $user2
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function findBetweenUsers(User $user1, User $user2)
     {
@@ -223,7 +225,7 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             )
         )->execute();
         foreach ($messages as $message) {
-            /* @var $message Message */
+            /** @var $message Message */
             if ($user->getUid() == $message->getSender()->getUid()) {
                 $message->setSenderDeleted(TRUE);
             } else {
@@ -233,5 +235,3 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
     }
 }
-
-?>

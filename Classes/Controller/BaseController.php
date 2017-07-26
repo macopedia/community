@@ -24,6 +24,7 @@ namespace Macopedia\Community\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Relation;
 use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Domain\Model\Photo;
 use Macopedia\Community\Domain\Model\Album;
@@ -32,15 +33,12 @@ use Macopedia\Community\Service\Access\AccessServiceInterface;
 use Macopedia\Community\Service\SettingsService;
 use Macopedia\Community\Service\Notification\NotificationServiceInterface;
 use Macopedia\Community\Exception\UnexpectedException;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * A base controller that implements basic functions that are needed
  * all over the project. Holds the requested and requesting user.
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Pascal Jungblut <mail@pascalj.com>
  */
 class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
@@ -84,7 +82,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $notificationService;
 
     /**
-     * If we have already benn redirected, don't show the flashmessages
+     * If we have already benn redirected, don't show the flash messages
      * @var boolean
      */
     static protected $redirected = FALSE;
@@ -225,8 +223,8 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * To avoid security mistakes we check arguments (like tx_community['foo']=88) in a
      * specific order and the first one that is set is the only one taken into account later on.
      * TODO: hook in this function
-     *
      * @return void
+     * @throws UnexpectedException
      */
     protected function fetchRequestedUserFromRequestArguments()
     {
@@ -415,7 +413,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $data = $_FILES['tx_' . strtolower($this->request->getControllerExtensionName())];
         if (is_array($data) && count($data) > 0) {
-            $propertyPath = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('.', $property);
+            $propertyPath = GeneralUtility::trimExplode('.', $property);
             $namePath = $data['name'];
             $tmpPath = $data['tmp_name'];
             $sizePath = $data['size'];
@@ -441,14 +439,14 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             return 2;
         }
         $fileInfo = pathinfo($fileArray['name']);
-        if (!\TYPO3\CMS\Core\Utility\GeneralUtility::inList($types, strtolower($fileInfo['extension']))) {
+        if (!GeneralUtility::inList($types, strtolower($fileInfo['extension']))) {
             return 3;
         }
 
         if (file_exists(PATH_site . $uploadDir . $fileArray['name'])) {
             $fileArray['name'] = $fileInfo['filename'] . '-' . time() . '.' . $fileInfo['extension'];
         }
-        if (\TYPO3\CMS\Core\Utility\GeneralUtility::upload_copy_move($fileArray['tmp'], PATH_site . $uploadDir . $fileArray['name'])) {
+        if (GeneralUtility::upload_copy_move($fileArray['tmp'], PATH_site . $uploadDir . $fileArray['name'])) {
             return $fileArray['name'];
         } else {
             return 4;
@@ -478,22 +476,8 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->repositoryService->get('photo')->add($newPhoto);
     }
 
-    /**
-     * We want to know if we were already redirected
-     * @see \TYPO3\CMS\Extbase\Mvc\Controller\AbstractController::redirect()
-     *
-     * @param string $actionName Name of the action to forward to
-     * @param string $controllerName Unqualified object name of the controller to forward to. If not specified, the current controller is used.
-     * @param string $extensionName Name of the extension containing the controller to forward to. If not specified, the current extension is assumed.
-     * @param \TYPO3\CMS\Extbase\Mvc\Controller\Arguments $arguments Arguments to pass to the target action
-     * @param integer $pageUid Target page uid. If NULL, the current page uid is used
-     * @param integer $delay (optional) The delay in seconds. Default is no delay.
-     * @param integer $statusCode (optional) The HTTP status code for the redirect. Default is "303 See Other"
-     * @return void
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException If the request is not a web request
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
-     */
-    protected function redirect($actionName, $controllerName = NULL, $extensionName = NULL, array $arguments = NULL, $pageUid = NULL, $delay = 0, $statusCode = 303)
+
+    protected function redirect($actionName, $controllerName = null, $extensionName = null, array $arguments = null, $pageUid = null, $delay = 0, $statusCode = 303)
     {
         BaseController::$redirected = TRUE;
         parent::redirect($actionName, $controllerName, $extensionName, $arguments, $pageUid, $delay, $statusCode);
@@ -513,5 +497,3 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         return FALSE;
     }
 }
-
-?>

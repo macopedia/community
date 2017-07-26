@@ -56,5 +56,3 @@ interface AccessServiceInterface
         $resource = ''
     );
 }
-
-?>

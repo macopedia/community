@@ -24,6 +24,8 @@ namespace Macopedia\Community\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Album;
+
 /**
  * Repository for Macopedia\Community\Domain\Model\Album
  */
@@ -41,7 +43,7 @@ class AlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param \Macopedia\Community\Domain\Model\User $user The owner of album
      * @param integer $albumType The type of special album
-     * @return array The posts
+     * @return Album
      */
     public function findOneByUserAndType(\Macopedia\Community\Domain\Model\User $user, $albumType)
     {
@@ -60,7 +62,6 @@ class AlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Deletes all albums for user - useful when we delete him
      *
      * @param \Macopedia\Community\Domain\Model\User $user
-     * @return void
      */
     public function deleteAllForUser(\Macopedia\Community\Domain\Model\User $user)
     {
@@ -73,5 +74,3 @@ class AlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
     }
 }
-
-?>

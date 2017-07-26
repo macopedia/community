@@ -45,5 +45,3 @@ interface RepositoryServiceInterface
      */
     public function get($repositoryName);
 }
-
-?>

@@ -334,5 +334,3 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
     }
 
 }
-
-?>
