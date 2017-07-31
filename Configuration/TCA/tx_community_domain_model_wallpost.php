@@ -1,10 +1,19 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
+defined('TYPO3_MODE') or die();
 
-$TCA['tx_community_domain_model_wallpost'] = array(
-    'ctrl' => $TCA['tx_community_domain_model_wallpost']['ctrl'],
+
+return array(
+    'ctrl' => array(
+        'title' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_wallpost',
+        'label' => 'subject',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'delete' => 'deleted',
+        'enablecolumns' => array(
+            'disabled' => 'hidden'
+        ),
+        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_wallpost.gif'
+    ),
     'interface' => array(
         'showRecordFieldList' => 'sender,recipient,subject,message',
     ),
@@ -17,7 +26,7 @@ $TCA['tx_community_domain_model_wallpost'] = array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
             )
