@@ -96,21 +96,29 @@ $feUserColumns = array(
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender',
         'config' => array(
-            'type' => 'select',
-            'items' => array(
-                array('---', ''),
-                array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.female', 1),
-                array('LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.male', 0),
-            )
+            'type' => 'radio',
+            'items' => [
+                [
+                    'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.0',
+                    '0'
+                ],
+                [
+                    'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.1',
+                    '1'
+                ]
+            ],
         )
     ),
+
     'date_of_birth' => array(
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.dateOfBirth',
-        'config' => array(
+        'config' => [
             'type' => 'input',
-            'eval' => 'date'
-        )
+            'renderType' => 'inputDateTime',
+            'eval' => 'datetime',
+            'default' => 0,
+        ]
     ),
     'profile_image' => array(
         'exclude' => 1,
