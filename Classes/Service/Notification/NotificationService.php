@@ -67,7 +67,7 @@ class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Co
                     $handler = $this->objectManager->get($method['handler']);
                     try {
                         $handler->send($notification, $method);
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         \TYPO3\CMS\Core\Utility\GeneralUtility::sysLog("Couldn't send email: " . $e->getMessage(), 'community', \TYPO3\CMS\Core\Utility\GeneralUtility::SYSLOG_SEVERITY_ERROR);
                     }
                 }
@@ -79,7 +79,7 @@ class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Co
      * Prevents from sending notification to user himself
      * @param Notification $notification
      * @param array $configuration
-     * @return array
+     * @return bool
      */
     protected function isValidNotification(Notification $notification, array $configuration)
     {
@@ -95,7 +95,7 @@ class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Co
 
     /**
      * Get array of available notification handlers for given rule name
-     * @param string resourceName
+     * @param string $ruleName resourceName
      * @return array
      */
     protected function getNotificationMethods($ruleName)
