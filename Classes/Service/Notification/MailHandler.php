@@ -24,14 +24,12 @@ namespace Macopedia\Community\Service\Notification;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Macopedia\Community\Domain\Model\User;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Email notifications
  *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
- * @author Konrad
  */
 class MailHandler extends AbstractHandler
 {
@@ -47,12 +45,13 @@ class MailHandler extends AbstractHandler
      * @param  Notification $notification
      * @param  array $configuration
      * @return void
+     * @throws \Macopedia\Community\Exception\UnexpectedException
      */
     public function send(Notification $notification, array $configuration)
     {
 
         /* @var $mail \TYPO3\CMS\Core\Mail\MailMessage */
-        $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Mail\MailMessage');
+        $mail = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
 
         $notifySenderFlag = $configuration['notifySender'];
         if ($notifySenderFlag == 1) { //sending message to sender user instead of recipient e.g "copy of message to my email"
@@ -64,8 +63,10 @@ class MailHandler extends AbstractHandler
         if (isset($recipient) && empty($configuration['overrideRecipient'])) {
             $mail->addTo($recipient->getEmail(), $recipient->getUsername());
         }
-        if (isset($configuration['recipient'])) {
+        if (!empty($configuration['recipient'])) {
             $mail->addTo($configuration['recipient']);
+        } else {
+            throw new \Macopedia\Community\Exception\UnexpectedException('No recipient set while sending mail via MailHandler', 1316515690);
         }
 
         if ($configuration['serverEmail']) {
@@ -88,10 +89,8 @@ class MailHandler extends AbstractHandler
             $mail->setBody($content['bodyPlain'], 'text/plain');
             $mail->addPart($content['bodyHTML'], 'text/html');
             $mail->send();
-        } catch (Exception $e) {
-            \TYPO3\CMS\Core\Utility\GeneralUtility::sysLog("Couldn't send email: " . $e->getMessage(), 'community', \TYPO3\CMS\Core\Utility\GeneralUtility::SYSLOG_SEVERITY_ERROR);
+        } catch (\Exception $e) {
+            GeneralUtility::sysLog("Couldn't send email: " . $e->getMessage(), 'community', GeneralUtility::SYSLOG_SEVERITY_ERROR);
         }
     }
 }
-
-?>
