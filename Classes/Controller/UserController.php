@@ -285,4 +285,3 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
     }
 }
 
-?>
