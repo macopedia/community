@@ -45,5 +45,3 @@ class InListViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelp
         return in_array($value, explode($seperator, $list));
     }
 }
-
-?>

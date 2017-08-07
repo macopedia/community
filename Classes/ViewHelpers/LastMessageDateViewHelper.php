@@ -63,5 +63,3 @@ class LastMessageDateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
         return $this->repositoryService->get('message')->findRecentBetweenUsers($user1, $user2)->getSentDate();
     }
 }
-
-?>

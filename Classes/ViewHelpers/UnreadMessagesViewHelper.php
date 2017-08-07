@@ -68,5 +68,3 @@ class UnreadMessagesViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
         }
     }
 }
-
-?>
