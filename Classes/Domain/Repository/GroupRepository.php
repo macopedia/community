@@ -39,5 +39,3 @@ class GroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return self::$tags;
     }
 }
-
-?>

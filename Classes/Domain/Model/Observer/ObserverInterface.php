@@ -31,5 +31,3 @@ interface ObserverInterface
 
     public function __toString();
 }
-
-?>

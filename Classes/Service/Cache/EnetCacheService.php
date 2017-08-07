@@ -132,4 +132,3 @@ class EnetCacheService implements CacheServiceInterface, \TYPO3\CMS\Core\Singlet
     }
 }
 
-?>

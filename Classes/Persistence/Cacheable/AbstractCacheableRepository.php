@@ -74,5 +74,3 @@ abstract class AbstractCacheableRepository extends \TYPO3\CMS\Extbase\Persistenc
         return $this->queryFactory->create($this->objectType);
     }
 }
-
-?>

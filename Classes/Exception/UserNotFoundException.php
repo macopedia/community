@@ -28,5 +28,3 @@ namespace Macopedia\Community\Exception;
 class UserNotFoundException extends \TYPO3\CMS\Extbase\Exception
 {
 }
-
-?>

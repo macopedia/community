@@ -46,5 +46,3 @@ interface ControllerInterface
      */
     public function getIdentifier($request);
 }
-
-?>

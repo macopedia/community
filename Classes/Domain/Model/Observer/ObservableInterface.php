@@ -33,5 +33,3 @@ interface ObservableInterface
 
     public function notify();
 }
-
-?>

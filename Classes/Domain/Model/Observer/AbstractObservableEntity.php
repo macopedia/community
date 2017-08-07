@@ -104,5 +104,3 @@ abstract class AbstractObservableEntity
         $this->attach($objectManager->get('Macopedia\Community\Domain\Model\Observer\CacheObserver'));
     }
 }
-
-?>

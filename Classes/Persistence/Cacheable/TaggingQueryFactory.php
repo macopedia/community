@@ -73,4 +73,3 @@ class TaggingQueryFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\QueryFa
     }
 }
 
-?>

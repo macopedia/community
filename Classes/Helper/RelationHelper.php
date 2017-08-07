@@ -102,5 +102,3 @@ class RelationHelper
         return RepositoryHelper::getRepository('AclRule')->findByRole($role);
     }
 }
-
-?>

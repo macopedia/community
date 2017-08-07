@@ -13,5 +13,3 @@ namespace Macopedia\Community\Core;
 class Bootstrap extends \TYPO3\CMS\Extbase\Core\Bootstrap
 {
 }
-
-?>

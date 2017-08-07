@@ -56,5 +56,3 @@ class Tx_Community_Resources_Private_Php_wizicon
         return $wizardItems;
     }
 }
-
-?>

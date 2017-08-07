@@ -312,5 +312,3 @@ class RelationController extends BaseController
         $this->notificationService->notify($notification);
     }
 }
-
-?>
