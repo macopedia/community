@@ -31,14 +31,9 @@ use Macopedia\Community\Domain\Model\Album,
     Macopedia\Community\Domain\Model\Relation;
 
 /**
- * Checks if the requestedUser and the requestingUser are the same.
- *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Konrad Baumgart
+ * Checks if user has access to album
  */
-class HasAccessToAlbumViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
+class HasAccessToAlbumViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper implements \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface
 {
 
     public function initializeArguments()
@@ -49,23 +44,28 @@ class HasAccessToAlbumViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelp
         $this->registerArgument('requestingUser', 'object', 'Requesting User Object.');
     }
 
-    public function render()
+    /**
+     *
+     * @param array $arguments ViewHelper arguments to evaluate the condition for this ViewHelper, allows for flexiblity in overriding this method.
+     * @return bool
+     */
+    protected static function evaluateCondition($arguments = null)
     {
         /** @var Album $album */
-        $album = $this->arguments['album'];
+        $album = $arguments['album'];
         /** @var Relation $relation */
-        $relation = $this->arguments['relation'];
+        $relation = $arguments['relation'];
         /** @var User $requestingUser */
-        $requestingUser = $this->arguments['requestingUser'];
+        $requestingUser = $arguments['requestingUser'];
 
         if (
             ($album->getPrivate() == 0) || //public
             ($requestingUser && $requestingUser->getUid() === $album->getUser()->getUid()) || // my album
             ($requestingUser && $relation && $relation->getStatus() === Relation::RELATION_STATUS_CONFIRMED && ($album->getPrivate() == 2)) //friends can see it
         ) {
-            return $this->renderThenChild();
+            return true;
         } else {
-            return $this->renderElseChild();
+            return false;
         }
     }
 }

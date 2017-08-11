@@ -31,11 +31,8 @@ use Macopedia\Community\Domain\Model\User;
 /**
  * Checks if the requestedUser and the requestingUser are the same.
  *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Pascal Jungblut <mail@pascalj.com>
  */
-class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
+class SameUserViewHelper  extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper implements \TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface
 {
 
     public function initializeArguments()
@@ -45,11 +42,15 @@ class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
         $this->registerArgument('requestedUser', 'object', 'Requested User.');
     }
 
-
-    public function render()
+    /**
+     *
+     * @param array $arguments ViewHelper arguments to evaluate the condition for this ViewHelper, allows for flexiblity in overriding this method.
+     * @return bool
+     */
+    protected static function evaluateCondition($arguments = null)
     {
-        $requestingUser = $this->arguments['requestingUser'];
-        $requestedUser = $this->arguments['requestedUser'];
+        $requestingUser = $arguments['requestingUser'];
+        $requestedUser = $arguments['requestedUser'];
 
         if ($requestingUser instanceof User) {
             $requestingUser = $requestingUser->getUid();
@@ -62,9 +63,9 @@ class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
         if ((is_int($requestingUser) && $requestingUser === $requestedUser)
             || ($requestingUser === NULL && $requestedUser === NULL)
         ) {
-            return $this->renderThenChild();
+            return true;
         } else {
-            return $this->renderElseChild();
+            return false;
         }
     }
 }
