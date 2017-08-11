@@ -24,6 +24,7 @@ namespace Macopedia\Community\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Relation;
 use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Domain\Model\Photo;
 use Macopedia\Community\Domain\Model\Album;
