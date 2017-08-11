@@ -141,8 +141,9 @@ class PhotoController extends BaseController
      */
     public function mainPhotoAction(Model\Photo $photo)
     {
-        $photo->getAlbum()->setMainPhoto($photo);
-        $this->addFlashMessage($this->_('profile.album.photoSetAsMainPhoto'));
+        $album = $photo->getAlbum();
+        $album->setMainPhoto($photo);
+        $this->repositoryService->get('album')->update($album);
         $this->redirect('show', 'Album', NULL, array('album' => $photo->getAlbum()));
     }
 
