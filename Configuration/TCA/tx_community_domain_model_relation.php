@@ -1,10 +1,21 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
+defined('TYPO3_MODE') or die();
 
-$TCA['tx_community_domain_model_relation'] = array(
-    'ctrl' => $TCA['tx_community_domain_model_relation']['ctrl'],
+
+return array(
+    'ctrl' => array(
+        'title' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation',
+        'label' => 'initiating_user',
+        'label_alt' => 'requested_user, status',
+        'label_alt_force' => 1,
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'delete' => 'deleted',
+        'enablecolumns' => array(
+            'disabled' => 'hidden'
+        ),
+        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_relation.gif'
+    ),
     'interface' => array(
         'showRecordFieldList' => 'initiating_user,requested_user,initiation_time,status'
     ),
@@ -17,7 +28,7 @@ $TCA['tx_community_domain_model_relation'] = array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check'
             )
@@ -71,5 +82,3 @@ $TCA['tx_community_domain_model_relation'] = array(
         )
     )
 );
-
-?>

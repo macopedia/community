@@ -1,10 +1,20 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
+defined('TYPO3_MODE') or die();
 
-$TCA['tx_community_domain_model_photo'] = array(
-    'ctrl' => $TCA['tx_community_domain_model_photo']['ctrl'],
+
+return array(
+    'ctrl' => array(
+        'title' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_photo',
+        'label' => 'image',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'dividers2tabs' => true,
+        'delete' => 'deleted',
+        'enablecolumns' => array(
+            'disabled' => 'hidden',
+        ),
+        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_photo.gif'
+    ),
     'interface' => array(
         'showRecordFieldList' => 'hidden, image',
     ),
@@ -17,7 +27,7 @@ $TCA['tx_community_domain_model_photo'] = array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
             ),
@@ -47,4 +57,3 @@ $TCA['tx_community_domain_model_photo'] = array(
         ),
     ),
 );
-?>
