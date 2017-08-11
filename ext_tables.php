@@ -264,7 +264,7 @@ $feUserColumns = array(
     ),
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $feUserColumns, 1);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $feUserColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCATypes('fe_users', 'gender', '', 'after:name');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCATypes('fe_users', '--div--;Community,political_view,religious_view,activities,interests,music,movies,books,quotes,about_me,cellphone,date_of_birth,profile_image;;;;1-1-1');
 
