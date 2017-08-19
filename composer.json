@@ -1,5 +1,5 @@
 {
-    "name": "macopedia/extension",
+    "name": "macopedia/community",
     "type": "typo3-cms-extension",
     "description": "TYPO3 CMS community / social network extension",
     "license": ["GPL-2.0+"],
