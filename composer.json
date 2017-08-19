@@ -16,7 +16,7 @@
         }
     },
     "replace": {
-        "community": "self.version",
+        "community": "self.version"
     },
     "extra": {
         "typo3/cms": {
