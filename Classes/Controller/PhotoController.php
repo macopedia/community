@@ -41,8 +41,6 @@ class PhotoController extends BaseController
      */
     public function newAction(Model\Album $album)
     {
-        //$photo = $this->repositoryService->get('photo')->findByUid(3);
-        //$album->addPhoto($photo);
         $this->view->assign('album', $album);
     }
 
@@ -98,6 +96,7 @@ class PhotoController extends BaseController
                 $album->setMainPhoto();
             }
         }
+        $this->repositoryService->get('album')->update($album);
         $this->repositoryService->get('photo')->remove($photo);
         $this->addFlashMessage($this->_('profile.album.photoRemoved'));
         $this->redirect('show', 'Album', NULL, array('album' => $album));
@@ -116,10 +115,11 @@ class PhotoController extends BaseController
         if ($this->hasAccessToAlbum($album)) {
             $imagePath = $photo->getImage();
             $this->requestingUser->setImage($imagePath);
+            $this->repositoryService->get('user')->update($this->requestingUser);
             if ($album->getAlbumType() == Model\Album::ALBUM_TYPE_AVATAR
-                && $album->getUser() == $this->requestingUser
+                && $album->getUser()->getUid() == $this->requestingUser->getUid()
             ) {
-                //don't have to copy photo to apecial album
+                //don't have to copy photo to special album
             } else {
                 $newPhoto = new Model\Photo();
                 $newPhoto->setImage($imagePath);
@@ -141,8 +141,9 @@ class PhotoController extends BaseController
      */
     public function mainPhotoAction(Model\Photo $photo)
     {
-        $photo->getAlbum()->setMainPhoto($photo);
-        $this->addFlashMessage($this->_('profile.album.photoSetAsMainPhoto'));
+        $album = $photo->getAlbum();
+        $album->setMainPhoto($photo);
+        $this->repositoryService->get('album')->update($album);
         $this->redirect('show', 'Album', NULL, array('album' => $photo->getAlbum()));
     }
 
@@ -168,5 +169,3 @@ class PhotoController extends BaseController
         }
     }
 }
-
-?>

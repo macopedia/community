@@ -165,5 +165,3 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->setLimit($limit)->execute();
     }
 }
-
-?>

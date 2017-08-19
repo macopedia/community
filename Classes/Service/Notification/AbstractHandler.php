@@ -102,7 +102,7 @@ abstract class AbstractHandler implements HandlerInterface, \TYPO3\CMS\Core\Sing
     /**
      * @param Notification $notification Object passed to fluid view
      * @param array $methodConfiguration
-     * @return string
+     * @return array
      */
     protected function render(Notification $notification, array $methodConfiguration)
     {
@@ -131,5 +131,3 @@ abstract class AbstractHandler implements HandlerInterface, \TYPO3\CMS\Core\Sing
     }
 
 }
-
-?>

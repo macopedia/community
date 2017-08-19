@@ -55,4 +55,3 @@ class WallHandler extends \Macopedia\Community\Service\Notification\BaseHandler
     }
 }
 
-?>

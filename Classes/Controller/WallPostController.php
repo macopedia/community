@@ -40,7 +40,6 @@ class WallPostController extends BaseController
     /**
      * Displays all WallPosts
      *
-     * @return string The rendered list view
      */
     public function listAction()
     {
@@ -52,7 +51,6 @@ class WallPostController extends BaseController
      * Creates a new WallPost and forwards to the list action.
      *
      * @param Model\WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
-     * @return string An HTML form for creating a new WallPost
      * @dontvalidate $newWallPost
      */
     public function newAction(Model\WallPost $newWallPost = null)
@@ -65,7 +63,6 @@ class WallPostController extends BaseController
      * Creates a new WallPost and forwards to the list action.
      *
      * @param Model\WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
-     * @return void
      *
      */
     public function createAction(Model\WallPost $newWallPost)
@@ -97,7 +94,6 @@ class WallPostController extends BaseController
      * Deletes an existing WallPost
      *
      * @param Model\WallPost $wallPost the WallPost to be deleted
-     * @return void
      */
     public function deleteAction(Model\WallPost $wallPost)
     {
@@ -106,5 +102,3 @@ class WallPostController extends BaseController
         $this->redirectToWall($this->getRequestedUser());
     }
 }
-
-?>

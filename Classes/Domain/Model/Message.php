@@ -302,5 +302,3 @@ class Message extends Observer\AbstractObservableEntity
         $this->recipientDeleted = $value;
     }
 }
-
-?>

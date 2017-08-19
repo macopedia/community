@@ -29,5 +29,3 @@ class UnexpectedException extends \TYPO3\CMS\Extbase\Exception
 {
 
 }
-
-?>

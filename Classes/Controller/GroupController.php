@@ -249,6 +249,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
      * Get an identifier
      *
      * @param $request
+     * @return array
      */
     public function getIdentifier($request)
     {
@@ -270,5 +271,3 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
         return $repo->getTags();
     }
 }
-
-?>

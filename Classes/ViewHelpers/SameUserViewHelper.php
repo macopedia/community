@@ -35,7 +35,7 @@ use Macopedia\Community\Domain\Model\User;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
+class SameUserViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper
 {
 
     public function initializeArguments()
@@ -45,11 +45,10 @@ class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
         $this->registerArgument('requestedUser', 'object', 'Requested User.');
     }
 
-
-    public function render()
+    protected static function evaluateCondition($arguments = null)
     {
-        $requestingUser = $this->arguments['requestingUser'];
-        $requestedUser = $this->arguments['requestedUser'];
+        $requestingUser = $arguments['requestingUser'];
+        $requestedUser = $arguments['requestedUser'];
 
         if ($requestingUser instanceof User) {
             $requestingUser = $requestingUser->getUid();
@@ -62,6 +61,15 @@ class SameUserViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
         if ((is_int($requestingUser) && $requestingUser === $requestedUser)
             || ($requestingUser === NULL && $requestedUser === NULL)
         ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function render()
+    {
+        if (static::evaluateCondition($this->arguments)) {
             return $this->renderThenChild();
         } else {
             return $this->renderElseChild();

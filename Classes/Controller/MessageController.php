@@ -263,8 +263,8 @@ class MessageController extends BaseController
         } elseif ($message->getRecipient() && $message->getRecipient()->getUid() == $this->getRequestingUser()->getUid()) {
             $message->setRecipientDeleted(true);
         }
+        $this->repositoryService->get('message')->update($message);
         $this->addFlashMessage($this->_('message.delete.success'));
     }
 }
 
-?>

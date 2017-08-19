@@ -26,6 +26,7 @@ namespace Macopedia\Community\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Relation;
 use Macopedia\Community\Domain\Model\User;
 
 /**
@@ -76,5 +77,3 @@ class RelationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         }
     }
 }
-
-?>

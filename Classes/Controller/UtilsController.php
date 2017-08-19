@@ -41,5 +41,3 @@ class UtilsController extends BaseController
         }
     }
 }
-
-?>

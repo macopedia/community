@@ -60,7 +60,7 @@
 
 			<label index="tx_community_domain_model_album">Album</label>
 			<label index="tx_community_domain_model_album.name">Name</label>
-			<label index="tx_community_domain_model_album.private">Private</label>
+			<label index="tx_community_domain_model_album.private">Privacy</label>
 			<label index="tx_community_domain_model_album.type">Type</label>
 			<label index="tx_community_domain_model_album.main_photo">Main Photo</label>
 			<label index="tx_community_domain_model_album.user">User</label>

@@ -78,5 +78,3 @@ class TaggingQuery extends \TYPO3\CMS\Extbase\Persistence\Generic\Query
         $this->repository = $repository;
     }
 }
-
-?>

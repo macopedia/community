@@ -66,5 +66,3 @@ class RepositoryService implements \Macopedia\Community\Service\RepositoryServic
         $this->objectManager = $objectManager;
     }
 }
-
-?>

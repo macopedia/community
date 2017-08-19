@@ -232,5 +232,3 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
     }
 
 }
-
-?>

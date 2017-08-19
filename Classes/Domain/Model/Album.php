@@ -31,14 +31,14 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * totaly public album
+     * public album
      *
      * @var integer
      */
     const PRIVACY_AVAILABLE_FOR_ALL = 0;
 
     /**
-     * album for logged in
+     * album for logged in users
      *
      * @var integer
      */
@@ -253,5 +253,3 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
 }
-
-?>

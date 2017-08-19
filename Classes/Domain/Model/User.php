@@ -468,5 +468,3 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Obser
         }
     }
 }
-
-?>

@@ -129,5 +129,3 @@ class AlbumController extends BaseController
         $this->redirect('list');
     }
 }
-
-?>

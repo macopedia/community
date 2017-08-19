@@ -87,7 +87,7 @@ class Relation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @var integer
      */
-    protected $status;
+    protected $status = 1;
 
     /**
      * @var \DateTime

@@ -43,4 +43,3 @@ interface NotificationServiceInterface
     public function notify(Notification $notification);
 }
 
-?>

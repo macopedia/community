@@ -60,5 +60,3 @@ class CacheObserver implements ObserverInterface, \TYPO3\CMS\Core\SingletonInter
         return get_class($this);
     }
 }
-
-?>

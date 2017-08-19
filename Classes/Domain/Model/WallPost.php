@@ -141,16 +141,4 @@ class WallPost extends Observer\AbstractObservableEntity
     {
         return $this->message;
     }
-
-    /**
-     * The constructor of this WallPost
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
-
 }
-
-?>

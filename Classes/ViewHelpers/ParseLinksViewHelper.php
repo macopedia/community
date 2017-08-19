@@ -44,5 +44,3 @@ class ParseLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
         return \Macopedia\Community\Helper\UrlLinkerHelper::htmlEscapeAndLinkUrls($string);
     }
 }
-
-?>

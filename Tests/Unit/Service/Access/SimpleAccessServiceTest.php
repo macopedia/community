@@ -53,5 +53,3 @@ class SimpleAccessServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->assertEquals(true, $accessService->hasAccess($stub, $stub));
     }
 }
-
-?>
