@@ -31,7 +31,7 @@ namespace Macopedia\Community\Service\Notification;
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *
  */
 class WallService extends \Macopedia\Community\Service\Notification\BaseHandler
 {

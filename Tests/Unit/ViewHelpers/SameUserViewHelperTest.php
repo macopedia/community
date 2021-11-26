@@ -32,7 +32,7 @@ use Macopedia\Community\ViewHelpers\SameUserViewHelper;
 /**
  * Test for the SameUserViewHelper
  *
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *
  */
 class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase
 {

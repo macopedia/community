@@ -28,7 +28,7 @@ namespace Macopedia\Community\Hook;
 /**
  * Class called by hooks in TCEmain
  *
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *
  */
 class Tcemain
 {

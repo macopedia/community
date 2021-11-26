@@ -31,7 +31,7 @@ use Macopedia\Community\Domain\Model\User;
 /**
  * Class containing information needed to notify an user
  *
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *
  */
 class Notification
 {

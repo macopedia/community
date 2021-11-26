@@ -34,7 +34,7 @@ use Macopedia\Community\Service\RepositoryServiceInterface,
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *
  */
 abstract class AbstractHandler implements HandlerInterface, \TYPO3\CMS\Core\SingletonInterface
 {

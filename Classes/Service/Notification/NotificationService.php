@@ -28,7 +28,7 @@ namespace Macopedia\Community\Service\Notification;
 /**
  * Service used to dispatch different kind of notifications
  *
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *
  * @author Konrad Baumgart
  */
 class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Core\SingletonInterface

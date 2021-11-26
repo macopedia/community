@@ -33,7 +33,7 @@ use Macopedia\Community\Service\Notification\Notification;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *
  */
 class NotificationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
