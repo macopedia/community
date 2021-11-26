@@ -26,16 +26,15 @@ namespace Macopedia\Community\Service\Notification;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Mail\MailMessage;
-use Macopedia\Community\Exception\UnexpectedException;
-use TYPO3\CMS\Core\Log\LogManager;
-use TYPO3\CMS\Core\Log\LogLevel;
 use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Exception\UnexpectedException;
+use TYPO3\CMS\Core\Log\LogLevel;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Email notifications
- *
  */
 class MailHandler extends AbstractHandler
 {
@@ -49,7 +48,6 @@ class MailHandler extends AbstractHandler
      *
      * @param  Notification $notification
      * @param  array $configuration
-     * @return void
      * @throws \Macopedia\Community\Exception\UnexpectedException
      */
     public function send(Notification $notification, array $configuration)

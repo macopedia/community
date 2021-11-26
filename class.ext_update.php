@@ -25,9 +25,6 @@
 /**
  * Update class for extmgr,
  * inspired by news extension
- *
- * @package TYPO3
- * @subpackage tx_community
  */
 class ext_update
 {
@@ -35,12 +32,12 @@ class ext_update
     public const STATUS_ERROR = 0;
     public const STATUS_OK = 1;
 
-    protected $messageArray = array();
+    protected $messageArray = [];
 
     protected function changeGender()
     {
         $status = self::STATUS_OK;
-        ;
+
         $title = 'Changing gender type form varchar to int';
 
         $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -55,9 +52,9 @@ class ext_update
         $entry = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
         $message = '';
         if ($entry['count(*)'] <= 0) {
-            $message = "Everything is up to date";
+            $message = 'Everything is up to date';
         } else {
-            $updateArray = array('gender' => 0);
+            $updateArray = ['gender' => 0];
 
             $res = $GLOBALS['TYPO3_DB']->exec_UPDATEquery('fe_users', "gender = 'male'", $updateArray);
             if ($res === false) {
@@ -83,9 +80,8 @@ class ext_update
                 $status = self::STATUS_OK;
             }
         }
-        $this->messageArray[] = array($status, $title, $message);
+        $this->messageArray[] = [$status, $title, $message];
     }
-
 
     /**
      * Main update function called by the extension manager.
@@ -97,7 +93,6 @@ class ext_update
         $this->changeGender();
         return $this->generateOutput();
     }
-
 
     /**
      * Generates more or less readable output.

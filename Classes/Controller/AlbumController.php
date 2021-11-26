@@ -2,7 +2,7 @@
 
 namespace Macopedia\Community\Controller;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Macopedia\Community\Domain\Model\Album;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,7 +26,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\Album;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * Controller for the Album object
@@ -35,8 +35,6 @@ class AlbumController extends BaseController
 {
     /**
      * Displays all Albums of requested user
-     *
-     * @return void
      */
     public function listAction()
     {
@@ -48,7 +46,6 @@ class AlbumController extends BaseController
      * Displays a single Album with it's photos
      *
      * @param Album $album the Album to display
-     * @return void
      */
     public function showAction(Album $album)
     {
@@ -57,20 +54,17 @@ class AlbumController extends BaseController
 
     /**
      * Redirects to show freshest album of requestedUser
-     *
-     * @return void
      */
     public function showMostRecentAction()
     {
         $album = $this->repositoryService->get('album')->findOneByUser($this->requestedUser);
-        $this->redirect('show', null, null, array('album' => $album));
+        $this->redirect('show', null, null, ['album' => $album]);
     }
 
     /**
      * Displays a form for creating a new Album
      *
      * @param Album $newAlbum a fresh Album object which has not yet been added to the repository
-     * @return void
      * @Extbase\IgnoreValidation("newAlbum")
      */
     public function newAction(Album $newAlbum = null)
@@ -82,7 +76,6 @@ class AlbumController extends BaseController
      * Creates a new Album and forwards to the list action.
      *
      * @param Album $newAlbum a fresh Album object which has not yet been added to the repository
-     * @return void
      */
     public function createAction(Album $newAlbum)
     {
@@ -107,7 +100,6 @@ class AlbumController extends BaseController
      * Updates an existing Album and forwards to the list action afterwards.
      *
      * @param Album $album the Album to display
-     * @return void
      */
     public function updateAction(Album $album)
     {
@@ -120,7 +112,6 @@ class AlbumController extends BaseController
      * Deletes an existing Album
      *
      * @param Album $album the Album to be deleted
-     * @return void
      */
     public function deleteAction(Album $album)
     {

@@ -1,7 +1,7 @@
 <?php
 
-use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -48,12 +48,12 @@ class Tx_Community_Resources_Private_Php_wizicon
         // name of the plugin to load on startup
         $extKeyPlugin = 'community_listusers';
 
-        $wizardItems['plugins_tx_community'] = array(
+        $wizardItems['plugins_tx_community'] = [
             'icon' => PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('community')) . 'Resources/Public/Images/newElementWizardIcon.png',
             'title' => $GLOBALS['LANG']->sL('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:wizard.title'),
             'description' => $GLOBALS['LANG']->sL('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:wizard.description'),
-            'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=' . $extKeyPlugin
-        );
+            'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=' . $extKeyPlugin,
+        ];
         return $wizardItems;
     }
 }

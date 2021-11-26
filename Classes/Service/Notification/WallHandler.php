@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Service\Notification;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,21 +28,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\WallPost;
-
 /**
  * Notify user with wall message
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class WallHandler extends BaseHandler
 {
     /**
      * @param  array $arguments
      * @param  array $configuration
-     * @return void
      */
     public function send(array $arguments, array $configuration)
     {

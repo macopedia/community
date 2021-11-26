@@ -36,35 +36,35 @@ class Album extends AbstractEntity
     /**
      * public album
      *
-     * @var integer
+     * @var int
      */
     public const PRIVACY_AVAILABLE_FOR_ALL = 0;
 
     /**
      * album for logged in users
      *
-     * @var integer
+     * @var int
      */
     public const PRIVACY_AVAILABLE_FOR_LOGGED_IN = 1;
 
     /**
      * album for friends
      *
-     * @var integer
+     * @var int
      */
     public const PRIVACY_AVAILABLE_FOR_FRIENDS = 2;
 
     /**
      * album is a normal album
      *
-     * @var integer
+     * @var int
      */
     public const ALBUM_TYPE_NORMAL = 0;
 
     /**
      * album contains current and old avatars
      *
-     * @var integer
+     * @var int
      */
     public const ALBUM_TYPE_AVATAR = 1;
 
@@ -95,7 +95,7 @@ class Album extends AbstractEntity
      * Normal album, album with user images(avatars),
      * wallposts images, etc.
      *
-     * @var integer
+     * @var int
      */
     protected $albumType;
 
@@ -123,8 +123,6 @@ class Album extends AbstractEntity
 
     /**
      * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage instances.
-     *
-     * @return void
      */
     protected function initStorageObjects()
     {
@@ -133,7 +131,6 @@ class Album extends AbstractEntity
 
     /**
      * @param string $name
-     * @return void
      */
     public function setName($name)
     {
@@ -150,7 +147,6 @@ class Album extends AbstractEntity
 
     /**
      * @param int $private
-     * @return void
      */
     public function setPrivate($private)
     {
@@ -167,7 +163,6 @@ class Album extends AbstractEntity
 
     /**
      * @param int $type
-     * @return void
      */
     public function setAlbumType($type)
     {
@@ -185,7 +180,6 @@ class Album extends AbstractEntity
     /**
      * Set main photo of album
      * @param \Macopedia\Community\Domain\Model\Photo $photo
-     * @return void
      */
     public function setMainPhoto(Photo $photo = null)
     {
@@ -204,7 +198,6 @@ class Album extends AbstractEntity
     /**
      * Set owner of album
      * @param \Macopedia\Community\Domain\Model\User $user
-     * @return void
      */
     public function setUser(User $user)
     {
@@ -222,7 +215,6 @@ class Album extends AbstractEntity
 
     /**
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\Photo> $photos
-     * @return void
      */
     public function setPhotos(ObjectStorage $photos)
     {
@@ -239,7 +231,6 @@ class Album extends AbstractEntity
 
     /**
      * @param \Macopedia\Community\Domain\Model\Photo the Photo to be added
-     * @return void
      */
     public function addPhoto(Photo $photo)
     {
@@ -248,7 +239,6 @@ class Album extends AbstractEntity
 
     /**
      * @param \Macopedia\Community\Domain\Model\Photo the Photo to be removed
-     * @return void
      */
     public function removePhoto(Photo $photoToRemove)
     {

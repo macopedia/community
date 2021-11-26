@@ -2,8 +2,8 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
-use Macopedia\Community\Exception\UnexpectedException;
+use Macopedia\Community\Domain\Model\Relation;
+use Macopedia\Community\Domain\Model\User;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,8 +28,8 @@ use Macopedia\Community\Exception\UnexpectedException;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
-use Macopedia\Community\Domain\Model\Relation;
+use Macopedia\Community\Exception\UnexpectedException;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * Repository for Relation
@@ -59,7 +59,7 @@ class RelationRepository extends Repository
      *
      * @param User $requestedUser
      * @param User $requestingUser
-     * @param integer | NULL $status
+     * @param int | NULL $status
      * @return Relation | NULL
      * @throws \Macopedia\Community\Exception\UnexpectedException
      */
@@ -82,11 +82,11 @@ class RelationRepository extends Repository
             throw new UnexpectedException(
                 'There are more than one relations from user ' . $requestedUser->getUid() . ' to ' . $requestingUser->getUid()
             );
-        } elseif (count($relations) == 1) {
-            return $relations[0];
-        } else {
-            return null;
         }
+        if (count($relations) == 1) {
+            return $relations[0];
+        }
+        return null;
     }
 
     /**
@@ -107,7 +107,6 @@ class RelationRepository extends Repository
      * Deletes all (confirmed,unconfirmed...) relations for given user - useful when we delete him
      *
      * @param User |int $user
-     * @return void
      */
     public function deleteAllForUser($user)
     {

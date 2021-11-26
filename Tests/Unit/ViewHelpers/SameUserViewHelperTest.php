@@ -31,8 +31,6 @@ use Macopedia\Community\ViewHelpers\SameUserViewHelper;
 
 /**
  * Test for the SameUserViewHelper
- *
- *
  */
 class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase
 {
@@ -55,12 +53,12 @@ class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelp
      */
     public function viewHelperRendersThenChildIfConditionIsTrue($user1, $user2)
     {
-        $this->viewHelper->expects($this->once())->method('renderThenChild')->will($this->returnValue('then'));
-        $this->viewHelper->expects($this->never())->method('renderElseChild');
+        $this->viewHelper->expects(self::once())->method('renderThenChild')->willReturn('then');
+        $this->viewHelper->expects(self::never())->method('renderElseChild');
         $this->viewHelper->setArguments(['requestingUser' => $user1, 'requestedUser' => $user2]);
 
         $actualResult = $this->viewHelper->render();
-        $this->assertEquals('then', $actualResult);
+        self::assertEquals('then', $actualResult);
     }
 
     public function thenProvider()
@@ -72,16 +70,15 @@ class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelp
         $user3 = $this->getAccessibleMock(User::class, null);
         $user3->_set('uid', 10);
 
-        return array(
-            array($user1, $user2),
-            array($user1, $user1),
-            array(null, null),
-            array(3, 3),
-            array($user1, 1),
-            array($user3, 10)
-        );
+        return [
+            [$user1, $user2],
+            [$user1, $user1],
+            [null, null],
+            [3, 3],
+            [$user1, 1],
+            [$user3, 10],
+        ];
     }
-
 
     /**
      * @test
@@ -89,12 +86,12 @@ class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelp
      */
     public function viewHelperRendersElseChildIfConditionIsFalse($user1, $user2)
     {
-        $this->viewHelper->expects($this->once())->method('renderElseChild')->will($this->returnValue('else'));
-        $this->viewHelper->expects($this->never())->method('renderThenChild');
+        $this->viewHelper->expects(self::once())->method('renderElseChild')->willReturn('else');
+        $this->viewHelper->expects(self::never())->method('renderThenChild');
 
         $this->viewHelper->setArguments(['requestingUser' => $user1, 'requestedUser' => $user2]);
         $actualResult = $this->viewHelper->render();
-        $this->assertEquals('else', $actualResult);
+        self::assertEquals('else', $actualResult);
     }
 
     public function elseProvider()
@@ -104,15 +101,15 @@ class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelp
         $user2 = $this->getAccessibleMock(User::class, null);
         $user2->_set('uid', 8);
 
-        return array(
-            array("sss", 23323),
-            array($user1, $user2),
-            array($user1, null),
-            array(null, $user1),
-            array(2, 1),
-            array($user2, 2),
-            array($user2, 0),
-            array($user2, 1)
-        );
+        return [
+            ['sss', 23323],
+            [$user1, $user2],
+            [$user1, null],
+            [null, $user1],
+            [2, 1],
+            [$user2, 2],
+            [$user2, 0],
+            [$user2, 1],
+        ];
     }
 }

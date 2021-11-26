@@ -26,8 +26,8 @@ namespace Macopedia\Community\Tests\Unit\Service\Notification;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Service\Notification\NotificationService;
 use Macopedia\Community\Service\Notification\Notification;
+use Macopedia\Community\Service\Notification\NotificationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -35,7 +35,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class NotificationServiceTest extends UnitTestCase
 {
@@ -51,7 +50,7 @@ class NotificationServiceTest extends UnitTestCase
      * @dataProvider isValidNotificationProvider
      * @param Notification $notification
      * @param array $configuration
-     * @param boolean $result
+     * @param bool $result
      */
     public function isValidNotificationTest(Notification $notification, array $configuration, $result)
     {
@@ -60,66 +59,66 @@ class NotificationServiceTest extends UnitTestCase
         $method = $reflection->getMethod('isValidNotification');
         $method->setAccessible(true);
 
-        $this->assertEquals($result, $method->invokeArgs($this->service, array($notification, $configuration)));
+        self::assertEquals($result, $method->invokeArgs($this->service, [$notification, $configuration]));
     }
 
     public function isValidNotificationProvider()
     {
-        $user1 = $this->getAccessibleMock('User', array('getUid'));
+        $user1 = $this->getAccessibleMock('User', ['getUid']);
         $user1->_set('uid', 1);
-        $user2 = $this->getAccessibleMock('User', array('getUid'));
+        $user2 = $this->getAccessibleMock('User', ['getUid']);
         $user2->_set('uid', 8);
 
-        $correctNotification = new Notification("someRule", $user1, $user2);
-        $wrongNotification = new Notification("someRule", $user1, $user1);
-        $wrongNotification2 = new Notification("someRule", $user1, null);
+        $correctNotification = new Notification('someRule', $user1, $user2);
+        $wrongNotification = new Notification('someRule', $user1, $user1);
+        $wrongNotification2 = new Notification('someRule', $user1, null);
 
-        $dataSets = array();
-        $dataSets[0] = array( //first test case: different users, empty configuration
+        $dataSets = [];
+        $dataSets[0] = [ //first test case: different users, empty configuration
             $correctNotification,
-            array(), //configuration
-            true //expected
-        );
-        $dataSets[1] = array(
+            [], //configuration
+            true, //expected
+        ];
+        $dataSets[1] = [
             $correctNotification,
-            array('allowSelfNotification' => 0),
-            true
-        );
-        $dataSets[2] = array(
+            ['allowSelfNotification' => 0],
+            true,
+        ];
+        $dataSets[2] = [
             $correctNotification,
-            array('allowSelfNotification' => ''),
-            true
-        );
-        $dataSets[3] = array(
+            ['allowSelfNotification' => ''],
+            true,
+        ];
+        $dataSets[3] = [
             $wrongNotification,
-            array('allowSelfNotification' => ''),
-            false
-        );
-        $dataSets[3] = array(
+            ['allowSelfNotification' => ''],
+            false,
+        ];
+        $dataSets[3] = [
             $wrongNotification,
-            array('allowSelfNotification' => 1),
-            true
-        );
-        $dataSets[3] = array(
+            ['allowSelfNotification' => 1],
+            true,
+        ];
+        $dataSets[3] = [
             $wrongNotification,
-            array('allowSelfNotification' => '1'),
-            true
-        );
-        $dataSets[3] = array(
+            ['allowSelfNotification' => '1'],
+            true,
+        ];
+        $dataSets[3] = [
             $wrongNotification,
-            array(),
-            false
-        );
-        $dataSets[3] = array(
+            [],
+            false,
+        ];
+        $dataSets[3] = [
             $wrongNotification2,
-            array(),
-            false
-        );
-        $dataSets[3] = array(
+            [],
+            false,
+        ];
+        $dataSets[3] = [
             $wrongNotification2,
-            array('allowSelfNotification' => 1),
-            false
-        );
+            ['allowSelfNotification' => 1],
+            false,
+        ];
         return $dataSets;
     }
 }

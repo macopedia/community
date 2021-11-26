@@ -2,8 +2,8 @@
 
 namespace Macopedia\Community\ViewHelpers\Widget\Controller;
 
-use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController;
 
 /***************************************************************
  *  Copyright notice
@@ -36,46 +36,44 @@ class PaginateController extends AbstractWidgetController
     /**
      * @var array
      */
-    protected $configuration = array('itemsPerPage' => 10, 'insertAbove' => false, 'insertBelow' => true, 'pagesAfter' => 2, 'pagesBefore' => 2, 'lessPages' => true, 'forcedNumberOfLinks' => 4);
+    protected $configuration = ['itemsPerPage' => 10, 'insertAbove' => false, 'insertBelow' => true, 'pagesAfter' => 2, 'pagesBefore' => 2, 'lessPages' => true, 'forcedNumberOfLinks' => 4];
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     protected $objects;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $currentPage = 1;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $pagesBefore = 1;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $pagesAfter = 1;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $lessPages = false;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $forcedNumberOfLinks = 10;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $numberOfPages = 1;
 
     /**
      * Initialize the action and get correct configuration
-     *
-     * @return void
      */
     public function initializeAction()
     {
@@ -95,8 +93,6 @@ class PaginateController extends AbstractWidgetController
     /**
      * If a certain number of links should be displayed, adjust before and after
      * amounts accordingly.
-     *
-     * @return void
      */
     protected function adjustForForcedNumberOfLinks()
     {
@@ -108,7 +104,7 @@ class PaginateController extends AbstractWidgetController
             min($this->pagesAfter, $this->numberOfPages - $this->currentPage - 1) + 1;
 
         if ($totalNumberOfLinks <= $forcedNumberOfLinks) {
-            $delta = intval(ceil(($forcedNumberOfLinks - $totalNumberOfLinks) / 2));
+            $delta = (int)(ceil(($forcedNumberOfLinks - $totalNumberOfLinks) / 2));
             $incr = ($forcedNumberOfLinks & 1) == 0 ? 1 : 0;
             if ($this->currentPage - ($this->pagesBefore + $delta) < 2) {
                 // Too little from the right to adjust
@@ -127,8 +123,7 @@ class PaginateController extends AbstractWidgetController
     /**
      * Main action which does all the fun
      *
-     * @param integer $currentPage
-     * @return void
+     * @param int $currentPage
      */
     public function indexAction($currentPage = 1)
     {
@@ -154,9 +149,9 @@ class PaginateController extends AbstractWidgetController
         }
         $modifiedObjects = $query->execute();
 
-        $this->view->assign('contentArguments', array(
-            $this->widgetConfiguration['as'] => $modifiedObjects
-        ));
+        $this->view->assign('contentArguments', [
+            $this->widgetConfiguration['as'] => $modifiedObjects,
+        ]);
         $this->view->assign('configuration', $this->configuration);
         $this->view->assign('pagination', $this->buildPagination());
     }
@@ -171,21 +166,21 @@ class PaginateController extends AbstractWidgetController
     {
         $this->adjustForForcedNumberOfLinks();
 
-        $pages = array();
+        $pages = [];
         $start = (int)max($this->currentPage - $this->pagesBefore, 1);
         $end = (int)min($this->numberOfPages - 1, $this->currentPage + $this->pagesAfter + 1);
         for ($i = $start; $i < $end; $i++) {
             $j = $i + 1;
-            $pages[] = array('number' => $j, 'isCurrent' => ($j === $this->currentPage));
+            $pages[] = ['number' => $j, 'isCurrent' => ($j === $this->currentPage)];
         }
 
-        $pagination = array(
+        $pagination = [
             'pages' => $pages,
             'current' => $this->currentPage,
             'numberOfPages' => $this->numberOfPages,
             'pagesBefore' => $this->pagesBefore,
             'pagesAfter' => $this->pagesAfter,
-        );
+        ];
         if ($this->currentPage < $this->numberOfPages) {
             $pagination['nextPage'] = $this->currentPage + 1;
         }

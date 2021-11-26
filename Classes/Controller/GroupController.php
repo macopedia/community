@@ -71,7 +71,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
             $group->setImage($image);
         } elseif ($image != 0) {
             $this->flashMessages->add($this->_('group.create.imageError'));
-            $this->redirect('new', 'Group', null, array('group' => $group));
+            $this->redirect('new', 'Group', null, ['group' => $group]);
             return;
         }
 
@@ -107,11 +107,11 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
             $group->setImage($image);
         } elseif ($image != 0) {
             $this->flashMessages->add($this->_('group.create.imageError'));
-            $this->redirect('new', 'Group', null, array('group' => $group));
+            $this->redirect('new', 'Group', null, ['group' => $group]);
             return;
         }
         $this->repositoryService->get('group')->update($group);
-        $this->redirect('show', 'Group', null, array('group' => $group));
+        $this->redirect('show', 'Group', null, ['group' => $group]);
     }
 
     /**
@@ -194,7 +194,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
                 $this->flashMessages->add($this->_('group.confirm.success'));
             }
         }
-        $this->redirect('show', 'Group', null, array('group' => $group));
+        $this->redirect('show', 'Group', null, ['group' => $group]);
     }
 
     /**
@@ -257,13 +257,13 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
      */
     public function getIdentifier($request)
     {
-        $requestSettings = array(
+        $requestSettings = [
             'controller' => $request->getControllerName(),
             'action' => $request->getControllerActionName(),
             'arguments' => $request->getArguments(),
-            'user' => $GLOBALS['TSFE']->fe_user->user[$GLOBALS['TSFE']->fe_user->userid_column]
-        );
-        return array($this->settings, $requestSettings);
+            'user' => $GLOBALS['TSFE']->fe_user->user[$GLOBALS['TSFE']->fe_user->userid_column],
+        ];
+        return [$this->settings, $requestSettings];
     }
 
     /**

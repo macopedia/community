@@ -39,28 +39,28 @@ class Relation extends AbstractEntity
     /**
      * the relation has just been initiated
      *
-     * @var integer
+     * @var int
      */
     public const RELATION_STATUS_NEW = 1;
 
     /**
      * the relation was confirmed by the requested user
      *
-     * @var integer
+     * @var int
      */
     public const RELATION_STATUS_CONFIRMED = 2;
 
     /**
      * the requested user rejected the relation request
      *
-     * @var integer
+     * @var int
      */
     public const RELATION_STATUS_REJECTED = 4;
 
     /**
      * one of the users cancelled the existing relation
      *
-     * @var integer
+     * @var int
      */
     public const RELATION_STATUS_CANCELLED = 8;
 
@@ -85,7 +85,7 @@ class Relation extends AbstractEntity
     //	protected $requestedRole;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $status = 1;
 
@@ -95,7 +95,6 @@ class Relation extends AbstractEntity
     protected $initiationTime;
 
     /**
-     *
      * @return \Macopedia\Community\Domain\Model\User
      */
     public function getInitiatingUser()
@@ -110,7 +109,6 @@ class Relation extends AbstractEntity
     {
         $this->initiatingUser = $initiatingUser;
     }
-
 
     /**
      * @return \DateTime
@@ -127,7 +125,6 @@ class Relation extends AbstractEntity
     {
         $this->initiationTime = $initiationTime;
     }
-
 
     /**
      * @return \Macopedia\Community\Domain\Model\User
@@ -146,7 +143,6 @@ class Relation extends AbstractEntity
     }
 
     /**
-     *
      * @return AclRole
      */
     // private function getInitiatingRole() {
@@ -174,9 +170,8 @@ class Relation extends AbstractEntity
     // 	$this->requestedRole = $requestedRole;
     // }
 
-
     /**
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {
@@ -184,13 +179,12 @@ class Relation extends AbstractEntity
     }
 
     /**
-     * @param integer $status
+     * @param int $status
      */
     public function setStatus($status)
     {
         $this->status = $status;
     }
-
 
     /*public function _isDirty($propertyName = NULL) {
         \TYPO3\CMS\Core\Utility\GeneralUtility::debug($this->_cleanProperties);

@@ -36,7 +36,7 @@ class NoCacheService implements CacheServiceInterface, SingletonInterface
      * @param mixed $content
      * @param array $identifier
      * @param array $tags
-     * @param integer $lifetime
+     * @param int $lifetime
      */
     public function set($content, array $identifier, array $tags, $lifetime = 86400)
     {
@@ -82,7 +82,6 @@ class NoCacheService implements CacheServiceInterface, SingletonInterface
     }
 
     /**
-     *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object
      */
     public function getTagsForEntity(AbstractEntity $object)

@@ -2,8 +2,8 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use Macopedia\Community\Helper\UrlLinkerHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /***************************************************************
  *  Copyright notice

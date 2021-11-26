@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\Persistence\Cacheable;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -45,7 +45,7 @@ abstract class AbstractCacheableRepository extends Repository
      *
      * @var array
      */
-    protected static $tags = array();
+    protected static $tags = [];
 
     /**
      * Get the tags for cache dropping

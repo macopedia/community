@@ -13,23 +13,21 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 /**
  * @category   Zend
- * @package    Zend
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Exception extends Exception
 {
     /**
-     * @var null|Exception
+     * @var Exception|null
      */
-    private $_previous = null;
+    private $_previous;
 
     /**
      * Construct the exception
@@ -37,7 +35,6 @@ class Zend_Exception extends Exception
      * @param  string $msg
      * @param  int $code
      * @param  Exception $previous
-     * @return void
      */
     public function __construct($msg = '', $code = 0, Exception $previous = null)
     {

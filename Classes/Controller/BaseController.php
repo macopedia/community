@@ -2,12 +2,6 @@
 
 namespace Macopedia\Community\Controller;
 
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Core\Core\Environment;
 /***************************************************************
  *  Copyright notice
  *
@@ -32,21 +26,26 @@ use TYPO3\CMS\Core\Core\Environment;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\Album;
+use Macopedia\Community\Domain\Model\Photo;
 use Macopedia\Community\Domain\Model\Relation;
 use Macopedia\Community\Domain\Model\User;
-use Macopedia\Community\Domain\Model\Photo;
-use Macopedia\Community\Domain\Model\Album;
-use Macopedia\Community\Service\RepositoryServiceInterface;
-use Macopedia\Community\Service\Access\AccessServiceInterface;
-use Macopedia\Community\Service\SettingsService;
-use Macopedia\Community\Service\Notification\NotificationServiceInterface;
 use Macopedia\Community\Exception\UnexpectedException;
+use Macopedia\Community\Service\Access\AccessServiceInterface;
+use Macopedia\Community\Service\Notification\NotificationServiceInterface;
+use Macopedia\Community\Service\RepositoryServiceInterface;
+use Macopedia\Community\Service\SettingsService;
+use TYPO3\CMS\Core\Core\Environment;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * A base controller that implements basic functions that are needed
  * all over the project. Holds the requested and requesting user.
- *
  */
 class BaseController extends ActionController
 {
@@ -55,14 +54,14 @@ class BaseController extends ActionController
      *
      * @var User
      */
-    protected $requestedUser = null;
+    protected $requestedUser;
 
     /**
      * The requesting user. Normally the logged in fe_user
      *
      * @var User
      */
-    protected $requestingUser = null;
+    protected $requestingUser;
 
     /**
      * Repository service. Get all your repositories with it.
@@ -90,12 +89,12 @@ class BaseController extends ActionController
 
     /**
      * If we have already benn redirected, don't show the flash messages
-     * @var boolean
+     * @var bool
      */
     protected static $redirected = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $accessDenied;
 
@@ -114,11 +113,11 @@ class BaseController extends ActionController
 
         if ($this->settings['debug']) {
             $this->addFlashMessage(
-                'Controller: ' . $controllerName . "<br />" .
-                'ActionName: ' . $actionName . "<br />" .
-                'resourceName: ' . $resourceName . "<br />" .
-                ($this->getRequestingUser() ? "RequestingUser: " . htmlspecialchars($this->getRequestingUser()->getName(), ENT_QUOTES | ENT_HTML401) : '') . "<br />" .
-                ($this->getRequestedUser() ? "RequestedUser: " . htmlspecialchars($this->getRequestedUser()->getName(), ENT_QUOTES | ENT_HTML401) : '') . "<br />" .
+                'Controller: ' . $controllerName . '<br />' .
+                'ActionName: ' . $actionName . '<br />' .
+                'resourceName: ' . $resourceName . '<br />' .
+                ($this->getRequestingUser() ? 'RequestingUser: ' . htmlspecialchars($this->getRequestingUser()->getName(), ENT_QUOTES | ENT_HTML401) : '') . '<br />' .
+                ($this->getRequestedUser() ? 'RequestedUser: ' . htmlspecialchars($this->getRequestedUser()->getName(), ENT_QUOTES | ENT_HTML401) : '') . '<br />' .
                 'AccesType: ' . $this->accessService->getAccessType($this->getRequestingUser(), $this->getRequestedUser()),
                 'Debug',
                 FlashMessage::INFO
@@ -129,13 +128,13 @@ class BaseController extends ActionController
             //access denied
             if ($this->settings['debug']) {
                 $this->addFlashMessage(
-                    "You do not have permission (" . $this->hasAccess($resourceName) .
-                    ") to access  resource: " . $resourceName .
-                    ", ActionName: " . $actionName .
-                    ($this->getRequestingUser() ? ", RequestingUser: " . $this->getRequestingUser()->getUid() : "") .
-                    ($this->getRequestedUser() ? ", RequestedUser:" . $this->getRequestedUser()->getUid() : "") .
-                    ", AccesType: " . $this->accessService->getAccessType($this->getRequestingUser(), $this->getRequestedUser()),
-                    "Debug",
+                    'You do not have permission (' . $this->hasAccess($resourceName) .
+                    ') to access  resource: ' . $resourceName .
+                    ', ActionName: ' . $actionName .
+                    ($this->getRequestingUser() ? ', RequestingUser: ' . $this->getRequestingUser()->getUid() : '') .
+                    ($this->getRequestedUser() ? ', RequestedUser:' . $this->getRequestedUser()->getUid() : '') .
+                    ', AccesType: ' . $this->accessService->getAccessType($this->getRequestingUser(), $this->getRequestedUser()),
+                    'Debug',
                     FlashMessage::WARNING
                 );
             }
@@ -146,7 +145,6 @@ class BaseController extends ActionController
     /**
      * Prepare view - assign requestedUser and requestingUser
      * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
-     * @return void
      */
     protected function initializeView(ViewInterface $view)
     {
@@ -158,12 +156,11 @@ class BaseController extends ActionController
 
     /**
      * Doesn't call action method if no access, otherwise acts normally
-     * @return void
      */
     protected function callActionMethod()
     {
         if ($this->accessDenied) {
-            $this->response->appendContent("");
+            $this->response->appendContent('');
         } else {
             parent::callActionMethod();
         }
@@ -174,7 +171,6 @@ class BaseController extends ActionController
      * Function is used to override the merge of settings via TS & flexforms
      *
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface An instance of the Configuration Manager
-     * @return void
      */
     public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {
@@ -229,12 +225,11 @@ class BaseController extends ActionController
      * To avoid security mistakes we check arguments (like tx_community['foo']=88) in a
      * specific order and the first one that is set is the only one taken into account later on.
      * TODO: hook in this function
-     * @return void
      * @throws UnexpectedException
      */
     protected function fetchRequestedUserFromRequestArguments()
     {
-        $argumentsPriority = array('photo', 'album', 'relation', 'user');
+        $argumentsPriority = ['photo', 'album', 'relation', 'user'];
         $foundUser = false;
         foreach ($argumentsPriority as $argument) {
             if ($foundUser) {
@@ -287,8 +282,6 @@ class BaseController extends ActionController
      * After we run this function, we know that both
      * $this->requestingUser and $this->requestedUser are set,
      * unless there is no requesting and requested user.
-     *
-     * @return void
      */
     protected function findRequestedAndRequestingUser()
     {
@@ -346,7 +339,7 @@ class BaseController extends ActionController
      * @param array $arguments
      * @return string
      */
-    protected function _($key, $arguments = array())
+    protected function _($key, $arguments = [])
     {
         $translation = LocalizationUtility::translate($key, $this->extensionName, $arguments);
         return !empty($translation) ? $translation : '';
@@ -355,7 +348,7 @@ class BaseController extends ActionController
     /**
      * Check if the user is on his own profile
      *
-     * @return boolean
+     * @return bool
      */
     protected function ownProfile()
     {
@@ -366,7 +359,7 @@ class BaseController extends ActionController
      * Checks if a user or visitor has the right to view a $resource
      *
      * @param string $resource
-     * @return boolean
+     * @return bool
      */
     public function hasAccess($resource)
     {
@@ -392,7 +385,7 @@ class BaseController extends ActionController
      */
     protected function redirectToUser(User $user)
     {
-        $this->redirect(null, null, null, array('user' => $user), ($this->settings['profilePage'] ? $this->settings['profilePage'] : $GLOBALS['TSFE']->id));
+        $this->redirect(null, null, null, ['user' => $user], ($this->settings['profilePage'] ? $this->settings['profilePage'] : $GLOBALS['TSFE']->id));
     }
 
     /**
@@ -402,7 +395,7 @@ class BaseController extends ActionController
      */
     protected function redirectToWall(User $user)
     {
-        $this->redirect(null, null, null, array('user' => $user), ($this->settings['wallPage'] ? $this->settings['wallPage'] : $GLOBALS['TSFE']->id));
+        $this->redirect(null, null, null, ['user' => $user], ($this->settings['wallPage'] ? $this->settings['wallPage'] : $GLOBALS['TSFE']->id));
     }
 
     /**
@@ -412,7 +405,7 @@ class BaseController extends ActionController
      * @param string $property
      * @param string $uploadDir upload directory
      * @param string $types file extension
-     * @param integer $maxSize maximal size in byte
+     * @param int $maxSize maximal size in byte
      * @return string file name|integer error number if something goes wrong
      */
     protected function handleUpload($property, $uploadDir, $types = 'jpg,gif,png', $maxSize = 1048576)
@@ -429,11 +422,11 @@ class BaseController extends ActionController
                 $sizePath = $sizePath[$segment];
             }
             if ($namePath !== null && $namePath !== '') {
-                $fileArray = array(
+                $fileArray = [
                     'name' => $namePath,
                     'tmp' => $tmpPath,
                     'size' => $sizePath,
-                );
+                ];
             } else {
                 return 1;
             }
@@ -454,9 +447,8 @@ class BaseController extends ActionController
         }
         if (GeneralUtility::upload_copy_move($fileArray['tmp'], Environment::getPublicPath() . '/' . $uploadDir . $fileArray['name'])) {
             return $fileArray['name'];
-        } else {
-            return 4;
         }
+        return 4;
     }
 
     /**
@@ -464,7 +456,7 @@ class BaseController extends ActionController
      * Adds/updates album and adds photo to repo, you dont need to care about it
      *
      * @param Photo $newPhoto
-     * @param integer $albumType like Album::ALBUM_TYPE_AVATAR
+     * @param int $albumType like Album::ALBUM_TYPE_AVATAR
      */
     protected function photoToSpecialAlbum(Photo $newPhoto, $albumType)
     {
@@ -482,7 +474,6 @@ class BaseController extends ActionController
         $this->repositoryService->get('photo')->add($newPhoto);
     }
 
-
     protected function redirect($actionName, $controllerName = null, $extensionName = null, array $arguments = null, $pageUid = null, $delay = 0, $statusCode = 303)
     {
         BaseController::$redirected = true;
@@ -493,7 +484,7 @@ class BaseController extends ActionController
      * If there were validation errors, we don't want to write details like
      * "An error occurred while trying to call UserController->updateAction()"
      *
-     * @return string|boolean The flash message or FALSE if no flash message should be set
+     * @return string|bool The flash message or FALSE if no flash message should be set
      */
     protected function getErrorFlashMessage()
     {

@@ -33,14 +33,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class WallService extends BaseHandler
 {
     /**
      * @param  array $arguments
      * @param  array $configuration
-     * @return void
      */
     public function send(array $arguments, array $configuration)
     {

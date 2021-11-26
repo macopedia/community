@@ -79,7 +79,7 @@ abstract class AbstractObservableEntity extends AbstractEntity implements Observ
      */
     public function detach(ObserverInterface $observer)
     {
-        $this->observers = array_diff($this->observers, array($observer));
+        $this->observers = array_diff($this->observers, [$observer]);
     }
 
     /**

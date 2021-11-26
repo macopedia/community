@@ -4,8 +4,8 @@ namespace Macopedia\Community\Service\Cache;
 
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory;
 
 /***************************************************************
  *  Copyright notice
@@ -39,7 +39,6 @@ class EnetCacheService implements CacheServiceInterface, SingletonInterface
      */
     protected static $cacheHandler;
 
-
     /**
      * The datamap factory
      *
@@ -67,7 +66,7 @@ class EnetCacheService implements CacheServiceInterface, SingletonInterface
      * @param mixed $content
      * @param array $identifier
      * @param array $tags
-     * @param integer $lifetime
+     * @param int $lifetime
      */
     public function set($content, array $identifier, array $tags, $lifetime = 86400)
     {
@@ -112,14 +111,13 @@ class EnetCacheService implements CacheServiceInterface, SingletonInterface
         $map = $this->dataMapFactory->buildDataMap(get_class($entity));
         $tableName = $map->getTableName();
 
-        $tags = array(
+        $tags = [
             $tableName . '_' . $entity->getUid(),
-        );
+        ];
         $this->drop($tags);
     }
 
     /**
-     *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object
      */
     public function getTagsForEntity(AbstractEntity $object)
@@ -127,9 +125,9 @@ class EnetCacheService implements CacheServiceInterface, SingletonInterface
         $map = $this->dataMapFactory->buildDataMap(get_class($object));
         $tableName = $map->getTableName();
 
-        $tags = array(
-            $tableName, $tableName . '_' . $object->getUid()
-        );
+        $tags = [
+            $tableName, $tableName . '_' . $object->getUid(),
+        ];
 
         return $tags;
     }

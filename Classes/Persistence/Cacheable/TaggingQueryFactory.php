@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\Persistence\Cacheable;
 
-use TYPO3\CMS\Extbase\Persistence\Generic\QueryFactory;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryFactory;
 
 /***************************************************************
  *  Copyright notice

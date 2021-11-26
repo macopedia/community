@@ -57,7 +57,7 @@ class CacheObserverTest extends UnitTestCase
      */
     public function updateDropsTags()
     {
-        $this->cacheService->expects($this->once())->method('dropTagsForEntity');
+        $this->cacheService->expects(self::once())->method('dropTagsForEntity');
         $this->observer->injectCacheService($this->cacheService);
 
         $this->observer->update($this->observable);
@@ -68,7 +68,7 @@ class CacheObserverTest extends UnitTestCase
      */
     public function updateRemovesObservable()
     {
-        $this->observable->expects($this->once())->method('detach');
+        $this->observable->expects(self::once())->method('detach');
         $this->observer->injectCacheService($this->cacheService);
 
         $this->observer->update($this->observable);

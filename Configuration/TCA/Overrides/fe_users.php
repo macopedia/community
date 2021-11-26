@@ -5,115 +5,115 @@ if (!defined('TYPO3_MODE')) {
 }
 
 // extend fe_users
-$feUserColumns = array(
-    'political_view' => array(
+$feUserColumns = [
+    'political_view' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.politicalView',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'religious_view' => array(
+            'rows' => 5,
+        ],
+    ],
+    'religious_view' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.religiousView',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'activities' => array(
+            'rows' => 5,
+        ],
+    ],
+    'activities' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.activities',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'interests' => array(
+            'rows' => 5,
+        ],
+    ],
+    'interests' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.interests',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'music' => array(
+            'rows' => 5,
+        ],
+    ],
+    'music' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.music',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'movies' => array(
+            'rows' => 5,
+        ],
+    ],
+    'movies' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.movies',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'books' => array(
+            'rows' => 5,
+        ],
+    ],
+    'books' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.books',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'quotes' => array(
+            'rows' => 5,
+        ],
+    ],
+    'quotes' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.quotes',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'about_me' => array(
+            'rows' => 5,
+        ],
+    ],
+    'about_me' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.aboutMe',
-        'config' => array(
+        'config' => [
             'type' => 'text',
             'cols' => 30,
-            'rows' => 5
-        )
-    ),
-    'cellphone' => array(
+            'rows' => 5,
+        ],
+    ],
+    'cellphone' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.cellphone',
-        'config' => array(
+        'config' => [
             'type' => 'input',
-            'width' => 30
-        )
-    ),
-    'gender' => array(
+            'width' => 30,
+        ],
+    ],
+    'gender' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender',
-        'config' => array(
+        'config' => [
             'type' => 'radio',
             'items' => [
                 [
                     'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.0',
-                    '0'
+                    '0',
                 ],
                 [
                     'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.gender.1',
-                    '1'
-                ]
+                    '1',
+                ],
             ],
-        )
-    ),
+        ],
+    ],
 
-    'date_of_birth' => array(
+    'date_of_birth' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.dateOfBirth',
         'config' => [
@@ -121,12 +121,12 @@ $feUserColumns = array(
             'renderType' => 'inputDateTime',
             'eval' => 'datetime',
             'default' => 0,
-        ]
-    ),
-    'profile_image' => array(
+        ],
+    ],
+    'profile_image' => [
         'exclude' => 1,
         'label' => 'LLL:EXT:community/Resources/Private/Language/locallang.xml:profile.details.profileImage',
-        'config' => array(
+        'config' => [
             'type' => 'group',
             'internal_type' => 'file',
             'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
@@ -135,10 +135,10 @@ $feUserColumns = array(
             'show_thumbs' => '1',
             'size' => '1',
             'maxitems' => '1',
-            'minitems' => '0'
-        )
-    ),
-);
+            'minitems' => '0',
+        ],
+    ],
+];
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('fe_users', $feUserColumns);
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCATypes('fe_users', 'gender', '', 'after:name');

@@ -2,7 +2,7 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
-use TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper;
+use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Service\RepositoryServiceInterface;
 /***************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ use Macopedia\Community\Service\RepositoryServiceInterface;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
+use TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper;
 
 /**
  * Checks if there are new messages to user1 from user2
@@ -64,8 +64,7 @@ class UnreadMessagesViewHelper extends IfViewHelper
     {
         if ($this->repositoryService->get('message')->findOneNewBetweenUsers($recipient, $sender)) {
             return $this->renderThenChild();
-        } else {
-            return $this->renderElseChild();
         }
+        return $this->renderElseChild();
     }
 }

@@ -2,8 +2,11 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
+use Macopedia\Community\Domain\Model\Message;
+use Macopedia\Community\Domain\Model\User;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,9 +31,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\Message;
-use Macopedia\Community\Domain\Model\User;
-
 class MessageRepository extends Repository
 {
     /**
@@ -45,7 +45,7 @@ class MessageRepository extends Repository
         return $query->matching(
             $query->logicalAnd([$query->equals('sender', $user), $query->equals('senderDeleted', false)])
         )->setOrderings(
-            array('sentDate' => QueryInterface::ORDER_DESCENDING)
+            ['sentDate' => QueryInterface::ORDER_DESCENDING]
         )->execute();
     }
 
@@ -61,7 +61,7 @@ class MessageRepository extends Repository
         return $query->matching(
             $query->logicalAnd([$query->equals('recipient', $user), $query->equals('recipientDeleted', false)])
         )->setOrderings(
-            array('sentDate' => QueryInterface::ORDER_DESCENDING)
+            ['sentDate' => QueryInterface::ORDER_DESCENDING]
         )->execute();
     }
 
@@ -93,7 +93,7 @@ class MessageRepository extends Repository
         $query->matching(
             $query->logicalOr([$query->logicalAnd([$query->equals('sender', $user1), $query->equals('senderDeleted', false), $query->equals('recipient', $user2)]), $query->logicalAnd([$query->equals('sender', $user2), $query->equals('recipient', $user1), $query->equals('recipientDeleted', false)])])
         );
-        $query->setOrderings(array('sentDate' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['sentDate' => QueryInterface::ORDER_ASCENDING]);
         return $query->execute();
     }
 
@@ -109,7 +109,7 @@ class MessageRepository extends Repository
         $query->matching(
             $query->logicalOr([$query->logicalAnd([$query->equals('sender', $user1), $query->equals('senderDeleted', false), $query->equals('recipient', $user2)]), $query->logicalAnd([$query->equals('sender', $user2), $query->equals('recipient', $user1), $query->equals('senderDeleted', false)])])
         );
-        $query->setOrderings(array('sentDate' => QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(['sentDate' => QueryInterface::ORDER_ASCENDING]);
         return $query->execute();
     }
 
@@ -124,7 +124,7 @@ class MessageRepository extends Repository
         $query->matching(
             $query->logicalOr([$query->logicalAnd([$query->equals('sender', $user1), $query->equals('senderDeleted', false), $query->equals('recipient', $user2)]), $query->logicalAnd([$query->equals('sender', $user2), $query->equals('recipient', $user1), $query->equals('recipientDeleted', false)])])
         );
-        $query->setOrderings(array('sentDate' => QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(['sentDate' => QueryInterface::ORDER_DESCENDING]);
         return $query->execute()->getFirst();
     }
 
@@ -159,7 +159,6 @@ class MessageRepository extends Repository
      * Deletes all (sent, receved...) messages for given user - useful when we delete him
      *
      * @param User $user
-     * @return void
      */
     public function deleteAllForUser(User $user)
     {

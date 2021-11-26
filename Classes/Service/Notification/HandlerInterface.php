@@ -31,7 +31,6 @@ namespace Macopedia\Community\Service\Notification;
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 interface HandlerInterface
 {
@@ -39,7 +38,6 @@ interface HandlerInterface
      * @abstract
      * @param  Notification $notification
      * @param  array $configuration
-     * @return void
      */
     public function send(Notification $notification, array $configuration);
 }

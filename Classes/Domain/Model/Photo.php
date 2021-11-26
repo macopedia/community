@@ -51,7 +51,6 @@ class Photo extends AbstractEntity
 
     /**
      * @param string $image
-     * @return void
      */
     public function setImage($image)
     {
@@ -66,10 +65,8 @@ class Photo extends AbstractEntity
         return $this->image;
     }
 
-
     /**
      * @param \Macopedia\Community\Domain\Model\Album $album
-     * @return void
      */
     public function setAlbum($album)
     {

@@ -62,17 +62,15 @@ class SameUserViewHelper extends AbstractConditionViewHelper
             || ($requestingUser === null && $requestedUser === null)
         ) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function render()
     {
         if (static::evaluateCondition($this->arguments)) {
             return $this->renderThenChild();
-        } else {
-            return $this->renderElseChild();
         }
+        return $this->renderElseChild();
     }
 }

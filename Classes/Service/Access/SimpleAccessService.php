@@ -26,8 +26,8 @@ namespace Macopedia\Community\Service\Access;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Domain\Model\Relation;
+use Macopedia\Community\Domain\Model\User;
 
 /**
  * A simple access helper.
@@ -99,7 +99,7 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      * @param User $requestingUser
      * @param User $requestedUser
      * @param string $resource
-     * @return boolean
+     * @return bool
      */
     public function hasAccess(
         User $requestingUser = null,
@@ -117,15 +117,14 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      * Check if the user is on his own profile
      * @param User $requestingUser
      * @param User $requestedUser
-     * @return boolean
+     * @return bool
      */
     public function sameUser($requestingUser, $requestedUser)
     {
         if ($requestingUser) {
             return $requestingUser->getUid() == $requestedUser->getUid();
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -158,7 +157,6 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
         $this->settingsService = $settingsService;
     }
 
-
     /**
      * Get the access type.
      *
@@ -177,9 +175,8 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
         if ($requestingUser === null) {
             if ($requestedUser === null) {
                 return self::ACCESS_PUBLIC;
-            } else {
-                return self::ACCESS_NOBODY;
             }
+            return self::ACCESS_NOBODY;
         }
         // second case: friends
         if ($requestingUser != null && $requestedUser != null) {
@@ -198,11 +195,11 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      *
      * @param string $type e.g. "friend"
      * @param string $resource
-     * @return boolean
+     * @return bool
      */
     protected function typeHasAccessToResource($type, $resource)
     {
-        $resourcePath = array_merge(array($type), explode('.', $resource));
+        $resourcePath = array_merge([$type], explode('.', $resource));
         $settings = $this->settingsService->get();
         $value = $this->traverseResourcePath($settings['accessRules'], $resourcePath);
         return $value == 1;

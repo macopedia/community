@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\Hook;
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -31,8 +31,6 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
  ***************************************************************/
 /**
  * Class called by hooks in TCEmain
- *
- *
  */
 class Tcemain
 {
@@ -44,7 +42,6 @@ class Tcemain
      * @param int $id Record uid of the updated record
      * @param mixed $value
      * @param \TYPO3\CMS\Core\DataHandling\DataHandler &$pObj reference to parent object
-     * @return void
      */
     public function processCmdmap_postProcess($command, $table, $id, $value, DataHandler &$pObj)
     {
@@ -70,10 +67,9 @@ class Tcemain
         }
     }
 
-
     protected function getCmdMapToDeleteRelations($userId)
     {
-        $cmdmap = array();
+        $cmdmap = [];
         $relations = $this->getRelations($userId);
         foreach ($relations as $relation) {
             $cmdmap['tx_community_domain_model_relation'][$relation['uid']]['delete'] = true;
@@ -83,14 +79,13 @@ class Tcemain
 
     protected function getCmdMapToDeleteWallPosts($userId)
     {
-        $cmdmap = array();
+        $cmdmap = [];
         $wallPosts = $this->getWallPosts($userId);
         foreach ($wallPosts as $wallPost) {
             $cmdmap['tx_community_domain_model_relation'][$wallPost['uid']]['delete'] = true;
         }
         return $cmdmap;
     }
-
 
     /**
      * Hides relations after hiding a user
@@ -103,7 +98,7 @@ class Tcemain
     public function processDatamap_postProcessFieldArray($status, $table, $id, $fieldArray, &$pObj)
     {
         if ($status === 'update' && $table === 'fe_users' && $fieldArray['disable'] == 1 && is_int($id)) {
-            $dataArr = array();
+            $dataArr = [];
 
             $relations = $this->getRelations($id);
             foreach ($relations as $relation) {
@@ -116,7 +111,7 @@ class Tcemain
             }
 
             $tce = GeneralUtility::makeInstance('\TYPO3\CMS\Core\DataHandling\DataHandler');
-            $tce->start($dataArr, array());
+            $tce->start($dataArr, []);
 
             $GLOBALS['TYPO3_DB']->sql_query('START TRANSACTION');
             $tce->process_datamap();

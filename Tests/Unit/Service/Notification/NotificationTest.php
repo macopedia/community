@@ -2,7 +2,7 @@
 
 namespace Macopedia\Community\Tests\Unit\Service\Notification;
 
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use Macopedia\Community\Service\Notification\Notification;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,14 +27,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Service\Notification\Notification;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test for the notification class
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class NotificationTest extends UnitTestCase
 {
@@ -51,11 +50,11 @@ class NotificationTest extends UnitTestCase
     public function magicMethodsTest()
     {
         $this->notification->setRelation('some string');
-        $this->assertEquals('some string', $this->notification->getRelation());
+        self::assertEquals('some string', $this->notification->getRelation());
 
         $this->notification->setRule('ruleName'); //existing property
-        $this->assertEquals('ruleName', $this->notification->getRule());
+        self::assertEquals('ruleName', $this->notification->getRule());
 
-        $this->assertEquals(null, $this->notification->getNotSetbeforeProperty());
+        self::assertNull($this->notification->getNotSetbeforeProperty());
     }
 }

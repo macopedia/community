@@ -2,12 +2,12 @@
 
 namespace Macopedia\Community\Service\Notification;
 
+use Macopedia\Community\Service\SettingsService;
+use TYPO3\CMS\Core\Log\LogLevel;
+use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Log\LogManager;
-use TYPO3\CMS\Core\Log\LogLevel;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-use Macopedia\Community\Service\SettingsService;
 
 /***************************************************************
  *  Copyright notice
@@ -50,7 +50,6 @@ class NotificationService implements NotificationServiceInterface, SingletonInte
      */
     protected $settingsService;
 
-
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
@@ -59,7 +58,6 @@ class NotificationService implements NotificationServiceInterface, SingletonInte
     /**
      * Iterate through settings and send message using appropriate handler (mail/wall/PM/....)
      * @param Notification $notification used by handlers
-     * @return void
      */
     public function notify(Notification $notification)
     {

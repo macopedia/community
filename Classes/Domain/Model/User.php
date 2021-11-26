@@ -2,11 +2,11 @@
 
 namespace Macopedia\Community\Domain\Model;
 
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
-use Macopedia\Community\Domain\Model\Observer\ObservableInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Macopedia\Community\Domain\Model\Observer\CacheObserver;
+use Macopedia\Community\Domain\Model\Observer\ObservableInterface;
 use Macopedia\Community\Domain\Model\Observer\ObserverInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 
 /***************************************************************
  *  Copyright notice
@@ -110,7 +110,6 @@ class User extends FrontendUser implements ObservableInterface
      * Sets the name value
      *
      * @param string $name
-     * @return void
      */
     public function setName($name)
     {
@@ -132,7 +131,6 @@ class User extends FrontendUser implements ObservableInterface
      * Sets the firstName value
      *
      * @param string $firstName
-     * @return void
      */
     public function setFirstName($firstName)
     {
@@ -143,7 +141,6 @@ class User extends FrontendUser implements ObservableInterface
      * Sets the middleName value
      *
      * @param string $middleName
-     * @return void
      */
     public function setMiddleName($middleName)
     {
@@ -154,7 +151,6 @@ class User extends FrontendUser implements ObservableInterface
      * Sets the lastName value
      *
      * @param string $lastName
-     * @return void
      */
     public function setLastName($lastName)
     {
@@ -162,7 +158,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getPoliticalView()
@@ -171,9 +166,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $politicalView
-     * @return void
      */
     public function setPoliticalView($politicalView)
     {
@@ -181,7 +174,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getReligiousView()
@@ -190,9 +182,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $religiousView
-     * @return void
      */
     public function setReligiousView($religiousView)
     {
@@ -200,7 +190,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getActivities()
@@ -209,9 +198,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $activities
-     * @return void
      */
     public function setActivities($activities)
     {
@@ -219,7 +206,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getInterests()
@@ -228,9 +214,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $interests
-     * @return void
      */
     public function setInterests($interests)
     {
@@ -238,7 +222,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getMusic()
@@ -247,9 +230,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $music
-     * @return void
      */
     public function setMusic($music)
     {
@@ -257,7 +238,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getMovies()
@@ -266,9 +246,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $movies
-     * @return void
      */
     public function setMovies($movies)
     {
@@ -276,7 +254,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getBooks()
@@ -285,9 +262,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $books
-     * @return void
      */
     public function setBooks($books)
     {
@@ -295,7 +270,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getQuotes()
@@ -304,9 +278,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $quotes
-     * @return void
      */
     public function setQuotes($quotes)
     {
@@ -314,7 +286,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getAboutMe()
@@ -323,9 +294,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $aboutMe
-     * @return void
      */
     public function setAboutMe($aboutMe)
     {
@@ -333,7 +302,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return string
      */
     public function getCellphone()
@@ -342,9 +310,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param $cellphone
-     * @return void
      */
     public function setCellphone($cellphone)
     {
@@ -352,9 +318,7 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param int $gender
-     * @return void
      */
     public function setGender($gender)
     {
@@ -370,7 +334,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @return \DateTime
      */
     public function getDateOfBirth()
@@ -379,7 +342,6 @@ class User extends FrontendUser implements ObservableInterface
     }
 
     /**
-     *
      * @param \DateTime $dateOfBirth
      */
     public function setDateOfBirth(\DateTime $dateOfBirth = null)
@@ -389,7 +351,7 @@ class User extends FrontendUser implements ObservableInterface
 
     /**
      * Counts age from date of birth
-     * @return integer
+     * @return int
      */
     public function getAge()
     {
@@ -417,7 +379,6 @@ class User extends FrontendUser implements ObservableInterface
     {
         $this->attach($cacheObserver);
     }
-
 
     /**
      * Overrides the normal _isDirty function and notifies the observers if something has changed
@@ -460,7 +421,7 @@ class User extends FrontendUser implements ObservableInterface
      */
     public function detach(ObserverInterface $observer)
     {
-        $this->observers = array_diff($this->observers, array($observer));
+        $this->observers = array_diff($this->observers, [$observer]);
     }
 
     /**

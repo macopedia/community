@@ -2,7 +2,7 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
+use Macopedia\Community\Domain\Model\User;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
@@ -28,7 +28,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class WallPostRepository extends Repository
 {
@@ -42,7 +42,7 @@ class WallPostRepository extends Repository
     {
         $query = $this->createQuery();
         return $query->matching($query->equals('recipient', $user))
-            ->setOrderings(array('crdate' => QueryInterface::ORDER_DESCENDING))
+            ->setOrderings(['crdate' => QueryInterface::ORDER_DESCENDING])
             ->execute();
     }
 
@@ -50,7 +50,6 @@ class WallPostRepository extends Repository
      * Deletes  all (sent,receved...) wall posts for given user - useful when we delete him
      *
      * @param User $user
-     * @return void
      */
     public function deleteAllForUser(User $user)
     {

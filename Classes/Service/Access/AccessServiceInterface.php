@@ -47,7 +47,7 @@ interface AccessServiceInterface
      * @param User $requestingUser
      * @param User $requestedUser
      * @param string $resource
-     * @return boolean
+     * @return bool
      */
     public function hasAccess(
         User $requestingUser = null,

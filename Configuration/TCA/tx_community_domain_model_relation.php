@@ -2,9 +2,8 @@
 
 defined('TYPO3_MODE') or die();
 
-
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation',
         'label' => 'initiating_user',
         'label_alt' => 'requested_user, status',
@@ -12,75 +11,75 @@ return array(
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
-        'enablecolumns' => array(
-            'disabled' => 'hidden'
-        ),
-        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_relation.gif'
-    ),
-    'interface' => array(
-        'showRecordFieldList' => 'initiating_user,requested_user,initiation_time,status'
-    ),
-    'types' => array(
-        '1' => array('showitem' => 'initiating_user,requested_user,initiation_time,status')
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => '')
-    ),
-    'columns' => array(
-        'hidden' => array(
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_relation.gif',
+    ],
+    'interface' => [
+        'showRecordFieldList' => 'initiating_user,requested_user,initiation_time,status',
+    ],
+    'types' => [
+        '1' => ['showitem' => 'initiating_user,requested_user,initiation_time,status'],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => array(
-                'type' => 'check'
-            )
-        ),
-        'initiating_user' => array(
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+        'initiating_user' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.initiating_user',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
                 'foreign_class' => 'Tx_Community_Domain_Model_User',
-                'maxitems' => 1
-            )
-        ),
-        'requested_user' => array(
+                'maxitems' => 1,
+            ],
+        ],
+        'requested_user' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.requested_user',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
                 'foreign_class' => 'Tx_Community_Domain_Model_User',
-                'maxitems' => 1
-            )
-        ),
-        'initiation_time' => array(
+                'maxitems' => 1,
+            ],
+        ],
+        'initiation_time' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.initiation_time',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime'
-            )
-        ),
-        'status' => array(
+                'renderType' => 'inputDateTime',
+            ],
+        ],
+        'status' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array(
-                    array('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.1', 1),
-                    array('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.2', 2),
-                    array('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.4', 4),
-                    array('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.8', 8)
-                ),
+                'items' => [
+                    ['LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.1', 1],
+                    ['LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.2', 2],
+                    ['LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.4', 4],
+                    ['LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_relation.status.8', 8],
+                ],
                 'size' => 1,
                 'maxitems' => 1,
-                'minitems' => 1
-            )
-        )
-    )
-);
+                'minitems' => 1,
+            ],
+        ],
+    ],
+];

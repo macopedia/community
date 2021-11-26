@@ -2,50 +2,49 @@
 
 defined('TYPO3_MODE') or die();
 
-
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_photo',
         'label' => 'image',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
-        ),
-        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_photo.gif'
-    ),
-    'interface' => array(
+        ],
+        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_photo.gif',
+    ],
+    'interface' => [
         'showRecordFieldList' => 'hidden, image',
-    ),
-    'types' => array(
-        '1' => array('showitem' => 'hidden,--palette--;;1,image,album'),
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-    'columns' => array(
-        'hidden' => array(
+    ],
+    'types' => [
+        '1' => ['showitem' => 'hidden,--palette--;;1,image,album'],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'image' => array(
+            ],
+        ],
+        'image' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_photo.image',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', ['uploadfolder' => 'uploads/tx_community/photos'], 'gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai'),
-        ),
-        'album' => array(
+        ],
+        'album' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_photo.album',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_community_domain_model_album',
-                'maxitems' => 1
-            ),
-        ),
-    ),
-);
+                'maxitems' => 1,
+            ],
+        ],
+    ],
+];

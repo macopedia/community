@@ -2,7 +2,7 @@
 
 namespace Macopedia\Community\Controller;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Macopedia\Community\Domain\Model\Message;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,8 +28,8 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  ***************************************************************/
 
 use Macopedia\Community\Domain\Model\User;
-use Macopedia\Community\Domain\Model\Message;
 use Macopedia\Community\Service\Notification\Notification;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * The controller for messages
@@ -111,8 +111,7 @@ class MessageController extends BaseController
     public function writeAction(
         User $user = null,
         Message $message = null
-    )
-    {
+    ) {
         if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
             return '';
         }
@@ -130,8 +129,7 @@ class MessageController extends BaseController
     public function writeThreadedAction(
         User $user = null,
         Message $message = null
-    )
-    {
+    ) {
         if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
             return '';
         }
@@ -152,9 +150,9 @@ class MessageController extends BaseController
         $this->request->setArgument('message', null);
 
         if ($this->request->getPluginName() == 'MessageBox') {
-            $this->redirect('read', null, null, array('user' => $message->getRecipient()));
+            $this->redirect('read', null, null, ['user' => $message->getRecipient()]);
         } elseif ($this->request->getPluginName() == 'ThreadedMessageWriteBox') {
-            $this->redirect('thread', null, null, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
+            $this->redirect('thread', null, null, ['user' => $message->getRecipient()], $this->settings['threadedMessagePage']);
         } else {
             $this->forward('write');
         }
@@ -251,7 +249,7 @@ class MessageController extends BaseController
         }
         $this->deleteMessage($message);
 
-        $this->redirect('thread', null, null, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
+        $this->redirect('thread', null, null, ['user' => $message->getRecipient()], $this->settings['threadedMessagePage']);
     }
 
     /**

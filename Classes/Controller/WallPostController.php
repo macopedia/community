@@ -2,9 +2,10 @@
 
 namespace Macopedia\Community\Controller;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Macopedia\Community\Domain\Model;
 use Macopedia\Community\Domain\Model\WallPost;
 use Macopedia\Community\Service\Notification\Notification;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,8 +29,6 @@ use Macopedia\Community\Service\Notification\Notification;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model;
-
 /**
  * Controller for the WallPost object
  *
@@ -41,7 +40,6 @@ class WallPostController extends BaseController
 {
     /**
      * Displays all WallPosts
-     *
      */
     public function listAction()
     {
@@ -65,7 +63,6 @@ class WallPostController extends BaseController
      * Creates a new WallPost and forwards to the list action.
      *
      * @param Model\WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
-     *
      */
     public function createAction(WallPost $newWallPost)
     {

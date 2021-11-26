@@ -27,6 +27,7 @@ use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 class Message extends AbstractObservableEntity
 {
     /**
@@ -86,7 +87,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->sender
      *
-     * @access public
      * @return \Macopedia\Community\Domain\Model\User
      */
     public function getSender()
@@ -98,7 +98,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->sender
      *
      * @param \Macopedia\Community\Domain\Model\User $value
-     * @access public
      */
     public function setSender($value)
     {
@@ -108,7 +107,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->recipient
      *
-     * @access public
      * @return \Macopedia\Community\Domain\Model\User
      */
     public function getRecipient()
@@ -120,7 +118,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->recipient
      *
      * @param \Macopedia\Community\Domain\Model\User $value
-     * @access public
      */
     public function setRecipient($value)
     {
@@ -130,7 +127,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->sent
      *
-     * @access public
      * @return bool
      */
     public function getSent()
@@ -142,7 +138,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->sent
      *
      * @param bool $value
-     * @access public
      */
     public function setSent($value)
     {
@@ -152,7 +147,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->read
      *
-     * @access public
      * @return bool
      */
     public function getRead()
@@ -164,7 +158,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->read
      *
      * @param bool $value
-     * @access public
      */
     public function setRead($value)
     {
@@ -174,7 +167,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->sentDate
      *
-     * @access public
      * @return \DateTime
      */
     public function getSentDate()
@@ -186,7 +178,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->sentDate
      *
      * @param \DateTime $value
-     * @access public
      */
     public function setSentDate($value)
     {
@@ -196,7 +187,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->readDate
      *
-     * @access public
      * @return \DateTime
      */
     public function getReadDate()
@@ -208,7 +198,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->readDate
      *
      * @param \DateTime $value
-     * @access public
      */
     public function setReadDate($value)
     {
@@ -218,7 +207,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->subject
      *
-     * @access public
      * @return string
      */
     public function getSubject()
@@ -230,7 +218,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->subject
      *
      * @param mixed $value
-     * @access public
      */
     public function setSubject($value)
     {
@@ -240,7 +227,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->message
      *
-     * @access public
      * @return string
      */
     public function getMessage()
@@ -252,7 +238,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->message
      *
      * @param string $value
-     * @access public
      */
     public function setMessage($value)
     {
@@ -262,7 +247,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->senderDeleted
      *
-     * @access public
      * @return bool
      */
     public function getSenderDeleted()
@@ -274,7 +258,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->senderDeleted
      *
      * @param bool $value
-     * @access public
      */
     public function setSenderDeleted($value)
     {
@@ -284,7 +267,6 @@ class Message extends AbstractObservableEntity
     /**
      * Get value of $this->recipientDeleted
      *
-     * @access public
      * @return bool
      */
     public function getRecipientDeleted()
@@ -296,7 +278,6 @@ class Message extends AbstractObservableEntity
      * Set the value of $this->recipientDeleted
      *
      * @param bool $value
-     * @access public
      */
     public function setRecipientDeleted($value)
     {

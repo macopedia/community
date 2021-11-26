@@ -55,7 +55,6 @@ class GroupHelper
             return true;
         }
 
-
         return $group->getAdmins()->contains($user);
     }
 

@@ -2,7 +2,7 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use Macopedia\Community\Domain\Model\Relation;
 use Macopedia\Community\Domain\Repository\RelationRepository;
 /***************************************************************
  *  Copyright notice
@@ -28,8 +28,7 @@ use Macopedia\Community\Domain\Repository\RelationRepository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\Relation;
-use Macopedia\Community\Domain\Model\User;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Returns the relaton between requestingUser and requestedUser
@@ -44,7 +43,6 @@ class RelationViewHelper extends AbstractViewHelper
      */
     protected $relationRepository;
 
-
     /**
      * Inject the repository
      *
@@ -55,11 +53,10 @@ class RelationViewHelper extends AbstractViewHelper
         $this->relationRepository = $relationRepository;
     }
 
-
     /**
      * returns the relation between 2 users. If the users are the same, return true, if there is no relation at all, return false
      *
-     * @return Relation|TRUE|FALSE
+     * @return Relation|true|false
      */
     public function render()
     {
@@ -71,9 +68,8 @@ class RelationViewHelper extends AbstractViewHelper
         $result = $this->relationRepository->findRelationBetweenUsers($requestingUser, $requestedUser);
         if ($result) {
             return $result;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function initializeArguments(): void

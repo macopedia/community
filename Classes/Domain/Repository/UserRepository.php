@@ -2,10 +2,10 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
+use Macopedia\Community\Domain\Model\User;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -29,7 +29,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Repository for User
@@ -49,7 +49,7 @@ class UserRepository extends Repository
     /**
      * Find the current user
      *
-     * @return User|NULL if user is not logged in
+     * @return User|null if user is not logged in
      */
     public function findCurrentUser()
     {
@@ -70,7 +70,7 @@ class UserRepository extends Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalOr([$query->like('name', '%' . str_replace(array('_', '%'), '', $word) . '%'), $query->like('username', '%' . str_replace(array('_', '%'), '', $word) . '%'), $query->equals('email', $word)])
+            $query->logicalOr([$query->like('name', '%' . str_replace(['_', '%'], '', $word) . '%'), $query->like('username', '%' . str_replace(['_', '%'], '', $word) . '%'), $query->equals('email', $word)])
         )->execute();
     }
 
@@ -92,11 +92,11 @@ class UserRepository extends Repository
 		")
         );
         $query->setOrderings(
-            array("(SELECT MAX(sent_date) FROM tx_community_domain_model_message m WHERE
+            ["(SELECT MAX(sent_date) FROM tx_community_domain_model_message m WHERE
 				(m.sender = fe_users.uid  AND m.recipient = {$user->getUid()} AND m.recipient_deleted=0)
 				OR
 				(m.recipient = fe_users.uid  AND m.sender = {$user->getUid()} AND m.sender_deleted=0)
-				)" => QueryInterface::ORDER_DESCENDING)
+				)" => QueryInterface::ORDER_DESCENDING]
         );
         return $query->execute();
     }
@@ -112,12 +112,12 @@ class UserRepository extends Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         //Helmut Hummel told me to do so ;)
-        if (in_array($orderBy, array('crdate', 'username')) && in_array($orderDirection, array(
+        if (in_array($orderBy, ['crdate', 'username']) && in_array($orderDirection, [
                 QueryInterface::ORDER_DESCENDING,
-                QueryInterface::ORDER_ASCENDING
-            ))
+                QueryInterface::ORDER_ASCENDING,
+            ])
         ) {
-            $query->setOrderings(array($orderBy => $orderDirection));
+            $query->setOrderings([$orderBy => $orderDirection]);
         }
         return $query->execute();
     }
@@ -137,12 +137,12 @@ class UserRepository extends Repository
         $query = $this->createQuery();
 
         //Helmut Hummel told me to do so ;)
-        if (in_array($orderBy, array('datetime', 'username')) && in_array($orderDirection, array(
+        if (in_array($orderBy, ['datetime', 'username']) && in_array($orderDirection, [
                 QueryInterface::ORDER_DESCENDING,
-                QueryInterface::ORDER_ASCENDING
-            ))
+                QueryInterface::ORDER_ASCENDING,
+            ])
         ) {
-            $query->setOrderings(array($orderBy => $orderDirection));
+            $query->setOrderings([$orderBy => $orderDirection]);
         }
 
         return $query->matching(
@@ -159,7 +159,7 @@ class UserRepository extends Repository
     public function findLatest($limit)
     {
         $query = $this->createQuery();
-        $query->setOrderings(array('uid' => QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(['uid' => QueryInterface::ORDER_DESCENDING]);
         return $query->setLimit($limit)->execute();
     }
 

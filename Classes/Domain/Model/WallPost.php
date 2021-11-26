@@ -2,8 +2,8 @@
 
 namespace Macopedia\Community\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /***************************************************************
  *  Copyright notice
@@ -63,7 +63,6 @@ class WallPost extends AbstractObservableEntity
      * Setter for sender
      *
      * @param \Macopedia\Community\Domain\Model\User $sender
-     * @return void
      */
     public function setSender($sender)
     {
@@ -84,7 +83,6 @@ class WallPost extends AbstractObservableEntity
      * Setter for recipient
      *
      * @param \Macopedia\Community\Domain\Model\User $recipient
-     * @return void
      */
     public function setRecipient($recipient)
     {
@@ -105,7 +103,6 @@ class WallPost extends AbstractObservableEntity
      * Setter for subject
      *
      * @param string $subject Subject
-     * @return void
      */
     public function setSubject($subject)
     {
@@ -126,7 +123,6 @@ class WallPost extends AbstractObservableEntity
      * Setter for message
      *
      * @param string $message message
-     * @return void
      */
     public function setMessage($message)
     {

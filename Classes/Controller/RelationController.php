@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\Controller;
 
-use TYPO3\CMS\Core\Messaging\FlashMessage;
-use Macopedia\Community\Exception\UnexpectedException;
-use Macopedia\Community\Service\Notification\Notification;
+use Macopedia\Community\Domain\Model\Relation;
+use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Exception;
 /***************************************************************
  *  Copyright notice
  *
@@ -29,9 +29,9 @@ use Macopedia\Community\Service\Notification\Notification;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
-use Macopedia\Community\Domain\Model\Relation;
-use Macopedia\Community\Exception;
+use Macopedia\Community\Exception\UnexpectedException;
+use Macopedia\Community\Service\Notification\Notification;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /**
  * The relation controller.
@@ -49,7 +49,7 @@ class RelationController extends BaseController
     {
         $relations = $this->repositoryService->get('relation')->findRelationsForUser($this->getRequestedUser(), $this->settings['relations']['listSome']['limit']);
         $relationNumber = $relations->count(); // TODO: this only counts until the limit is reached!
-        $users = array();
+        $users = [];
         foreach ($relations as $relation) {
             /* @var $relation Relation */
             if ($relation->getRequestedUser()->getUid() == $this->getRequestedUser()->getUid()) {
@@ -76,7 +76,6 @@ class RelationController extends BaseController
      *
      * @param User $user
      * @throws Exception\UnexpectedException
-     * @return void
      * @see Relation
      */
     public function requestAction(User $user)
@@ -124,7 +123,6 @@ class RelationController extends BaseController
      * @param Relation $relation
      * @param User $user user with who we want to be friends
      * @throws Exception\UnexpectedException
-     * @return void
      */
     protected function requestedExistingRelation(Relation $relation, User $user)
     {
@@ -176,12 +174,10 @@ class RelationController extends BaseController
         $this->redirectToUser($this->getRequestingUser());
     }
 
-
     /**
      * Reject a relation which hasn't been accepted yet
      *
      * @param Relation $relation
-     * @return void
      */
     public function rejectAction(Relation $relation)
     {
@@ -200,8 +196,6 @@ class RelationController extends BaseController
 
     /**
      * List all unconfirmed relations
-     *
-     * @return void
      */
     public function unconfirmedAction()
     {
@@ -209,11 +203,11 @@ class RelationController extends BaseController
             $this->view->assign(
                 'unconfirmedRelations',
                 $this->repositoryService->get('relation')->findUnconfirmedForUser(
-                $this->getRequestingUser()
-            )
+                    $this->getRequestingUser()
+                )
             );
         } else {
-            $this->view->assign('unconfirmedRelations', array());
+            $this->view->assign('unconfirmedRelations', []);
         }
     }
 
@@ -223,7 +217,6 @@ class RelationController extends BaseController
      * @param Relation $relation
      * @param User $user
      * @throws Exception\UnexpectedException
-     * @return void
      */
     public function cancelAction(Relation $relation = null, User $user = null)
     {
@@ -231,13 +224,13 @@ class RelationController extends BaseController
             if ($user !== null) {
                 $relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
             } else {
-                throw new UnexpectedException("One of the parameters must be set");
+                throw new UnexpectedException('One of the parameters must be set');
             }
         }
         if ($this->request->hasArgument('confirmCancel')) {
             $this->cancelRelation($relation);
             $requestedUser = $this->getRequestedUser();
-            $this->addFlashMessage($this->_('relation.cancel.success', array($requestedUser->getName())));
+            $this->addFlashMessage($this->_('relation.cancel.success', [$requestedUser->getName()]));
             $this->redirectToUser($requestedUser);
         }
     }
@@ -246,7 +239,6 @@ class RelationController extends BaseController
      * Confirm a relation and notify the initiating user
      *
      * @param Relation $relation
-     * @return void
      */
     protected function confirmRelation(Relation $relation)
     {
@@ -261,7 +253,6 @@ class RelationController extends BaseController
      * Reject a relation and notify the initiating user
      *
      * @param Relation $relation
-     * @return void
      */
     protected function rejectRelation(Relation $relation)
     {
@@ -273,7 +264,6 @@ class RelationController extends BaseController
      * Cancel a friend request and notify the initiating user
      *
      * @param Relation $relation
-     * @return void
      */
     protected function cancelFriendRequest(Relation $relation)
     {
@@ -287,7 +277,6 @@ class RelationController extends BaseController
      * an accepted relation gets cancelled by one of the users.
      *
      * @param Relation $relation
-     * @return void
      */
     protected function cancelRelation(Relation $relation)
     {
@@ -300,7 +289,6 @@ class RelationController extends BaseController
      * Send notification from requestingUser to requestedUser
      *
      * @param string $resourceName
-     * @return void
      */
     protected function notify($resourceName)
     {

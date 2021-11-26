@@ -2,8 +2,9 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use Macopedia\Community\Service\RepositoryServiceInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,8 +28,6 @@ use Macopedia\Community\Service\RepositoryServiceInterface;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-use Macopedia\Community\Domain\Model\User;
 
 /**
  * Shows the date of newest message between users

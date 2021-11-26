@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use Macopedia\Community\Domain\Model\Album;
 use Macopedia\Community\Domain\Model\User;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +28,7 @@ use Macopedia\Community\Domain\Model\User;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\Album;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * Repository for Macopedia\Community\Domain\Model\Album
@@ -37,7 +37,7 @@ class AlbumRepository extends Repository
 {
     public function initialize()
     {
-        $this->setDefaultOrderings(array('crdate' => QueryInterface::ORDER_DESCENDING));
+        $this->setDefaultOrderings(['crdate' => QueryInterface::ORDER_DESCENDING]);
         //requied in AlbumController->showMostRecentAction
     }
 
@@ -45,7 +45,7 @@ class AlbumRepository extends Repository
      * Finds albums by user and special
      *
      * @param \Macopedia\Community\Domain\Model\User $user The owner of album
-     * @param integer $albumType The type of special album
+     * @param int $albumType The type of special album
      * @return Album
      */
     public function findOneByUserAndType(User $user, $albumType)

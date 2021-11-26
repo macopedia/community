@@ -2,8 +2,8 @@
 
 namespace Macopedia\Community\Domain\Model\Observer;
 
-use TYPO3\CMS\Core\SingletonInterface;
 use Macopedia\Community\Service\Cache\CacheServiceInterface;
+use TYPO3\CMS\Core\SingletonInterface;
 
 /***************************************************************
  *  Copyright notice

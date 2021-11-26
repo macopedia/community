@@ -26,9 +26,9 @@ namespace Macopedia\Community\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Domain\Model\Album;
 use Macopedia\Community\Domain\Model\Photo;
+use Macopedia\Community\Domain\Model\User;
 
 /**
  * Controller for the User object
@@ -43,14 +43,12 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
     /**
      * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
      */
-    protected $staticCountryRepository = null;
+    protected $staticCountryRepository;
 
     /**
      * Injects the staticCountryRepository
      *
      * @param \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $repository repository to inject
-     *
-     * @return void
      */
     public function injectStaticCountryRepository(\SJBR\StaticInfoTables\Domain\Repository\CountryRepository $repository)
     {
@@ -62,13 +60,13 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
      */
     public function listAction()
     {
-        $users = array();
-        $groupId = intval($this->settings['userlist']['groupId']);
+        $users = [];
+        $groupId = (int)($this->settings['userlist']['groupId']);
         $orderBy = $this->settings['userlist']['orderBy'];
         $orderDirection = $this->settings['userlist']['orderDirection'];
-        $limit = intval($this->settings['userlist']['limit']);
-        $pagebrowser = intval($this->settings['userlist']['pagebrowser']);
-        $itemsPerPage = intval($this->settings['userlist']['itemsPerPage']);
+        $limit = (int)($this->settings['userlist']['limit']);
+        $pagebrowser = (int)($this->settings['userlist']['pagebrowser']);
+        $itemsPerPage = (int)($this->settings['userlist']['itemsPerPage']);
 
         switch ($this->settings['userlist']['whatToDisplay']) {
             case 'all':
@@ -150,7 +148,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
             'user.image',
             $this->settings['profile']['image']['prefix'],
             $this->settings['profile']['image']['types'],
-            intval($this->settings['profile']['image']['maxSize'])
+            (int)($this->settings['profile']['image']['maxSize'])
         );
         if (!is_int($imagePath)) {
             $user->setImage($imagePath);
@@ -162,10 +160,10 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
             $this->photoToSpecialAlbum($newPhoto, Album::ALBUM_TYPE_AVATAR);
 
             $this->addFlashMessage($this->_('profile.updateImage.success'));
-            $this->redirect('edit', 'User', null, array('user' => $user));
+            $this->redirect('edit', 'User', null, ['user' => $user]);
         } else {
             $this->addFlashMessage($this->_('profile.updateImage.error'), '', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
-            $this->redirect('editImage', 'User', null, array('user' => $user));
+            $this->redirect('editImage', 'User', null, ['user' => $user]);
         }
     }
 
@@ -219,7 +217,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
      */
     public function searchAction()
     {
-        $users = array();
+        $users = [];
         if ($this->request->hasArgument('searchWord') && $this->request->getArgument('searchWord') != '') {
             $word = $this->request->getArgument('searchWord');
             $users = $this->repositoryService->get('user')->searchByString($word);
@@ -229,7 +227,6 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
 
     /**
      * Give search box
-     *
      */
     public function searchBoxAction()
     {
@@ -256,7 +253,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
             $notification->setMessage($reason);
             $this->notificationService->notify($notification);
         }
-        $this->redirect('details', null, null, array('user' => $user));
+        $this->redirect('details', null, null, ['user' => $user]);
     }
 
     /**
@@ -267,12 +264,12 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
      */
     public function getIdentifier($request)
     {
-        $requestSettings = array(
+        $requestSettings = [
             'controller' => $request->getControllerName(),
             'action' => $request->getControllerActionName(),
-            'arguments' => $request->getArguments()
-        );
-        return array($this->settings, $requestSettings);
+            'arguments' => $request->getArguments(),
+        ];
+        return [$this->settings, $requestSettings];
     }
 
     /**

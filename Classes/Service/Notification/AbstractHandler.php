@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\Service\Notification;
 
+use Macopedia\Community\Service\RepositoryServiceInterface;
+use Macopedia\Community\Service\SettingsService;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -29,15 +29,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Service\RepositoryServiceInterface;
-use Macopedia\Community\Service\SettingsService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
  * Abstract notification handler
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 abstract class AbstractHandler implements HandlerInterface, SingletonInterface
 {
@@ -95,7 +94,6 @@ abstract class AbstractHandler implements HandlerInterface, SingletonInterface
      * @abstract
      * @param Notification $notification
      * @param array $configuration from plugin.tx_community.settings.notification.rules.XXX.YYY
-     * @return void
      */
     public function send(Notification $notification, array $configuration)
     {
@@ -129,6 +127,6 @@ abstract class AbstractHandler implements HandlerInterface, SingletonInterface
         $view->assign('plainText', true);
         $bodyPlain = $view->render();
 
-        return array('subject' => $subject, 'bodyHTML' => $bodyHTML, 'bodyPlain' => $bodyPlain);
+        return ['subject' => $subject, 'bodyHTML' => $bodyHTML, 'bodyPlain' => $bodyPlain];
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\ViewHelpers\Widget;
 
-use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper;
 use Macopedia\Community\ViewHelpers\Widget\Controller\PaginateController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper;
 
 /***************************************************************
  *  Copyright notice
@@ -52,7 +52,6 @@ class PaginateViewHelper extends AbstractWidgetViewHelper
      * Inject controller
      *
      * @param Controller\PaginateController $controller
-     * @return void
      */
     public function injectController(PaginateController $controller)
     {

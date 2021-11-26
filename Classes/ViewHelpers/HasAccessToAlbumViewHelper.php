@@ -27,13 +27,12 @@ namespace Macopedia\Community\ViewHelpers;
  ***************************************************************/
 
 use Macopedia\Community\Domain\Model\Album;
-use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Domain\Model\Relation;
+use Macopedia\Community\Domain\Model\User;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
  * Checks if the requestedUser and the requestingUser are the same.
- *
  */
 class HasAccessToAlbumViewHelper extends AbstractConditionViewHelper
 {
@@ -60,16 +59,14 @@ class HasAccessToAlbumViewHelper extends AbstractConditionViewHelper
             ($requestingUser && $relation && $relation->getStatus() === Relation::RELATION_STATUS_CONFIRMED && ($album->getPrivate() == 2)) //friends can see it
         ) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
     public function render()
     {
         if (static::evaluateCondition($this->arguments)) {
             return $this->renderThenChild();
-        } else {
-            return $this->renderElseChild();
         }
+        return $this->renderElseChild();
     }
 }

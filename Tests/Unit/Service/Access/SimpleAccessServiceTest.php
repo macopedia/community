@@ -45,10 +45,10 @@ class SimpleAccessServiceTest extends UnitTestCase
     public function hasAccessReturnsTrueForSameUser()
     {
         $stub = $this->getMock('User');
-        $stub->expects($this->any())
+        $stub->expects(self::any())
             ->method('getUid')
-            ->will($this->returnValue(1));
+            ->willReturn(1);
         $accessService = new SimpleAccessService();
-        $this->assertEquals(true, $accessService->hasAccess($stub, $stub));
+        self::assertTrue($accessService->hasAccess($stub, $stub));
     }
 }

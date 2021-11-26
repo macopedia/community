@@ -2,9 +2,9 @@
 
 namespace Macopedia\Community\Controller;
 
+use Macopedia\Community\Domain\Model;
 use Macopedia\Community\Domain\Model\Album;
 use Macopedia\Community\Domain\Model\Photo;
-use Macopedia\Community\Domain\Model\Relation;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +28,7 @@ use Macopedia\Community\Domain\Model\Relation;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model;
+use Macopedia\Community\Domain\Model\Relation;
 
 /**
  * Controller for the Photo object
@@ -39,7 +39,6 @@ class PhotoController extends BaseController
      * Displays a form for creating a new  Photo
      *
      * @param Model\Album $album album we create photo in
-     * @return void
      */
     public function newAction(Album $album)
     {
@@ -50,7 +49,6 @@ class PhotoController extends BaseController
      * Creates a new Photo and forwards to the list action.
      *
      * @param Model\Album $album album we create photo in
-     * @return void
      */
     public function createAction(Album $album)
     {
@@ -59,7 +57,7 @@ class PhotoController extends BaseController
             'newPhoto.image',
             $this->settings['album']['image']['prefix'],
             $this->settings['album']['image']['types'],
-            intval($this->settings['album']['image']['maxSize'])
+            (int)($this->settings['album']['image']['maxSize'])
         );
 
         if (!is_int($fileName)) {
@@ -72,7 +70,7 @@ class PhotoController extends BaseController
             $this->repositoryService->get('photo')->add($newPhoto);
             $this->repositoryService->get('album')->update($album);
             $this->addFlashMessage($this->_('photo.album.uploadSuccess'));
-            $this->redirect('show', 'album', null, array('album' => $album->getUid()));
+            $this->redirect('show', 'album', null, ['album' => $album->getUid()]);
         } else {
             $this->addFlashMessage($this->_('profile.album.uploadError'));
             $this->redirect('new');
@@ -83,7 +81,6 @@ class PhotoController extends BaseController
      * Deletes an existing Photo
      *
      * @param Model\Photo $photo the Photo to be deleted
-     * @return void
      */
     public function deleteAction(Photo $photo)
     {
@@ -101,7 +98,7 @@ class PhotoController extends BaseController
         $this->repositoryService->get('album')->update($album);
         $this->repositoryService->get('photo')->remove($photo);
         $this->addFlashMessage($this->_('profile.album.photoRemoved'));
-        $this->redirect('show', 'Album', null, array('album' => $album));
+        $this->redirect('show', 'Album', null, ['album' => $album]);
     }
 
     /**
@@ -109,7 +106,6 @@ class PhotoController extends BaseController
      * It's posible to set other user's photo as own avatar
      *
      * @param Model\Photo $photo the Photo to be set as avatar
-     * @return void
      */
     public function avatarAction(Photo $photo)
     {
@@ -132,21 +128,20 @@ class PhotoController extends BaseController
         } else {
             $this->addFlashMessage($this->_('profile.album.accessDenied'));
         }
-        $this->redirect('show', 'Album', null, array('album' => $album));
+        $this->redirect('show', 'Album', null, ['album' => $album]);
     }
 
     /**
      * Sets an existing photo as main photo of it's album
      *
      * @param Model\Photo $photo the Photo to be set as main
-     * @return void
      */
     public function mainPhotoAction(Photo $photo)
     {
         $album = $photo->getAlbum();
         $album->setMainPhoto($photo);
         $this->repositoryService->get('album')->update($album);
-        $this->redirect('show', 'Album', null, array('album' => $photo->getAlbum()));
+        $this->redirect('show', 'Album', null, ['album' => $photo->getAlbum()]);
     }
 
     /**
@@ -166,8 +161,7 @@ class PhotoController extends BaseController
             $album->getPrivate() === 0
         ) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }

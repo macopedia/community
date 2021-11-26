@@ -2,121 +2,120 @@
 
 defined('TYPO3_MODE') or die();
 
-
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message',
         'label' => 'subject',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'delete' => 'deleted',
-        'enablecolumns' => array(
-            'disabled' => 'hidden'
-        ),
-        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_message.gif'
-    ),
-    'interface' => array(
-        'showRecordFieldList' => 'sender,recipient,read,sent,read_date,sent_date,subject,message'
-    ),
-    'types' => array(
-        '1' => array('showitem' => 'sender,recipient,read,sent,read_date,sent_date,subject,message')
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => '')
-    ),
-    'columns' => array(
-        'hidden' => array(
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+        ],
+        'iconfile' => 'EXT:community/Resources/Public/Icons/tx_community_domain_model_message.gif',
+    ],
+    'interface' => [
+        'showRecordFieldList' => 'sender,recipient,read,sent,read_date,sent_date,subject,message',
+    ],
+    'types' => [
+        '1' => ['showitem' => 'sender,recipient,read,sent,read_date,sent_date,subject,message'],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => array(
-                'type' => 'check'
-            )
-        ),
-        'sender' => array(
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+        'sender' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.sender',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
                 'foreign_class' => 'Tx_Community_Domain_Model_User',
-                'maxitems' => 1
-            )
-        ),
-        'recipient' => array(
+                'maxitems' => 1,
+            ],
+        ],
+        'recipient' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.recipient',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
                 'foreign_class' => 'Tx_Community_Domain_Model_User',
-                'maxitems' => 1
-            )
-        ),
-        'sent_date' => array(
+                'maxitems' => 1,
+            ],
+        ],
+        'sent_date' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.sent_date',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime'
-            )
-        ),
-        'read_date' => array(
+                'renderType' => 'inputDateTime',
+            ],
+        ],
+        'read_date' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.read_date',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime'
-            )
-        ),
-        'sent' => array(
+                'renderType' => 'inputDateTime',
+            ],
+        ],
+        'sent' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.sent',
-            'config' => array(
-                'type' => 'check'
-            )
-        ),
-        'tx_community_read' => array(
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+        'tx_community_read' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.read',
-            'config' => array(
-                'type' => 'check'
-            )
-        ),
-        'subject' => array(
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+        'subject' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.subject',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
-            )
-        ),
-        'message' => array(
+                'eval' => 'trim,required',
+            ],
+        ],
+        'message' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.message',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'size' => 30,
-                'eval' => 'trim,required'
-            )
-        ),
-        'sender_deleted' => array(
+                'eval' => 'trim,required',
+            ],
+        ],
+        'sender_deleted' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.sender_deleted',
-            'config' => array(
-                'type' => 'check'
-            )
-        ),
-        'recipient_deleted' => array(
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+        'recipient_deleted' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.recipient_deleted',
-            'config' => array(
-                'type' => 'check'
-            )
-        ),
-    )
-);
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+    ],
+];

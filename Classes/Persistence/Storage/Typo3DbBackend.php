@@ -2,13 +2,13 @@
 
 namespace Macopedia\Community\Persistence\Storage;
 
-use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement;
-use TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface;
-use TYPO3\CMS\Extbase\Persistence\Generic\Qom\QueryObjectModelConstantsInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Exception\UnsupportedOrderException;
-use TYPO3\CMS\Extbase\Persistence\Generic\Qom\SelectorInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\JoinInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\QueryObjectModelConstantsInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\SelectorInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /***************************************************************
  *  Copyright notice
@@ -48,7 +48,6 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
      * @param array &$sql The query parts
      * @param array &$parameters The parameters that will replace the markers
      * @param array $boundVariableValues The bound variables in the query (key) and their values (value)
-     * @return void
      */
     protected function parseConstraint(Statement $constraint = null, SourceInterface $source, array &$sql, array &$parameters)
     {
@@ -65,7 +64,6 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
      * @param array $orderings An array of orderings (\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Ordering)
      * @param \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface $source The source
      * @param array &$sql The query parts
-     * @return void
      */
     protected function parseOrderings(array $orderings, SourceInterface $source, array &$sql)
     {

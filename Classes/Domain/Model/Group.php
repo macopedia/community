@@ -41,14 +41,14 @@ class Group extends FrontendUserGroup
     /**
      * The group is public: anyone can join
      *
-     * @var integer
+     * @var int
      */
     public const GROUP_TYPE_PUBLIC = 1;
 
     /**
      * The group is private: the user needs to be confirmed by the creator/admins to join
      *
-     * @var integer
+     * @var int
      */
     public const GROUP_TYPE_PRIVATE = 2;
 
@@ -61,7 +61,7 @@ class Group extends FrontendUserGroup
 
     /**
      * The grouptype
-     * @var integer
+     * @var int
      */
     protected $grouptype;
 
@@ -101,12 +101,10 @@ class Group extends FrontendUserGroup
      */
     protected $pendingMembers;
 
-
     /**
      * Setter for name
      *
      * @param string $name name
-     * @return void
      */
     public function setName($name)
     {
@@ -126,8 +124,7 @@ class Group extends FrontendUserGroup
     /**
      * Setter for grouptype
      *
-     * @param integer $grouptype The grouptype
-     * @return void
+     * @param int $grouptype The grouptype
      */
     public function setGrouptype($grouptype)
     {
@@ -137,7 +134,7 @@ class Group extends FrontendUserGroup
     /**
      * Getter for grouptype
      *
-     * @return integer The grouptype
+     * @return int The grouptype
      */
     public function getGrouptype()
     {
@@ -148,7 +145,6 @@ class Group extends FrontendUserGroup
      * Setter for description
      *
      * @param string $description description
-     * @return void
      */
     public function setDescription($description)
     {
@@ -169,7 +165,6 @@ class Group extends FrontendUserGroup
      * Setter for image
      *
      * @param string $image the image of the group
-     * @return void
      */
     public function setImage($image)
     {
@@ -190,7 +185,6 @@ class Group extends FrontendUserGroup
      * Setter for creator
      *
      * @param \Macopedia\Community\Domain\Model\User $creator creator
-     * @return void
      */
     public function setCreator(User $creator)
     {
@@ -211,7 +205,6 @@ class Group extends FrontendUserGroup
      * Setter for admins
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $admins admins
-     * @return void
      */
     public function setAdmins(ObjectStorage $admins)
     {
@@ -232,7 +225,6 @@ class Group extends FrontendUserGroup
      * Adds a User
      *
      * @param \Macopedia\Community\Domain\Model\User The User to be added
-     * @return void
      */
     public function addAdmin(User $admin)
     {
@@ -243,7 +235,6 @@ class Group extends FrontendUserGroup
      * Removes a User
      *
      * @param \Macopedia\Community\Domain\Model\User The User to be removed
-     * @return void
      */
     public function removeAdmin(User $admin)
     {
@@ -254,7 +245,6 @@ class Group extends FrontendUserGroup
      * Setter for members
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $members members
-     * @return void
      */
     public function setMembers(ObjectStorage $members)
     {
@@ -275,7 +265,6 @@ class Group extends FrontendUserGroup
      * Adds a User
      *
      * @param \Macopedia\Community\Domain\Model\User The User to be added
-     * @return void
      */
     public function addMember(User $member)
     {
@@ -286,7 +275,6 @@ class Group extends FrontendUserGroup
      * Removes a User
      *
      * @param \Macopedia\Community\Domain\Model\User The User to be removed
-     * @return void
      */
     public function removeMember(User $member)
     {
@@ -297,7 +285,6 @@ class Group extends FrontendUserGroup
      * Setter for pendingMembers
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $pendingMembers pendingMembers
-     * @return void
      */
     public function setPendingMembers(ObjectStorage $pendingMembers)
     {
@@ -318,7 +305,6 @@ class Group extends FrontendUserGroup
      * Adds a User
      *
      * @param \Macopedia\Community\Domain\Model\User The User to be added
-     * @return void
      */
     public function addPendingMember(User $pendingMember)
     {
@@ -329,7 +315,6 @@ class Group extends FrontendUserGroup
      * Removes a User
      *
      * @param \Macopedia\Community\Domain\Model\User The User to be removed
-     * @return void
      */
     public function removePendingMember(User $pendingMember)
     {
