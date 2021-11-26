@@ -35,7 +35,7 @@ use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
  * third party extensions. That's useful if you, for any reason, want to extend a certain model.
  * By changing the repository for that model, you can easily replace the model with your own.
  *
- * @version $Id$
+ *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>

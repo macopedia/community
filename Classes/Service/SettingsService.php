@@ -30,7 +30,7 @@ use TYPO3\CMS\Core\SingletonInterface;
 /**
  * A helper class to get the settings everywhere.
  *
- * @version $Id$
+ *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>

@@ -33,7 +33,7 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  * A cachable repository. Meaning that can return the tags that were used.
  *
  *
- * @version $Id$
+ *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>

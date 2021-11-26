@@ -2,9 +2,6 @@
 
 namespace Macopedia\Community\Controller;
 
-use Macopedia\Community\Domain\Model;
-use Macopedia\Community\Domain\Model\Album;
-use Macopedia\Community\Domain\Model\Photo;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,6 +25,9 @@ use Macopedia\Community\Domain\Model\Photo;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model;
+use Macopedia\Community\Domain\Model\Album;
+use Macopedia\Community\Domain\Model\Photo;
 use Macopedia\Community\Domain\Model\Relation;
 
 /**

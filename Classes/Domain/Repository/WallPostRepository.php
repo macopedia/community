@@ -2,8 +2,6 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
-use Macopedia\Community\Domain\Model\User;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,6 +26,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Domain\Model\User;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class WallPostRepository extends Repository

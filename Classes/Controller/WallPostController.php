@@ -33,7 +33,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 /**
  * Controller for the WallPost object
  *
- * @version $Id$
+ *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
