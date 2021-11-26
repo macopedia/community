@@ -26,9 +26,9 @@ namespace Macopedia\Community\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User,
-    Macopedia\Community\Domain\Model\Album,
-    Macopedia\Community\Domain\Model\Photo;
+use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Domain\Model\Album;
+use Macopedia\Community\Domain\Model\Photo;
 
 /**
  * Controller for the User object
@@ -281,7 +281,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
      */
     public function getTags()
     {
-        return \Macopedia\Community\Helper\RelationHelper::getRepository('User')->getTags();
+        return $this->repositoryService->get('user')->getTags();
     }
 }
 

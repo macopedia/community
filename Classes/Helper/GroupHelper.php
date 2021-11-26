@@ -40,38 +40,6 @@ use Macopedia\Community\Domain\Model\Group,
 class GroupHelper
 {
 
-    /**
-     * Add a pending member to the group
-     *
-     * @param Group $group
-     * @param User $user
-     */
-    static public function addPendingMember(
-        Group $group,
-        User $user
-    )
-    {
-        $group->addPendingMember($user);
-        RepositoryHelper::getRepository('Group')->update($group);
-        // TODO: message the admins/creator
-    }
-
-    /**
-     * Confirm that a user can join a group
-     *
-     * @param Group $group
-     * @param User $user
-     */
-    static public function confirmMember(
-        Group $group,
-        User $user
-    )
-    {
-        $group->removePendingMember($user);
-        $group->addMember($user);
-        RepositoryHelper::getRepository('Group')->update($group);
-        // TODO: message the user
-    }
 
     /**
      * Checks if a user is an admin of a group

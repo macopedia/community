@@ -26,10 +26,9 @@ namespace Macopedia\Community\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\Group,
-    Macopedia\Community\Domain\Model\User,
-    Macopedia\Community\Helper\RepositoryHelper,
-    Macopedia\Community\Helper\GroupHelper;
+use Macopedia\Community\Domain\Model\Group;
+use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Helper\GroupHelper;
 
 /**
  * Controller for the Group object
@@ -124,7 +123,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
     public function deleteAction(Group $group)
     {
         if ($this->request->hasArgument('confirmedDelete') && ($this->getRequestingUser()->getUid() == $group->getCreator()->getUid())) {
-            RepositoryHelper::getRepository('group')->remove($group);
+            $this->repositoryService->get('group')->remove($group);
         } else {
             $this->view->assign('group', $group);
         }
@@ -164,10 +163,14 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
     {
         if ($this->getRequestingUser() instanceof User) {
             if ($group->getGrouptype() == Group::GROUP_TYPE_PRIVATE) {
-                GroupHelper::addPendingMember($group, $this->getRequestingUser());
+                $group->addPendingMember($this->getRequestingUser());
+                $this->repositoryService->get('group')->update($group);
             } elseif ($group->getGrouptype() == Group::GROUP_TYPE_PUBLIC) {
                 if (!GroupHelper::isAdmin($group, $this->getRequestingUser())) {
-                    GroupHelper::confirmMember($group, $this->getRequestingUser());
+                    $group->removePendingMember($this->getRequestingUser());
+                    $group->addMember($this->getRequestingUser());
+                    $this->repositoryService->get('group')->update($group);
+                    // TODO: message the user
                 }
             }
         }
@@ -186,7 +189,10 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
     {
         if ($this->getRequestingUser() instanceof User) {
             if (GroupHelper::isAdmin($group, $this->getRequestingUser())) {
-                GroupHelper::confirmMember($group, $user);
+                $group->removePendingMember($user);
+                $group->addMember($user);
+                $this->repositoryService->get('group')->update($group);
+                // TODO: message the user
                 $this->flashMessages->add($this->_('group.confirm.success'));
             }
         }
@@ -267,7 +273,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
      */
     public function getTags()
     {
-        $repo = RepositoryHelper::getRepository('Group');
+        $repo = $this->repositoryService->get('group');
         return $repo->getTags();
     }
 }
