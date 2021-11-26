@@ -25,6 +25,11 @@ namespace Macopedia\Community\Service\Notification;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use TYPO3\CMS\Core\Mail\MailMessage;
+use Macopedia\Community\Exception\UnexpectedException;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Log\LogLevel;
 use Macopedia\Community\Domain\Model\User;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -51,7 +56,7 @@ class MailHandler extends AbstractHandler
     {
 
         /* @var $mail \TYPO3\CMS\Core\Mail\MailMessage */
-        $mail = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
 
         $notifySenderFlag = $configuration['notifySender'];
         if ($notifySenderFlag == 1) { //sending message to sender user instead of recipient e.g "copy of message to my email"
@@ -66,13 +71,13 @@ class MailHandler extends AbstractHandler
         if (!empty($configuration['recipient'])) {
             $mail->addTo($configuration['recipient']);
         } else {
-            throw new \Macopedia\Community\Exception\UnexpectedException('No recipient set while sending mail via MailHandler', 1316515690);
+            throw new UnexpectedException('No recipient set while sending mail via MailHandler', 1316515690);
         }
 
         if ($configuration['serverEmail']) {
             $mail->setFrom($configuration['serverEmail']);
         } else {
-            throw new \Macopedia\Community\Exception\UnexpectedException('No sender while sending mail via MailHandler', 1316515689);
+            throw new UnexpectedException('No sender while sending mail via MailHandler', 1316515689);
         }
 
         //We can't send from user's email, as other servers won't accept mails from foreign domains from us
@@ -90,7 +95,7 @@ class MailHandler extends AbstractHandler
             $mail->addPart($content['bodyHTML'], 'text/html');
             $mail->send();
         } catch (\Exception $e) {
-            GeneralUtility::sysLog("Couldn't send email: " . $e->getMessage(), 'community', GeneralUtility::SYSLOG_SEVERITY_ERROR);
+            GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__)->log(LogLevel::ERROR, "Couldn't send email: " . $e->getMessage());
         }
     }
 }

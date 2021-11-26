@@ -27,6 +27,7 @@ namespace Macopedia\Community\Tests\Unit\Service\Access;
  ***************************************************************/
 
 use Macopedia\Community\Service\Access\SimpleAccessService;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test for the simple access service
@@ -36,7 +37,7 @@ use Macopedia\Community\Service\Access\SimpleAccessService;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class SimpleAccessServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class SimpleAccessServiceTest extends UnitTestCase
 {
     /**
      * @test

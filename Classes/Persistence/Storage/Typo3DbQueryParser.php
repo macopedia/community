@@ -2,6 +2,12 @@
 
 namespace Macopedia\Community\Persistence\Storage;
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\AndInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\OrInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\NotInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ComparisonInterface;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use Macopedia\Community\Persistence\QOM\SQL;
 /**
  * This file is part of the TYPO3 CMS project.
  *
@@ -27,7 +33,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom;
  */
 class Typo3DbQueryParser extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbQueryParser
 {
-
     /**
      * Walks through the qom's constraints and extracts the properties and values.
      *
@@ -48,16 +53,16 @@ class Typo3DbQueryParser extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\
         $objectsToParse = array();
 
         $delimiter = '';
-        if ($comparison instanceof Qom\AndInterface) {
+        if ($comparison instanceof AndInterface) {
             $delimiter = 'AND';
             $objectsToParse = array($comparison->getConstraint1(), $comparison->getConstraint2());
-        } elseif ($comparison instanceof Qom\OrInterface) {
+        } elseif ($comparison instanceof OrInterface) {
             $delimiter = 'OR';
             $objectsToParse = array($comparison->getConstraint1(), $comparison->getConstraint2());
-        } elseif ($comparison instanceof Qom\NotInterface) {
+        } elseif ($comparison instanceof NotInterface) {
             $delimiter = 'NOT';
             $objectsToParse = array($comparison->getConstraint());
-        } elseif ($comparison instanceof Qom\ComparisonInterface) {
+        } elseif ($comparison instanceof ComparisonInterface) {
             $operand1 = $comparison->getOperand1();
             $parameterIdentifier = $this->normalizeParameterIdentifier($qomPath . $operand1->getPropertyName());
             $comparison->setParameterIdentifier($parameterIdentifier);
@@ -66,12 +71,12 @@ class Typo3DbQueryParser extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\
             if ($operator === QueryInterface::OPERATOR_IN) {
                 $items = array();
                 foreach ($operand2 as $value) {
-                    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7000000) {
+                    if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7000000) {
                         $value = $this->getPlainValue($value);
                     } else {
                         $value = $this->dataMapper->getPlainValue($value);
                     }
-                    if ($value !== NULL) {
+                    if ($value !== null) {
                         $items[] = $value;
                     }
                 }
@@ -80,7 +85,7 @@ class Typo3DbQueryParser extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\
                 $parameters[$parameterIdentifier] = $operand2;
             }
             $operators[] = $operator;
-        } elseif ($comparison instanceof \Macopedia\Community\Persistence\QOM\SQL) {
+        } elseif ($comparison instanceof SQL) {
             $parameters = array(array(), (string)$comparison);
             return array($parameters, $operators);
         } elseif (!is_object($comparison)) {
@@ -103,5 +108,4 @@ class Typo3DbQueryParser extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\
 
         return array($parameters, $operators);
     }
-
 }

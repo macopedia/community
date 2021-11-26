@@ -2,8 +2,6 @@
 
 namespace Macopedia\Community\Tests\Unit\Service\Notification;
 
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -30,7 +28,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 use Macopedia\Community\Service\Notification\NotificationService;
 use Macopedia\Community\Service\Notification\Notification;
-use Macopedia\Community\Domain\Model\User;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test for the notification service

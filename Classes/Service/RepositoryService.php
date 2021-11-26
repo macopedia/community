@@ -2,6 +2,9 @@
 
 namespace Macopedia\Community\Service;
 
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +28,6 @@ namespace Macopedia\Community\Service;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Standard repository helper.
  *
@@ -38,7 +40,7 @@ namespace Macopedia\Community\Service;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class RepositoryService implements \Macopedia\Community\Service\RepositoryServiceInterface, \TYPO3\CMS\Core\SingletonInterface
+class RepositoryService implements RepositoryServiceInterface, SingletonInterface
 {
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
@@ -61,7 +63,7 @@ class RepositoryService implements \Macopedia\Community\Service\RepositoryServic
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }

@@ -1,6 +1,15 @@
 <?php
 
 namespace Macopedia\Community\Persistence\Storage;
+
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\QueryObjectModelConstantsInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Exception\UnsupportedOrderException;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\SelectorInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\JoinInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +33,6 @@ namespace Macopedia\Community\Persistence\Storage;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Edited storage backend to enable
  *  Macopedia\Community\Persistence\QOM\SQL usage in queries
@@ -32,7 +40,6 @@ namespace Macopedia\Community\Persistence\Storage;
  */
 class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend
 {
-
     /**
      * Transforms a constraint into SQL and parameter arrays
      *
@@ -43,9 +50,9 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
      * @param array $boundVariableValues The bound variables in the query (key) and their values (value)
      * @return void
      */
-    protected function parseConstraint(\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement $constraint = NULL, \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface $source, array &$sql, array &$parameters)
+    protected function parseConstraint(Statement $constraint = null, SourceInterface $source, array &$sql, array &$parameters)
     {
-        if ($constraint instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement) {
+        if ($constraint instanceof Statement) {
             $sql['where'][] = $constraint->getStatement();
         } else {
             parent::parseConstraint($constraint, $source, $sql, $parameters);
@@ -60,31 +67,31 @@ class Typo3DbBackend extends \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo
      * @param array &$sql The query parts
      * @return void
      */
-    protected function parseOrderings(array $orderings, \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SourceInterface $source, array &$sql)
+    protected function parseOrderings(array $orderings, SourceInterface $source, array &$sql)
     {
         foreach ($orderings as $propertyName => $order) {
             switch ($order) {
-                case \TYPO3\CMS\Extbase\Persistence\Generic\Qom\QueryObjectModelConstantsInterface::JCR_ORDER_ASCENDING: // Deprecated since Extbase 1.1
-                case \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING:
+                case QueryObjectModelConstantsInterface::JCR_ORDER_ASCENDING: // Deprecated since Extbase 1.1
+                case QueryInterface::ORDER_ASCENDING:
                     $order = 'ASC';
                     break;
-                case \TYPO3\CMS\Extbase\Persistence\Generic\Qom\QueryObjectModelConstantsInterface::JCR_ORDER_DESCENDING: // Deprecated since Extbase 1.1
-                case \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING:
+                case QueryObjectModelConstantsInterface::JCR_ORDER_DESCENDING: // Deprecated since Extbase 1.1
+                case QueryInterface::ORDER_DESCENDING:
                     $order = 'DESC';
                     break;
                 default:
-                    throw new \TYPO3\CMS\Extbase\Persistence\Generic\Exception\UnsupportedOrderException('Unsupported order encountered.', 1242816074);
+                    throw new UnsupportedOrderException('Unsupported order encountered.', 1242816074);
             }
             if (substr(trim($propertyName), 0, 1) === '(') {
                 $sql['orderings'][] = $propertyName . ' ' . $order;
             } else {
-                if ($source instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\SelectorInterface) {
+                if ($source instanceof SelectorInterface) {
                     $className = $source->getNodeTypeName();
                     $tableName = $this->dataMapper->convertClassNameToTableName($className);
-                    while (strpos($propertyName, '.') !== FALSE) {
+                    while (strpos($propertyName, '.') !== false) {
                         $this->addUnionStatement($className, $tableName, $propertyName, $sql);
                     }
-                } elseif ($source instanceof \TYPO3\CMS\Extbase\Persistence\Generic\Qom\JoinInterface) {
+                } elseif ($source instanceof JoinInterface) {
                     $tableName = $source->getLeft()->getSelectorName();
                 }
                 $columnName = $this->dataMapper->convertPropertyNameToColumnName($propertyName, $className);

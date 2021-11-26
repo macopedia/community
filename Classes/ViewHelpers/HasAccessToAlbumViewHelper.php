@@ -2,7 +2,6 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -30,6 +29,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 use Macopedia\Community\Domain\Model\Album;
 use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Domain\Model\Relation;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
  * Checks if the requestedUser and the requestingUser are the same.
