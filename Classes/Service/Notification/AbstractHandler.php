@@ -5,7 +5,7 @@ namespace Macopedia\Community\Service\Notification;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Tymoteusz Motylewski <t.motylewski@gmail.com>
+ *  (c) 2011 Tymoteusz Motylewski
  *
  *  All rights reserved
  *
