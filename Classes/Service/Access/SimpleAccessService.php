@@ -28,6 +28,10 @@ namespace Macopedia\Community\Service\Access;
 
 use Macopedia\Community\Domain\Model\Relation;
 use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Service\RepositoryServiceInterface;
+use Macopedia\Community\Service\SettingsService;
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 
 /**
  * A simple access helper.
@@ -37,7 +41,7 @@ use Macopedia\Community\Domain\Model\User;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\SingletonInterface
+class SimpleAccessService implements AccessServiceInterface, SingletonInterface
 {
     /**
      * Logged out users, and requested user not set
@@ -132,7 +136,7 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      *
      * @param \Macopedia\Community\Service\RepositoryServiceInterface $repositoryService
      */
-    public function injectRepositoryService(\Macopedia\Community\Service\RepositoryServiceInterface $repositoryService)
+    public function injectRepositoryService(RepositoryServiceInterface $repositoryService)
     {
         $this->repositoryService = $repositoryService;
     }
@@ -142,7 +146,7 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -152,7 +156,7 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      *
      * @param \Macopedia\Community\Service\SettingsService $settingsService
      */
-    public function injectSettingsService(\Macopedia\Community\Service\SettingsService $settingsService)
+    public function injectSettingsService(SettingsService $settingsService)
     {
         $this->settingsService = $settingsService;
     }

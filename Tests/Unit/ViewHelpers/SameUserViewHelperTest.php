@@ -28,11 +28,12 @@ namespace Macopedia\Community\Tests\ViewHelpers;
 
 use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\ViewHelpers\SameUserViewHelper;
+use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 
 /**
  * Test for the SameUserViewHelper
  */
-class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase
+class SameUserViewHelperTest extends ViewHelperBaseTestcase
 {
     /**
      * @var \Macopedia\Community\ViewHelpers\SameUserViewHelper|\TYPO3\TestingFramework\Core\AccessibleObjectInterface

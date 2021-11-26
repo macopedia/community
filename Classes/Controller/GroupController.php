@@ -26,16 +26,18 @@ namespace Macopedia\Community\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Controller\Cacheable\ControllerInterface;
 use Macopedia\Community\Domain\Model\Group;
 use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Helper\GroupHelper;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * Controller for the Group object
  *
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class GroupController extends BaseController implements \Macopedia\Community\Controller\Cacheable\ControllerInterface
+class GroupController extends BaseController implements ControllerInterface
 {
     /**
      * Show the form to create a new group
@@ -80,7 +82,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
      *  Display the form to edit a group
      *
      * @param Group $group
-     * @dontvalidate $group
+     * @Extbase\IgnoreValidation("group")
      */
     public function editAction(Group $group)
     {

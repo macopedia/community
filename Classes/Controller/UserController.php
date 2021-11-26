@@ -26,9 +26,13 @@ namespace Macopedia\Community\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Macopedia\Community\Controller\Cacheable\ControllerInterface;
 use Macopedia\Community\Domain\Model\Album;
 use Macopedia\Community\Domain\Model\Photo;
 use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Service\Notification\Notification;
+use SJBR\StaticInfoTables\Domain\Repository\CountryRepository;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 
 /**
  * Controller for the User object
@@ -38,7 +42,7 @@ use Macopedia\Community\Domain\Model\User;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class UserController extends BaseController implements \Macopedia\Community\Controller\Cacheable\ControllerInterface
+class UserController extends BaseController implements ControllerInterface
 {
     /**
      * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
@@ -50,7 +54,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
      *
      * @param \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $repository repository to inject
      */
-    public function injectStaticCountryRepository(\SJBR\StaticInfoTables\Domain\Repository\CountryRepository $repository)
+    public function injectStaticCountryRepository(CountryRepository $repository)
     {
         $this->staticCountryRepository = $repository;
     }
@@ -162,7 +166,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
             $this->addFlashMessage($this->_('profile.updateImage.success'));
             $this->redirect('edit', 'User', null, ['user' => $user]);
         } else {
-            $this->addFlashMessage($this->_('profile.updateImage.error'), '', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $this->addFlashMessage($this->_('profile.updateImage.error'), '', FlashMessage::ERROR);
             $this->redirect('editImage', 'User', null, ['user' => $user]);
         }
     }
@@ -241,11 +245,11 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
     public function reportAction(User $user, $reason = '')
     {
         if ($this->settings['profile']['reasonForReportRequired'] && strlen($reason) == 0) {
-            $this->addFlashMessage($this->_('profile.report.needReason'), '', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
+            $this->addFlashMessage($this->_('profile.report.needReason'), '', FlashMessage::ERROR);
         } else {
             $this->addFlashMessage($this->_('profile.report.reported'));
 
-            $notification = new \Macopedia\Community\Service\Notification\Notification(
+            $notification = new Notification(
                 'userReport',
                 $this->requestingUser,
                 $this->requestedUser
