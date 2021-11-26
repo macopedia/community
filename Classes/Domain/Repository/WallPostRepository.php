@@ -2,6 +2,8 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +30,7 @@ namespace Macopedia\Community\Domain\Repository;
 
 use Macopedia\Community\Domain\Model\User;
 
-class WallPostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class WallPostRepository extends Repository
 {
 
     /**
@@ -41,7 +43,7 @@ class WallPostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching($query->equals('recipient', $user))
-            ->setOrderings(array('crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING))
+            ->setOrderings(array('crdate' => QueryInterface::ORDER_DESCENDING))
             ->execute();
     }
 
@@ -55,10 +57,7 @@ class WallPostRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         $messages = $query->matching(
-            $query->logicalOr(
-                $query->equals('sender', $user),
-                $query->equals('recipient', $user)
-            )
+            $query->logicalOr([$query->equals('sender', $user), $query->equals('recipient', $user)])
         )->execute();
 
         foreach ($messages as $message) {

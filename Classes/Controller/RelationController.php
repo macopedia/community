@@ -2,6 +2,9 @@
 
 namespace Macopedia\Community\Controller;
 
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use Macopedia\Community\Exception\UnexpectedException;
+use Macopedia\Community\Service\Notification\Notification;
 /***************************************************************
  *  Copyright notice
  *
@@ -82,7 +85,7 @@ class RelationController extends BaseController
         if (!$user->getUid() || !$this->getRequestingUser()->getUid()
             || $user->getUid() == $this->getRequestingUser()->getUid()
         ) {
-            $this->addFlashMessage($this->_('relation.request.fail'), \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+            $this->addFlashMessage($this->_('relation.request.fail'), FlashMessage::NOTICE);
             $this->redirectToUser($this->getRequestingUser());
         }
         $relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
@@ -108,7 +111,7 @@ class RelationController extends BaseController
             $this->requestedExistingRelation($relation, $user);
         } else {
             // more than one relation? something is wrong.
-            throw new Exception\UnexpectedException(
+            throw new UnexpectedException(
                 'There are more than one relations between user ' . $user->getUid() . ' and user ' . $this->getRequestingUser()->getUid()
             );
         }
@@ -131,7 +134,7 @@ class RelationController extends BaseController
 
             case Relation::RELATION_STATUS_NEW:
                 if ($relation->getRequestedUser() == $user) {
-                    $this->addFlashMessage($this->_('relation.request.alreadyPending'), '', \TYPO3\CMS\Core\Messaging\FlashMessage::NOTICE);
+                    $this->addFlashMessage($this->_('relation.request.alreadyPending'), '', FlashMessage::NOTICE);
                 } else {
                     // if both sides request friendship, it's ok
                     $this->addFlashMessage($this->_('relation.confirm.success'));
@@ -140,7 +143,7 @@ class RelationController extends BaseController
                 break;
 
             case Relation::RELATION_STATUS_CONFIRMED:
-                $this->addFlashMessage($this->_('relation.request.alreadyFriends'), '', \TYPO3\CMS\Core\Messaging\FlashMessage::INFO);
+                $this->addFlashMessage($this->_('relation.request.alreadyFriends'), '', FlashMessage::INFO);
                 break;
 
             case Relation::RELATION_STATUS_REJECTED:
@@ -154,7 +157,7 @@ class RelationController extends BaseController
                 break;
 
             default:
-                throw new Exception\UnexpectedException(
+                throw new UnexpectedException(
                     'Unknown relation status between user ' . $user->getUid() . ' and user ' . $this->getRequestingUser()->getUid()
                 );
                 break;
@@ -227,7 +230,7 @@ class RelationController extends BaseController
             if ($user !== NULL) {
                 $relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
             } else {
-                throw new Exception\UnexpectedException("One of the parameters must be set");
+                throw new UnexpectedException("One of the parameters must be set");
             }
         }
         if ($this->request->hasArgument('confirmCancel')) {
@@ -302,7 +305,7 @@ class RelationController extends BaseController
     {
         $relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($this->getRequestedUser(), $this->getRequestingUser());
 
-        $notification = new \Macopedia\Community\Service\Notification\Notification(
+        $notification = new Notification(
             $resourceName,
             $this->requestingUser,
             $this->requestedUser

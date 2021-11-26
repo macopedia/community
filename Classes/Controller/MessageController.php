@@ -1,5 +1,6 @@
 <?php
 namespace Macopedia\Community\Controller;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 /***************************************************************
  *  Copyright notice
  *
@@ -104,7 +105,7 @@ class MessageController extends BaseController
      *
      * @param User $user recipient
      * @param Message $message
-     * @dontvalidate $message
+     * @Extbase\IgnoreValidation("message")
      */
     public function writeAction(
         User $user = NULL,
@@ -122,7 +123,7 @@ class MessageController extends BaseController
      *
      * @param User $user recipient
      * @param Message $message
-     * @dontvalidate $message
+     * @Extbase\IgnoreValidation("message")
      */
     public function writeThreadedAction(
         User $user = NULL,

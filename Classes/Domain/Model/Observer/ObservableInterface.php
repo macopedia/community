@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model\Observer;
+
 /***************************************************************
  *  Copyright notice
  *

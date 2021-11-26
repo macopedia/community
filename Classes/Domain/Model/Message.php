@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model;
+
+use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +26,7 @@ namespace Macopedia\Community\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-class Message extends Observer\AbstractObservableEntity
+class Message extends AbstractObservableEntity
 {
 
     /**

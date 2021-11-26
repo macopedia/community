@@ -2,6 +2,8 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use Macopedia\Community\Exception\UnexpectedException;
 /***************************************************************
  *  Copyright notice
  *
@@ -36,7 +38,7 @@ use Macopedia\Community\Domain\Model\User,
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class RelationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class RelationRepository extends Repository
 {
 
     /**
@@ -49,13 +51,7 @@ class RelationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalAnd(
-                $query->logicalOr(
-                    $query->equals('initiatingUser', $user->getUid()),
-                    $query->equals('requestedUser', $user->getUid())
-                ),
-                $query->equals('status', Relation::RELATION_STATUS_CONFIRMED)
-            )
+            $query->logicalAnd([$query->logicalOr([$query->equals('initiatingUser', $user->getUid()), $query->equals('requestedUser', $user->getUid())]), $query->equals('status', Relation::RELATION_STATUS_CONFIRMED)])
         )->execute();
     }
 
@@ -81,23 +77,11 @@ class RelationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $statusQuery = $query->logicalNot($query->equals('status', 0));
         }
         $relations = $query->matching(
-            $query->logicalAnd(
-                $query->logicalOr(
-                    $query->logicalAnd(
-                        $query->equals('initiatingUser', $requestedUser),
-                        $query->equals('requestedUser', $requestingUser)
-                    ),
-                    $query->logicalAnd(
-                        $query->equals('initiatingUser', $requestingUser),
-                        $query->equals('requestedUser', $requestedUser)
-                    )
-                ),
-                $statusQuery
-            )
+            $query->logicalAnd([$query->logicalOr([$query->logicalAnd([$query->equals('initiatingUser', $requestedUser), $query->equals('requestedUser', $requestingUser)]), $query->logicalAnd([$query->equals('initiatingUser', $requestingUser), $query->equals('requestedUser', $requestedUser)])]), $statusQuery])
         )->execute();
 
         if (count($relations) > 1) {
-            throw new \Macopedia\Community\Exception\UnexpectedException(
+            throw new UnexpectedException(
                 'There are more than one relations from user ' . $requestedUser->getUid() . ' to ' . $requestingUser->getUid()
             );
         } elseif (count($relations) == 1) {
@@ -117,10 +101,7 @@ class RelationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalAnd(
-                $query->equals('requestedUser', $user),
-                $query->equals('status', Relation::RELATION_STATUS_NEW)
-            )
+            $query->logicalAnd([$query->equals('requestedUser', $user), $query->equals('status', Relation::RELATION_STATUS_NEW)])
         )->execute();
     }
 
@@ -135,10 +116,7 @@ class RelationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         $relations = $query->matching(
-            $query->logicalOr(
-                $query->equals('initiatingUser', $user),
-                $query->equals('requestedUser', $user)
-            )
+            $query->logicalOr([$query->equals('initiatingUser', $user), $query->equals('requestedUser', $user)])
         )->execute();
         foreach ($relations as $relation) {
             $this->remove($relation);

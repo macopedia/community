@@ -2,6 +2,7 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -34,7 +35,7 @@ use Macopedia\Community\Domain\Model\Relation;
  * Checks if the requestedUser and the requestingUser are the same.
  *
  */
-class HasAccessToAlbumViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+class HasAccessToAlbumViewHelper extends AbstractConditionViewHelper
 {
 
     public function initializeArguments()

@@ -1,5 +1,7 @@
 <?php
 namespace Macopedia\Community\Domain\Repository;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,7 +29,7 @@ namespace Macopedia\Community\Domain\Repository;
 use Macopedia\Community\Domain\Model\Message;
 use Macopedia\Community\Domain\Model\User;
 
-class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class MessageRepository extends Repository
 {
 
     /**
@@ -40,11 +42,8 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalAnd(
-                $query->equals('sender', $user),
-                $query->equals('senderDeleted', false)
-            )
-        )->setOrderings(array('sentDate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+            $query->logicalAnd([$query->equals('sender', $user), $query->equals('senderDeleted', false)])
+        )->setOrderings(array('sentDate' => QueryInterface::ORDER_DESCENDING)
         )->execute();
     }
 
@@ -58,11 +57,8 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalAnd(
-                $query->equals('recipient', $user),
-                $query->equals('recipientDeleted', false)
-            )
-        )->setOrderings(array('sentDate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+            $query->logicalAnd([$query->equals('recipient', $user), $query->equals('recipientDeleted', false)])
+        )->setOrderings(array('sentDate' => QueryInterface::ORDER_DESCENDING)
         )->execute();
     }
 
@@ -76,15 +72,9 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalAnd(
-                $query->equals('recipient', $user),
-                $query->logicalNot(
-                    $query->logicalOr(
-                        $query->equals('recipientDeleted', true),
-                        $query->equals('tx_community_read', true)
-                    )
-                )
-            )
+            $query->logicalAnd([$query->equals('recipient', $user), $query->logicalNot(
+                $query->logicalOr([$query->equals('recipientDeleted', true), $query->equals('tx_community_read', true)])
+            )])
         )->execute();
     }
 
@@ -98,20 +88,9 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalOr(
-                $query->logicalAnd(
-                    $query->equals('sender', $user1),
-                    $query->equals('senderDeleted', false),
-                    $query->equals('recipient', $user2)
-                ),
-                $query->logicalAnd(
-                    $query->equals('sender', $user2),
-                    $query->equals('recipient', $user1),
-                    $query->equals('recipientDeleted', false)
-                )
-            )
+            $query->logicalOr([$query->logicalAnd([$query->equals('sender', $user1), $query->equals('senderDeleted', false), $query->equals('recipient', $user2)]), $query->logicalAnd([$query->equals('sender', $user2), $query->equals('recipient', $user1), $query->equals('recipientDeleted', false)])])
         );
-        $query->setOrderings(array('sentDate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(array('sentDate' => QueryInterface::ORDER_ASCENDING));
         return $query->execute();
     }
 
@@ -125,20 +104,9 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalOr(
-                $query->logicalAnd(
-                    $query->equals('sender', $user1),
-                    $query->equals('senderDeleted', false),
-                    $query->equals('recipient', $user2)
-                ),
-                $query->logicalAnd(
-                    $query->equals('sender', $user2),
-                    $query->equals('recipient', $user1),
-                    $query->equals('senderDeleted', false)
-                )
-            )
+            $query->logicalOr([$query->logicalAnd([$query->equals('sender', $user1), $query->equals('senderDeleted', false), $query->equals('recipient', $user2)]), $query->logicalAnd([$query->equals('sender', $user2), $query->equals('recipient', $user1), $query->equals('senderDeleted', false)])])
         );
-        $query->setOrderings(array('sentDate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
+        $query->setOrderings(array('sentDate' => QueryInterface::ORDER_ASCENDING));
         return $query->execute();
     }
 
@@ -151,20 +119,9 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalOr(
-                $query->logicalAnd(
-                    $query->equals('sender', $user1),
-                    $query->equals('senderDeleted', false),
-                    $query->equals('recipient', $user2)
-                ),
-                $query->logicalAnd(
-                    $query->equals('sender', $user2),
-                    $query->equals('recipient', $user1),
-                    $query->equals('recipientDeleted', false)
-                )
-            )
+            $query->logicalOr([$query->logicalAnd([$query->equals('sender', $user1), $query->equals('senderDeleted', false), $query->equals('recipient', $user2)]), $query->logicalAnd([$query->equals('sender', $user2), $query->equals('recipient', $user1), $query->equals('recipientDeleted', false)])])
         );
-        $query->setOrderings(array('sentDate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(array('sentDate' => QueryInterface::ORDER_DESCENDING));
         return $query->execute()->getFirst();
     }
 
@@ -177,12 +134,7 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            $query->logicalAnd(
-                $query->equals('recipient', $recipient),
-                $query->equals('sender', $sender),
-                $query->equals('recipientDeleted', false),
-                $query->equals('read_date', 0)
-            )
+            $query->logicalAnd([$query->equals('recipient', $recipient), $query->equals('sender', $sender), $query->equals('recipientDeleted', false), $query->equals('read_date', 0)])
         );
         return $query->execute()->getFirst();
     }
@@ -196,16 +148,7 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalOr(
-                $query->logicalAnd(
-                    $query->equals('sender', $user),
-                    $query->equals('senderDeleted', false)
-                ),
-                $query->logicalAnd(
-                    $query->equals('recipient', $user),
-                    $query->equals('recipientDeleted', false)
-                )
-            )
+            $query->logicalOr([$query->logicalAnd([$query->equals('sender', $user), $query->equals('senderDeleted', false)]), $query->logicalAnd([$query->equals('recipient', $user), $query->equals('recipientDeleted', false)])])
         )->execute();
     }
 
@@ -219,10 +162,7 @@ class MessageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         $messages = $query->matching(
-            $query->logicalOr(
-                $query->equals('sender', $user),
-                $query->equals('recipient', $user)
-            )
+            $query->logicalOr([$query->equals('sender', $user), $query->equals('recipient', $user)])
         )->execute();
         foreach ($messages as $message) {
             /** @var $message Message */

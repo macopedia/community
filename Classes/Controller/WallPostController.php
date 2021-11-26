@@ -2,6 +2,9 @@
 
 namespace Macopedia\Community\Controller;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Macopedia\Community\Domain\Model\WallPost;
+use Macopedia\Community\Service\Notification\Notification;
 /***************************************************************
  *  Copyright notice
  *
@@ -51,9 +54,9 @@ class WallPostController extends BaseController
      * Creates a new WallPost and forwards to the list action.
      *
      * @param Model\WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
-     * @dontvalidate $newWallPost
+     * @Extbase\IgnoreValidation("newWallPost")
      */
-    public function newAction(Model\WallPost $newWallPost = null)
+    public function newAction(WallPost $newWallPost = null)
     {
         $this->view->assign('newWallPost', $newWallPost);
         $this->view->assign('recipient', $this->getRequestedUser());
@@ -65,7 +68,7 @@ class WallPostController extends BaseController
      * @param Model\WallPost $newWallPost a fresh WallPost object which has not yet been added to the repository
      *
      */
-    public function createAction(Model\WallPost $newWallPost)
+    public function createAction(WallPost $newWallPost)
     {
         $newWallPost->setRecipient($this->getRequestedUser());
         $newWallPost->setSender($this->getRequestingUser());
@@ -79,7 +82,7 @@ class WallPostController extends BaseController
         /* @var $persistenceManager \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager */
         $persistenceManager->persistAll();
 
-        $notification = new \Macopedia\Community\Service\Notification\Notification(
+        $notification = new Notification(
             'wallPostCreate',
             $this->requestingUser,
             $this->requestedUser
@@ -95,7 +98,7 @@ class WallPostController extends BaseController
      *
      * @param Model\WallPost $wallPost the WallPost to be deleted
      */
-    public function deleteAction(Model\WallPost $wallPost)
+    public function deleteAction(WallPost $wallPost)
     {
         $this->repositoryService->get('wallPost')->remove($wallPost);
         $this->addFlashMessage($this->_('wallPost.list.deleted'));

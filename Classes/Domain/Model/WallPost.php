@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model;
+
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,9 +27,7 @@ namespace Macopedia\Community\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-
-class WallPost extends Observer\AbstractObservableEntity
+class WallPost extends AbstractObservableEntity
 {
 
     /**
@@ -54,7 +55,7 @@ class WallPost extends Observer\AbstractObservableEntity
      * message
      *
      * @var string $message
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $message;
 

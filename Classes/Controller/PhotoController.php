@@ -2,6 +2,9 @@
 
 namespace Macopedia\Community\Controller;
 
+use Macopedia\Community\Domain\Model\Album;
+use Macopedia\Community\Domain\Model\Photo;
+use Macopedia\Community\Domain\Model\Relation;
 /***************************************************************
  *  Copyright notice
  *
@@ -39,7 +42,7 @@ class PhotoController extends BaseController
      * @param Model\Album $album album we create photo in
      * @return void
      */
-    public function newAction(Model\Album $album)
+    public function newAction(Album $album)
     {
         $this->view->assign('album', $album);
     }
@@ -50,7 +53,7 @@ class PhotoController extends BaseController
      * @param Model\Album $album album we create photo in
      * @return void
      */
-    public function createAction(Model\Album $album)
+    public function createAction(Album $album)
     {
         // handleUpload() returns numer in case of error
         $fileName = $this->handleUpload(
@@ -61,7 +64,7 @@ class PhotoController extends BaseController
         );
 
         if (!is_int($fileName)) {
-            $newPhoto = new Model\Photo();
+            $newPhoto = new Photo();
             $newPhoto->setImage($fileName);
             $album->addPhoto($newPhoto);
             if (!$album->getMainPhoto()) {
@@ -83,7 +86,7 @@ class PhotoController extends BaseController
      * @param Model\Photo $photo the Photo to be deleted
      * @return void
      */
-    public function deleteAction(Model\Photo $photo)
+    public function deleteAction(Photo $photo)
     {
         $album = $photo->getAlbum();
         $album->removePhoto($photo);
@@ -109,22 +112,22 @@ class PhotoController extends BaseController
      * @param Model\Photo $photo the Photo to be set as avatar
      * @return void
      */
-    public function avatarAction(Model\Photo $photo)
+    public function avatarAction(Photo $photo)
     {
         $album = $photo->getAlbum();
         if ($this->hasAccessToAlbum($album)) {
             $imagePath = $photo->getImage();
             $this->requestingUser->setImage($imagePath);
             $this->repositoryService->get('user')->update($this->requestingUser);
-            if ($album->getAlbumType() == Model\Album::ALBUM_TYPE_AVATAR
+            if ($album->getAlbumType() == Album::ALBUM_TYPE_AVATAR
                 && $album->getUser()->getUid() == $this->requestingUser->getUid()
             ) {
                 //don't have to copy photo to special album
             } else {
-                $newPhoto = new Model\Photo();
+                $newPhoto = new Photo();
                 $newPhoto->setImage($imagePath);
 
-                $this->photoToSpecialAlbum($newPhoto, Model\Album::ALBUM_TYPE_AVATAR);
+                $this->photoToSpecialAlbum($newPhoto, Album::ALBUM_TYPE_AVATAR);
             }
             $this->addFlashMessage($this->_('profile.album.photoSetAsAvatar'));
         } else {
@@ -139,7 +142,7 @@ class PhotoController extends BaseController
      * @param Model\Photo $photo the Photo to be set as main
      * @return void
      */
-    public function mainPhotoAction(Model\Photo $photo)
+    public function mainPhotoAction(Photo $photo)
     {
         $album = $photo->getAlbum();
         $album->setMainPhoto($photo);
@@ -153,13 +156,13 @@ class PhotoController extends BaseController
      * @param Model\Album $album
      * @return bool
      */
-    public function hasAccessToAlbum(Model\Album $album)
+    public function hasAccessToAlbum(Album $album)
     {
         $requestingUser = $this->requestingUser;
         $relation = $this->getRelation();
 
         if (($requestingUser && ($album->getUser()->getUid() === $requestingUser->getUid())) ||
-            $relation->getStatus() === Model\Relation::RELATION_STATUS_CONFIRMED ||
+            $relation->getStatus() === Relation::RELATION_STATUS_CONFIRMED ||
             ($album->getPrivate() <= 1 && $requestingUser) ||
             $album->getPrivate() === 0
         ) {

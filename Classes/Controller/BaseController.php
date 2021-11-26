@@ -1,5 +1,13 @@
 <?php
+
 namespace Macopedia\Community\Controller;
+
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Core\Environment;
 /***************************************************************
  *  Copyright notice
  *
@@ -40,7 +48,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * all over the project. Holds the requested and requesting user.
  *
  */
-class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class BaseController extends ActionController
 {
 
     /**
@@ -115,7 +123,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 ($this->getRequestedUser() ? "RequestedUser: " . htmlspecialchars($this->getRequestedUser()->getName(), ENT_QUOTES | ENT_HTML401) : '') . "<br />" .
                 'AccesType: ' . $this->accessService->getAccessType($this->getRequestingUser(), $this->getRequestedUser()),
                 'Debug',
-                \TYPO3\CMS\Core\Messaging\FlashMessage::INFO
+                FlashMessage::INFO
             );
         }
 
@@ -130,7 +138,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                     ($this->getRequestedUser() ? ", RequestedUser:" . $this->getRequestedUser()->getUid() : "") .
                     ", AccesType: " . $this->accessService->getAccessType($this->getRequestingUser(), $this->getRequestedUser()),
                     "Debug",
-                    \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
+                    FlashMessage::WARNING
                 );
             }
             $this->accessDenied = true;
@@ -142,7 +150,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
      * @return void
      */
-    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
+    protected function initializeView(ViewInterface $view)
     {
         parent::initializeView($view);
         $this->view->assign('requestedUser', $this->getRequestedUser());
@@ -170,10 +178,10 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface An instance of the Configuration Manager
      * @return void
      */
-    public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
-        $this->settings = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
+        $this->settings = $this->configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS);
     }
 
     /**
@@ -342,7 +350,7 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function _($key, $arguments = array())
     {
-        $translation = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, $this->extensionName, $arguments);
+        $translation = LocalizationUtility::translate($key, $this->extensionName, $arguments);
         return !empty($translation) ? $translation : '';
     }
 
@@ -443,10 +451,10 @@ class BaseController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             return 3;
         }
 
-        if (file_exists(PATH_site . $uploadDir . $fileArray['name'])) {
+        if (file_exists(Environment::getPublicPath() . '/' . $uploadDir . $fileArray['name'])) {
             $fileArray['name'] = $fileInfo['filename'] . '-' . time() . '.' . $fileInfo['extension'];
         }
-        if (GeneralUtility::upload_copy_move($fileArray['tmp'], PATH_site . $uploadDir . $fileArray['name'])) {
+        if (GeneralUtility::upload_copy_move($fileArray['tmp'], Environment::getPublicPath() . '/' . $uploadDir . $fileArray['name'])) {
             return $fileArray['name'];
         } else {
             return 4;

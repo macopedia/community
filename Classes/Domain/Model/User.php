@@ -1,6 +1,12 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model;
+
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use Macopedia\Community\Domain\Model\Observer\ObservableInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Macopedia\Community\Domain\Model\Observer\CacheObserver;
+use Macopedia\Community\Domain\Model\Observer\ObserverInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +30,6 @@ namespace Macopedia\Community\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * A normal user of the community
  *
@@ -33,7 +38,7 @@ namespace Macopedia\Community\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Observer\ObservableInterface
+class User extends FrontendUser implements ObservableInterface
 {
 
     /**
@@ -400,7 +405,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Obser
 
     public function initializeObject()
     {
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+        $objectManager = GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
         $cacheObserver = $objectManager->get('Macopedia\Community\Domain\Model\Observer\CacheObserver');
         $this->attach($cacheObserver);
     }
@@ -408,7 +413,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Obser
     /**
      * @var \Macopedia\Community\Domain\Model\Observer\CacheObserver $cacheObserver
      */
-    public function injectCacheObserver(\Macopedia\Community\Domain\Model\Observer\CacheObserver $cacheObserver)
+    public function injectCacheObserver(CacheObserver $cacheObserver)
     {
         $this->attach($cacheObserver);
     }
@@ -443,7 +448,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Obser
      *
      * @param \Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer
      */
-    public function attach(\Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer)
+    public function attach(ObserverInterface $observer)
     {
         $this->observers[] = $observer;
     }
@@ -453,7 +458,7 @@ class User extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser implements Obser
      *
      * @param \Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer
      */
-    public function detach(\Macopedia\Community\Domain\Model\Observer\ObserverInterface $observer)
+    public function detach(ObserverInterface $observer)
     {
         $this->observers = array_diff($this->observers, array($observer));
     }

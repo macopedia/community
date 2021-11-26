@@ -2,6 +2,7 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -35,7 +36,7 @@ use Macopedia\Community\Domain\Model\User;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class SameUserViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+class SameUserViewHelper extends AbstractConditionViewHelper
 {
 
     public function initializeArguments()

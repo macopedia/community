@@ -2,6 +2,10 @@
 
 namespace Macopedia\Community\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /***************************************************************
  *  Copyright notice
  *
@@ -35,12 +39,11 @@ use Macopedia\Community\Domain\Model\User;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class UserRepository extends Repository
 {
 
     /**
      * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-     * @inject
      */
     protected $cObj;
 
@@ -68,11 +71,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalOr(
-                $query->like('name', '%' . str_replace(array('_', '%'), '', $word) . '%'),
-                $query->like('username', '%' . str_replace(array('_', '%'), '', $word) . '%'),
-                $query->equals('email', $word) //only full email address
-            )
+            $query->logicalOr([$query->like('name', '%' . str_replace(array('_', '%'), '', $word) . '%'), $query->like('username', '%' . str_replace(array('_', '%'), '', $word) . '%'), $query->equals('email', $word)])
         )->execute();
     }
 
@@ -85,7 +84,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $query = $this->createQuery();
         $query->matching(
-            new \TYPO3\CMS\Extbase\Persistence\Generic\Qom\Statement("
+            new Statement("
 		  EXISTS (SELECT * FROM tx_community_domain_model_message m WHERE
 			(m.sender = fe_users.uid  AND m.recipient = {$user->getUid()} AND m.recipient_deleted=0)
 			OR
@@ -98,7 +97,7 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 				(m.sender = fe_users.uid  AND m.recipient = {$user->getUid()} AND m.recipient_deleted=0)
 				OR
 				(m.recipient = fe_users.uid  AND m.sender = {$user->getUid()} AND m.sender_deleted=0)
-				)" => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+				)" => QueryInterface::ORDER_DESCENDING)
         );
         return $query->execute();
     }
@@ -115,8 +114,8 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->getQuerySettings()->setRespectStoragePage(FALSE);
         //Helmut Hummel told me to do so ;)
         if (in_array($orderBy, array('crdate', 'username')) && in_array($orderDirection, array(
-                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+                QueryInterface::ORDER_DESCENDING,
+                QueryInterface::ORDER_ASCENDING
             ))
         ) {
             $query->setOrderings(array($orderBy => $orderDirection));
@@ -140,8 +139,8 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
         //Helmut Hummel told me to do so ;)
         if (in_array($orderBy, array('datetime', 'username')) && in_array($orderDirection, array(
-                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING,
-                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+                QueryInterface::ORDER_DESCENDING,
+                QueryInterface::ORDER_ASCENDING
             ))
         ) {
             $query->setOrderings(array($orderBy => $orderDirection));
@@ -161,7 +160,12 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function findLatest($limit)
     {
         $query = $this->createQuery();
-        $query->setOrderings(array('uid' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
+        $query->setOrderings(array('uid' => QueryInterface::ORDER_DESCENDING));
         return $query->setLimit($limit)->execute();
+    }
+
+    public function injectCObj(ContentObjectRenderer $cObj): void
+    {
+        $this->cObj = $cObj;
     }
 }

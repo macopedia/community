@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model\Observer;
+
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +27,6 @@ namespace Macopedia\Community\Domain\Model\Observer;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * An abstract class to make observable models easier
  *
@@ -34,7 +36,7 @@ namespace Macopedia\Community\Domain\Model\Observer;
  * @author Pascal Jungblut <mail@pascalj.com>
  */
 abstract class AbstractObservableEntity
-    extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+    extends AbstractEntity
     implements ObservableInterface
 {
 
@@ -99,7 +101,7 @@ abstract class AbstractObservableEntity
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    public function injectObjectManager(ObjectManager $objectManager)
     {
         $this->attach($objectManager->get('Macopedia\Community\Domain\Model\Observer\CacheObserver'));
     }
