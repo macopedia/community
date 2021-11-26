@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Helper;
+
 /**
  *  UrlLinker - facilitates turning plain text URLs into HTML links.
  *
@@ -13,7 +14,6 @@ namespace Macopedia\Community\Helper;
  */
 class UrlLinkerHelper
 {
-
     /**
      * Transforms plain text into valid HTML, escaping special characters and
      * turning URLs into links.
@@ -91,7 +91,7 @@ class UrlLinkerHelper
                     $linkText = "$protocol$username$password@$domain$port$path$query";
 
                     $linkHtml = '<a href="' . htmlspecialchars($completeUrl) . '" target="_blank" rel="nofollow">'
-                        . wordwrap(htmlspecialchars($linkText), 35, '<wbr />', TRUE)
+                        . wordwrap(htmlspecialchars($linkText), 35, '<wbr />', true)
                         . '</a>';
                 } else {
                     // Prepend http:// if no protocol specified
@@ -99,7 +99,7 @@ class UrlLinkerHelper
                     $linkText = "$protocol$domain$port$path$query";
 
                     $linkHtml = '<a href="' . htmlspecialchars($completeUrl) . '" target="_blank" rel="nofollow">'
-                        . wordwrap(htmlspecialchars($linkText), 35, '<wbr />', TRUE)
+                        . wordwrap(htmlspecialchars($linkText), 35, '<wbr />', true)
                         . '</a>';
                 }
 

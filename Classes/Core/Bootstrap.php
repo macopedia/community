@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Core;
+
 /**
  * A custom bootstrap. Wee need this to implement our own caching
  *

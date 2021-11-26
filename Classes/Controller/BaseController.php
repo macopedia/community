@@ -50,20 +50,19 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class BaseController extends ActionController
 {
-
     /**
      * the user who is requested to view
      *
      * @var User
      */
-    protected $requestedUser = NULL;
+    protected $requestedUser = null;
 
     /**
      * The requesting user. Normally the logged in fe_user
      *
      * @var User
      */
-    protected $requestingUser = NULL;
+    protected $requestingUser = null;
 
     /**
      * Repository service. Get all your repositories with it.
@@ -93,7 +92,7 @@ class BaseController extends ActionController
      * If we have already benn redirected, don't show the flash messages
      * @var boolean
      */
-    static protected $redirected = FALSE;
+    protected static $redirected = false;
 
     /**
      * @var boolean
@@ -105,7 +104,6 @@ class BaseController extends ActionController
      */
     protected function initializeAction()
     {
-
         $this->findRequestedAndRequestingUser();
 
         $this->settingsService->set($this->settings);
@@ -240,7 +238,7 @@ class BaseController extends ActionController
         $foundUser = false;
         foreach ($argumentsPriority as $argument) {
             if ($foundUser) {
-                $this->request->setArgument($argument, NULL);
+                $this->request->setArgument($argument, null);
             } elseif ($this->request->hasArgument($argument)
                 && !is_array($this->request->getArgument($argument))
                 && $this->request->getArgument($argument) != null
@@ -276,7 +274,7 @@ class BaseController extends ActionController
                         $this->requestedUser = $this->repositoryService->get('user')
                             ->findByUid((int)$this->request->getArgument('user'));
                         break;
-                    default :
+                    default:
                         //TODO: add hook
                 }
             }
@@ -297,7 +295,7 @@ class BaseController extends ActionController
         $this->requestingUser = $this->repositoryService->get('user')->findCurrentUser();
         $this->fetchRequestedUserFromRequestArguments();
 
-        if ($this->requestedUser === NULL) {
+        if ($this->requestedUser === null) {
             $this->requestedUser = $this->getRequestingUser();
         }
     }
@@ -336,7 +334,7 @@ class BaseController extends ActionController
                 $this->getRequestingUser()
             );
         } else {
-            $relation = NULL;
+            $relation = null;
         }
         return $relation;
     }
@@ -381,7 +379,7 @@ class BaseController extends ActionController
     protected function redirectToLogin()
     {
         if ($this->settings['loginPage']) {
-            $this->redirect(NULL, NULL, NULL, NULL, $this->settings['loginPage']);
+            $this->redirect(null, null, null, null, $this->settings['loginPage']);
         } else {
             $this->redirectToURI('');
         }
@@ -394,7 +392,7 @@ class BaseController extends ActionController
      */
     protected function redirectToUser(User $user)
     {
-        $this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['profilePage'] ? $this->settings['profilePage'] : $GLOBALS['TSFE']->id));
+        $this->redirect(null, null, null, array('user' => $user), ($this->settings['profilePage'] ? $this->settings['profilePage'] : $GLOBALS['TSFE']->id));
     }
 
     /**
@@ -404,7 +402,7 @@ class BaseController extends ActionController
      */
     protected function redirectToWall(User $user)
     {
-        $this->redirect(NULL, NULL, NULL, array('user' => $user), ($this->settings['wallPage'] ? $this->settings['wallPage'] : $GLOBALS['TSFE']->id));
+        $this->redirect(null, null, null, array('user' => $user), ($this->settings['wallPage'] ? $this->settings['wallPage'] : $GLOBALS['TSFE']->id));
     }
 
     /**
@@ -430,7 +428,7 @@ class BaseController extends ActionController
                 $tmpPath = $tmpPath[$segment];
                 $sizePath = $sizePath[$segment];
             }
-            if ($namePath !== NULL && $namePath !== '') {
+            if ($namePath !== null && $namePath !== '') {
                 $fileArray = array(
                     'name' => $namePath,
                     'tmp' => $tmpPath,
@@ -487,7 +485,7 @@ class BaseController extends ActionController
 
     protected function redirect($actionName, $controllerName = null, $extensionName = null, array $arguments = null, $pageUid = null, $delay = 0, $statusCode = 303)
     {
-        BaseController::$redirected = TRUE;
+        BaseController::$redirected = true;
         parent::redirect($actionName, $controllerName, $extensionName, $arguments, $pageUid, $delay, $statusCode);
     }
 
@@ -502,6 +500,6 @@ class BaseController extends ActionController
         if ($this->settings['debug']) {
             return parent::getErrorFlashMessage();
         }
-        return FALSE;
+        return false;
     }
 }

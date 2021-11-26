@@ -1,6 +1,14 @@
 <?php
 
 namespace Macopedia\Community\Service\Notification;
+
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Log\LogLevel;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use Macopedia\Community\Service\SettingsService;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -24,16 +32,14 @@ namespace Macopedia\Community\Service\Notification;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Service used to dispatch different kind of notifications
  *
  *
  * @author Konrad Baumgart
  */
-class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Core\SingletonInterface
+class NotificationService implements NotificationServiceInterface, SingletonInterface
 {
-
     /**
      * @var array
      */
@@ -57,7 +63,6 @@ class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Co
      */
     public function notify(Notification $notification)
     {
-
         $methods = $this->getNotificationMethods($notification->getRule());
         if ($methods) {
             $defaults = $this->getNotificationDefaults();
@@ -68,7 +73,7 @@ class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Co
                     try {
                         $handler->send($notification, $method);
                     } catch (\Exception $e) {
-                        \TYPO3\CMS\Core\Utility\GeneralUtility::sysLog("Couldn't send email: " . $e->getMessage(), 'community', \TYPO3\CMS\Core\Utility\GeneralUtility::SYSLOG_SEVERITY_ERROR);
+                        GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__)->log(LogLevel::ERROR, "Couldn't send email: " . $e->getMessage());
                     }
                 }
             }
@@ -123,7 +128,7 @@ class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Co
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -133,9 +138,8 @@ class NotificationService implements NotificationServiceInterface, \TYPO3\CMS\Co
      *
      * @param \Macopedia\Community\Service\SettingsService $settingsService
      */
-    public function injectSettingsService(\Macopedia\Community\Service\SettingsService $settingsService)
+    public function injectSettingsService(SettingsService $settingsService)
     {
         $this->settingsService = $settingsService;
     }
-
 }

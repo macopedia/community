@@ -4,6 +4,7 @@ namespace Macopedia\Community\ViewHelpers\Widget\Controller;
 
 use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,11 +33,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PaginateController extends AbstractWidgetController
 {
-
     /**
      * @var array
      */
-    protected $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE, 'pagesAfter' => 2, 'pagesBefore' => 2, 'lessPages' => TRUE, 'forcedNumberOfLinks' => 4);
+    protected $configuration = array('itemsPerPage' => 10, 'insertAbove' => false, 'insertBelow' => true, 'pagesAfter' => 2, 'pagesBefore' => 2, 'lessPages' => true, 'forcedNumberOfLinks' => 4);
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
@@ -60,7 +60,7 @@ class PaginateController extends AbstractWidgetController
     /**
      * @var boolean
      */
-    protected $lessPages = FALSE;
+    protected $lessPages = false;
 
     /**
      * @var integer
@@ -82,12 +82,14 @@ class PaginateController extends AbstractWidgetController
         $this->objects = $this->widgetConfiguration['objects'];
         $this->configuration = GeneralUtility::array_merge_recursive_overrule(
             $this->configuration,
-            $this->widgetConfiguration['configuration'], TRUE);
-        $this->numberOfPages = ceil(count($this->objects) / (integer)$this->configuration['itemsPerPage']);
-        $this->pagesBefore = (integer)$this->configuration['pagesBefore'];
-        $this->pagesAfter = (integer)$this->configuration['pagesAfter'];
-        $this->lessPages = (boolean)$this->configuration['lessPages'];
-        $this->forcedNumberOfLinks = (integer)$this->configuration['forcedNumberOfLinks'];
+            $this->widgetConfiguration['configuration'],
+            true
+        );
+        $this->numberOfPages = ceil(count($this->objects) / (int)$this->configuration['itemsPerPage']);
+        $this->pagesBefore = (int)$this->configuration['pagesBefore'];
+        $this->pagesAfter = (int)$this->configuration['pagesAfter'];
+        $this->lessPages = (bool)$this->configuration['lessPages'];
+        $this->forcedNumberOfLinks = (int)$this->configuration['forcedNumberOfLinks'];
     }
 
     /**
@@ -120,7 +122,6 @@ class PaginateController extends AbstractWidgetController
                 $this->pagesAfter += $delta - $incr;
             }
         }
-
     }
 
     /**
@@ -132,7 +133,7 @@ class PaginateController extends AbstractWidgetController
     public function indexAction($currentPage = 1)
     {
         // set current page
-        $this->currentPage = (integer)$currentPage;
+        $this->currentPage = (int)$currentPage;
         if ($this->currentPage < 1) {
             $this->currentPage = 1;
         } elseif ($this->currentPage > $this->numberOfPages) {
@@ -140,7 +141,7 @@ class PaginateController extends AbstractWidgetController
         }
 
         // modify query
-        $itemsPerPage = (integer)$this->configuration['itemsPerPage'];
+        $itemsPerPage = (int)$this->configuration['itemsPerPage'];
         $query = $this->objects->getQuery();
 
         // limit should only be used if needed
@@ -149,7 +150,7 @@ class PaginateController extends AbstractWidgetController
         }
 
         if ($this->currentPage > 1) {
-            $query->setOffset((integer)($itemsPerPage * ($this->currentPage - 1)));
+            $query->setOffset((int)($itemsPerPage * ($this->currentPage - 1)));
         }
         $modifiedObjects = $query->execute();
 
@@ -194,13 +195,12 @@ class PaginateController extends AbstractWidgetController
 
         // Less pages
         if ($start > 1 && $this->lessPages) {
-            $pagination['lessPages'] = TRUE;
+            $pagination['lessPages'] = true;
         }
         // More pages
         if ($end < $this->numberOfPages - 1 && $this->lessPages) {
-            $pagination['morePages'] = TRUE;
+            $pagination['morePages'] = true;
         }
         return $pagination;
     }
 }
-

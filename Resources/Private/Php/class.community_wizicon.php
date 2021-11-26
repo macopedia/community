@@ -2,6 +2,7 @@
 
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,7 +36,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  */
 class Tx_Community_Resources_Private_Php_wizicon
 {
-
     /**
      * Processing the wizard items array
      *
@@ -43,7 +43,7 @@ class Tx_Community_Resources_Private_Php_wizicon
      *
      * @return array Modified array with wizard items
      */
-    function proc($wizardItems)
+    public function proc($wizardItems)
     {
         // name of the plugin to load on startup
         $extKeyPlugin = 'community_listusers';

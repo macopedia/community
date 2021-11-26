@@ -37,7 +37,6 @@ use Macopedia\Community\Domain\Model\User;
  */
 class UnreadMessagesViewHelper extends IfViewHelper
 {
-
     /**
      * Repository service. Get all your repositories with it.
      *

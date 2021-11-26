@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Domain\Model;
 
 use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +29,6 @@ use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
  ***************************************************************/
 class Message extends AbstractObservableEntity
 {
-
     /**
      * The sender
      *

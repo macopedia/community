@@ -5,6 +5,7 @@ namespace Macopedia\Community\Domain\Model;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -37,20 +38,19 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Group extends FrontendUserGroup
 {
-
     /**
      * The group is public: anyone can join
      *
      * @var integer
      */
-    const GROUP_TYPE_PUBLIC = 1;
+    public const GROUP_TYPE_PUBLIC = 1;
 
     /**
      * The group is private: the user needs to be confirmed by the creator/admins to join
      *
      * @var integer
      */
-    const GROUP_TYPE_PRIVATE = 2;
+    public const GROUP_TYPE_PRIVATE = 2;
 
     /**
      * name
@@ -335,5 +335,4 @@ class Group extends FrontendUserGroup
     {
         $this->pendingMembers->detach($pendingMember);
     }
-
 }

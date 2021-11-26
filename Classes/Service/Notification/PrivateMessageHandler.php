@@ -2,7 +2,6 @@
 
 namespace Macopedia\Community\Service\Notification;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,6 +25,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Notify user with private message
  *
@@ -35,7 +37,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PrivateMessageHandler extends AbstractHandler
 {
-
     /**
      * @param  array $notification
      * @param  array $configuration
@@ -43,20 +44,19 @@ class PrivateMessageHandler extends AbstractHandler
      */
     public function send(array $notification, array $configuration)
     {
-
         $message = GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\Message');
         /* @var $message Message */
         $message->setSent(true);
         $message->setSentDate(time());
         $message->setSender($notification['sender']);
         $message->setRecipient($notification['recipient']);
-        if ($configuration['subject'])
+        if ($configuration['subject']) {
             $message->setSubject($configuration['subject']);
-        if ($notification['subject'])
+        }
+        if ($notification['subject']) {
             $message->setSubject($notification['subject']);
+        }
         $message->setMessage($this->render($notification, $configuration));
         $this->repositoryService->get('message')->add($message);
     }
-
 }
-

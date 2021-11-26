@@ -35,7 +35,6 @@ use Macopedia\Community\Domain\Model\User;
  */
 class Notification
 {
-
     /**
      * Location for overloaded data.
      * @var array
@@ -115,7 +114,7 @@ class Notification
      * @param User $sender
      * @param User $recipient
      */
-    public function __construct($rule = '', User $sender = NULL, User $recipient = NULL)
+    public function __construct($rule = '', User $sender = null, User $recipient = null)
     {
         $this->setRule($rule);
         $this->setSender($sender);
@@ -136,4 +135,3 @@ class Notification
         }
     }
 }
-

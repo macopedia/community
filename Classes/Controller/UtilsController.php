@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -29,7 +30,6 @@ namespace Macopedia\Community\Controller;
  */
 class UtilsController extends BaseController
 {
-
     /**
      * Manages printing messages from flashMessages queue
      * @return mixed

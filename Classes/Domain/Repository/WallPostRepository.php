@@ -32,7 +32,6 @@ use Macopedia\Community\Domain\Model\User;
 
 class WallPostRepository extends Repository
 {
-
     /**
      * Finds most recent posts by the specified blog
      *
@@ -67,5 +66,4 @@ class WallPostRepository extends Repository
             }
         }
     }
-
 }

@@ -38,7 +38,6 @@ use Macopedia\Community\Service\Notification\Notification;
  */
 class NotificationTest extends UnitTestCase
 {
-
     protected $notification;
 
     public function setUp()
@@ -57,8 +56,6 @@ class NotificationTest extends UnitTestCase
         $this->notification->setRule('ruleName'); //existing property
         $this->assertEquals('ruleName', $this->notification->getRule());
 
-        $this->assertEquals(NULL, $this->notification->getNotSetbeforeProperty());
+        $this->assertEquals(null, $this->notification->getNotSetbeforeProperty());
     }
 }
-
-

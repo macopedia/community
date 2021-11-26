@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Service\Cache;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -28,7 +29,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  ***************************************************************/
 interface CacheServiceInterface
 {
-
     /**
      * Sets a cache entry
      *

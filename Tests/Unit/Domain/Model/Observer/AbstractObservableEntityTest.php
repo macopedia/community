@@ -2,7 +2,6 @@
 
 namespace Macopedia\Community\Tests\Unit\Domain\Model\Observer;
 
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,8 +26,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\Observer\CacheObserver,
-    Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
+use Macopedia\Community\Domain\Model\Observer\CacheObserver;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test for the cache observer
@@ -40,7 +39,6 @@ use Macopedia\Community\Domain\Model\Observer\CacheObserver,
  */
 class AbstractObservableEntityTest extends UnitTestCase
 {
-
     private $cacheService;
 
     private $observable;

@@ -35,7 +35,6 @@ use Macopedia\Community\Domain\Model;
  */
 class PhotoController extends BaseController
 {
-
     /**
      * Displays a form for creating a new  Photo
      *
@@ -73,7 +72,7 @@ class PhotoController extends BaseController
             $this->repositoryService->get('photo')->add($newPhoto);
             $this->repositoryService->get('album')->update($album);
             $this->addFlashMessage($this->_('photo.album.uploadSuccess'));
-            $this->redirect('show', 'album', NULL, array('album' => $album->getUid()));
+            $this->redirect('show', 'album', null, array('album' => $album->getUid()));
         } else {
             $this->addFlashMessage($this->_('profile.album.uploadError'));
             $this->redirect('new');
@@ -102,7 +101,7 @@ class PhotoController extends BaseController
         $this->repositoryService->get('album')->update($album);
         $this->repositoryService->get('photo')->remove($photo);
         $this->addFlashMessage($this->_('profile.album.photoRemoved'));
-        $this->redirect('show', 'Album', NULL, array('album' => $album));
+        $this->redirect('show', 'Album', null, array('album' => $album));
     }
 
     /**
@@ -133,7 +132,7 @@ class PhotoController extends BaseController
         } else {
             $this->addFlashMessage($this->_('profile.album.accessDenied'));
         }
-        $this->redirect('show', 'Album', NULL, array('album' => $album));
+        $this->redirect('show', 'Album', null, array('album' => $album));
     }
 
     /**
@@ -147,7 +146,7 @@ class PhotoController extends BaseController
         $album = $photo->getAlbum();
         $album->setMainPhoto($photo);
         $this->repositoryService->get('album')->update($album);
-        $this->redirect('show', 'Album', NULL, array('album' => $photo->getAlbum()));
+        $this->redirect('show', 'Album', null, array('album' => $photo->getAlbum()));
     }
 
     /**
@@ -166,9 +165,9 @@ class PhotoController extends BaseController
             ($album->getPrivate() <= 1 && $requestingUser) ||
             $album->getPrivate() === 0
         ) {
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 }

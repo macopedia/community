@@ -38,7 +38,6 @@ use Macopedia\Community\Domain\Model\WallPost;
  */
 class WallHandler extends BaseHandler
 {
-
     /**
      * @param  array $arguments
      * @param  array $configuration
@@ -46,7 +45,6 @@ class WallHandler extends BaseHandler
      */
     public function send(array $arguments, array $configuration)
     {
-
         $message = GeneralUtility::makeInstance('WallPost');
         $message->setSender($arguments['sender']);
         $message->setRecipient($arguments['recipient']);
@@ -55,4 +53,3 @@ class WallHandler extends BaseHandler
         $this->repositoryService->get('wallPost')->add($message);
     }
 }
-

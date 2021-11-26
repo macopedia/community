@@ -4,6 +4,7 @@ namespace Macopedia\Community\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -29,7 +30,6 @@ use Macopedia\Community\Domain\Model\Observer\AbstractObservableEntity;
  ***************************************************************/
 class WallPost extends AbstractObservableEntity
 {
-
     /**
      * Sender
      *

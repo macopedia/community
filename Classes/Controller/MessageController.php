@@ -1,5 +1,7 @@
 <?php
+
 namespace Macopedia\Community\Controller;
+
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 /***************************************************************
  *  Copyright notice
@@ -25,9 +27,9 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User,
-    Macopedia\Community\Domain\Model\Message,
-    Macopedia\Community\Service\Notification\Notification;
+use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Domain\Model\Message;
+use Macopedia\Community\Service\Notification\Notification;
 
 /**
  * The controller for messages
@@ -42,7 +44,6 @@ use Macopedia\Community\Domain\Model\User,
  */
 class MessageController extends BaseController
 {
-
     /**
      * Show the inbox of a user
      */
@@ -108,8 +109,9 @@ class MessageController extends BaseController
      * @Extbase\IgnoreValidation("message")
      */
     public function writeAction(
-        User $user = NULL,
-        Message $message = NULL)
+        User $user = null,
+        Message $message = null
+    )
     {
         if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
             return '';
@@ -126,8 +128,9 @@ class MessageController extends BaseController
      * @Extbase\IgnoreValidation("message")
      */
     public function writeThreadedAction(
-        User $user = NULL,
-        Message $message = NULL)
+        User $user = null,
+        Message $message = null
+    )
     {
         if ($this->getRequestedUser()->getUid() == $this->getRequestingUser()->getUid()) {
             return '';
@@ -146,12 +149,12 @@ class MessageController extends BaseController
         $this->sendMessage($message);
 
         //We reset message argument, so that we don't see old message in write message form
-        $this->request->setArgument('message', NULL);
+        $this->request->setArgument('message', null);
 
         if ($this->request->getPluginName() == 'MessageBox') {
-            $this->redirect('read', NULL, NULL, array('user' => $message->getRecipient()));
+            $this->redirect('read', null, null, array('user' => $message->getRecipient()));
         } elseif ($this->request->getPluginName() == 'ThreadedMessageWriteBox') {
-            $this->redirect('thread', NULL, NULL, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
+            $this->redirect('thread', null, null, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
         } else {
             $this->forward('write');
         }
@@ -194,11 +197,10 @@ class MessageController extends BaseController
     {
 
         //We can read only when we are sender or recipient of this message
-        $hasAccess = FALSE;
+        $hasAccess = false;
 
         if ($message->getRecipient() && $this->getRequestingUser()->getUid() == $message->getRecipient()->getUid()) {
-
-            $hasAccess = TRUE;
+            $hasAccess = true;
 
             //do not flag message as read when reading your own message
             $message->setRead(true);
@@ -207,7 +209,7 @@ class MessageController extends BaseController
         }
 
         if ($message->getSender() && $this->getRequestingUser()->getUid() == $message->getSender()->getUid()) {
-            $hasAccess = TRUE;
+            $hasAccess = true;
         }
 
         if ($hasAccess) {
@@ -223,7 +225,7 @@ class MessageController extends BaseController
      * @param Message $message
      * @param string $redirectAction
      */
-    public function deleteAction(Message $message, $redirectAction = NULL)
+    public function deleteAction(Message $message, $redirectAction = null)
     {
         if (!$this->getRequestingUser()) {
             return;
@@ -249,7 +251,7 @@ class MessageController extends BaseController
         }
         $this->deleteMessage($message);
 
-        $this->redirect('thread', NULL, NULL, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
+        $this->redirect('thread', null, null, array('user' => $message->getRecipient()), $this->settings['threadedMessagePage']);
     }
 
     /**
@@ -268,4 +270,3 @@ class MessageController extends BaseController
         $this->addFlashMessage($this->_('message.delete.success'));
     }
 }
-

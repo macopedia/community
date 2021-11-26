@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Service\Notification;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -34,8 +35,6 @@ namespace Macopedia\Community\Service\Notification;
  */
 interface HandlerInterface
 {
-
-
     /**
      * @abstract
      * @param  Notification $notification
@@ -43,6 +42,4 @@ interface HandlerInterface
      * @return void
      */
     public function send(Notification $notification, array $configuration);
-
 }
-

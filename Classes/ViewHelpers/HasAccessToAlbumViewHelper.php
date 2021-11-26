@@ -37,7 +37,6 @@ use Macopedia\Community\Domain\Model\Relation;
  */
 class HasAccessToAlbumViewHelper extends AbstractConditionViewHelper
 {
-
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -65,7 +64,7 @@ class HasAccessToAlbumViewHelper extends AbstractConditionViewHelper
             return false;
         }
     }
-        public function render()
+    public function render()
     {
         if (static::evaluateCondition($this->arguments)) {
             return $this->renderThenChild();

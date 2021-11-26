@@ -42,7 +42,6 @@ use Macopedia\Community\Exception;
  */
 class RelationController extends BaseController
 {
-
     /**
      * Display some of user's friends
      */
@@ -89,7 +88,7 @@ class RelationController extends BaseController
             $this->redirectToUser($this->getRequestingUser());
         }
         $relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
-        if ($relation === NULL) {
+        if ($relation === null) {
             //Normal request
             $this->addFlashMessage($this->_('relation.request.pending'));
 
@@ -129,7 +128,6 @@ class RelationController extends BaseController
      */
     protected function requestedExistingRelation(Relation $relation, User $user)
     {
-
         switch ($relation->getStatus()) {
 
             case Relation::RELATION_STATUS_NEW:
@@ -208,8 +206,11 @@ class RelationController extends BaseController
     public function unconfirmedAction()
     {
         if ($this->ownProfile()) {
-            $this->view->assign('unconfirmedRelations', $this->repositoryService->get('relation')->findUnconfirmedForUser(
-                $this->getRequestingUser())
+            $this->view->assign(
+                'unconfirmedRelations',
+                $this->repositoryService->get('relation')->findUnconfirmedForUser(
+                $this->getRequestingUser()
+            )
             );
         } else {
             $this->view->assign('unconfirmedRelations', array());
@@ -224,10 +225,10 @@ class RelationController extends BaseController
      * @throws Exception\UnexpectedException
      * @return void
      */
-    public function cancelAction(Relation $relation = NULL, User $user = NULL)
+    public function cancelAction(Relation $relation = null, User $user = null)
     {
-        if ($relation === NULL) {
-            if ($user !== NULL) {
+        if ($relation === null) {
+            if ($user !== null) {
                 $relation = $this->repositoryService->get('relation')->findRelationBetweenUsers($user, $this->getRequestingUser());
             } else {
                 throw new UnexpectedException("One of the parameters must be set");

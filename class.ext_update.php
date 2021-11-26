@@ -31,15 +31,16 @@
  */
 class ext_update
 {
-    const STATUS_WARNING = -1;
-    const STATUS_ERROR = 0;
-    const STATUS_OK = 1;
+    public const STATUS_WARNING = -1;
+    public const STATUS_ERROR = 0;
+    public const STATUS_OK = 1;
 
     protected $messageArray = array();
 
     protected function changeGender()
     {
-        $status = self::STATUS_OK;;
+        $status = self::STATUS_OK;
+        ;
         $title = 'Changing gender type form varchar to int';
 
         $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -59,7 +60,7 @@ class ext_update
             $updateArray = array('gender' => 0);
 
             $res = $GLOBALS['TYPO3_DB']->exec_UPDATEquery('fe_users', "gender = 'male'", $updateArray);
-            if ($res === FALSE) {
+            if ($res === false) {
                 $message .= "\n" . ' Could not change gender "male"';
                 $status = self::STATUS_ERROR;
             }
@@ -67,14 +68,14 @@ class ext_update
             $updateArray['gender'] = 1;
             $res = $GLOBALS['TYPO3_DB']->exec_UPDATEquery('fe_users', "gender = 'female'", $updateArray);
 
-            if ($res === FALSE) {
+            if ($res === false) {
                 $message .= "\n" . ' Could not change gender "female"';
                 $status = self::STATUS_ERROR;
             }
 
             $sql = "ALTER TABLE fe_users CHANGE gender gender int(11) unsigned default '0'";
 
-            if ($GLOBALS['TYPO3_DB']->admin_query($sql) === FALSE) {
+            if ($GLOBALS['TYPO3_DB']->admin_query($sql) === false) {
                 $message .= ' SQL ERROR: ' . $GLOBALS['TYPO3_DB']->sql_error();
                 $status = self::STATUS_ERROR;
             } else {
@@ -123,6 +124,6 @@ class ext_update
      */
     public function access()
     {
-        return TRUE;
+        return true;
     }
 }

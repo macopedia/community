@@ -39,7 +39,6 @@ use Macopedia\Community\Domain\Model\User;
  */
 class RelationViewHelper extends AbstractViewHelper
 {
-
     /**
      * @var \Macopedia\Community\Domain\Repository\RelationRepository
      */
@@ -67,13 +66,13 @@ class RelationViewHelper extends AbstractViewHelper
         $requestingUser = $this->arguments['requestingUser'];
         $requestedUser = $this->arguments['requestedUser'];
         if ($requestingUser === $requestedUser) {
-            return TRUE;
+            return true;
         }
         $result = $this->relationRepository->findRelationBetweenUsers($requestingUser, $requestedUser);
         if ($result) {
             return $result;
         } else {
-            return FALSE;
+            return false;
         }
     }
 

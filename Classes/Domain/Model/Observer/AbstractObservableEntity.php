@@ -4,6 +4,7 @@ namespace Macopedia\Community\Domain\Model\Observer;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,15 +36,12 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-abstract class AbstractObservableEntity
-    extends AbstractEntity
-    implements ObservableInterface
+abstract class AbstractObservableEntity extends AbstractEntity implements ObservableInterface
 {
-
     /**
      * Overrides the normal _isDirty function and notifies the observers if something has changed
      */
-    public function _isDirty($property = NULL, $notify = TRUE)
+    public function _isDirty($property = null, $notify = true)
     {
         $dirty = parent::_isDirty($property);
         if ($dirty && $notify) {
@@ -55,7 +53,7 @@ abstract class AbstractObservableEntity
     /**
      * Overrides the normal _isNew function and notifies the observers if this object is new (and will be persisted)
      */
-    public function _isNew($notify = TRUE)
+    public function _isNew($notify = true)
     {
         $new = parent::_isNew();
         if ($new && $notify) {

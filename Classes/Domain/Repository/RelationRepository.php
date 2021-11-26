@@ -28,8 +28,8 @@ use Macopedia\Community\Exception\UnexpectedException;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User,
-    Macopedia\Community\Domain\Model\Relation;
+use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Domain\Model\Relation;
 
 /**
  * Repository for Relation
@@ -40,7 +40,6 @@ use Macopedia\Community\Domain\Model\User,
  */
 class RelationRepository extends Repository
 {
-
     /**
      * Find confirmed relations for a certain user.
      *
@@ -67,11 +66,10 @@ class RelationRepository extends Repository
     public function findRelationBetweenUsers(
         User $requestedUser,
         User $requestingUser,
-        $status = NULL
-    )
-    {
+        $status = null
+    ) {
         $query = $this->createQuery();
-        if ($status !== NULL) {
+        if ($status !== null) {
             $statusQuery = $query->equals('status', $status);
         } else {
             $statusQuery = $query->logicalNot($query->equals('status', 0));
@@ -87,7 +85,7 @@ class RelationRepository extends Repository
         } elseif (count($relations) == 1) {
             return $relations[0];
         } else {
-            return NULL;
+            return null;
         }
     }
 

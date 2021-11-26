@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Tests\Unit\Service\Notification;
 
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,9 +28,9 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Service\Notification\NotificationService,
-    Macopedia\Community\Service\Notification\Notification,
-    Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Service\Notification\NotificationService;
+use Macopedia\Community\Service\Notification\Notification;
+use Macopedia\Community\Domain\Model\User;
 
 /**
  * Test for the notification service
@@ -40,8 +41,6 @@ use Macopedia\Community\Service\Notification\NotificationService,
  */
 class NotificationServiceTest extends UnitTestCase
 {
-
-
     protected $service;
 
     public function setUp()
@@ -75,7 +74,7 @@ class NotificationServiceTest extends UnitTestCase
 
         $correctNotification = new Notification("someRule", $user1, $user2);
         $wrongNotification = new Notification("someRule", $user1, $user1);
-        $wrongNotification2 = new Notification("someRule", $user1, NULL);
+        $wrongNotification2 = new Notification("someRule", $user1, null);
 
         $dataSets = array();
         $dataSets[0] = array( //first test case: different users, empty configuration
@@ -125,5 +124,4 @@ class NotificationServiceTest extends UnitTestCase
         );
         return $dataSets;
     }
-
 }

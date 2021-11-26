@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,34 +36,33 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Relation extends AbstractEntity
 {
-
     /**
      * the relation has just been initiated
      *
      * @var integer
      */
-    const RELATION_STATUS_NEW = 1;
+    public const RELATION_STATUS_NEW = 1;
 
     /**
      * the relation was confirmed by the requested user
      *
      * @var integer
      */
-    const RELATION_STATUS_CONFIRMED = 2;
+    public const RELATION_STATUS_CONFIRMED = 2;
 
     /**
      * the requested user rejected the relation request
      *
      * @var integer
      */
-    const RELATION_STATUS_REJECTED = 4;
+    public const RELATION_STATUS_REJECTED = 4;
 
     /**
      * one of the users cancelled the existing relation
      *
      * @var integer
      */
-    const RELATION_STATUS_CANCELLED = 8;
+    public const RELATION_STATUS_CANCELLED = 8;
 
     /**
      * @var \Macopedia\Community\Domain\Model\User
@@ -82,7 +82,7 @@ class Relation extends AbstractEntity
     /**
      * @var AclRole
      */
-//	protected $requestedRole;
+    //	protected $requestedRole;
 
     /**
      * @var integer

@@ -4,6 +4,7 @@ namespace Macopedia\Community\Domain\Model\Observer;
 
 use TYPO3\CMS\Core\SingletonInterface;
 use Macopedia\Community\Service\Cache\CacheServiceInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -29,7 +30,6 @@ use Macopedia\Community\Service\Cache\CacheServiceInterface;
  ***************************************************************/
 class CacheObserver implements ObserverInterface, SingletonInterface
 {
-
     /**
      * @var \Macopedia\Community\Service\Cache\CacheServiceInterface
      */

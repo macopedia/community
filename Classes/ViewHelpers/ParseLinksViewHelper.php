@@ -4,6 +4,7 @@ namespace Macopedia\Community\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use Macopedia\Community\Helper\UrlLinkerHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,7 +36,6 @@ use Macopedia\Community\Helper\UrlLinkerHelper;
  */
 class ParseLinksViewHelper extends AbstractViewHelper
 {
-
     /**
      * @see http://www.flashnutz.com/2010/07/find-links-within-text-and-convert-to-active-links-with-php/
      * @return string

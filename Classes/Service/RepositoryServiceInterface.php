@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Service;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -36,7 +37,6 @@ namespace Macopedia\Community\Service;
  */
 interface RepositoryServiceInterface
 {
-
     /**
      * Get the repository for the model $repositoryName (e.g. "user")
      *

@@ -40,7 +40,6 @@ use Macopedia\Community\Domain\Model\User;
  */
 interface AccessServiceInterface
 {
-
     /**
      * Check if requestingUser has access to $resource of $requestedUser. $requestingUser may be empty if
      * "anonymous" is requesting a resource.
@@ -51,8 +50,8 @@ interface AccessServiceInterface
      * @return boolean
      */
     public function hasAccess(
-        User $requestingUser = NULL,
-        User $requestedUser = NULL,
+        User $requestingUser = null,
+        User $requestedUser = null,
         $resource = ''
     );
 }

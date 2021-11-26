@@ -3,6 +3,7 @@
 namespace Macopedia\Community\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  * Copyright notice
  *
@@ -34,7 +35,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class CountryFlagViewHelper extends AbstractViewHelper
 {
-
     /**
      * Renders the CountryFlagViewHelper
      *
@@ -53,4 +53,3 @@ class CountryFlagViewHelper extends AbstractViewHelper
         $this->registerArgument('country', 'SJBR\StaticInfoTables\Domain\Model\Country', 'Country-Object', false);
     }
 }
-

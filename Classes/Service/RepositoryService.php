@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Service;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -39,7 +40,6 @@ namespace Macopedia\Community\Service;
  */
 class RepositoryService implements \Macopedia\Community\Service\RepositoryServiceInterface, \TYPO3\CMS\Core\SingletonInterface
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */

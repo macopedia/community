@@ -26,7 +26,6 @@ namespace Macopedia\Community\Tests\Unit\Service\Access;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Service\Access\SimpleAccessService;
 
 /**
@@ -39,7 +38,6 @@ use Macopedia\Community\Service\Access\SimpleAccessService;
  */
 class SimpleAccessServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
-
     /**
      * @test
      */

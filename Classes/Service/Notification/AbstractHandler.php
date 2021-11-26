@@ -29,8 +29,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Service\RepositoryServiceInterface,
-    Macopedia\Community\Service\SettingsService;
+use Macopedia\Community\Service\RepositoryServiceInterface;
+use Macopedia\Community\Service\SettingsService;
 
 /**
  * Abstract notification handler
@@ -41,7 +41,6 @@ use Macopedia\Community\Service\RepositoryServiceInterface,
  */
 abstract class AbstractHandler implements HandlerInterface, SingletonInterface
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
@@ -132,5 +131,4 @@ abstract class AbstractHandler implements HandlerInterface, SingletonInterface
 
         return array('subject' => $subject, 'bodyHTML' => $bodyHTML, 'bodyPlain' => $bodyPlain);
     }
-
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Controller\Cacheable;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,7 +36,6 @@ namespace Macopedia\Community\Controller\Cacheable;
  */
 interface ControllerInterface
 {
-
     /**
      * Get the tags that should be flushed
      */

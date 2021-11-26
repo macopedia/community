@@ -26,8 +26,8 @@ namespace Macopedia\Community\Helper;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\Group,
-    Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Domain\Model\Group;
+use Macopedia\Community\Domain\Model\User;
 
 /**
  * A helper to manage group related functions
@@ -39,19 +39,16 @@ use Macopedia\Community\Domain\Model\Group,
  */
 class GroupHelper
 {
-
-
     /**
      * Checks if a user is an admin of a group
      *
      * @param Group $group
      * @param User $user
      */
-    static public function isAdmin(
+    public static function isAdmin(
         Group $group,
         User $user
-    )
-    {
+    ) {
         $userId = $user->getUid();
 
         if ($group->getCreator()->getUid() == $userId) {
@@ -68,13 +65,11 @@ class GroupHelper
      * @param Group $group
      * @param User $user
      */
-    static public function isMember(
+    public static function isMember(
         Group $group,
         User $user
-    )
-    {
+    ) {
         return $group->getMembers()->contains($user);
-
     }
 
     /**
@@ -83,12 +78,10 @@ class GroupHelper
      * @param Group $group
      * @param User $user
      */
-    static public function isPendingMember(
+    public static function isPendingMember(
         Group $group,
         User $user
-    )
-    {
+    ) {
         return $group->getPendingMembers()->contains($user);
-
     }
 }

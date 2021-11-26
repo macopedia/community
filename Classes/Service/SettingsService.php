@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -36,7 +37,6 @@ use TYPO3\CMS\Core\SingletonInterface;
  */
 class SettingsService implements SingletonInterface
 {
-
     protected $settings;
 
     /**

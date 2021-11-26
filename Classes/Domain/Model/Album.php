@@ -5,6 +5,7 @@ namespace Macopedia\Community\Domain\Model;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,41 +33,40 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Album extends AbstractEntity
 {
-
     /**
      * public album
      *
      * @var integer
      */
-    const PRIVACY_AVAILABLE_FOR_ALL = 0;
+    public const PRIVACY_AVAILABLE_FOR_ALL = 0;
 
     /**
      * album for logged in users
      *
      * @var integer
      */
-    const PRIVACY_AVAILABLE_FOR_LOGGED_IN = 1;
+    public const PRIVACY_AVAILABLE_FOR_LOGGED_IN = 1;
 
     /**
      * album for friends
      *
      * @var integer
      */
-    const PRIVACY_AVAILABLE_FOR_FRIENDS = 2;
+    public const PRIVACY_AVAILABLE_FOR_FRIENDS = 2;
 
     /**
      * album is a normal album
      *
      * @var integer
      */
-    const ALBUM_TYPE_NORMAL = 0;
+    public const ALBUM_TYPE_NORMAL = 0;
 
     /**
      * album contains current and old avatars
      *
      * @var integer
      */
-    const ALBUM_TYPE_AVATAR = 1;
+    public const ALBUM_TYPE_AVATAR = 1;
 
     /**
      * Owner of the album
@@ -187,7 +187,7 @@ class Album extends AbstractEntity
      * @param \Macopedia\Community\Domain\Model\Photo $photo
      * @return void
      */
-    public function setMainPhoto(Photo $photo = NULL)
+    public function setMainPhoto(Photo $photo = null)
     {
         $this->mainPhoto = $photo;
     }
@@ -254,5 +254,4 @@ class Album extends AbstractEntity
     {
         $this->photos->detach($photoToRemove);
     }
-
 }

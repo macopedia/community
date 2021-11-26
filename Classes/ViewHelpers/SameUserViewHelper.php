@@ -2,7 +2,6 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -28,6 +27,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  ***************************************************************/
 
 use Macopedia\Community\Domain\Model\User;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
  * Checks if the requestedUser and the requestingUser are the same.
@@ -38,7 +38,6 @@ use Macopedia\Community\Domain\Model\User;
  */
 class SameUserViewHelper extends AbstractConditionViewHelper
 {
-
     public function initializeArguments()
     {
         parent::initializeArguments();
@@ -60,7 +59,7 @@ class SameUserViewHelper extends AbstractConditionViewHelper
         }
 
         if ((is_int($requestingUser) && $requestingUser === $requestedUser)
-            || ($requestingUser === NULL && $requestedUser === NULL)
+            || ($requestingUser === null && $requestedUser === null)
         ) {
             return true;
         } else {

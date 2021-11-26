@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Service\Notification;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -33,7 +34,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class MailHandler extends AbstractHandler
 {
-
     /**
      * Sends e-mail to recipients
      * Mail is sent from address $configuration[sender]

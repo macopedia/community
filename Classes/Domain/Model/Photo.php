@@ -4,6 +4,7 @@ namespace Macopedia\Community\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Photo extends AbstractEntity
 {
-
     /**
      * image
      *
@@ -83,5 +83,4 @@ class Photo extends AbstractEntity
     {
         return $this->album;
     }
-
 }

@@ -40,14 +40,13 @@ use Macopedia\Community\Helper\GroupHelper;
  */
 class GroupController extends BaseController implements \Macopedia\Community\Controller\Cacheable\ControllerInterface
 {
-
     /**
      * Show the form to create a new grop
      *
      * @param Group $group
      * @dontverify $group
      */
-    public function newAction(Group $group = NULL)
+    public function newAction(Group $group = null)
     {
         $this->view->assign('group', $group);
         $this->view->assign('groupOwner', $this->getRequestingUser());
@@ -72,7 +71,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
             $group->setImage($image);
         } elseif ($image != 0) {
             $this->flashMessages->add($this->_('group.create.imageError'));
-            $this->redirect('new', 'Group', NULL, array('group' => $group));
+            $this->redirect('new', 'Group', null, array('group' => $group));
             return;
         }
 
@@ -108,11 +107,11 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
             $group->setImage($image);
         } elseif ($image != 0) {
             $this->flashMessages->add($this->_('group.create.imageError'));
-            $this->redirect('new', 'Group', NULL, array('group' => $group));
+            $this->redirect('new', 'Group', null, array('group' => $group));
             return;
         }
         $this->repositoryService->get('group')->update($group);
-        $this->redirect('show', 'Group', NULL, array('group' => $group));
+        $this->redirect('show', 'Group', null, array('group' => $group));
     }
 
     /**
@@ -185,8 +184,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
     public function confirmMembershipAction(
         Group $group,
         User $user
-    )
-    {
+    ) {
         if ($this->getRequestingUser() instanceof User) {
             if (GroupHelper::isAdmin($group, $this->getRequestingUser())) {
                 $group->removePendingMember($user);
@@ -196,7 +194,7 @@ class GroupController extends BaseController implements \Macopedia\Community\Con
                 $this->flashMessages->add($this->_('group.confirm.success'));
             }
         }
-        $this->redirect('show', 'Group', NULL, array('group' => $group));
+        $this->redirect('show', 'Group', null, array('group' => $group));
     }
 
     /**

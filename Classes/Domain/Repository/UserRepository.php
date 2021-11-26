@@ -41,7 +41,6 @@ use Macopedia\Community\Domain\Model\User;
  */
 class UserRepository extends Repository
 {
-
     /**
      * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
      */
@@ -54,9 +53,9 @@ class UserRepository extends Repository
      */
     public function findCurrentUser()
     {
-        $uid = (integer)$GLOBALS['TSFE']->fe_user->user['uid'];
+        $uid = (int)$GLOBALS['TSFE']->fe_user->user['uid'];
         if ($uid === 0) {
-            return NULL;
+            return null;
         }
         return $this->findByUid($uid);
     }
@@ -111,7 +110,7 @@ class UserRepository extends Repository
     public function findAllOrderBy($orderBy, $orderDirection)
     {
         $query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(FALSE);
+        $query->getQuerySettings()->setRespectStoragePage(false);
         //Helmut Hummel told me to do so ;)
         if (in_array($orderBy, array('crdate', 'username')) && in_array($orderDirection, array(
                 QueryInterface::ORDER_DESCENDING,

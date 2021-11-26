@@ -36,7 +36,6 @@ use Macopedia\Community\ViewHelpers\SameUserViewHelper;
  */
 class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase
 {
-
     /**
      * @var \Macopedia\Community\ViewHelpers\SameUserViewHelper|\TYPO3\TestingFramework\Core\AccessibleObjectInterface
      */
@@ -117,5 +116,3 @@ class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelp
         );
     }
 }
-
-

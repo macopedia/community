@@ -39,7 +39,6 @@ use Macopedia\Community\Domain\Model;
  */
 class WallPostController extends BaseController
 {
-
     /**
      * Displays all WallPosts
      *

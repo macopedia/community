@@ -4,6 +4,7 @@ namespace Macopedia\Community\Persistence\Cacheable;
 
 use TYPO3\CMS\Extbase\Persistence\Generic\Query;
 use Macopedia\Community\Service\Cache\CacheService;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -29,7 +30,6 @@ use Macopedia\Community\Service\Cache\CacheService;
  ***************************************************************/
 class TaggingQuery extends Query
 {
-
     /**
      * @var array
      */

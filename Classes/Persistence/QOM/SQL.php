@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Persistence\QOM;
 
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,12 +33,11 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
  */
 class SQL implements ConstraintInterface
 {
-
     /**
      * The SQL code that is to be inserted in query
      * @var string
      */
-    var $code;
+    public $code;
 
     /**
      * @param string $SQL

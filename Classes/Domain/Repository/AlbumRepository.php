@@ -1,6 +1,7 @@
 <?php
 
 namespace Macopedia\Community\Domain\Repository;
+
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use Macopedia\Community\Domain\Model\User;
@@ -34,7 +35,6 @@ use Macopedia\Community\Domain\Model\Album;
  */
 class AlbumRepository extends Repository
 {
-
     public function initialize()
     {
         $this->setDefaultOrderings(array('crdate' => QueryInterface::ORDER_DESCENDING));

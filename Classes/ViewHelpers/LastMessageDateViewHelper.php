@@ -37,7 +37,6 @@ use Macopedia\Community\Domain\Model\User;
  */
 class LastMessageDateViewHelper extends AbstractViewHelper
 {
-
     /**
      * Repository service. Get all your repositories with it.
      *

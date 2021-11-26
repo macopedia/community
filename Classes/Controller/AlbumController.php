@@ -33,7 +33,6 @@ use Macopedia\Community\Domain\Model\Album;
  */
 class AlbumController extends BaseController
 {
-
     /**
      * Displays all Albums of requested user
      *
@@ -64,7 +63,7 @@ class AlbumController extends BaseController
     public function showMostRecentAction()
     {
         $album = $this->repositoryService->get('album')->findOneByUser($this->requestedUser);
-        $this->redirect('show', NULL, NULL, array('album' => $album));
+        $this->redirect('show', null, null, array('album' => $album));
     }
 
     /**
@@ -74,7 +73,7 @@ class AlbumController extends BaseController
      * @return void
      * @Extbase\IgnoreValidation("newAlbum")
      */
-    public function newAction(Album $newAlbum = NULL)
+    public function newAction(Album $newAlbum = null)
     {
         $this->view->assign('newAlbum', $newAlbum);
     }

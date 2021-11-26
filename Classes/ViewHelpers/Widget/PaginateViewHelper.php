@@ -5,6 +5,7 @@ namespace Macopedia\Community\ViewHelpers\Widget;
 use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper;
 use Macopedia\Community\ViewHelpers\Widget\Controller\PaginateController;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -42,7 +43,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 class PaginateViewHelper extends AbstractWidgetViewHelper
 {
-
     /**
      * @var Controller\PaginateController
      */

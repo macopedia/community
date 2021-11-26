@@ -7,6 +7,7 @@ use Macopedia\Community\Domain\Model\Observer\ObservableInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Macopedia\Community\Domain\Model\Observer\CacheObserver;
 use Macopedia\Community\Domain\Model\Observer\ObserverInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -40,7 +41,6 @@ use Macopedia\Community\Domain\Model\Observer\ObserverInterface;
  */
 class User extends FrontendUser implements ObservableInterface
 {
-
     /**
      * @var string
      */
@@ -382,7 +382,7 @@ class User extends FrontendUser implements ObservableInterface
      *
      * @param \DateTime $dateOfBirth
      */
-    public function setDateOfBirth(\DateTime $dateOfBirth = NULL)
+    public function setDateOfBirth(\DateTime $dateOfBirth = null)
     {
         $this->dateOfBirth = $dateOfBirth;
     }
@@ -422,7 +422,7 @@ class User extends FrontendUser implements ObservableInterface
     /**
      * Overrides the normal _isDirty function and notifies the observers if something has changed
      */
-    public function _isDirty($property = NULL, $notify = TRUE)
+    public function _isDirty($property = null, $notify = true)
     {
         $dirty = parent::_isDirty($property);
         if ($dirty && $notify) {
@@ -434,7 +434,7 @@ class User extends FrontendUser implements ObservableInterface
     /**
      * Overrides the normal _isNew function and notifies the observers if this object is new (and will be persisted)
      */
-    public function _isNew($notify = TRUE)
+    public function _isNew($notify = true)
     {
         $new = parent::_isNew();
         if ($new && $notify) {

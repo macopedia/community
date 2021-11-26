@@ -1,5 +1,7 @@
 <?php
+
 namespace Macopedia\Community\Domain\Repository;
+
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 /***************************************************************
@@ -31,7 +33,6 @@ use Macopedia\Community\Domain\Model\User;
 
 class MessageRepository extends Repository
 {
-
     /**
      * Find outgoing messages for the current user
      *
@@ -43,7 +44,8 @@ class MessageRepository extends Repository
         $query = $this->createQuery();
         return $query->matching(
             $query->logicalAnd([$query->equals('sender', $user), $query->equals('senderDeleted', false)])
-        )->setOrderings(array('sentDate' => QueryInterface::ORDER_DESCENDING)
+        )->setOrderings(
+            array('sentDate' => QueryInterface::ORDER_DESCENDING)
         )->execute();
     }
 
@@ -58,7 +60,8 @@ class MessageRepository extends Repository
         $query = $this->createQuery();
         return $query->matching(
             $query->logicalAnd([$query->equals('recipient', $user), $query->equals('recipientDeleted', false)])
-        )->setOrderings(array('sentDate' => QueryInterface::ORDER_DESCENDING)
+        )->setOrderings(
+            array('sentDate' => QueryInterface::ORDER_DESCENDING)
         )->execute();
     }
 
@@ -167,9 +170,9 @@ class MessageRepository extends Repository
         foreach ($messages as $message) {
             /** @var $message Message */
             if ($user->getUid() == $message->getSender()->getUid()) {
-                $message->setSenderDeleted(TRUE);
+                $message->setSenderDeleted(true);
             } else {
-                $message->setRecipientDeleted(TRUE);
+                $message->setRecipientDeleted(true);
             }
             $this->update($message);
         }

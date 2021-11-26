@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Service\Notification;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -36,7 +37,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class WallService extends BaseHandler
 {
-
     /**
      * @param  array $arguments
      * @param  array $configuration
@@ -44,7 +44,6 @@ class WallService extends BaseHandler
      */
     public function send(array $arguments, array $configuration)
     {
-
         $message = GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\WallPost');
         $message->setSender($arguments['sender']);
         $message->setRecipient($arguments['recipient']);
@@ -53,4 +52,3 @@ class WallService extends BaseHandler
         $this->repositoryService->get('wallPost')->add($message);
     }
 }
-

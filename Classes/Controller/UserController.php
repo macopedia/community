@@ -40,11 +40,10 @@ use Macopedia\Community\Domain\Model\Photo;
  */
 class UserController extends BaseController implements \Macopedia\Community\Controller\Cacheable\ControllerInterface
 {
-
     /**
      * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
      */
-    protected $staticCountryRepository = NULL;
+    protected $staticCountryRepository = null;
 
     /**
      * Injects the staticCountryRepository
@@ -163,10 +162,10 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
             $this->photoToSpecialAlbum($newPhoto, Album::ALBUM_TYPE_AVATAR);
 
             $this->addFlashMessage($this->_('profile.updateImage.success'));
-            $this->redirect('edit', 'User', NULL, array('user' => $user));
+            $this->redirect('edit', 'User', null, array('user' => $user));
         } else {
             $this->addFlashMessage($this->_('profile.updateImage.error'), '', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
-            $this->redirect('editImage', 'User', NULL, array('user' => $user));
+            $this->redirect('editImage', 'User', null, array('user' => $user));
         }
     }
 
@@ -212,7 +211,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
         $this->repositoryService->get('user')->remove($user);
 
         $redirectPage = $this->settings['afterAccountDeletePage'];
-        $this->redirect(NULL, NULL, NULL, NULL, $redirectPage);
+        $this->redirect(null, null, null, null, $redirectPage);
     }
 
     /**
@@ -257,7 +256,7 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
             $notification->setMessage($reason);
             $this->notificationService->notify($notification);
         }
-        $this->redirect('details', NULL, NULL, array('user' => $user));
+        $this->redirect('details', null, null, array('user' => $user));
     }
 
     /**
@@ -284,4 +283,3 @@ class UserController extends BaseController implements \Macopedia\Community\Cont
         return $this->repositoryService->get('user')->getTags();
     }
 }
-

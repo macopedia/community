@@ -4,6 +4,7 @@ namespace Macopedia\Community\Service\Cache;
 
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -29,7 +30,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  ***************************************************************/
 class NoCacheService implements CacheServiceInterface, SingletonInterface
 {
-
     /**
      * Sets a cache entry
      *

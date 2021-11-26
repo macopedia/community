@@ -3,6 +3,7 @@
 namespace Macopedia\Community\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,7 +36,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class InListViewHelper extends AbstractViewHelper
 {
-
     public function render()
     {
         $list = $this->arguments['list'];

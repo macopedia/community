@@ -26,8 +26,8 @@ namespace Macopedia\Community\Service\Access;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use Macopedia\Community\Domain\Model\User,
-    Macopedia\Community\Domain\Model\Relation;
+use Macopedia\Community\Domain\Model\User;
+use Macopedia\Community\Domain\Model\Relation;
 
 /**
  * A simple access helper.
@@ -39,33 +39,32 @@ use Macopedia\Community\Domain\Model\User,
  */
 class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\SingletonInterface
 {
-
     /**
      * Logged out users, and requested user not set
      *
      * @var string
      */
-    const ACCESS_PUBLIC = 'public';
+    public const ACCESS_PUBLIC = 'public';
     /**
      * Logged out users, requested user set
      *
      * @var string
      */
-    const ACCESS_NOBODY = 'nobody';
+    public const ACCESS_NOBODY = 'nobody';
 
     /**
      * Logged in users - no friends
      *
      * @var string
      */
-    const ACCESS_OTHER = 'other';
+    public const ACCESS_OTHER = 'other';
 
     /**
      * Friends
      *
      * @var string
      */
-    const ACCESS_FRIEND = 'friend';
+    public const ACCESS_FRIEND = 'friend';
 
     /**
      * @var \Macopedia\Community\Service\RepositoryServiceInterface
@@ -103,11 +102,10 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      * @return boolean
      */
     public function hasAccess(
-        User $requestingUser = NULL,
-        User $requestedUser = NULL,
+        User $requestingUser = null,
+        User $requestedUser = null,
         $resource = ''
-    )
-    {
+    ) {
         if ($requestedUser && $requestingUser && ($requestingUser->getUid() == $requestedUser->getUid())) {
             return true;
         }
@@ -172,20 +170,19 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      * @return string
      */
     public function getAccessType(
-        User $requestingUser = NULL,
-        User $requestedUser = NULL
-    )
-    {
+        User $requestingUser = null,
+        User $requestedUser = null
+    ) {
         // first case: $requestingUser is NULL: anonymous rule
-        if ($requestingUser === NULL) {
-            if ($requestedUser === NULL) {
+        if ($requestingUser === null) {
+            if ($requestedUser === null) {
                 return self::ACCESS_PUBLIC;
             } else {
                 return self::ACCESS_NOBODY;
             }
         }
         // second case: friends
-        if ($requestingUser != NULL && $requestedUser != NULL) {
+        if ($requestingUser != null && $requestedUser != null) {
             $relationRepository = $this->repositoryService->get('Relation');
             $relation = $relationRepository->findRelationBetweenUsers($requestingUser, $requestedUser);
             if ($relation && $relation->getStatus() == Relation::RELATION_STATUS_CONFIRMED) {
@@ -205,7 +202,6 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
      */
     protected function typeHasAccessToResource($type, $resource)
     {
-
         $resourcePath = array_merge(array($type), explode('.', $resource));
         $settings = $this->settingsService->get();
         $value = $this->traverseResourcePath($settings['accessRules'], $resourcePath);
@@ -230,5 +226,4 @@ class SimpleAccessService implements AccessServiceInterface, \TYPO3\CMS\Core\Sin
         }
         return $lastAccess;
     }
-
 }

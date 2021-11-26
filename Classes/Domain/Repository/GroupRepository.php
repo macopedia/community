@@ -3,6 +3,7 @@
 namespace Macopedia\Community\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -34,7 +35,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class GroupRepository extends Repository
 {
-
     public function getTags()
     {
         return self::$tags;

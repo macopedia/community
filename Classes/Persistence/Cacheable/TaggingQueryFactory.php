@@ -5,6 +5,7 @@ namespace Macopedia\Community\Persistence\Cacheable;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryFactory;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,7 +31,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  ***************************************************************/
 class TaggingQueryFactory extends QueryFactory
 {
-
     /**
      * @var \Macopedia\Community\Persistence\Cacheable\AbstractCacheableRepository
      */
@@ -75,4 +75,3 @@ class TaggingQueryFactory extends QueryFactory
         $this->repository = $repository;
     }
 }
-

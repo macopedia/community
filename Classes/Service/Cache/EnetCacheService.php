@@ -6,6 +6,7 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -31,13 +32,12 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  ***************************************************************/
 class EnetCacheService implements CacheServiceInterface, SingletonInterface
 {
-
     /**
      * The cache handler
      *
      * @var object
      */
-    static protected $cacheHandler;
+    protected static $cacheHandler;
 
 
     /**
@@ -45,7 +45,7 @@ class EnetCacheService implements CacheServiceInterface, SingletonInterface
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory
      */
-    static protected $dataMapFactory;
+    protected static $dataMapFactory;
 
     /**
      * Constructor, initialize the cacheHander
@@ -59,7 +59,6 @@ class EnetCacheService implements CacheServiceInterface, SingletonInterface
             $this->dataMapFactory = new DataMapFactory(GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Reflection\ReflectionService'));
             $this->dataMapFactory->injectReflectionService(GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Reflection\ReflectionService'));
         }
-
     }
 
     /**
@@ -135,4 +134,3 @@ class EnetCacheService implements CacheServiceInterface, SingletonInterface
         return $tags;
     }
 }
-
