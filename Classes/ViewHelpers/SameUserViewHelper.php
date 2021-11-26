@@ -31,10 +31,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
 /**
  * Checks if the requestedUser and the requestingUser are the same.
- *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @author Pascal Jungblut <mail@pascalj.com>
  */
 class SameUserViewHelper extends AbstractConditionViewHelper
 {
