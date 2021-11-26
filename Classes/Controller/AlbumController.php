@@ -2,7 +2,7 @@
 
 namespace Macopedia\Community\Controller;
 
-use Macopedia\Community\Domain\Model\Album;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,6 +27,7 @@ use Macopedia\Community\Domain\Model\Album;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Macopedia\Community\Domain\Model\Album;
 
 /**
  * Controller for the Album object

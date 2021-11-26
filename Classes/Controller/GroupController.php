@@ -33,15 +33,12 @@ use Macopedia\Community\Helper\GroupHelper;
 /**
  * Controller for the Group object
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
 class GroupController extends BaseController implements \Macopedia\Community\Controller\Cacheable\ControllerInterface
 {
     /**
-     * Show the form to create a new grop
+     * Show the form to create a new group
      *
      * @param Group $group
      * @dontverify $group

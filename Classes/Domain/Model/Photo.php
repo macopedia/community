@@ -27,6 +27,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 /**
  * Image that is in user's gallery
  */

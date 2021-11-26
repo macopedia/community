@@ -5,6 +5,7 @@ namespace Macopedia\Community\Controller;
 use Macopedia\Community\Domain\Model;
 use Macopedia\Community\Domain\Model\WallPost;
 use Macopedia\Community\Service\Notification\Notification;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /***************************************************************
  *  Copyright notice

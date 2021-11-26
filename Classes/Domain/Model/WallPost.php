@@ -28,6 +28,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 class WallPost extends AbstractObservableEntity
 {
     /**

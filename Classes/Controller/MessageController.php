@@ -2,7 +2,6 @@
 
 namespace Macopedia\Community\Controller;
 
-use Macopedia\Community\Domain\Model\Message;
 /***************************************************************
  *  Copyright notice
  *
@@ -30,6 +29,8 @@ use Macopedia\Community\Domain\Model\Message;
 use Macopedia\Community\Domain\Model\User;
 use Macopedia\Community\Service\Notification\Notification;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use Macopedia\Community\Domain\Model\Message;
+
 
 /**
  * The controller for messages

@@ -29,6 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 /**
  * A group
  *
