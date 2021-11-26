@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\Service\Cache;
+
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +27,7 @@ namespace Macopedia\Community\Service\Cache;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-class NoCacheService implements \Macopedia\Community\Service\Cache\CacheServiceInterface, \TYPO3\CMS\Core\SingletonInterface
+class NoCacheService implements CacheServiceInterface, SingletonInterface
 {
 
     /**
@@ -74,7 +76,7 @@ class NoCacheService implements \Macopedia\Community\Service\Cache\CacheServiceI
      *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity
      */
-    public function dropTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity)
+    public function dropTagsForEntity(AbstractEntity $entity)
     {
         return;
     }
@@ -83,7 +85,7 @@ class NoCacheService implements \Macopedia\Community\Service\Cache\CacheServiceI
      *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object
      */
-    public function getTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object)
+    public function getTagsForEntity(AbstractEntity $object)
     {
         return;
     }

@@ -1,5 +1,7 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\PathUtility;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,7 +25,6 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Class that adds the wizard icon.
  *
@@ -48,7 +49,7 @@ class Tx_Community_Resources_Private_Php_wizicon
         $extKeyPlugin = 'community_listusers';
 
         $wizardItems['plugins_tx_community'] = array(
-            'icon' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('community') . 'Resources/Public/Images/newElementWizardIcon.png',
+            'icon' => PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('community')) . 'Resources/Public/Images/newElementWizardIcon.png',
             'title' => $GLOBALS['LANG']->sL('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:wizard.title'),
             'description' => $GLOBALS['LANG']->sL('LLL:EXT:community/Resources/Private/Language/locallang_db.xml:wizard.description'),
             'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=' . $extKeyPlugin

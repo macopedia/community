@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\ViewHelpers;
+
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Macopedia\Community\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Returns the lengh of a string
  *
@@ -32,14 +33,18 @@ namespace Macopedia\Community\ViewHelpers;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Simon Schaufelberger <simonschaufi@googlemail.com>
  */
-class StrlenViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class StrlenViewHelper extends AbstractViewHelper
 {
 
-    /**
-     * @param string $value The string
-     */
-    public function render($value)
+    public function render()
     {
+        $value = $this->arguments['value'];
         return strlen($value);
+    }
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('value', 'string', 'The string', true);
     }
 }

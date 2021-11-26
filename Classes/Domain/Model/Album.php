@@ -1,6 +1,10 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model;
+
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,11 +27,10 @@ namespace Macopedia\Community\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Album that may contain images
  */
-class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Album extends AbstractEntity
 {
 
     /**
@@ -76,7 +79,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Name of the album
      *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $name;
 
@@ -84,7 +87,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Only friends, only logged in or everyone
      *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $private;
 
@@ -100,8 +103,8 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * photos
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\Photo>
-     * @lazy
-     * @cascade remove
+     * @Extbase\ORM\Lazy
+     * @Extbase\ORM\Cascade("remove")
      */
     protected $photos;
 
@@ -109,7 +112,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * mainPhoto - the proto that represents the album on list
      *
      * @var \Macopedia\Community\Domain\Model\Photo
-     * @lazy
+     * @Extbase\ORM\Lazy
      */
     protected $mainPhoto;
 
@@ -125,7 +128,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->photos = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->photos = new ObjectStorage();
     }
 
     /**
@@ -184,7 +187,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \Macopedia\Community\Domain\Model\Photo $photo
      * @return void
      */
-    public function setMainPhoto(\Macopedia\Community\Domain\Model\Photo $photo = NULL)
+    public function setMainPhoto(Photo $photo = NULL)
     {
         $this->mainPhoto = $photo;
     }
@@ -203,7 +206,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \Macopedia\Community\Domain\Model\User $user
      * @return void
      */
-    public function setUser(\Macopedia\Community\Domain\Model\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -221,7 +224,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\Photo> $photos
      * @return void
      */
-    public function setPhotos(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $photos)
+    public function setPhotos(ObjectStorage $photos)
     {
         $this->photos = $photos;
     }
@@ -238,7 +241,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \Macopedia\Community\Domain\Model\Photo the Photo to be added
      * @return void
      */
-    public function addPhoto(\Macopedia\Community\Domain\Model\Photo $photo)
+    public function addPhoto(Photo $photo)
     {
         $this->photos->attach($photo);
     }
@@ -247,7 +250,7 @@ class Album extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \Macopedia\Community\Domain\Model\Photo the Photo to be removed
      * @return void
      */
-    public function removePhoto(\Macopedia\Community\Domain\Model\Photo $photoToRemove)
+    public function removePhoto(Photo $photoToRemove)
     {
         $this->photos->detach($photoToRemove);
     }

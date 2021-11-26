@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Service;
+
+use TYPO3\CMS\Core\SingletonInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Macopedia\Community\Service;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * A helper class to get the settings everywhere.
  *
@@ -33,7 +34,7 @@ namespace Macopedia\Community\Service;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class SettingsService implements \TYPO3\CMS\Core\SingletonInterface
+class SettingsService implements SingletonInterface
 {
 
     protected $settings;

@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Domain\Repository;
+
+use TYPO3\CMS\Extbase\Persistence\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,11 +25,10 @@ namespace Macopedia\Community\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Repository for Macopedia\Community\Domain\Model\Photo
  */
-class PhotoRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class PhotoRepository extends Repository
 {
 
 }

@@ -2,7 +2,7 @@
 if (!defined('TYPO3_MODE')) die ('Access denied.');
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'UserImage',
     array(
         'User' => 'image',
@@ -13,7 +13,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'UserDetails',
     array(
         'User' => 'details,report',
@@ -24,7 +24,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'InteracionMenu',
     array(
         'User' => 'interaction',
@@ -35,7 +35,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'ListRelations',
     array(
         'Relation' => 'listSome',
@@ -46,7 +46,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'UnconfirmedRelations',
     array(
         'Relation' => 'unconfirmed',
@@ -57,7 +57,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'Wall',
     array(
         'WallPost' => 'list',
@@ -68,7 +68,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'WallForm',
     array(
         'WallPost' => 'new,delete,create',
@@ -79,7 +79,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'MessageBox',
     array(
         'Message' => 'inbox,outbox,unread,read,delete',
@@ -90,7 +90,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'MessageWriteBox',
     array(
         'Message' => 'write,send',
@@ -101,7 +101,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'ThreadedMessageBox',
     array(
         'Message' => 'listThreads,thread,deleteThreaded',
@@ -112,7 +112,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'ThreadedMessageWriteBox',
     array(
         'Message' => 'writeThreaded,send',
@@ -123,7 +123,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'SearchBox',
     array(
         'User' => 'searchBox',
@@ -134,7 +134,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'SearchResults',
     array(
         'User' => 'search',
@@ -145,7 +145,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'EditProfile',
     array(
         'User' => 'edit,update,editImage,updateImage,deleteImage,deleteAccount',
@@ -156,7 +156,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'RelationManagement',
     array(
         'Relation' => 'list,request,cancel,confirm,reject,unconfirmed',
@@ -167,7 +167,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'Gallery',
     array(
         'Album' => 'list,show,new,create,edit,update,delete,showMostRecent',
@@ -180,7 +180,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'ListUsers',
     array(
         'User' => 'list',
@@ -191,7 +191,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-    'Macopedia.' . $_EXTKEY,
+    'Macopedia.' . 'community',
     'FlashMessagesDisplayer',
     array(
         'Utils' => 'flashMessagesDisplay',

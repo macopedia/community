@@ -2,6 +2,7 @@
 
 namespace Macopedia\Community\Service\Notification;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -35,7 +36,7 @@ use Macopedia\Community\Domain\Model\WallPost;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class WallHandler extends \Macopedia\Community\Service\Notification\BaseHandler
+class WallHandler extends BaseHandler
 {
 
     /**
@@ -46,7 +47,7 @@ class WallHandler extends \Macopedia\Community\Service\Notification\BaseHandler
     public function send(array $arguments, array $configuration)
     {
 
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('WallPost');
+        $message = GeneralUtility::makeInstance('WallPost');
         $message->setSender($arguments['sender']);
         $message->setRecipient($arguments['recipient']);
         $message->setSubject($arguments['sender']->getName());

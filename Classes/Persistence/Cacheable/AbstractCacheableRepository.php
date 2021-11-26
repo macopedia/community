@@ -1,6 +1,10 @@
 <?php
 
 namespace Macopedia\Community\Persistence\Cacheable;
+
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +28,6 @@ namespace Macopedia\Community\Persistence\Cacheable;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * A cachable repository. Meaning that can return the tags that were used.
  *
@@ -34,7 +37,7 @@ namespace Macopedia\Community\Persistence\Cacheable;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-abstract class AbstractCacheableRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+abstract class AbstractCacheableRepository extends Repository
 {
 
     /**
@@ -57,10 +60,10 @@ abstract class AbstractCacheableRepository extends \TYPO3\CMS\Extbase\Persistenc
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function __construct(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function __construct(ObjectManagerInterface $objectManager)
     {
         parent::__construct($objectManager);
-        $this->queryFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\Macopedia\Community\Persistence\Cacheable\TaggingQueryFactory');
+        $this->queryFactory = GeneralUtility::makeInstance('\Macopedia\Community\Persistence\Cacheable\TaggingQueryFactory');
         $this->queryFactory->injectRepository($this);
     }
 

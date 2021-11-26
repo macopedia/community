@@ -16,6 +16,7 @@
 							<label>What to display</label>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">ALL</numIndex>
@@ -41,10 +42,13 @@
 							<displayCond>FIELD:settings.userlist.whatToDisplay:=:group</displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0"></numIndex>
-										<numIndex index="1"></numIndex>
+										<numIndex index="0">
+										</numIndex>
+										<numIndex index="1">
+										</numIndex>
 									</numIndex>
 								</items>
 								<foreign_table>be_groups</foreign_table>
@@ -60,6 +64,7 @@
 							<displayCond>FIELD:settings.userlist.whatToDisplay:IN:all,group</displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.crdate</numIndex>
@@ -81,6 +86,7 @@
 							<displayCond>FIELD:settings.userlist.whatToDisplay:IN:all,group</displayCond>
 							<config>
 								<type>select</type>
+								<renderType>selectSingle</renderType>
 								<items type="array">
 									<numIndex index="0" type="array">
 										<numIndex index="0">LLL:EXT:community/Resources/Private/Language/locallang_db.xml:flexform.ascDesc_asc</numIndex>
@@ -98,33 +104,33 @@
 					</settings.userlist.orderDirection>
 					<settings.userlist.limit>
 						<TCEforms>
-						<label>Limit: max items to show</label>
-						<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:all,group</displayCond>
-						<config>
-							<type>input</type>
-							<eval>num</eval>
-							<size>3</size>
-						</config>
+							<label>Limit: max items to show</label>
+							<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:all,group</displayCond>
+							<config>
+								<type>input</type>
+								<eval>num</eval>
+								<size>3</size>
+							</config>
 						</TCEforms>
 					</settings.userlist.limit>
 					<settings.userlist.pagebrowser>
 						<TCEforms>
-						<label>Use pagebrowser</label>
-						<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:latest,random</displayCond>
-						<config>
-							<type>check</type>
-						</config>
+							<label>Use pagebrowser</label>
+							<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:latest,random</displayCond>
+							<config>
+								<type>check</type>
+							</config>
 						</TCEforms>
 					</settings.userlist.pagebrowser>
 					<settings.userlist.itemsPerPage>
 						<TCEforms>
-						<label>Pagebrowser: items per page</label>
-						<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:latest,random</displayCond>
-						<config>
-							<type>input</type>
-							<eval>num</eval>
-							<size>3</size>
-						</config>
+							<label>Pagebrowser: items per page</label>
+							<displayCond>FIELD:settings.userlist.whatToDisplay:!IN:latest,random</displayCond>
+							<config>
+								<type>input</type>
+								<eval>num</eval>
+								<size>3</size>
+							</config>
 						</TCEforms>
 					</settings.userlist.itemsPerPage>
 				</el>
@@ -143,14 +149,15 @@
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
-								<default></default>
+								<default>
+								</default>
 								<wizards type="array">
 									<_PADDING>2</_PADDING>
 									<link type="array">
 										<type>popup</type>
 										<title>Link</title>
 										<icon>link_popup.gif</icon>
-										<script>browse_links.php?mode=wizard&amp;act=file</script>
+										<script>browse_links.php?mode=wizard&act=file</script>
 										<params type="array">
 											<blindLinkOptions>page,url,mail,spec</blindLinkOptions>
 											<allowedExtensions>htm,html,tmpl,tpl</allowedExtensions>

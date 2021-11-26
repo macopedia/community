@@ -1,6 +1,11 @@
 <?php
 
 namespace Macopedia\Community\Service\Cache;
+
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +29,7 @@ namespace Macopedia\Community\Service\Cache;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-class EnetCacheService implements CacheServiceInterface, \TYPO3\CMS\Core\SingletonInterface
+class EnetCacheService implements CacheServiceInterface, SingletonInterface
 {
 
     /**
@@ -49,11 +53,11 @@ class EnetCacheService implements CacheServiceInterface, \TYPO3\CMS\Core\Singlet
     public function __construct()
     {
         if (!$this->cacheHandler) {
-            $this->cacheHandler = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('tx_enetcache');
+            $this->cacheHandler = GeneralUtility::makeInstance('tx_enetcache');
         }
         if (!$this->dataMapFactory) {
-            $this->dataMapFactory = new \TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory(\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Reflection\ReflectionService'));
-            $this->dataMapFactory->injectReflectionService(\TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Reflection\ReflectionService'));
+            $this->dataMapFactory = new DataMapFactory(GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Reflection\ReflectionService'));
+            $this->dataMapFactory->injectReflectionService(GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Reflection\ReflectionService'));
         }
 
     }
@@ -104,7 +108,7 @@ class EnetCacheService implements CacheServiceInterface, \TYPO3\CMS\Core\Singlet
      *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity
      */
-    public function dropTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity)
+    public function dropTagsForEntity(AbstractEntity $entity)
     {
         $map = $this->dataMapFactory->buildDataMap(get_class($entity));
         $tableName = $map->getTableName();
@@ -119,7 +123,7 @@ class EnetCacheService implements CacheServiceInterface, \TYPO3\CMS\Core\Singlet
      *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object
      */
-    public function getTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object)
+    public function getTagsForEntity(AbstractEntity $object)
     {
         $map = $this->dataMapFactory->buildDataMap(get_class($object));
         $tableName = $map->getTableName();

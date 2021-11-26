@@ -1,6 +1,10 @@
 <?php
 
 namespace Macopedia\Community\ViewHelpers\Widget;
+
+use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper;
+use Macopedia\Community\ViewHelpers\Widget\Controller\PaginateController;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,7 +27,6 @@ namespace Macopedia\Community\ViewHelpers\Widget;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * This ViewHelper renders a Pagination of objects.
  * Copied from news extension
@@ -37,7 +40,7 @@ namespace Macopedia\Community\ViewHelpers\Widget;
  * </f:widget.paginate>
  * </code>
  */
-class PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper
+class PaginateViewHelper extends AbstractWidgetViewHelper
 {
 
     /**
@@ -51,7 +54,7 @@ class PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetView
      * @param Controller\PaginateController $controller
      * @return void
      */
-    public function injectController(Controller\PaginateController $controller)
+    public function injectController(PaginateController $controller)
     {
         $this->controller = $controller;
     }
@@ -59,13 +62,21 @@ class PaginateViewHelper extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetView
     /**
      * Render everything
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects
-     * @param string $as
-     * @param mixed $configuration
      * @return string
      */
-    public function render(\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $objects, $as, $configuration = array('itemsPerPage' => 10, 'insertAbove' => FALSE, 'insertBelow' => TRUE))
+    public function render()
     {
+        $objects = $this->arguments['objects'];
+        $as = $this->arguments['as'];
+        $configuration = $this->arguments['configuration'];
         return $this->initiateSubRequest();
+    }
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('objects', QueryResultInterface::class, '', true);
+        $this->registerArgument('as', 'string', '', true);
+        $this->registerArgument('configuration', 'mixed', '', false, ['itemsPerPage' => 10, 'insertAbove' => false, 'insertBelow' => true]);
     }
 }

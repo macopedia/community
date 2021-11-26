@@ -2,6 +2,7 @@
 
 namespace Macopedia\Community\Tests\Unit\Service\Notification;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /***************************************************************
  *  Copyright notice
  *
@@ -37,7 +38,7 @@ use Macopedia\Community\Service\Notification\NotificationService,
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class NotificationServiceTest extends UnitTestCase
 {
 
 

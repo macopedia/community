@@ -1,6 +1,10 @@
 <?php
 
 namespace Macopedia\Community\Persistence\Cacheable;
+
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryFactory;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +28,7 @@ namespace Macopedia\Community\Persistence\Cacheable;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-class TaggingQueryFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\QueryFactory
+class TaggingQueryFactory extends QueryFactory
 {
 
     /**
@@ -40,26 +43,26 @@ class TaggingQueryFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\QueryFa
      */
     public function create($className)
     {
-        $objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+        $objectManager = new ObjectManager();
         $persistenceManager = $objectManager->get('TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface');
         $backend = $objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\Backend');
 
         $reflectionService = $backend->getReflectionService();
 
-        $dataMapFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory');
+        $dataMapFactory = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory');
         $dataMapFactory->injectReflectionService($reflectionService);
 
-        $dataMapper = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper');
+        $dataMapper = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper');
         $dataMapper->injectIdentityMap($backend->getIdentityMap());
         $dataMapper->injectSession($backend->getSession());
         $dataMapper->injectReflectionService($reflectionService);
         $dataMapper->injectDataMapFactory($dataMapFactory);
 
-        $querySettings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
+        $querySettings = GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings');
 
-        $query = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\Macopedia\Community\Persistence\Cacheable\TaggingQuery', $className);
+        $query = GeneralUtility::makeInstance('\Macopedia\Community\Persistence\Cacheable\TaggingQuery', $className);
         $query->injectPersistenceManager($persistenceManager);
-        $query->injectCacheService(\TYPO3\CMS\Core\Utility\GeneralUtility::makeinstance('\Macopedia\Community\Service\Cache\CacheService'));
+        $query->injectCacheService(GeneralUtility::makeinstance('\Macopedia\Community\Service\Cache\CacheService'));
         $query->injectRepository($this->repository);
         $query->injectDataMapper($dataMapper);
         $query->setQuerySettings($querySettings);
@@ -67,7 +70,7 @@ class TaggingQueryFactory extends \TYPO3\CMS\Extbase\Persistence\Generic\QueryFa
         return $query;
     }
 
-    public function injectRepository(\Macopedia\Community\Persistence\Cacheable\AbstractCacheableRepository $repository)
+    public function injectRepository(AbstractCacheableRepository $repository)
     {
         $this->repository = $repository;
     }

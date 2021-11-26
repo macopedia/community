@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Service\Cache;
+
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Macopedia\Community\Service\Cache;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 interface CacheServiceInterface
 {
 
@@ -62,11 +63,11 @@ interface CacheServiceInterface
      *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity
      */
-    public function dropTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $entity);
+    public function dropTagsForEntity(AbstractEntity $entity);
 
     /**
      *
      * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object
      */
-    public function getTagsForEntity(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity $object);
+    public function getTagsForEntity(AbstractEntity $object);
 }

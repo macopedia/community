@@ -2,6 +2,7 @@
 
 namespace Macopedia\Community\Controller;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 /***************************************************************
  *  Copyright notice
  *
@@ -71,7 +72,7 @@ class AlbumController extends BaseController
      *
      * @param Album $newAlbum a fresh Album object which has not yet been added to the repository
      * @return void
-     * @dontvalidate $newAlbum
+     * @Extbase\IgnoreValidation("newAlbum")
      */
     public function newAction(Album $newAlbum = NULL)
     {

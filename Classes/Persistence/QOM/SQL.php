@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Persistence\QOM;
+
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,12 +26,11 @@ namespace Macopedia\Community\Persistence\QOM;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Enables usage of raw SQL in queries
  * Requires change in \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend to work
  */
-class SQL implements \TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface
+class SQL implements ConstraintInterface
 {
 
     /**

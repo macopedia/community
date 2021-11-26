@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\Persistence\Cacheable;
+
+use TYPO3\CMS\Extbase\Persistence\Generic\Query;
+use Macopedia\Community\Service\Cache\CacheService;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +27,7 @@ namespace Macopedia\Community\Persistence\Cacheable;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-class TaggingQuery extends \TYPO3\CMS\Extbase\Persistence\Generic\Query
+class TaggingQuery extends Query
 {
 
     /**
@@ -68,7 +70,7 @@ class TaggingQuery extends \TYPO3\CMS\Extbase\Persistence\Generic\Query
      *
      * @param \Macopedia\Community\Service\Cache\CacheService $cacheService
      */
-    public function injectCacheService(\Macopedia\Community\Service\Cache\CacheService $cacheService)
+    public function injectCacheService(CacheService $cacheService)
     {
         $this->cacheService = $cacheService;
     }

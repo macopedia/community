@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\Domain\Repository;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use Macopedia\Community\Domain\Model\User;
 /***************************************************************
  *  Copyright notice
  *
@@ -29,12 +32,12 @@ use Macopedia\Community\Domain\Model\Album;
 /**
  * Repository for Macopedia\Community\Domain\Model\Album
  */
-class AlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class AlbumRepository extends Repository
 {
 
     public function initialize()
     {
-        $this->setDefaultOrderings(array('crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
+        $this->setDefaultOrderings(array('crdate' => QueryInterface::ORDER_DESCENDING));
         //requied in AlbumController->showMostRecentAction
     }
 
@@ -45,14 +48,11 @@ class AlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param integer $albumType The type of special album
      * @return Album
      */
-    public function findOneByUserAndType(\Macopedia\Community\Domain\Model\User $user, $albumType)
+    public function findOneByUserAndType(User $user, $albumType)
     {
         $query = $this->createQuery();
         return $query->matching(
-            $query->logicalAnd(
-                $query->equals('user', $user),
-                $query->equals('albumType', $albumType)
-            )
+            $query->logicalAnd([$query->equals('user', $user), $query->equals('albumType', $albumType)])
         )
             ->execute()
             ->getFirst();
@@ -63,7 +63,7 @@ class AlbumRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param \Macopedia\Community\Domain\Model\User $user
      */
-    public function deleteAllForUser(\Macopedia\Community\Domain\Model\User $user)
+    public function deleteAllForUser(User $user)
     {
         $query = $this->createQuery();
         $albums = $query->matching(

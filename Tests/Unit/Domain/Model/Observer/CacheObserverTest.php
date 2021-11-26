@@ -2,6 +2,7 @@
 
 namespace Macopedia\Community\Tests\Unit\Domain\Model\Observer;
 
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 /***************************************************************
  *  Copyright notice
  *
@@ -38,7 +39,7 @@ use Macopedia\Community\Domain\Model\Observer\CacheObserver,
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class CacheObserverTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class CacheObserverTest extends UnitTestCase
 {
 
     private $cacheService;

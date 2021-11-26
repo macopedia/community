@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Service\Notification;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Macopedia\Community\Service\Notification;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Notify user with private message
  *
@@ -43,7 +44,7 @@ class PrivateMessageHandler extends AbstractHandler
     public function send(array $notification, array $configuration)
     {
 
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\Message');
+        $message = GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\Message');
         /* @var $message Message */
         $message->setSent(true);
         $message->setSentDate(time());

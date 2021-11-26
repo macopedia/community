@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Exception;
+
+use TYPO3\CMS\Extbase\Exception;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +26,7 @@ namespace Macopedia\Community\Exception;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-class UnexpectedException extends \TYPO3\CMS\Extbase\Exception
+class UnexpectedException extends Exception
 {
 
 }

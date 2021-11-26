@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\ViewHelpers;
+
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  * Copyright notice
  *
@@ -24,26 +26,31 @@ namespace Macopedia\Community\ViewHelpers;
  *
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Renders a country flag for the given country object
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class CountryFlagViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class CountryFlagViewHelper extends AbstractViewHelper
 {
 
     /**
      * Renders the CountryFlagViewHelper
      *
-     * @param \SJBR\StaticInfoTables\Domain\Model\Country $country Country-Object
      * @return string Country Flag Image
      */
-    public function render(\SJBR\StaticInfoTables\Domain\Model\Country $country = null)
+    public function render()
     {
+        $country = $this->arguments['country'];
         return !empty($country) ? '<span title="' . $country->getShortNameEn() . '" class="tx_community_flags tx_community_flag_'
             . strtolower($country->getIsoCodeA2()) . '">&nbsp;</span>' : '';
+    }
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('country', 'SJBR\StaticInfoTables\Domain\Model\Country', 'Country-Object', false);
     }
 }
 

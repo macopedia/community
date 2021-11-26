@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\ViewHelpers;
+
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Macopedia\Community\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Checks if the requestedUser and the requestingUser are the same.
  *
@@ -32,16 +33,22 @@ namespace Macopedia\Community\ViewHelpers;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class InListViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class InListViewHelper extends AbstractViewHelper
 {
 
-    /**
-     * @param string $list A list seperated by $seperator
-     * @param string $value The value to look for
-     * @param string $seperator The seperator for the list
-     */
-    public function render($list = '', $value = '', $seperator = ',')
+    public function render()
     {
+        $list = $this->arguments['list'];
+        $value = $this->arguments['value'];
+        $seperator = $this->arguments['seperator'];
         return in_array($value, explode($seperator, $list));
+    }
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('list', 'string', 'A list seperated by $seperator', false, '');
+        $this->registerArgument('value', 'string', 'The value to look for', false, '');
+        $this->registerArgument('seperator', 'string', 'The seperator for the list', false, ',');
     }
 }

@@ -7,7 +7,6 @@ return array(
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'dividers2tabs' => true,
         'delete' => 'deleted',
         'enablecolumns' => array(
             'disabled' => 'hidden',
@@ -18,7 +17,7 @@ return array(
         'showRecordFieldList' => 'hidden, name, private, photos',
     ),
     'types' => array(
-        '1' => array('showitem' => 'hidden;;1, name, user, private, photos'),
+        '1' => array('showitem' => 'hidden,--palette--;;1,name,user,private,photos'),
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
@@ -26,7 +25,7 @@ return array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
             ),

@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model\Observer;
+
+use TYPO3\CMS\Core\SingletonInterface;
+use Macopedia\Community\Service\Cache\CacheServiceInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +27,7 @@ namespace Macopedia\Community\Domain\Model\Observer;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-class CacheObserver implements ObserverInterface, \TYPO3\CMS\Core\SingletonInterface
+class CacheObserver implements ObserverInterface, SingletonInterface
 {
 
     /**
@@ -47,7 +49,7 @@ class CacheObserver implements ObserverInterface, \TYPO3\CMS\Core\SingletonInter
     /**
      * Inject the cache service
      */
-    public function injectCacheService(\Macopedia\Community\Service\Cache\CacheServiceInterface $cacheService)
+    public function injectCacheService(CacheServiceInterface $cacheService)
     {
         $this->cacheService = $cacheService;
     }

@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Domain\Repository;
+
+use TYPO3\CMS\Extbase\Persistence\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,7 +25,6 @@ namespace Macopedia\Community\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Repository for Macopedia\Community\Domain\Model\Group
  *
@@ -31,7 +32,7 @@ namespace Macopedia\Community\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class GroupRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class GroupRepository extends Repository
 {
 
     public function getTags()

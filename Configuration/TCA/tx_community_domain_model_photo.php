@@ -8,7 +8,6 @@ return array(
         'label' => 'image',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'dividers2tabs' => true,
         'delete' => 'deleted',
         'enablecolumns' => array(
             'disabled' => 'hidden',
@@ -19,7 +18,7 @@ return array(
         'showRecordFieldList' => 'hidden, image',
     ),
     'types' => array(
-        '1' => array('showitem' => 'hidden;;1, image, album'),
+        '1' => array('showitem' => 'hidden,--palette--;;1,image,album'),
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
@@ -27,7 +26,7 @@ return array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check',
             ),
@@ -35,15 +34,7 @@ return array(
         'image' => array(
             'exclude' => 0,
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_photo.image',
-            'config' => array(
-                'type' => 'group',
-                'internal_type' => 'file',
-                'uploadfolder' => 'uploads/tx_community/photos',
-                'show_thumbs' => 1,
-                'size' => 5,
-                'allowed' => 'gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai',
-                'disallowed' => '',
-            ),
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', ['uploadfolder' => 'uploads/tx_community/photos'], 'gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai'),
         ),
         'album' => array(
             'exclude' => 0,

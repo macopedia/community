@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Service\Notification;
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +26,6 @@ namespace Macopedia\Community\Service\Notification;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Notify user with on wall
  *
@@ -33,7 +34,7 @@ namespace Macopedia\Community\Service\Notification;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class WallService extends \Macopedia\Community\Service\Notification\BaseHandler
+class WallService extends BaseHandler
 {
 
     /**
@@ -44,7 +45,7 @@ class WallService extends \Macopedia\Community\Service\Notification\BaseHandler
     public function send(array $arguments, array $configuration)
     {
 
-        $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\WallPost');
+        $message = GeneralUtility::makeInstance('Macopedia\Community\Domain\Model\WallPost');
         $message->setSender($arguments['sender']);
         $message->setRecipient($arguments['recipient']);
         $message->setSubject($arguments['sender']->getName());

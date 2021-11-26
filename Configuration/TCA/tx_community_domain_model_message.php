@@ -26,7 +26,7 @@ return array(
     'columns' => array(
         'hidden' => array(
             'exclude' => 1,
-            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => array(
                 'type' => 'check'
             )
@@ -58,7 +58,8 @@ return array(
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.sent_date',
             'config' => array(
                 'type' => 'input',
-                'eval' => 'datetime'
+                'eval' => 'datetime',
+                'renderType' => 'inputDateTime'
             )
         ),
         'read_date' => array(
@@ -66,7 +67,8 @@ return array(
             'label' => 'LLL:EXT:community/Resources/Private/Language/locallang_db.xml:tx_community_domain_model_message.read_date',
             'config' => array(
                 'type' => 'input',
-                'eval' => 'datetime'
+                'eval' => 'datetime',
+                'renderType' => 'inputDateTime'
             )
         ),
         'sent' => array(

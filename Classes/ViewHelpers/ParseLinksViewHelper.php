@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\ViewHelpers;
+
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use Macopedia\Community\Helper\UrlLinkerHelper;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,23 +27,28 @@ namespace Macopedia\Community\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Parses a string for links and replaces them with clickable links
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ParseLinksViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class ParseLinksViewHelper extends AbstractViewHelper
 {
 
     /**
      * @see http://www.flashnutz.com/2010/07/find-links-within-text-and-convert-to-active-links-with-php/
-     * @param string $string The data to be parsed for links
      * @return string
      */
-    public function render($string)
+    public function render()
     {
-        return \Macopedia\Community\Helper\UrlLinkerHelper::htmlEscapeAndLinkUrls($string);
+        $string = $this->arguments['string'];
+        return UrlLinkerHelper::htmlEscapeAndLinkUrls($string);
+    }
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('string', 'string', 'The data to be parsed for links', true);
     }
 }

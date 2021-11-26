@@ -1,6 +1,8 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model;
+
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +26,6 @@ namespace Macopedia\Community\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-
 /**
  * A relation between two users.
  *
@@ -33,7 +33,7 @@ namespace Macopedia\Community\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @author Pascal Jungblut <mail@pascalj.com>
  */
-class Relation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Relation extends AbstractEntity
 {
 
     /**
@@ -106,7 +106,7 @@ class Relation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @param \Macopedia\Community\Domain\Model\User $initiatingUser
      */
-    public function setInitiatingUser(\Macopedia\Community\Domain\Model\User $initiatingUser)
+    public function setInitiatingUser(User $initiatingUser)
     {
         $this->initiatingUser = $initiatingUser;
     }
@@ -140,7 +140,7 @@ class Relation extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @param \Macopedia\Community\Domain\Model\User $requestedUser
      */
-    public function setRequestedUser(\Macopedia\Community\Domain\Model\User $requestedUser)
+    public function setRequestedUser(User $requestedUser)
     {
         $this->requestedUser = $requestedUser;
     }

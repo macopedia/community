@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\ViewHelpers\Widget\Controller;
+
+use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,12 +26,11 @@ namespace Macopedia\Community\ViewHelpers\Widget\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Paginate controller to create the pagination.
  * Copied from news extension
  */
-class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
+class PaginateController extends AbstractWidgetController
 {
 
     /**
@@ -78,7 +80,7 @@ class PaginateController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetCont
     public function initializeAction()
     {
         $this->objects = $this->widgetConfiguration['objects'];
-        $this->configuration = \TYPO3\CMS\Core\Utility\GeneralUtility::array_merge_recursive_overrule(
+        $this->configuration = GeneralUtility::array_merge_recursive_overrule(
             $this->configuration,
             $this->widgetConfiguration['configuration'], TRUE);
         $this->numberOfPages = ceil(count($this->objects) / (integer)$this->configuration['itemsPerPage']);

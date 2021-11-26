@@ -2,6 +2,9 @@
 
 namespace Macopedia\Community\Service\Notification;
 
+use TYPO3\CMS\Core\SingletonInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /***************************************************************
  *  Copyright notice
  *
@@ -36,7 +39,7 @@ use Macopedia\Community\Service\RepositoryServiceInterface,
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-abstract class AbstractHandler implements HandlerInterface, \TYPO3\CMS\Core\SingletonInterface
+abstract class AbstractHandler implements HandlerInterface, SingletonInterface
 {
 
     /**
@@ -49,7 +52,7 @@ abstract class AbstractHandler implements HandlerInterface, \TYPO3\CMS\Core\Sing
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -110,9 +113,9 @@ abstract class AbstractHandler implements HandlerInterface, \TYPO3\CMS\Core\Sing
         /* @var $view \TYPO3\CMS\Fluid\View\StandaloneView */
 
         $settings = $this->settingsService->get();
-        $view->setTemplatePathAndFilename(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($settings['notification']['templateRootPath'] . $methodConfiguration['template'] . '.html'));
-        $view->setLayoutRootPath(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($settings['notification']['layoutRootPath']));
-        $view->setPartialRootPath(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($settings['notification']['partialRootPath']));
+        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($settings['notification']['templateRootPath'] . $methodConfiguration['template'] . '.html'));
+        $view->setLayoutRootPath(GeneralUtility::getFileAbsFileName($settings['notification']['layoutRootPath']));
+        $view->setPartialRootPath(GeneralUtility::getFileAbsFileName($settings['notification']['partialRootPath']));
 
         $view->assign('plainText', false);
         $view->assign('notification', $notification);

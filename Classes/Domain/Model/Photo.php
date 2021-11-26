@@ -1,6 +1,9 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model;
+
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,18 +26,17 @@ namespace Macopedia\Community\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Image that is in user's gallery
  */
-class Photo extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Photo extends AbstractEntity
 {
 
     /**
      * image
      *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $image;
 
@@ -42,8 +44,8 @@ class Photo extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * album
      *
      * @var \Macopedia\Community\Domain\Model\Album
-     * @validate NotEmpty
-     * @lazy
+     * @Extbase\ORM\Lazy
+     * @Extbase\Validate("NotEmpty")
      */
     protected $album;
 

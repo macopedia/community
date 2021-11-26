@@ -2,6 +2,8 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
+use TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper;
+use Macopedia\Community\Service\RepositoryServiceInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -33,7 +35,7 @@ use Macopedia\Community\Domain\Model\User;
  *
  * @author Konrad Baumgart
  */
-class UnreadMessagesViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
+class UnreadMessagesViewHelper extends IfViewHelper
 {
 
     /**
@@ -48,7 +50,7 @@ class UnreadMessagesViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\IfViewHelper
      *
      * @param \Macopedia\Community\Service\RepositoryServiceInterface $repositoryService
      */
-    public function injectRepositoryService(\Macopedia\Community\Service\RepositoryServiceInterface $repositoryService)
+    public function injectRepositoryService(RepositoryServiceInterface $repositoryService)
     {
         $this->repositoryService = $repositoryService;
     }

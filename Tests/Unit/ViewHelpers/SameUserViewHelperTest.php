@@ -38,7 +38,7 @@ class SameUserViewHelperTest extends \TYPO3\TestingFramework\Fluid\Unit\ViewHelp
 {
 
     /**
-     * @var \Macopedia\Community\ViewHelpers\SameUserViewHelper|\PHPUnit_Framework_MockObject_MockObject|\TYPO3\TestingFramework\Core\AccessibleObjectInterface
+     * @var \Macopedia\Community\ViewHelpers\SameUserViewHelper|\TYPO3\TestingFramework\Core\AccessibleObjectInterface
      */
     protected $viewHelper;
 

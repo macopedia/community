@@ -6,12 +6,9 @@ $EM_CONF[$_EXTKEY] = array(
     'description' => 'A flexible community / social network system based on Extbase and Fluid. Friends (buddies), messages, user profile, wall, gallery, notification service, and a lot more.',
     'category' => 'plugin',
     'version' => '4.0.0',
-    'dependencies' => 'cms,extbase,fluid',
     'state' => 'stable',
-    'uploadfolder' => 1,
+    'uploadfolder' => true,
     'createDirs' => 'uploads/tx_community,uploads/tx_community/photos',
-    'modify_tables' => 'fe_users',
-    'clearcacheonload' => 0,
     'author' => 'Tymoteusz Motylewski',
     'author_email' => 't.motylewski@gmail.com',
     'author_company' => 'Macopedia.pl',
@@ -26,6 +23,5 @@ $EM_CONF[$_EXTKEY] = array(
         'suggests' => array(
             'smilie' => '',
         ),
-    ),
-    'suggests' => array()
+    )
 );

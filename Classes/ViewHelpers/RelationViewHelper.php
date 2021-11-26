@@ -2,6 +2,8 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use Macopedia\Community\Domain\Repository\RelationRepository;
 /***************************************************************
  *  Copyright notice
  *
@@ -35,7 +37,7 @@ use Macopedia\Community\Domain\Model\User;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class RelationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class RelationViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -49,7 +51,7 @@ class RelationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
      *
      * @param \Macopedia\Community\Domain\Repository\RelationRepository $relationRepository
      */
-    public function injectRelationRepository(\Macopedia\Community\Domain\Repository\RelationRepository $relationRepository)
+    public function injectRelationRepository(RelationRepository $relationRepository)
     {
         $this->relationRepository = $relationRepository;
     }
@@ -58,22 +60,27 @@ class RelationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
     /**
      * returns the relation between 2 users. If the users are the same, return true, if there is no relation at all, return false
      *
-     * @param User $requestingUser
-     * @param User $requestedUser
      * @return Relation|TRUE|FALSE
      */
-    public function render(User $requestingUser, User $requestedUser)
+    public function render()
     {
+        $requestingUser = $this->arguments['requestingUser'];
+        $requestedUser = $this->arguments['requestedUser'];
         if ($requestingUser === $requestedUser) {
             return TRUE;
         }
-
         $result = $this->relationRepository->findRelationBetweenUsers($requestingUser, $requestedUser);
-
         if ($result) {
             return $result;
         } else {
             return FALSE;
         }
+    }
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('requestingUser', 'Macopedia\Community\Domain\Model\User', '', true);
+        $this->registerArgument('requestedUser', 'Macopedia\Community\Domain\Model\User', '', true);
     }
 }

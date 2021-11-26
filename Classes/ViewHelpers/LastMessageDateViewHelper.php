@@ -2,6 +2,8 @@
 
 namespace Macopedia\Community\ViewHelpers;
 
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use Macopedia\Community\Service\RepositoryServiceInterface;
 /***************************************************************
  *  Copyright notice
  *
@@ -33,7 +35,7 @@ use Macopedia\Community\Domain\Model\User;
  *
  * @author Konrad Baumgart
  */
-class LastMessageDateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class LastMessageDateViewHelper extends AbstractViewHelper
 {
 
     /**
@@ -48,18 +50,25 @@ class LastMessageDateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
      *
      * @param \Macopedia\Community\Service\RepositoryServiceInterface $repositoryService
      */
-    public function injectRepositoryService(\Macopedia\Community\Service\RepositoryServiceInterface $repositoryService)
+    public function injectRepositoryService(RepositoryServiceInterface $repositoryService)
     {
         $this->repositoryService = $repositoryService;
     }
 
     /**
      * Gives the date of most recent message between user1 and user2
-     * @param User $user1
-     * @param User $user2
      */
-    public function render($user1, $user2)
+    public function render()
     {
+        $user1 = $this->arguments['user1'];
+        $user2 = $this->arguments['user2'];
         return $this->repositoryService->get('message')->findRecentBetweenUsers($user1, $user2)->getSentDate();
+    }
+
+    public function initializeArguments(): void
+    {
+        parent::initializeArguments();
+        $this->registerArgument('user1', 'User', '', true);
+        $this->registerArgument('user2', 'User', '', true);
     }
 }

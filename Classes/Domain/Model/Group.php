@@ -1,6 +1,10 @@
 <?php
 
 namespace Macopedia\Community\Domain\Model;
+
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +28,6 @@ namespace Macopedia\Community\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * A group
  *
@@ -32,7 +35,7 @@ namespace Macopedia\Community\Domain\Model;
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
+class Group extends FrontendUserGroup
 {
 
     /**
@@ -52,7 +55,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
     /**
      * name
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $name;
 
@@ -189,7 +192,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \Macopedia\Community\Domain\Model\User $creator creator
      * @return void
      */
-    public function setCreator(\Macopedia\Community\Domain\Model\User $creator)
+    public function setCreator(User $creator)
     {
         $this->creator = $creator;
     }
@@ -210,7 +213,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $admins admins
      * @return void
      */
-    public function setAdmins(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $admins)
+    public function setAdmins(ObjectStorage $admins)
     {
         $this->admins = $admins;
     }
@@ -231,7 +234,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \Macopedia\Community\Domain\Model\User The User to be added
      * @return void
      */
-    public function addAdmin(\Macopedia\Community\Domain\Model\User $admin)
+    public function addAdmin(User $admin)
     {
         $this->admins->attach($admin);
     }
@@ -242,7 +245,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \Macopedia\Community\Domain\Model\User The User to be removed
      * @return void
      */
-    public function removeAdmin(\Macopedia\Community\Domain\Model\User $admin)
+    public function removeAdmin(User $admin)
     {
         $this->admins->detach($admin);
     }
@@ -253,7 +256,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $members members
      * @return void
      */
-    public function setMembers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $members)
+    public function setMembers(ObjectStorage $members)
     {
         $this->members = $members;
     }
@@ -274,7 +277,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \Macopedia\Community\Domain\Model\User The User to be added
      * @return void
      */
-    public function addMember(\Macopedia\Community\Domain\Model\User $member)
+    public function addMember(User $member)
     {
         $this->members->attach($member);
     }
@@ -285,7 +288,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \Macopedia\Community\Domain\Model\User The User to be removed
      * @return void
      */
-    public function removeMember(\Macopedia\Community\Domain\Model\User $member)
+    public function removeMember(User $member)
     {
         $this->members->detach($member);
     }
@@ -296,7 +299,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Macopedia\Community\Domain\Model\User> $pendingMembers pendingMembers
      * @return void
      */
-    public function setPendingMembers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $pendingMembers)
+    public function setPendingMembers(ObjectStorage $pendingMembers)
     {
         $this->pendingMembers = $pendingMembers;
     }
@@ -317,7 +320,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \Macopedia\Community\Domain\Model\User The User to be added
      * @return void
      */
-    public function addPendingMember(\Macopedia\Community\Domain\Model\User $pendingMember)
+    public function addPendingMember(User $pendingMember)
     {
         $this->pendingMembers->attach($pendingMember);
     }
@@ -328,7 +331,7 @@ class Group extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup
      * @param \Macopedia\Community\Domain\Model\User The User to be removed
      * @return void
      */
-    public function removePendingMember(\Macopedia\Community\Domain\Model\User $pendingMember)
+    public function removePendingMember(User $pendingMember)
     {
         $this->pendingMembers->detach($pendingMember);
     }
